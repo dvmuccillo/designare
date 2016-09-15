@@ -13,8 +13,8 @@ class Etapa(models.Model):
 	atividade_inicial = models.ForeignKey(Atividade,on_delete=)
 	metodologia = models.ForeignKey(Metodologia,on_delete=models.CASCADE)
 	
-	def get_proxima_etapa_valida():
-		return 
+	#def get_proxima_etapa_valida():
+	#	return 
 
 class Atividade(models.Model):
 	nome = models.CharField(max_length=50)
