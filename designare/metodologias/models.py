@@ -3,16 +3,20 @@ from django.db import models
 # Create your models here.
 
 class Metodologia(models.Model):
-	nome = models.
-	etapa_inicial = 
+	nome = models.CharField(max_length=100)
+	etapa_inicial = models.ForeignKey(Etapa,on_delete=)
 
 class Etapa(models.Model):
-	nome = models.
-	descricao = models.
-	prox_etapa = models.
-	atividade_inicial = models.
+	nome = models.CharField(max_length=100)
+	descricao = models.CharField(max_length=250)
+	prox_etapa = models.ForeignKey('self',on_delete=)
+	atividade_inicial = models.ForeignKey(Atividade,on_delete=)
 
-
+class Atividade(models.Model):
+	nome = models.CharField(max_length=100)
+	descricao = models.CharField(max_length=250)
+	prox_atividade = models.ForeignKey('self',on_delete=)
+	
 #class Projeto(models.Model):
 #	nome = models.
 #	descricao = models.
@@ -21,11 +25,6 @@ class Etapa(models.Model):
 #	dt_fim = models.
 #	capa = models.
 #	estado = models.
-
-class Atividade(models.Model):
-	nome = models.
-	descricao = models.
-	prox_atividade = models.
 
 #class Execução(models.Model):
 #	data = models.
