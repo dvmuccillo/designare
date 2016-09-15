@@ -11,6 +11,9 @@ class Etapa(models.Model):
 	descricao = models.CharField(max_length=250)
 	prox_etapa = models.ForeignKey('self',on_delete=)
 	atividade_inicial = models.ForeignKey(Atividade,on_delete=)
+	
+	def get_proxima_etapa_valida():
+		return 
 
 class Atividade(models.Model):
 	nome = models.CharField(max_length=100)
