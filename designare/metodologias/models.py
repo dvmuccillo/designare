@@ -8,6 +8,9 @@ class Metodologia(models.Model):
 	nome = models.CharField(max_length=50)
 	#etapa_inicial = models.ForeignKey(Etapa,on_delete=models.SET_NULL,blank=True,null=True)
 
+	def __str__(self):
+		return self.nome
+
 class Etapa(models.Model):
 	nome = models.CharField(max_length=50)
 	descricao = models.CharField(max_length=300)
@@ -15,11 +18,17 @@ class Etapa(models.Model):
 	#atividade_inicial = models.ForeignKey(Atividade,on_delete=models.SET_NULL,blank=True,null=True)
 	metodologia = models.ForeignKey(Metodologia,on_delete=models.CASCADE)
 
+	def __str__(self):
+		return self.nome
+
 class Atividade(models.Model):
 	nome = models.CharField(max_length=50)
 	descricao = models.CharField(max_length=300)
 	prox_atividade = models.ForeignKey('self',on_delete=models.SET_NULL,blank=True,null=True)
 	etapa = models.ForeignKey(Etapa,on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.nome
 	
 	
 #class Projeto(models.Model):
