@@ -1,25 +1,24 @@
 from django.db import models
 
 # Create your models here.
+#def get_proxima_etapa_valida():
+#	etapa = Etapa.objects.get
 
 class Metodologia(models.Model):
 	nome = models.CharField(max_length=50)
-	etapa_inicial = models.ForeignKey(Etapa,on_delete=)
+	#etapa_inicial = models.ForeignKey(Etapa,on_delete=models.SET_NULL,blank=True,null=True)
 
 class Etapa(models.Model):
 	nome = models.CharField(max_length=50)
 	descricao = models.CharField(max_length=300)
-	prox_etapa = models.ForeignKey('self',on_delete=)
-	atividade_inicial = models.ForeignKey(Atividade,on_delete=)
+	prox_etapa = models.ForeignKey('self',on_delete=models.SET_NULL,blank=True,null=True)
+	#atividade_inicial = models.ForeignKey(Atividade,on_delete=models.SET_NULL,blank=True,null=True)
 	metodologia = models.ForeignKey(Metodologia,on_delete=models.CASCADE)
-	
-	#def get_proxima_etapa_valida():
-	#	return 
 
 class Atividade(models.Model):
 	nome = models.CharField(max_length=50)
 	descricao = models.CharField(max_length=300)
-	prox_atividade = models.ForeignKey('self',on_delete=)
+	prox_atividade = models.ForeignKey('self',on_delete=models.SET_NULL,blank=True,null=True)
 	etapa = models.ForeignKey(Etapa,on_delete=models.CASCADE)
 	
 	
