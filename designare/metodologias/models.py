@@ -52,11 +52,14 @@ class Atividade(models.Model):
 	etapa = models.ForeignKey(
 		Etapa,
 		on_delete=models.CASCADE,
-		related_name='etapa_pai'
+		related_name='atividades'
 	)
 
 	def __str__(self):
 		return self.nome
+
+	def proximas_atividades_possiveis(self):
+		return self.etapa.atividades.all().exclude(pk=self.pk)
 	
 	
 #class Projeto(models.Model):
