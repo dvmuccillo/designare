@@ -10,8 +10,22 @@ class Projeto(models.Model):
 			blank=True,
 			null=True
 	)
-	dt_inicio = models.DateField(False)
-	dt_fim = models.DateField(False)
-	capa = models.CharField(max_length=300)
-	estado = models.CharField(max_length=50)
+	DEFINIDO 	= 'DE'
+	EM_ESPERA 	= 'ES'
+	EM_EXECUCAO = 'EX'
+	CONCLUIDO	= 'CO'
+	ESTADOS = (
+		(DEFINIDO,'Definido'),
+		(EM_ESPERA,'Em espera'),
+		(EM_EXECUCAO,'Em Execução'),
+		(CONCLUIDO,'Concluído'),	
+	)
+	estado = models.CharField(
+		max_length=2,
+		choices=ESTADOS,
+		default=DEFINIDO,
+	)
+	#dt_inicio = models.DateField(False)
+	#dt_fim = models.DateField(False)
+	#capa = models.CharField(max_length=300)
 
