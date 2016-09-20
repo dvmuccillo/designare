@@ -3,31 +3,37 @@
 <div class="row m-y-2" align="center">
     
     <div class="div-btn-form-projeto">
-        <button 
-            class="btn btn-secondary btn-circle" 
-            alt="Adicionar novo projeto"
-            id="btn-novo-projeto"
-            data-toggle="collapse"
-            href="#div-form-novo-projeto"
-        >
-            <i class="fa fa-plus" aria-hidden="true"></i>
-        </button>
-        <button 
-            class="btn btn-danger btn-circle hidden"
-            alt="Adicionar novo projeto"
-            id="btn-cancelar-novo-projeto"
-            data-toggle="collapse"
-            href="#div-form-novo-projeto" 
-        >
-            <i class="fa fa-times" aria-hidden="true"></i>
-        </button>
-        <button
-            class="btn btn-success btn-circle hidden"
-            alt="Adicionar novo projeto"
-            id="btn-adicionar-novo-projeto"
-        >
-            <i class="fa fa-check" aria-hidden="true"></i>
-        </button>
+        <span data-toggle="tooltip" data-placement="top" title="Adicionar Novo Projeto">
+            <button 
+                class="btn btn-secondary btn-circle" 
+                alt="Adicionar novo projeto"
+                id="btn-novo-projeto"
+                data-toggle="collapse"
+                href="#div-form-novo-projeto"
+            >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+        </span>
+        <span data-toggle="tooltip" data-placement="top" title="Cancelar">
+            <button 
+                class="btn btn-danger btn-circle hidden"
+                alt="Adicionar novo projeto"
+                id="btn-cancelar-novo-projeto"
+                data-toggle="collapse"
+                href="#div-form-novo-projeto"                
+            >
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </span>
+        <span data-toggle="tooltip" data-placement="top" title="Cadastrar Projeto">
+            <button
+                class="btn btn-success btn-circle hidden"
+                alt="Adicionar novo projeto"
+                id="btn-adicionar-novo-projeto"
+            >
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+        </span>
     </div>
 </div>
 <div class="collapse" id="div-form-novo-projeto">
@@ -147,10 +153,15 @@
            $("#btn-cancelar-novo-projeto").toggleClass('hidden',false);
            $("#btn-adicionar-novo-projeto").toggleClass('hidden',false);
         });
+        
         $("#btn-cancelar-novo-projeto").click(function(){
            $("#btn-novo-projeto").toggleClass('hidden',false);
            $("#btn-cancelar-novo-projeto").toggleClass('hidden',true);
            $("#btn-adicionar-novo-projeto").toggleClass('hidden',true);
         });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     });
 {% endblock %}
