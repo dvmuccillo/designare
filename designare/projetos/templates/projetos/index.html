@@ -7,13 +7,17 @@
             class="btn btn-secondary btn-circle" 
             alt="Adicionar novo projeto"
             id="btn-novo-projeto"
+            data-toggle="collapse"
+            href="#div-form-novo-projeto"
         >
             <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
         <button 
             class="btn btn-danger btn-circle hidden"
             alt="Adicionar novo projeto"
-            id="btn-cancelar-novo-projeto" 
+            id="btn-cancelar-novo-projeto"
+            data-toggle="collapse"
+            href="#div-form-novo-projeto" 
         >
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
@@ -26,7 +30,7 @@
         </button>
     </div>
 </div>
-<div class="hidden" id="div-form-novo-projeto">
+<div class="collapse" id="div-form-novo-projeto">
     <div class="row" align="center">
         <div class="col-md-6 offset-md-3">
             <div>
@@ -66,25 +70,39 @@
 {% block content %}
 <div class="container">
             <div class="row m-y-2">
-                <h3>Em andamento</h3>
+                <h3>Em execução</h3>
             </div>
             <div class="row">                
                 <div class="col-md-4">
                     <div class="card border-square">
                         <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
-                        <a class="btn btn-secondary card-block btn-block border-square">Projeto X</a>
+                        <a class="btn btn-secondary card-block btn-block border-square">
+                            <b>Projeto X</b>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card border-square">
                         <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
-                        <a class="btn btn-secondary card-block btn-block border-square">Projeto X</a>
+                        <a class="btn btn-secondary card-block btn-block border-square">
+                            <b>Projeto X</b>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card border-square">
                         <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
-                        <a class="btn btn-secondary card-block btn-block border-square">Projeto X</a>
+                        <a class="btn btn-secondary card-block btn-block border-square">
+                            <b>Projeto X</b>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-square">
+                        <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
+                        <a class="btn btn-secondary card-block btn-block border-square">
+                            <b>Projeto X</b>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -94,25 +112,32 @@
                 <h3>Aguardando</h3>
             </div>
             <div class="row">                
-        <div class="col-md-4">
-            <div class="card border-square">
-                <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
-                <a class="btn btn-secondary card-block btn-block border-square">Projeto X</a>
+                <div class="col-md-4">
+                    <div class="card border-square">
+                        <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
+                        <a class="btn btn-secondary card-block btn-block border-square">
+                            <b>Projeto X</b>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-square">
+                        <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
+                        <a class="btn btn-secondary card-block btn-block border-square">
+                            <b>Projeto X</b>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-square">
+                        <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
+                        <a class="btn btn-secondary card-block btn-block border-square">
+                            <b>Projeto X</b>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card border-square">
-                <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
-                <a class="btn btn-secondary card-block btn-block border-square">Projeto X</a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-square">
-                <img src="https://steamcdn-a.akamaihd.net/steam/apps/730/header.jpg?2016-9-18" class="card-mg-top" width="100%" height="100%">
-                <a class="btn btn-secondary card-block btn-block border-square">Projeto X</a>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock content %}
 {% block javascript_functions %}
@@ -121,13 +146,11 @@
            $("#btn-novo-projeto").toggleClass('hidden',true);
            $("#btn-cancelar-novo-projeto").toggleClass('hidden',false);
            $("#btn-adicionar-novo-projeto").toggleClass('hidden',false);
-           $("#div-form-novo-projeto").toggleClass('hidden',false);
         });
         $("#btn-cancelar-novo-projeto").click(function(){
            $("#btn-novo-projeto").toggleClass('hidden',false);
            $("#btn-cancelar-novo-projeto").toggleClass('hidden',true);
            $("#btn-adicionar-novo-projeto").toggleClass('hidden',true);
-           $("#div-form-novo-projeto").toggleClass('hidden',true);
         });
     });
 {% endblock %}
