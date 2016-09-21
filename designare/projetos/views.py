@@ -5,11 +5,12 @@ from projetos.models import Projeto
 
 # Create your views here.
 def index(request):
+    projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
     context = {
     	'titulo_da_pagina' : "Projetos",
-    }
-    template = loader.get_template('projetos/index.html')
-    return HttpResponse(template.render(context,request))
+    	'projetos_definidos' : projetos_definidos,
+      	}
+    return render(request, 'projetos/index.html', context)
 
 def novo(request):
 	projeto = Projeto(
