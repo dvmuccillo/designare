@@ -3,56 +3,58 @@
 <div class="row m-y-2" align="center">
     
     <div class="div-btn-form-projeto">
-        <span data-toggle="tooltip" data-placement="top" title="Adicionar Novo Projeto">
-            <button 
-                class="btn btn-secondary btn-circle" 
-                alt="Adicionar novo projeto"
-                id="btn-novo-projeto"
-                data-toggle="collapse"
-                href="#div-form-novo-projeto"
-            >
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </button>
-        </span>
-        <span data-toggle="tooltip" data-placement="top" title="Cancelar">
-            <button 
-                class="btn btn-danger btn-circle hidden"
-                alt="Adicionar novo projeto"
-                id="btn-cancelar-novo-projeto"
-                data-toggle="collapse"
-                href="#div-form-novo-projeto"                
-            >
-                <i class="fa fa-times" aria-hidden="true"></i>
-            </button>
-        </span>
-        <span data-toggle="tooltip" data-placement="top" title="Cadastrar Projeto">
-            <button
-                class="btn btn-success btn-circle hidden"
-                alt="Adicionar novo projeto"
-                id="btn-adicionar-novo-projeto"
-            >
-                <i class="fa fa-check" aria-hidden="true"></i>
-            </button>
-        </span>
+        <button 
+            class="btn btn-secondary btn-circle" 
+            alt="Adicionar novo projeto"
+            id="btn-novo-projeto"
+            data-toggle="collapse"
+            href="#div-form-novo-projeto"
+            data-tooltip="tooltip" data-placement="top" title="Adicionar Novo Projeto"
+        >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+        <button 
+            class="btn btn-danger btn-circle hidden"
+            alt="Adicionar novo projeto"
+            id="btn-cancelar-novo-projeto"
+            data-toggle="collapse"
+            href="#div-form-novo-projeto"
+            data-tooltip="tooltip" data-placement="top" title="Cancelar"                
+        >
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+        <button
+            class="btn btn-success btn-circle hidden"
+            alt="Adicionar novo projeto"
+            id="btn-adicionar-novo-projeto"
+            data-tooltip="tooltip" data-placement="top" title="Cadastrar Projeto"
+        >
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
     </div>
 </div>
 <div class="collapse" id="div-form-novo-projeto">
     <div class="row" align="center">
         <div class="col-md-6 offset-md-3">
             <div>
-                <form>
+                <form action="{% url 'projetos:novo' %}" method="post" id="form-novo-projeto">
+                    {% csrf_token %}
                     <div class="input-group">
-                        <span class="input-group-addon border-square" id="basic-addon1">
+                        <span class="input-group-addon border-square">
                             <i class="fa fa-tag"></i>
                         </span>
-                        <input type="text" class="form-control border-square" placeholder="Título do Projeto">
+                        <input name="nome" 
+                            type="text"
+                            class="form-control border-square"
+                            placeholder="Título do Projeto"
+                        >
                     </div>
                     <br>
                     <div class="input-group">
-                        <span class="input-group-addon border-square" id="basic-addon1">
+                        <span class="input-group-addon border-square">
                             <i class="fa fa-info"></i>
                         </span>
-                        <textarea 
+                        <textarea name="descricao" 
                             class="form-control border-square"
                             placeholder="Descrição do Projeto"
                             rows="5"
@@ -60,10 +62,10 @@
                     </div>
                     <br>
                     <div class="input-group">
-                        <span class="input-group-addon border-square" id="basic-addon1">
+                        <span class="input-group-addon border-square">
                             <i class="fa fa-database"></i>
                         </span>
-                        <select class="form-control border-square">
+                        <select class="form-control border-square" disabled>
                             <option>Metodologia do Projeto</option>
                         </select>
                     </div>
@@ -160,8 +162,12 @@
            $("#btn-adicionar-novo-projeto").toggleClass('hidden',true);
         });
 
+        $("#btn-adicionar-novo-projeto").click(function(){
+            $("#form-novo-projeto").submit();
+        });
+
         $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
+            $('[data-tooltip="tooltip"]').tooltip()
         })
     });
 {% endblock %}
