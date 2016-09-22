@@ -25,7 +25,10 @@ class Projeto(models.Model):
 		choices=ESTADOS,
 		default=DEFINIDO,
 	)
-	#imagem_capa = models.ImageField(upload_to='projetos/img/capas/')
+	imagem_capa = models.ImageField(
+        upload_to='static/img/projetos/capas/',
+    	default='static/img/projetos/capas/default.png',
+    )
 	#dt_inicio = models.DateField(False)
 	#dt_fim = models.DateField(False)
 
