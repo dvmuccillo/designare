@@ -39,17 +39,22 @@
             <div>
                 <form action="{% url 'projetos:novo' %}" method="post" id="form-novo-projeto">
                     {% csrf_token %}
-                    <div class="input-group">
-                        <span class="input-group-addon border-square">
-                            <i class="fa fa-tag"></i>
-                        </span>
-                        <input name="nome" 
-                            type="text"
-                            class="form-control border-square"
-                            placeholder="Título do Projeto"
-                        >
+                    <div class="form-group" id="div-input-projeto-nome">
+                        <div class="input-group">
+                            <span class="input-group-addon border-square">
+                                <i class="fa fa-tag"></i>
+                            </span>
+                            <input name="nome" 
+                                type="text"
+                                class="form-control border-square"
+                                placeholder="Título do Projeto"
+                                id="input-projeto-nome" 
+                            >
+                        </div>
+                        <div class="form-control-feedback text-md-left invisible" id="div-projeto-nome-txt">
+                            Este campo é obrigatório!
+                        </div>
                     </div>
-                    <br>
                     <div class="input-group">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-info"></i>
@@ -82,7 +87,7 @@
         </div>
         <div class="row">
             <div class="col-md-5">
-                <div class="card card-outline-secondary text-xs-center">
+                <div class="card card-outline-secondary text-xs-center border-square">
                     <div class="card-block">
                         <blockquote class="card-blockquote">
                             <p>Nenhum projeto em execução no momento!</p>
@@ -98,7 +103,7 @@
         </div>
         <div class="row">
             <div class="col-md-5">
-                <div class="card card-outline-secondary text-xs-center">
+                <div class="card card-outline-secondary text-xs-center border-square">
                     <div class="card-block">
                         <blockquote class="card-blockquote">
                             <p>Nenhum projeto em espera no momento!</p>
@@ -133,7 +138,7 @@
         </div>
         <div class="row">
             <div class="col-md-5">
-                <div class="card card-outline-secondary text-xs-center">
+                <div class="card card-outline-secondary text-xs-center border-square">
                     <div class="card-block">
                         <blockquote class="card-blockquote">
                             <p>Nenhum projeto concluído no momento!</p>
@@ -160,7 +165,17 @@
         });
 
         $("#btn-adicionar-novo-projeto").click(function(){
-            $("#form-novo-projeto").submit();
+            $('#div-input-projeto-nome').toggleClass('has-danger',false);
+            $('#input-projeto-nome').toggleClass('form-control-danger',false);
+            $('#div-projeto-nome-txt').toggleClass('invisible',true);
+            if($('#input-projeto-nome').val() == ""){
+                $('#div-input-projeto-nome').toggleClass('has-danger',true);
+                $('#input-projeto-nome').toggleClass('form-control-danger',true);
+                $('#div-projeto-nome-txt').toggleClass('invisible',false);
+            }
+            else{
+                $("#form-novo-projeto").submit();
+            }
         });
 
         $(function () {
