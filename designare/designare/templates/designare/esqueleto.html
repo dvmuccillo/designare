@@ -63,5 +63,11 @@
         <script type="text/javascript">
         {% block javascript_functions %}
         {% endblock %}
+            $(document).ready(function(){
+                $(function () {
+                    $('[data-tooltip="tooltip"]').tooltip()
+                })
+            });
+        </script>
     </body>
 </html>
