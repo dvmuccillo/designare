@@ -21,8 +21,7 @@ def novo(request):
     projeto = Projeto(
                 nome=request.POST.get('nome'),
                 descricao=request.POST.get('descricao'),
-                imagem_capa=capa
-                
+                imagem_capa=capa                
             )
     projeto.save();
     return redirect('projetos:index')
