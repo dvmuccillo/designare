@@ -7,6 +7,5 @@ urlpatterns = [
     # /metodologias/
     url(r'^$', views.index, name='index'),
     # /metodologias/novo/
-    # url(r'^novo/$', views.novo, name='novo'),
-
+    url(r'^nova/$', views.nova, name='nova'),
 ]

@@ -9,3 +9,6 @@ def index(request):
 		'titulo_da_pagina' : "Metodologias",
 	}
 	return render(request,'metodologias/index.html',context)
+
+def nova(request):
+    return render(request,'metodologias/nova.html')
