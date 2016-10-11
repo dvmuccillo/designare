@@ -41,61 +41,62 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    Nenhuma etapa adcionada
+            <div class="list-group" id="div-menu-etapas">
+                <a href="#" class="list-group-item active" id="li-menu-nenhuma-etapa">
+                    Nenhuma etapa adicionada
                 </a>
             </div>
         </div>
         <div class="col-md-9">
+            <div class="row col-md-11 offset-md-1" id="div-listagem-etapas">
+                <!-- Inserir etapas aqui -->             
+            </div>
             <div class="row">
                 <div class="row" align="center">
-        <div class="col-md-6 offset-md-3">
-            <div class="row" id="etapas">
-                
-            </div>
-            <div class="row">
-                <form 
-                    action="{% url 'projetos:novo' %}" method="post"
-                    enctype="multipart/form-data" id="form-novo-projeto"
-                >
-                    {% csrf_token %}
-                    <div class="form-group" id="div-input-etapa-nome">
-                        <div class="input-group">
-                            <span class="input-group-addon border-square">
-                                <i class="fa fa-tag"></i>
-                            </span>
-                            <input name="nome" 
-                                type="text"
-                                class="form-control border-square"
-                                placeholder="Nome da Etapa"
-                                id="input-etapa-nome" 
+                    <div class="col-md-6 offset-md-3">
+                        <div class="row">
+                            <br>
+                            <form 
+                                action="{% url 'projetos:novo' %}" method="post"
+                                enctype="multipart/form-data" id="form-novo-projeto"
                             >
+                                {% csrf_token %}
+                                <div class="form-group" id="div-input-etapa-nome">
+                                    <div class="input-group">
+                                        <span class="input-group-addon border-square">
+                                            <i class="fa fa-tag"></i>
+                                        </span>
+                                        <input name="nome" 
+                                            type="text"
+                                            class="form-control border-square"
+                                            placeholder="Nome da Etapa"
+                                            id="input-etapa-nome" 
+                                        >
+                                    </div>
+                                    
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon border-square">
+                                        <i class="fa fa-info"></i>
+                                    </span>
+                                    <textarea name="descricao" 
+                                        class="form-control border-square"
+                                        placeholder="Descrição da Etapa"
+                                        rows="5"
+                                        id="input-etapa-descricao"
+                                    ></textarea>
+                                </div>
+                                <br>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-secondary" id="btn-nova-etapa">
+                                        Cadastrar Etapa
+                                    </button>
+                                </div>
+                                
+                            </form>
+                            </div>
                         </div>
-                        
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon border-square">
-                            <i class="fa fa-info"></i>
-                        </span>
-                        <textarea name="descricao" 
-                            class="form-control border-square"
-                            placeholder="Descrição da Etapa"
-                            rows="5"
-                            id="input-etapa-descricao"
-                        ></textarea>
-                    </div>
-                    <br>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary" id="btn-nova-etapa">
-                            Cadastrar Etapa
-                        </button>
-                    </div>
-                    
-                </div>
-                </form>
-            </div>
-        </div>        
+                    </div>        
     </div>
             </div>
 
@@ -108,7 +109,66 @@ $(document).ready(function(){
     $("#btn-nova-etapa").click(function(){
         nome = $("#input-etapa-nome").val();
         descricao = $("#input-etapa-descricao").val();
-        $("#etapas").append("<p>Etapa: "+nome+" Descrição: "+descricao+"</p>")
+        div_etapa = "<div class='row'>"
+                        + "<div class='row'>"
+                            + "<div class='card card-outline-secondary border-square unbordered'>"
+                                + "<div class='card-block'>"
+                                    + "<h3 class='card-title'>"+nome+"</h3>"
+                                    + "<blockquote class='card-blockquote'>"
+                                        + "<p>"+descricao+"</p>"
+                                    + "</blockquote>"
+                                + "</div>"
+                            + "</div>"
+                        + "</div>"
+                        + "<div class='row' id='div-etapa-"+nome+"-atividades'>"
+                            + "<div class='row' align='center'>"
+                                + "<form "
+                                    + "class='col-md-7 offset-md-2'"
+                                    + "action='{% url 'projetos:novo' %}' method='post'"
+                                    + "enctype='multipart/form-data' id='form-nova-atividade'"
+                                + ">"
+                                    + "{% csrf_token %}"
+                                    + "<div class='form-group' id='div-input-etapa-nome'>"
+                                        + "<div class='input-group'>"
+                                            + "<span class='input-group-addon border-square'>"
+                                                + "<i class='fa fa-tag'></i>"
+                                            + "</span>"
+                                            + "<input name='nome'" 
+                                                + "type='text'"
+                                                + "class='form-control border-square'"
+                                                + "placeholder='Nome da Atividade'"
+                                                + "id='input-atividade-nome'"
+                                            + ">"
+                                        + "</div>"
+                                    + "</div>"
+                                    + "<div class='input-group'>"
+                                        + "<span class='input-group-addon border-square'>"
+                                            + "<i class='fa fa-info'></i>"
+                                        + "</span>"
+                                        + "<textarea name='descricao'"
+                                            + "class='form-control border-square'"
+                                            + "placeholder='Descrição da Atividade'"
+                                            + "rows='5'"
+                                            + "id='input-atividade-descricao'"
+                                        + "></textarea>"
+                                    + "</div>"
+                                    + "<br>"
+                                    + "<div class='btn-group' role='group'>"
+                                        + "<button type='button' class='btn btn-secondary' id='btn-nova-atividade'>"
+                                            + "Cadastrar Atividade"
+                                        + "</button>"
+                                    + "</div>"
+                                + "</form>"
+                            + "</div>";
+                        + "</div>"                  
+                    + "</div>"
+                    + "<div class='clearfix'>"
+                        + "<br><br><hr>"
+                    + "</div>";
+        link_etapa = "<a href='#' class='list-group-item'>"+nome+"</a>";
+        $("#li-menu-nenhuma-etapa").remove();        
+        $("#div-listagem-etapas").append(div_etapa);
+        $("#div-menu-etapas").append(link_etapa);
     });
 });
 {% endblock %}
