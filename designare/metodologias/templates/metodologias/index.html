@@ -1,0 +1,165 @@
+{% extends 'designare/esqueleto.html' %}
+{% block body %}
+<!DOCTYPE html>
+    <div class="container">
+        <div class="row m-t-3">
+            <div class="col-md-1 offset-md-11">
+                <div class="btn-group">
+                    <button
+                        type="button"
+                        class="btn btn-secondary border-square"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        data-tooltip="tooltip" data-placement="top" title="Menu"
+                    >
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <div class="dropdown-menu border-square">
+                        <a class="dropdown-item" href="/">
+                            <i class="fa fa-home" aria-hidden="true"></i>&nbsp;Início
+                        </a>
+                        <a class="dropdown-item" href="/metodologias/">
+                            <i class="fa fa-database" aria-hidden="true"></i>&nbsp;Metodologias
+                        </a>
+                        <a class="dropdown-item" href="/projetos/">
+                            <i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;Projetos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <h1 align="center">Designare</h1>
+        </div>
+        <div class="row m-y-1">
+            <h2 align="center">{{ titulo_da_pagina }}</h2>
+        </div>
+        {% block subtitle_content %}
+        {% endblock %}
+        <div class="row">
+            <hr>
+        </div>
+    </div>
+    {% block content %}
+            <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <ul class="list-group">
+                        
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-link">Metodologia 1</a>
+                            <div class="btn-group pull-md-right">
+                                <a
+                                    href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
+                                >
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Editar"
+                                >
+
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="" class="btn btn-danger"
+                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                >
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <a href="" class="btn btn-link">Metodologia 2</a>
+                            <div class="btn-group pull-md-right">
+                                <a
+                                    href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
+                                >
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Editar"
+                                >
+
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="" class="btn btn-danger"
+                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                >
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </li><li class="list-group-item">
+                            <a href="" class="btn btn-link">Metodologia 3</a>
+                            <div class="btn-group pull-md-right">
+                                <a
+                                    href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
+                                >
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Editar"
+                                >
+
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="" class="btn btn-danger"
+                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                >
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </li><li class="list-group-item">
+                            <a href="" class="btn btn-link">Metodologia 4</a>
+                            <div class="btn-group pull-md-right">
+                                <a
+                                    href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
+                                >
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Editar"
+                                >
+
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="" class="btn btn-danger"
+                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                >
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </li><li class="list-group-item">
+                            <a href="" class="btn btn-link">Metodologia 5</a>
+                            <div class="btn-group pull-md-right">
+                                <a
+                                    href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
+                                >
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="" class="btn btn-secondary"
+                                    data-tooltip="tooltip" data-placement="top" title="Editar"
+                                >
+
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="" class="btn btn-danger"
+                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                >
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+
+                 
+
+        </div>
+    {% endblock %}
+{% endblock %}

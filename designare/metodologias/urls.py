@@ -2,10 +2,11 @@ from django.conf.urls import url
 
 from . import views
 
-app_name = 'projetos'
+app_name = 'metodologias'
 urlpatterns = [
-    # /projetos/
+    # /metodologias/
     url(r'^$', views.index, name='index'),
-    # /projetos/novo/
-    url(r'^novo/$', views.novo, name='novo'),
+    # /metodologias/novo/
+    # url(r'^novo/$', views.novo, name='novo'),
+
 ]
