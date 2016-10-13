@@ -42,7 +42,8 @@
     <div class="row">
         <div class="col-md-3">
             <div class="list-group" id="div-menu-etapas" style="position: fixed;">
-                <a href="#" class="list-group-item list-group-item-action list-group-item-info" id="li-menu-nenhuma-etapa">
+                <a href="#Cadastrar_Nova_Etapa" class="list-group-item list-group-item-action list-group-item-info"
+                    id="li-menu-primeiro-item">
                     Nenhuma etapa adicionada
                 </a>
             </div>
@@ -55,6 +56,7 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
                         <div class="row">
+                            <a name="Cadastrar_Nova_Etapa"></a>
                             <br>
                             <form 
                                 action="{% url 'projetos:novo' %}" method="post"
@@ -107,19 +109,17 @@
                                     </div>
                                 </div>                                
                             </form>
-                            </div>
                         </div>
-                    </div>        
-    </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
 {% endblock %}
 {% block javascript_functions %}
 $(document).ready(function(){
-    $("#li-menu-nenhuma-etapa").click(function(){
+    $("#li-menu-primeiro-item").click(function(){
         $("#input-etapa-nome").focus();
     });
     $("#btn-nova-etapa").click(function(){
@@ -204,8 +204,10 @@ $(document).ready(function(){
                         + "</div>";
             /* Elemento HTML que representa o menu com link interno para etapa */
             link_etapa = "<a href='#"+nome+"' class='list-group-item list-group-item-action'>"+nome+"</a>";
-            /* Remove o link que exibe o aviso de nenhuma etapa cadastrada */
-            $("#li-menu-nenhuma-etapa").remove();
+            /* Altera o conteúdo e estilo do primeiro item do menu */
+            $("#li-menu-primeiro-item").empty();
+            $("#li-menu-primeiro-item").toggleClass("list-group-item-info",false);
+            $("#li-menu-primeiro-item").append("<i class='fa fa-plus'></i>&nbsp;Adicionar nova etapa");
             /* Limpa os campos do formulário de cadastro de etapas */
             $("#input-etapa-nome").val("");
             $("#input-etapa-descricao").val("");
