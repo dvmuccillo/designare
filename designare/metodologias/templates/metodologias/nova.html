@@ -41,7 +41,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <div class="list-group" id="div-menu-etapas">
+            <div class="list-group" id="div-menu-etapas" style="position: fixed;">
                 <a href="#" class="list-group-item list-group-item-action list-group-item-info" id="li-menu-nenhuma-etapa">
                     Nenhuma etapa adicionada
                 </a>
@@ -63,7 +63,13 @@
                             >
                                 {% csrf_token %}
                                 <div class="form-group" id="div-input-etapa-nome">
-                                    <label><b>Nome</b></label>
+                                    <label>
+                                        <b>Nome</b>&nbsp;
+                                        <i
+                                            class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
+                                            title="Este campo é obrigatório!"
+                                        ></i>
+                                    </label>
                                     <div class="input-group">
                                         <span class="input-group-addon border-square">
                                             <i class="fa fa-tag"></i>
@@ -75,7 +81,7 @@
                                             id="input-etapa-nome" 
                                         >
                                     </div>
-                                    
+                                    <div class="form-control-feedback" id="div-etapa-nome-feedback"></div>
                                 </div>
                                 <label><b>Descrição</b></label>
                                 <div class="input-group">
@@ -89,6 +95,9 @@
                                         id="input-etapa-descricao"
                                     ></textarea>
                                 </div>
+                                <p class="form-text text-muted">
+                                    Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
+                                </p>
                                 <br>
                                 <div align="center">
                                     <div class="btn-group" role="group">
@@ -114,12 +123,23 @@ $(document).ready(function(){
         $("#input-etapa-nome").focus();
     });
     $("#btn-nova-etapa").click(function(){
+        /* Limpeza de estilos de validação */
+        $("#div-input-etapa-nome").toggleClass("has-danger",false);
+        $("#input-etapa-nome").toggleClass("form-control-danger",false);
+        $("#div-etapa-nome-feedback").empty();
+        /* Valor das propriedades de etapa */
         nome = $("#input-etapa-nome").val();
         descricao = $("#input-etapa-descricao").val();
+        /* Verifica se o nome da etapa foi informado */
         if(!nome){
-            alert(vazio);
-        } else {       
+            /* Aplica estilos de aviso se o nome da etapa não foi informado */
+            $("#div-input-etapa-nome").toggleClass("has-danger",true);
+            $("#input-etapa-nome").toggleClass("form-control-danger",true);
+            $("#div-etapa-nome-feedback").append("Informe o nome da etapa!");
+        } else {
+            /* Elemento HTML que representa uma etapa */       
             div_etapa = "<div class='row'>"
+                            + "<a name='"+nome+"'></a>"
                             + "<div class='row'>"
                                 + "<div class='card card-outline-secondary border-square unbordered'>"
                                     + "<div class='card-block'>"
@@ -141,7 +161,7 @@ $(document).ready(function(){
                                         + "enctype='multipart/form-data' id='form-nova-atividade'"
                                     + ">"
                                         + "{% csrf_token %}"
-                                        + "<div class='form-group' id='div-input-etapa-nome'>"
+                                        + "<div class='form-group' id='div-input-atividade-nome'>"
                                             + "<label><b>Nome</b></label>"
                                             + "<div class='input-group'>"
                                                 + "<span class='input-group-addon border-square'>"
@@ -182,10 +202,14 @@ $(document).ready(function(){
                         + "<div class='clearfix'>"
                             + "<br><br><hr>"
                         + "</div>";
-            link_etapa = "<a href='#' class='list-group-item list-group-item-action'>"+nome+"</a>";
+            /* Elemento HTML que representa o menu com link interno para etapa */
+            link_etapa = "<a href='#"+nome+"' class='list-group-item list-group-item-action'>"+nome+"</a>";
+            /* Remove o link que exibe o aviso de nenhuma etapa cadastrada */
             $("#li-menu-nenhuma-etapa").remove();
+            /* Limpa os campos do formulário de cadastro de etapas */
             $("#input-etapa-nome").val("");
             $("#input-etapa-descricao").val("");
+            /* Insere os elementos HTML no corpo */
             $("#div-listagem-etapas").append(div_etapa);
             $("#div-menu-etapas").append(link_etapa);
         }
