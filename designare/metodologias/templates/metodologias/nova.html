@@ -59,6 +59,7 @@
                             <form 
                                 action="{% url 'projetos:novo' %}" method="post"
                                 enctype="multipart/form-data" id="form-novo-projeto"
+                                id="form-etapa"
                             >
                                 {% csrf_token %}
                                 <div class="form-group" id="div-input-etapa-nome">
@@ -178,8 +179,10 @@ $(document).ready(function(){
                     + "<div class='clearfix'>"
                         + "<br><br><hr>"
                     + "</div>";
-        link_etapa = "<a href='#' class='list-group-item'>"+nome+"</a>";
-        $("#li-menu-nenhuma-etapa").remove();        
+        link_etapa = "<a href='#' class='list-group-item list-group-item-action'>"+nome+"</a>";
+        $("#li-menu-nenhuma-etapa").remove();
+        $("#input-etapa-nome").val("");
+        $("#input-etapa-descricao").val("");
         $("#div-listagem-etapas").append(div_etapa);
         $("#div-menu-etapas").append(link_etapa);
     });
