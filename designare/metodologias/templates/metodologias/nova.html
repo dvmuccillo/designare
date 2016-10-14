@@ -46,22 +46,22 @@
                     id="li-menu-primeiro-item">
                     Nenhuma etapa adicionada
                 </a>
+                <!-- Inserir demais links de etapas aqui -->
             </div>
         </div>
         <div class="col-md-9">
             <div class="row col-md-11 offset-md-1" id="div-listagem-etapas">
-                <!-- Inserir etapas aqui -->             
+                <!-- Inserir etapas aqui -->
             </div>
             <div class="row">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
+                        <a id="Cadastrar_Nova_Etapa"></a>
                         <div class="row">
-                            <a name="Cadastrar_Nova_Etapa"></a>
                             <br>
                             <form 
                                 action="{% url 'projetos:novo' %}" method="post"
-                                enctype="multipart/form-data" id="form-novo-projeto"
-                                id="form-etapa"
+                                enctype="multipart/form-data" id="form-etapa"
                             >
                                 {% csrf_token %}
                                 <div class="form-group" id="div-input-etapa-nome">
@@ -120,6 +120,10 @@
 {% block javascript_functions %}
 $(document).ready(function(){
     $("#li-menu-primeiro-item").click(function(){
+        event.preventDefault();
+        $('html, body').animate({
+            scrollTop: $("#form-etapa").offset().top
+        }, 1000);
         $("#input-etapa-nome").focus();
     });
     $("#btn-nova-etapa").click(function(){
@@ -138,8 +142,8 @@ $(document).ready(function(){
             $("#div-etapa-nome-feedback").append("Informe o nome da etapa!");
         } else {
             /* Elemento HTML que representa uma etapa */       
-            div_etapa = "<div class='row'>"
-                            + "<a name='"+nome+"'></a>"
+            div_etapa = "<a id='"+nome+"'></a><div class='row'>"
+                            + ""
                             + "<div class='row'>"
                                 + "<div class='card card-outline-secondary border-square unbordered'>"
                                     + "<div class='card-block'>"
@@ -203,7 +207,7 @@ $(document).ready(function(){
                             + "<br><br><hr>"
                         + "</div>";
             /* Elemento HTML que representa o menu com link interno para etapa */
-            link_etapa = "<a href='#"+nome+"' class='list-group-item list-group-item-action'>"+nome+"</a>";
+            link_etapa = "<a href='#"+nome+"' class='list-group-item list-group-item-action' id='li-menu-etapa-"+nome+"'>"+nome+"</a>";
             /* Altera o conteúdo e estilo do primeiro item do menu */
             $("#li-menu-primeiro-item").empty();
             $("#li-menu-primeiro-item").toggleClass("list-group-item-info",false);
@@ -214,6 +218,12 @@ $(document).ready(function(){
             /* Insere os elementos HTML no corpo */
             $("#div-listagem-etapas").append(div_etapa);
             $("#div-menu-etapas").append(link_etapa);
+            $("#li-menu-etapa-"+nome).on("click",function(){
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $("#li-menu-etapa-"+nome).offset().top
+                }, 1000);
+            });
         }
     });
 });
