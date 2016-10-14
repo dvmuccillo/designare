@@ -32,8 +32,37 @@
     <div class="row m-y-1">
         <h2 align="center">{{ titulo_da_pagina }}</h2>
     </div>
-    {% block subtitle_content %}
-    {% endblock %}
+    <div class="row m-y-2" align="center" id="div-form-metodologia">
+        <div class="col-md-6 offset-md-3" id="form-metodologia">
+            <form class="form-inline">
+                {% csrf_token %}
+                <div class="form-group" id="div-input-metodologia-nome">
+                    <label class="sr-only" for="input-metodologia-nome">
+                        <b>Nome</b>&nbsp;
+                    </label>
+                    <input name="nome" 
+                        type="text"
+                        class="form-control border-square"
+                        placeholder="Nome da Metodologia"
+                        id="input-metodologia-nome"
+                        data-tooltip="tooltip" data-placement="bottom"
+                        title="Forneça um nome para a Metodologia!"
+                    >
+                    <button class="btn btn-success border-square" id="btn-nova-metodologia">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row m-y-1 hidden" id="div-metodologia-nome">
+            <h2 align="center">
+                <span id="metodologia-nome"></span>
+                <button class="btn btn-secondary border-square" id="btn-edit-metodologia">
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </h2>
+        </div>
     <div class="row">
         <hr>
     </div>
@@ -119,6 +148,47 @@
 {% endblock %}
 {% block javascript_functions %}
 $(document).ready(function(){
+    /* Verifica se metodologia tem nome definido */
+    if($("#div-metodologia-nome").hasClass("hidden")){
+        /* Se metodologia não tem nome definido (não existe)*/
+        /* Requisita foco para o campo de nome da metodologia */
+        $("#input-metodologia-nome").focus();
+        /* Exibe tooltip do campo */
+        $("#input-metodologia-nome").tooltip('show');
+    }
+    /* Previne a submissão do formulário */
+    $("#form-metodologia").submit(function(){
+        event.preventDefault();
+    });
+
+    /* Ação de cadastro de metodologia (definição do nome) */
+    $("#btn-nova-metodologia").click(function(){
+        $("#div-input-metodologia-nome").toggleClass("has-danger",false);
+        $("#input-metodologia-nome").toggleClass("form-control-danger",false);
+        nome = $("#input-metodologia-nome").val();
+        if(!nome){
+            $("#div-input-metodologia-nome").toggleClass("has-danger",true);
+            $("#input-metodologia-nome").toggleClass("form-control-danger",true);
+        }
+        else {
+            $("#metodologia-nome").empty();
+            $("#metodologia-nome").append(nome);
+            $("#div-form-metodologia").toggleClass("hidden",true);
+            $("#div-metodologia-nome").toggleClass("hidden",false);
+        }
+    });
+
+    /* Ação de edição de metodologia */
+    $("#btn-edit-metodologia").click(function(){
+        $("#div-metodologia-nome").toggleClass("hidden",true);
+        $("#div-form-metodologia").toggleClass("hidden",false);
+        /* Requisita foco para o campo de nome da metodologia */
+        $("#input-metodologia-nome").focus();
+        /* Exibe tooltip do campo */
+        $("#input-metodologia-nome").tooltip('show');
+    });
+
+    /*  */
     $("#li-menu-primeiro-item").click(function(){
         event.preventDefault();
         $('html, body').animate({
@@ -219,10 +289,12 @@ $(document).ready(function(){
             $("#div-listagem-etapas").append(div_etapa);
             $("#div-menu-etapas").append(link_etapa);
             $("#li-menu-etapa-"+nome).on("click",function(){
-                event.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $("#li-menu-etapa-"+nome).offset().top
-                }, 1000);
+                //event.preventDefault();
+                //id = nome;
+                //alert(id);
+                //$('html, body').animate({
+                //    scrollTop: $("#"+nome).offset().top
+                //}, 1000);
             });
         }
     });

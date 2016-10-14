@@ -33,8 +33,16 @@
         <div class="row m-y-1">
             <h2 align="center">{{ titulo_da_pagina }}</h2>
         </div>
-        {% block subtitle_content %}
-        {% endblock %}
+        <div class="row m-y-2" align="center">
+            <a 
+                class="btn btn-secondary btn-circle" 
+                id="btn-novo-projeto"
+                href="/metodologias/nova/"
+                data-tooltip="tooltip" data-placement="top" title="Adicionar Nova Metodologia"
+            >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+        </div>
         <div class="row">
             <hr>
         </div>
