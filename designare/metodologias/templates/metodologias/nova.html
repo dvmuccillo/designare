@@ -92,51 +92,53 @@
                                 action="{% url 'projetos:novo' %}" method="post"
                                 enctype="multipart/form-data" id="form-etapa"
                             >
-                                {% csrf_token %}
-                                <div class="form-group" id="div-input-etapa-nome">
-                                    <label>
-                                        <b>Nome</b>&nbsp;
-                                        <i
-                                            class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
-                                            title="Este campo é obrigatório!"
-                                        ></i>
-                                    </label>
+                                <fieldset id="fieldset-nova-etapa">
+                                    {% csrf_token %}
+                                    <div class="form-group" id="div-input-etapa-nome">
+                                        <label>
+                                            <b>Nome</b>&nbsp;
+                                            <i
+                                                class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
+                                                title="Este campo é obrigatório!"
+                                            ></i>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-tag"></i>
+                                            </span>
+                                            <input name="nome" 
+                                                type="text"
+                                                class="form-control border-square"
+                                                placeholder="Nome da Etapa"
+                                                id="input-etapa-nome" 
+                                            >
+                                        </div>
+                                        <div class="form-control-feedback" id="div-etapa-nome-feedback"></div>
+                                    </div>
+                                    <label><b>Descrição</b></label>
                                     <div class="input-group">
                                         <span class="input-group-addon border-square">
-                                            <i class="fa fa-tag"></i>
+                                            <i class="fa fa-info"></i>
                                         </span>
-                                        <input name="nome" 
-                                            type="text"
+                                        <textarea name="descricao" 
                                             class="form-control border-square"
-                                            placeholder="Nome da Etapa"
-                                            id="input-etapa-nome" 
-                                        >
+                                            placeholder="Descrição da Etapa"
+                                            rows="5"
+                                            id="input-etapa-descricao"
+                                        ></textarea>
                                     </div>
-                                    <div class="form-control-feedback" id="div-etapa-nome-feedback"></div>
-                                </div>
-                                <label><b>Descrição</b></label>
-                                <div class="input-group">
-                                    <span class="input-group-addon border-square">
-                                        <i class="fa fa-info"></i>
-                                    </span>
-                                    <textarea name="descricao" 
-                                        class="form-control border-square"
-                                        placeholder="Descrição da Etapa"
-                                        rows="5"
-                                        id="input-etapa-descricao"
-                                    ></textarea>
-                                </div>
-                                <p class="form-text text-muted">
-                                    Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
-                                </p>
-                                <br>
-                                <div align="center">
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-secondary" id="btn-nova-etapa">
-                                            Cadastrar Etapa
-                                        </button>
+                                    <p class="form-text text-muted">
+                                        Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
+                                    </p>
+                                    <br>
+                                    <div align="center">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-secondary" id="btn-nova-etapa">
+                                                Cadastrar Etapa
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>                                
+                                </fieldset>                                
                             </form>
                         </div>
                     </div>
@@ -151,6 +153,8 @@ $(document).ready(function(){
     /* Verifica se metodologia tem nome definido */
     if($("#div-metodologia-nome").hasClass("hidden")){
         /* Se metodologia não tem nome definido (não existe)*/
+        /* Desabilita o formulário de cadastro de etapas */
+        $("#fieldset-nova-etapa").prop("disabled",true)
         /* Requisita foco para o campo de nome da metodologia */
         $("#input-metodologia-nome").focus();
         /* Exibe tooltip do campo */
@@ -175,6 +179,8 @@ $(document).ready(function(){
             $("#metodologia-nome").append(nome);
             $("#div-form-metodologia").toggleClass("hidden",true);
             $("#div-metodologia-nome").toggleClass("hidden",false);
+            /* Habilita o formulário de cadastro de etapas */
+            $("#fieldset-nova-etapa").prop("disabled",false)
         }
     });
 
@@ -191,10 +197,17 @@ $(document).ready(function(){
     /*  */
     $("#li-menu-primeiro-item").click(function(){
         event.preventDefault();
-        $('html, body').animate({
-            scrollTop: $("#form-etapa").offset().top
-        }, 1000);
-        $("#input-etapa-nome").focus();
+        if($("#fieldset-nova-etapa").prop("disabled")){
+            /* Requisita foco para o campo de nome da metodologia */
+            $("#input-metodologia-nome").focus();
+            /* Exibe tooltip do campo */
+            $("#input-metodologia-nome").tooltip('show');
+        } else {
+            $('html, body').animate({
+                scrollTop: $("#form-etapa").offset().top
+            }, 1000);
+            $("#input-etapa-nome").focus();
+        }
     });
     $("#btn-nova-etapa").click(function(){
         /* Limpeza de estilos de validação */
