@@ -6,6 +6,8 @@ app_name = 'metodologias'
 urlpatterns = [
     # /metodologias/
     url(r'^$', views.index, name='index'),
-    # /metodologias/novo/
+    # /metodologias/nova/
     url(r'^nova/$', views.nova, name='nova'),
+    # /metodologias/nova/cadastrar-metodologia/
+    url(r'^nova/cadastrar-metodologia/$', views.cadastrar_metodologia, name='cadastrar_metodologia'),
 ]
