@@ -52,116 +52,37 @@
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <ul class="list-group">
-                        
-                        <li class="list-group-item">
-                            <a href="" class="btn btn-link">Metodologia 1</a>
-                            <div class="btn-group pull-md-right">
-                                <a
-                                    href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
-                                >
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Editar"
-                                >
-
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="" class="btn btn-danger"
-                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                >
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <a href="" class="btn btn-link">Metodologia 2</a>
-                            <div class="btn-group pull-md-right">
-                                <a
-                                    href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
-                                >
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Editar"
-                                >
-
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="" class="btn btn-danger"
-                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                >
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </li><li class="list-group-item">
-                            <a href="" class="btn btn-link">Metodologia 3</a>
-                            <div class="btn-group pull-md-right">
-                                <a
-                                    href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
-                                >
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Editar"
-                                >
-
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="" class="btn btn-danger"
-                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                >
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </li><li class="list-group-item">
-                            <a href="" class="btn btn-link">Metodologia 4</a>
-                            <div class="btn-group pull-md-right">
-                                <a
-                                    href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
-                                >
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Editar"
-                                >
-
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="" class="btn btn-danger"
-                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                >
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </li><li class="list-group-item">
-                            <a href="" class="btn btn-link">Metodologia 5</a>
-                            <div class="btn-group pull-md-right">
-                                <a
-                                    href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Visualizar"
-                                >
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="" class="btn btn-secondary"
-                                    data-tooltip="tooltip" data-placement="top" title="Editar"
-                                >
-
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <a href="" class="btn btn-danger"
-                                    data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                >
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
-                        </li>
-                        
+                        {% if metodologias %}
+                            {% for metodologia in metodologias %}
+                                <li class="list-group-item">
+                                    <a href="" class="btn btn-link">{{ metodologia.nome }}</a>
+                                    <div class="btn-group pull-md-right">
+                                        <a
+                                            href="" class="btn btn-secondary"
+                                            data-tooltip="tooltip" data-placement="top" title="Visualizar"
+                                        >
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a 
+                                            href="" class="btn btn-secondary"
+                                            data-tooltip="tooltip" data-placement="top" title="Editar"
+                                        >
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a 
+                                            href="" class="btn btn-danger"
+                                            data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                        >
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item list-group-item-action list-group-item-info">
+                                <p>Nenhuma metodologia cadastrada ainda!</p>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

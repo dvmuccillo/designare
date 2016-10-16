@@ -5,10 +5,12 @@ from django.template import loader
 from metodologias.models import Metodologia
 
 def index(request):
-	context = {
-		'titulo_da_pagina' : "Metodologias",
-	}
-	return render(request,'metodologias/index.html',context)
+    metodologias = Metodologia.objects.all().order_by('nome')
+    context = {
+        'titulo_da_pagina' : "Metodologias",
+        'metodologias'     : metodologias,
+    }
+    return render(request,'metodologias/index.html',context)
 
 def nova(request):
     return render(request,'metodologias/nova.html')

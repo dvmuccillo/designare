@@ -8,7 +8,7 @@ from projetos.models import Projeto
 def index(request):
     projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
     context = {
-        'titulo_da_pagina' : "Projetos",
+        'titulo_da_pagina'   : "Projetos",
         'projetos_definidos' : projetos_definidos,
           }
     return render(request, 'projetos/index.html', context)
