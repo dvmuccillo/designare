@@ -198,6 +198,12 @@ $(document).ready(function(){
         $("#div-input-metodologia-nome").toggleClass("has-danger",false);
         $("#input-metodologia-nome").toggleClass("form-control-danger",false);
         nome = $("#input-metodologia-nome").val();
+        idm = $("#input-metodologia-id").val();
+        if (idm == "") {
+            endereco = "{% url 'metodologias:cadastrar_metodologia' %}";
+        } else {
+            endereco = "/metodologias/" + idm + "/atualizar-nome/";
+        }
         if(!nome){
             $("#div-input-metodologia-nome").toggleClass("has-danger",true);
             $("#input-metodologia-nome").toggleClass("form-control-danger",true);
@@ -206,8 +212,8 @@ $(document).ready(function(){
             /* Realiza a requisição ajax para cadastro */
             $.ajax({
                 type    : "POST",
-                url     : "{% url 'metodologias:cadastrar_metodologia' %}",
-                data    : { 'nome' : $("#input-metodologia-nome").val(),
+                url     : endereco,
+                data    : { 'nome' : nome,
                             'csrfmiddlewaretoken' : document.form_metodologia.csrfmiddlewaretoken.value,
                         },
                 dataType: "json",
@@ -229,7 +235,8 @@ $(document).ready(function(){
                         $("#div-form-metodologia").toggleClass("hidden",true);
                         $("#div-metodologia-nome").toggleClass("hidden",false);
                         /* Habilita o formulário de cadastro de etapas */
-                        $("#fieldset-nova-etapa").prop("disabled",false)                       
+                        $("#fieldset-nova-etapa").prop("disabled",false)
+                        if(idm == ""){window.history.replaceState(null, null, "/metodologias/"+data.metodologia_id+"/")};                       
                     }
                 }
             });

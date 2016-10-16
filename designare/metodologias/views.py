@@ -19,6 +19,12 @@ def detalhes(request, metodologia_id):
     }
     return render(request,'metodologias/nova.html', context)
 
+def atualizar_nome(request, metodologia_id):
+    metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    metodologia.nome =  request.POST.get('nome')
+    metodologia.save();
+    return JsonResponse({'sucesso': True})
+
 def nova(request):
     return render(request,'metodologias/nova.html')
 
