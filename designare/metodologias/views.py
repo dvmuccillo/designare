@@ -12,6 +12,9 @@ def index(request):
     }
     return render(request,'metodologias/index.html',context)
 
+def detalhes(request, question_id):
+    return render(request,'metodologias/nova.html')
+
 def nova(request):
     return render(request,'metodologias/nova.html')
 

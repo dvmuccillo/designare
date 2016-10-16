@@ -55,7 +55,7 @@
                         {% if metodologias %}
                             {% for metodologia in metodologias %}
                                 <li class="list-group-item">
-                                    <a href="" class="btn btn-link">{{ metodologia.nome }}</a>
+                                    <a href="{% url 'metodologias:detalhes' metodologia.pk %}" class="btn btn-link">{{ metodologia.nome }}</a>
                                     <div class="btn-group pull-md-right">
                                         <a
                                             href="" class="btn btn-secondary"
