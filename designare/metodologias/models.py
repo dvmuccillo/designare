@@ -12,7 +12,8 @@ class Etapa(models.Model):
 	ordem = models.IntegerField(null=True)
 	metodologia = models.ForeignKey(
 		Metodologia,
-		on_delete=models.CASCADE
+		on_delete=models.CASCADE,
+		related_name='etapas'
 	)
 
 	def __str__(self):
