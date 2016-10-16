@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404,render,redirect
 from django.http import HttpResponse,JsonResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template import loader
@@ -12,8 +12,12 @@ def index(request):
     }
     return render(request,'metodologias/index.html',context)
 
-def detalhes(request, question_id):
-    return render(request,'metodologias/nova.html')
+def detalhes(request, metodologia_id):
+    metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    context = {
+        'metodologia' : metodologia,
+    }
+    return render(request,'metodologias/nova.html', context)
 
 def nova(request):
     return render(request,'metodologias/nova.html')
