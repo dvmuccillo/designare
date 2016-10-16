@@ -18,4 +18,4 @@ def cadastrar_metodologia(request):
                 nome = request.POST.get('nome')
             )
     metodologia.save();
-    return JsonResponse({'metodologia_id': metodologia.pk })
+    return JsonResponse({'metodologia_id': metodologia.pk, 'sucesso': True })

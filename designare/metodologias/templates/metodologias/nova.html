@@ -33,9 +33,10 @@
         <h2 align="center">{{ titulo_da_pagina }}</h2>
     </div>
     <div class="row m-y-2" align="center" id="div-form-metodologia">
-        <div class="col-md-6 offset-md-3" id="form-metodologia">
-            <form class="form-inline">
+        <div class="col-md-6 offset-md-3">
+            <form class="form-inline" id="form-metodologia" name="form_metodologia">
                 {% csrf_token %}
+                <input type="hidden" name="metodologia-id" id="input-metodologia-id" value=""/>
                 <div class="form-group" id="div-input-metodologia-nome">
                     <label class="sr-only" for="input-metodologia-nome">
                         <b>Nome</b>&nbsp;
@@ -167,6 +168,7 @@ $(document).ready(function(){
 
     /* Ação de cadastro de metodologia (definição do nome) */
     $("#btn-nova-metodologia").click(function(){
+        event.preventDefault();
         $("#div-input-metodologia-nome").toggleClass("has-danger",false);
         $("#input-metodologia-nome").toggleClass("form-control-danger",false);
         nome = $("#input-metodologia-nome").val();
@@ -175,12 +177,36 @@ $(document).ready(function(){
             $("#input-metodologia-nome").toggleClass("form-control-danger",true);
         }
         else {
-            $("#metodologia-nome").empty();
-            $("#metodologia-nome").append(nome);
-            $("#div-form-metodologia").toggleClass("hidden",true);
-            $("#div-metodologia-nome").toggleClass("hidden",false);
-            /* Habilita o formulário de cadastro de etapas */
-            $("#fieldset-nova-etapa").prop("disabled",false)
+            /* Realiza a requisição ajax para cadastro */
+            $.ajax({
+                type    : "POST",
+                url     : "{% url 'metodologias:cadastrar_metodologia' %}",
+                data    : { 'nome' : $("#input-metodologia-nome").val(),
+                            'csrfmiddlewaretoken' : document.form_metodologia.csrfmiddlewaretoken.value,
+                        },
+                dataType: "json",
+                encode  : true,
+
+                beforeSend: function(){
+                    $('#btn-nova-metodologia').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>&nbsp;Processando');
+                },
+                success: function(data){
+                    //Cria um log da data recebida no console
+                    console.log(data);
+                    //Verifica se a operação foi bem sucedida
+                    $('#btn-nova-metodologia').html("<i class='fa fa-check'></i>");
+                    if(data.sucesso)
+                    {
+                        $("#input-metodologia-id").val(data.metodologia_id);
+                        $("#metodologia-nome").empty();
+                        $("#metodologia-nome").append(nome);
+                        $("#div-form-metodologia").toggleClass("hidden",true);
+                        $("#div-metodologia-nome").toggleClass("hidden",false);
+                        /* Habilita o formulário de cadastro de etapas */
+                        $("#fieldset-nova-etapa").prop("disabled",false)                       
+                    }
+                }
+            });
         }
     });
 
