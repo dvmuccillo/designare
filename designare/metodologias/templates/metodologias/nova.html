@@ -115,10 +115,7 @@
                         <a id="Cadastrar_Nova_Etapa"></a>
                         <div class="row">
                             <br>
-                            <form 
-                                action="{% url 'projetos:novo' %}" method="post"
-                                enctype="multipart/form-data" id="form-etapa"
-                            >
+                            <form id="form-etapa" name="form_etapa">
                                 <fieldset id="fieldset-nova-etapa">
                                     {% csrf_token %}
                                     <div class="form-group" id="div-input-etapa-nome">
@@ -150,7 +147,7 @@
                                         <textarea name="descricao" 
                                             class="form-control border-square"
                                             placeholder="Descrição da Etapa"
-                                            rows="5"
+                                            rows="5" maxlength="300"
                                             id="input-etapa-descricao"
                                         ></textarea>
                                     </div>
@@ -286,6 +283,8 @@ $(document).ready(function(){
         /* Valor das propriedades de etapa */
         nome = $("#input-etapa-nome").val();
         descricao = $("#input-etapa-descricao").val();
+        idm = $("#input-metodologia-id").val();
+        endereco = "/metodologias/" + idm + "/cadastrar-etapa/";
         /* Verifica se o nome da etapa foi informado */
         if(!nome){
             /* Aplica estilos de aviso se o nome da etapa não foi informado */
@@ -293,91 +292,120 @@ $(document).ready(function(){
             $("#input-etapa-nome").toggleClass("form-control-danger",true);
             $("#div-etapa-nome-feedback").append("Informe o nome da etapa!");
         } else {
-            /* Elemento HTML que representa uma etapa */       
-            div_etapa = "<a id='"+nome+"'></a><div class='row'>"
-                            + ""
-                            + "<div class='row'>"
-                                + "<div class='card card-outline-secondary border-square unbordered'>"
-                                    + "<div class='card-block'>"
-                                        + "<h3 class='card-title'>"+nome+"</h3>"
-                                        + "<blockquote class='card-blockquote'>"
-                                            + "<p>"+descricao+"</p>"
-                                        + "</blockquote>"
-                                    + "</div>"
-                                + "</div>"
-                            + "</div>"
-                            + "<div class='row' id='div-etapa-{id}-atividades'>"
-                                + "<!-- Inserir Atividades da Etapa aqui -->"
-                            + "</div>"
-                            + "<div class='row'>"
-                                + "<div class='row'>"
-                                    + "<form "
-                                        + "class='col-md-7 offset-md-2'"
-                                        + "action='{% url 'projetos:novo' %}' method='post'"
-                                        + "enctype='multipart/form-data' id='form-nova-atividade'"
-                                    + ">"
-                                        + "{% csrf_token %}"
-                                        + "<div class='form-group' id='div-input-atividade-nome'>"
-                                            + "<label><b>Nome</b></label>"
-                                            + "<div class='input-group'>"
-                                                + "<span class='input-group-addon border-square'>"
-                                                    + "<i class='fa fa-tag'></i>"
-                                                + "</span>"
-                                                + "<input name='nome'" 
-                                                    + "type='text'"
-                                                    + "class='form-control border-square'"
-                                                    + "placeholder='Nome da Atividade'"
-                                                    + "id='input-atividade-nome'"
+            /* Realiza a requisição ajax para cadastro */
+            $.ajax({
+                type    : "POST",
+                url     : endereco,
+                data    : { 'nome' : nome,
+                            'descricao' : descricao, 
+                            'csrfmiddlewaretoken' : document.form_etapa.csrfmiddlewaretoken.value,
+                        },
+                dataType: "json",
+                encode  : true,
+
+                beforeSend: function(){
+                    $('#btn-nova-etapa').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>&nbsp;Processando');
+                },
+                success: function(data){
+                    //Cria um log da data recebida no console
+                    console.log(data);
+                    //Verifica se a operação foi bem sucedida
+                    $('#btn-nova-etapa').html("Cadastrar Etapa");
+                    if(data.sucesso)
+                    {
+                        ide = data.etapa_id;
+
+                        /* Elemento HTML que representa uma etapa */       
+                        div_etapa = "<a id='etapa_"+ide+"'></a><div class='row'>"
+                                        + ""
+                                        + "<div class='row'>"
+                                            + "<div class='card card-outline-secondary border-square unbordered'>"
+                                                + "<div class='card-block'>"
+                                                    + "<h3 class='card-title'>"+nome+"</h3>"
+                                                    + "<blockquote class='card-blockquote'>"
+                                                        + "<p>"+descricao+"</p>"
+                                                    + "</blockquote>"
+                                                + "</div>"
+                                            + "</div>"
+                                        + "</div>"
+                                        + "<div class='row' id='div-etapa-"+ide+"-atividades'>"
+                                            + "<!-- Inserir Atividades da Etapa aqui -->"
+                                        + "</div>"
+                                        + "<div class='row'>"
+                                            + "<div class='row'>"
+                                                + "<form "
+                                                    + "class='col-md-7 offset-md-2'"
+                                                    + "action='{% url 'projetos:novo' %}' method='post'"
+                                                    + "enctype='multipart/form-data' id='form-nova-atividade'"
                                                 + ">"
-                                            + "</div>"
-                                        + "</div>"
-                                        + "<label><b>Descrição</b></label>"
-                                        + "<div class='input-group'>"
-                                            + "<span class='input-group-addon border-square'>"
-                                                + "<i class='fa fa-info'></i>"
-                                            + "</span>"
-                                            + "<textarea name='descricao'"
-                                                + "class='form-control border-square'"
-                                                + "placeholder='Descrição da Atividade'"
-                                                + "rows='5'"
-                                                + "id='input-atividade-descricao'"
-                                            + "></textarea>"
-                                        + "</div>"
-                                        + "<br>"
-                                        + "<div  align='center'>"
-                                            + "<div class='btn-group' role='group'>"
-                                                + "<button type='button' class='btn btn-secondary' id='btn-nova-atividade'>"
-                                                    + "Cadastrar Atividade"
-                                                + "</button>"
-                                            + "</div>"
-                                        + "</div>"
-                                    + "</form>"
-                                + "</div>";
-                            + "</div>"                  
-                        + "</div>"
-                        + "<div class='clearfix'>"
-                            + "<br><br><hr>"
-                        + "</div>";
-            /* Elemento HTML que representa o menu com link interno para etapa */
-            link_etapa = "<a href='#"+nome+"' class='list-group-item list-group-item-action' id='li-menu-etapa-"+nome+"'>"+nome+"</a>";
-            /* Altera o conteúdo e estilo do primeiro item do menu */
-            $("#li-menu-primeiro-item").empty();
-            $("#li-menu-primeiro-item").toggleClass("list-group-item-info",false);
-            $("#li-menu-primeiro-item").append("<i class='fa fa-plus'></i>&nbsp;Adicionar nova etapa");
-            /* Limpa os campos do formulário de cadastro de etapas */
-            $("#input-etapa-nome").val("");
-            $("#input-etapa-descricao").val("");
-            /* Insere os elementos HTML no corpo */
-            $("#div-listagem-etapas").append(div_etapa);
-            $("#div-menu-etapas").append(link_etapa);
-            $("#li-menu-etapa-"+nome).on("click",function(){
-                //event.preventDefault();
-                //id = nome;
-                //alert(id);
-                //$('html, body').animate({
-                //    scrollTop: $("#"+nome).offset().top
-                //}, 1000);
+                                                    + "{% csrf_token %}"
+                                                    + "<div class='form-group' id='div-input-atividade-nome'>"
+                                                        + "<label><b>Nome</b></label>"
+                                                        + "<div class='input-group'>"
+                                                            + "<span class='input-group-addon border-square'>"
+                                                                + "<i class='fa fa-tag'></i>"
+                                                            + "</span>"
+                                                            + "<input name='nome'" 
+                                                                + "type='text'"
+                                                                + "class='form-control border-square'"
+                                                                + "placeholder='Nome da Atividade'"
+                                                                + "id='input-atividade-nome'"
+                                                            + ">"
+                                                        + "</div>"
+                                                    + "</div>"
+                                                    + "<label><b>Descrição</b></label>"
+                                                    + "<div class='input-group'>"
+                                                        + "<span class='input-group-addon border-square'>"
+                                                            + "<i class='fa fa-info'></i>"
+                                                        + "</span>"
+                                                        + "<textarea name='descricao'"
+                                                            + "class='form-control border-square'"
+                                                            + "placeholder='Descrição da Atividade'"
+                                                            + "rows='5'"
+                                                            + "id='input-atividade-descricao'"
+                                                        + "></textarea>"
+                                                    + "</div>"
+                                                    + "<br>"
+                                                    + "<div  align='center'>"
+                                                        + "<div class='btn-group' role='group'>"
+                                                            + "<button type='button' class='btn btn-secondary' id='btn-nova-atividade'>"
+                                                                + "Cadastrar Atividade"
+                                                            + "</button>"
+                                                        + "</div>"
+                                                    + "</div>"
+                                                + "</form>"
+                                            + "</div>";
+                                        + "</div>"                  
+                                    + "</div>"
+                                    + "<div class='clearfix'>"
+                                        + "<br><br><hr>"
+                                    + "</div>";
+                        /* Elemento HTML que representa o menu com link interno para etapa */
+                        link_etapa = "<a href='#etapa_"+ide+"' class='list-group-item list-group-item-action' id='li-menu-etapa-"+nome+"'>"+nome+"</a>";
+                        /* Altera o conteúdo e estilo do primeiro item do menu */
+                        $("#li-menu-primeiro-item").empty();
+                        $("#li-menu-primeiro-item").toggleClass("list-group-item-info",false);
+                        $("#li-menu-primeiro-item").append("<i class='fa fa-plus'></i>&nbsp;Adicionar nova etapa");
+                        /* Limpa os campos do formulário de cadastro de etapas */
+                        $("#input-etapa-nome").val("");
+                        $("#input-etapa-descricao").val("");
+                        /* Insere os elementos HTML no corpo */
+                        $("#div-listagem-etapas").append(div_etapa);
+                        $("#div-menu-etapas").append(link_etapa);
+                        /*
+                        $("#li-menu-etapa-"+nome).on("click",function(){
+                            //event.preventDefault();
+                            //id = nome;
+                            //alert(id);
+                            //$('html, body').animate({
+                            //    scrollTop: $("#"+nome).offset().top
+                            //}, 1000);
+                        });
+                        */                                               
+                    }
+                }
             });
+
         }
     });
 });
