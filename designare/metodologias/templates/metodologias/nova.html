@@ -131,9 +131,22 @@
                             <div class='row'>
                                 <div class='card card-outline-secondary border-square unbordered'>
                                     <div class='card-block'>
-                                        <h3 class='card-title'>{{ etapa.nome }}</h3>
+                                        <h3 class='card-title'>
+                                            <span>{{ etapa.nome }}</span>
+                                            <button 
+                                                class="btn btn-secondary border-square" id="btn-edit-etapa"
+                                                data-tooltip="tooltip" data-placement="top"
+                                                title="Editar etapa"
+                                            >
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </h3>
                                         <blockquote class='card-blockquote'>
-                                            <p>"{{ etapa.descricao }}"</p>
+                                            {%if etapa.descricao %}
+                                                <p>{{ etapa.descricao }}</p>
+                                            {% else %}
+                                                <p><i>Nenhuma descrição fornecida para esta etapa!</i></p>
+                                            {% endif %}
                                         </blockquote>
                                     </div>
                                 </div>
@@ -401,7 +414,16 @@ $(document).ready(function(){
                                         + "<div class='row'>"
                                             + "<div class='card card-outline-secondary border-square unbordered'>"
                                                 + "<div class='card-block'>"
-                                                    + "<h3 class='card-title'>"+nome+"</h3>"
+                                                    + "<h3 class='card-title'>"
+                                                        + "<span>" + nome + "</span>&nbsp;"
+                                                        + "<button " 
+                                                            + "class='btn btn-secondary border-square' id='btn-edit-etapa'"
+                                                            + "data-tooltip='tooltip' data-placement='top'"
+                                                            + "title='Editar etapa'"
+                                                        + "'>"
+                                                            + "<i class='fa fa-pencil'></i>"
+                                                        + "</button>"
+                                                    +"</h3>"
                                                     + "<blockquote class='card-blockquote'>"
                                                         + "<p>"+descricao+"</p>"
                                                     + "</blockquote>"
