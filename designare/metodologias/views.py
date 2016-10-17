@@ -14,8 +14,10 @@ def index(request):
 
 def detalhes(request, metodologia_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    etapas = metodologia.etapas.all().order_by('ordem')
     context = {
         'metodologia' : metodologia,
+        'etapas' : etapas,
     }
     return render(request,'metodologias/nova.html', context)
 

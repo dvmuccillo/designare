@@ -98,16 +98,97 @@
     <div class="row">
         <div class="col-md-3" style="position: relative;">
             <div class="list-group" id="div-menu-etapas" style="position: fixed;">
-                <a href="#Cadastrar_Nova_Etapa" class="list-group-item list-group-item-action list-group-item-info"
-                    id="li-menu-primeiro-item">
-                    Nenhuma etapa adicionada
-                </a>
-                <!-- Inserir demais links de etapas aqui -->
+                <!-- Inserir links de etapas aqui -->
+                {% if etapas %}
+                    <a href="#Cadastrar_Nova_Etapa" class="list-group-item list-group-item-action" id="li-menu-primeiro-item">
+                        <i class="fa fa-plus"></i>&nbsp;Adicionar nova etapa
+                    </a>
+                    {% for etapa in etapas %}
+                        <a
+                            href="#etapa_{{ etapa.id }}" id="li-menu-etapa-{{ etapa.id }}"
+                            class="list-group-item list-group-item-action"
+                        >
+                            {{ etapa.nome }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <a 
+                        href="#Cadastrar_Nova_Etapa" id="li-menu-primeiro-item"
+                        class="list-group-item list-group-item-action list-group-item-info"
+                    >
+                        Nenhuma etapa adicionada
+                    </a>
+                {% endif%}
             </div>
         </div>
         <div class="col-md-9">
             <div class="row col-md-11 offset-md-1" id="div-listagem-etapas">
                 <!-- Inserir etapas aqui -->
+                {% if etapas %}
+                    {% for etapa in etapas %}
+                        <a id='etapa_{{ etapa.id }}'></a>
+                        <div class='row'>
+                            <div class='row'>
+                                <div class='card card-outline-secondary border-square unbordered'>
+                                    <div class='card-block'>
+                                        <h3 class='card-title'>{{ etapa.nome }}</h3>
+                                        <blockquote class='card-blockquote'>
+                                            <p>"{{ etapa.descricao }}"</p>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='row' id='div-etapa-"+ide+"-atividades'>
+                                <!-- Inserir Atividades da Etapa aqui -->
+                            </div>
+                            <div class='row'>
+                                <div class='row'>
+                                    <form "
+                                        class='col-md-7 offset-md-2'
+                                        name="form_nova_atividade" id='form-nova-atividade'
+                                    >
+                                        {% csrf_token %}
+                                        <div class='form-group' id='div-input-atividade-nome'>
+                                            <label><b>Nome</b></label>
+                                            <div class='input-group'>
+                                                <span class='input-group-addon border-square'>
+                                                    <i class='fa fa-tag'></i>
+                                                </span>
+                                                <input name='nome'
+                                                    type='text'
+                                                    class='form-control border-square'
+                                                    placeholder='Nome da Atividade'
+                                                    id='input-atividade-nome'
+                                                >
+                                            </div>
+                                        </div>
+                                        <label><b>Descrição</b></label>
+                                        <div class='input-group'>
+                                            <span class='input-group-addon border-square'>
+                                                <i class='fa fa-info'></i>
+                                            </span>
+                                            <textarea name='descricao'
+                                                class='form-control border-square'
+                                                placeholder='Descrição da Atividade'
+                                                rows='5'
+                                                id='input-atividade-descricao'
+                                            ></textarea>
+                                        </div>
+                                        <br>
+                                        <div  align='center'>
+                                            <div class='btn-group' role='group'>
+                                                <button type='button' class='btn btn-secondary' id='btn-nova-atividade'>
+                                                    Cadastrar Atividade
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>                  
+                        </div>
+                        <div class='row m-y-2'></div>
+                    {% endfor %}
+                {% endif%}
             </div>
             <div class="row">
                 <div class="row">
@@ -314,7 +395,6 @@ $(document).ready(function(){
                     if(data.sucesso)
                     {
                         ide = data.etapa_id;
-
                         /* Elemento HTML que representa uma etapa */       
                         div_etapa = "<a id='etapa_"+ide+"'></a><div class='row'>"
                                         + ""
@@ -335,8 +415,7 @@ $(document).ready(function(){
                                             + "<div class='row'>"
                                                 + "<form "
                                                     + "class='col-md-7 offset-md-2'"
-                                                    + "action='{% url 'projetos:novo' %}' method='post'"
-                                                    + "enctype='multipart/form-data' id='form-nova-atividade'"
+                                                    + "name='form_nova_atividade' id='form-nova-atividade'"
                                                 + ">"
                                                     + "{% csrf_token %}"
                                                     + "<div class='form-group' id='div-input-atividade-nome'>"
@@ -374,18 +453,18 @@ $(document).ready(function(){
                                                         + "</div>"
                                                     + "</div>"
                                                 + "</form>"
-                                            + "</div>";
+                                            + "</div>"
                                         + "</div>"                  
                                     + "</div>"
-                                    + "<div class='clearfix'>"
-                                        + "<br><br><hr>"
-                                    + "</div>";
+                                    + "<div class='row m-y-2'></div>";
                         /* Elemento HTML que representa o menu com link interno para etapa */
                         link_etapa = "<a href='#etapa_"+ide+"' class='list-group-item list-group-item-action' id='li-menu-etapa-"+nome+"'>"+nome+"</a>";
                         /* Altera o conteúdo e estilo do primeiro item do menu */
-                        $("#li-menu-primeiro-item").empty();
-                        $("#li-menu-primeiro-item").toggleClass("list-group-item-info",false);
-                        $("#li-menu-primeiro-item").append("<i class='fa fa-plus'></i>&nbsp;Adicionar nova etapa");
+                        if($("#li-menu-primeiro-item").hasClass("list-group-item-info")){
+                            $("#li-menu-primeiro-item").empty();
+                            $("#li-menu-primeiro-item").toggleClass("list-group-item-info",false);
+                            $("#li-menu-primeiro-item").append("<i class='fa fa-plus'></i>&nbsp;Adicionar nova etapa");
+                        }
                         /* Limpa os campos do formulário de cadastro de etapas */
                         $("#input-etapa-nome").val("");
                         $("#input-etapa-descricao").val("");
