@@ -73,8 +73,12 @@
                         <span class="input-group-addon border-square">
                             <i class="fa fa-database"></i>
                         </span>
-                        <select class="form-control border-square" disabled>
-                            <option>Metodologia do Projeto</option>
+                        <select class="form-control border-square">
+                            {% if metodologias %}
+                                {% for metodologia in metodologias %}
+                                    <option>{{ metodologia.nome }}</option>
+                                {% endfor %}
+                            {% endif %}
                         </select>
                     </div>
                     <br>

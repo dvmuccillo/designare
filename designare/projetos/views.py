@@ -3,13 +3,16 @@ from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template import loader
 from projetos.models import Projeto
+from metodologias.models import Metodologia
 
 # Create your views here.
 def index(request):
+    metodologias = Metodologia.objects.all().order_by('nome')
     projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
     context = {
         'titulo_da_pagina'   : "Projetos",
         'projetos_definidos' : projetos_definidos,
+        'metodologias'       : metodologias,
           }
     return render(request, 'projetos/index.html', context)
 

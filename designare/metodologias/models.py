@@ -22,12 +22,7 @@ class Etapa(models.Model):
 class Atividade(models.Model):
 	nome = models.CharField(max_length=50)
 	descricao = models.CharField(max_length=300)
-	prox_atividade = models.ForeignKey(
-		'self',
-		on_delete=models.SET_NULL,
-		blank=True,
-		null=True
-	)
+	ordem = models.IntegerField(null=True)
 	etapa = models.ForeignKey(
 		Etapa,
 		on_delete=models.CASCADE,
