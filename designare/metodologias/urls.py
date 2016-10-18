@@ -18,4 +18,6 @@ urlpatterns = [
     url(r'^nova/$', views.nova, name='nova'),
     # /metodologias/nova/cadastrar-metodologia/
     url(r'^nova/cadastrar-metodologia/$', views.cadastrar_metodologia, name='cadastrar_metodologia'),
+    # /metodologias/id/excluir-metodologia/
+    url(r'^(?P<metodologia_id>[0-9]+)/excluir-metodologia/$', views.excluir_metodologia, name='excluir_metodologia'),
 ]

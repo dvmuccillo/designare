@@ -59,3 +59,8 @@ def cadastrar_metodologia(request):
             )
     metodologia.save();
     return JsonResponse({'metodologia_id': metodologia.pk, 'sucesso': True })
+
+def excluir_metodologia(request,metodologia_id):
+    metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    metodologia.delete();
+    return redirect('metodologias:index')

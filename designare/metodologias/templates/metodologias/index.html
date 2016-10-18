@@ -64,7 +64,7 @@
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                         <a 
-                                            href="" class="btn btn-danger"
+                                            href="{% url 'metodologias:excluir_metodologia' metodologia.pk %}" class="btn btn-danger"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
                                         >
                                             <i class="fa fa-times"></i>
@@ -74,7 +74,8 @@
                             {% endfor %}
                         {% else %}
                             <li class="list-group-item list-group-item-action list-group-item-info">
-                                <p>Nenhuma metodologia cadastrada ainda!</p>
+                                <h5 class="list-group-item-heading">Nenhuma metodologia cadastrada ainda!</h5>
+                                <p class="list-group-item-text"><i>Clique no botão acima para cadastrar uma nova!</i></p>
                             </li>
                         {% endif %}
                     </ul>
