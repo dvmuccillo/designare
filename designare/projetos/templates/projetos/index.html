@@ -136,7 +136,17 @@
                 {% for projeto in projetos_definidos %}
                     <div class="col-md-4">
                         <div class="card border-square">
-                            <img src="/{{ projeto.imagem_capa }}" class="card-mg-top" width="100%" height="100%">
+                            <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
+                            <div class="card-img-overlay">
+                                <div class="pull-md-right">
+                                    <a 
+                                        href="{% url 'projetos:excluir_projeto' projeto.pk %}" class="btn btn-danger btn-sm"
+                                        data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                    >
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
                             <a class="btn btn-secondary card-block btn-block border-square">
                                 <b>{{ projeto.nome }}</b>
                             </a>

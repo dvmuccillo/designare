@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404,render,redirect
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template import loader
@@ -27,4 +27,9 @@ def novo(request):
                 imagem_capa=capa                
             )
     projeto.save();
+    return redirect('projetos:index')
+
+def excluir_projeto(request,projeto_id):
+    projeto = get_object_or_404(Projeto,pk=projeto_id)
+    projeto.delete();
     return redirect('projetos:index')
