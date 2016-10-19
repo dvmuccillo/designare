@@ -20,6 +20,7 @@ def detalhes(request, projeto_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     context = {
         'projeto' : projeto,
+        'titulo_da_pagina' : projeto.nome,
     }
     return render(request,'projetos/projeto.html', context)
 

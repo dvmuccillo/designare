@@ -1,1 +1,114 @@
-{% extends 'designare/esqueleto.html' %}
+{% extends 'projetos/base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row" id="div-row-etapas">
+        <div class="col-md-3" style="position: relative;">
+            <div class="list-group" id="div-menu-etapas" style="position: fixed;">
+                <!-- Inserir links de etapas aqui -->
+                {% if projeto.metodologia.etapas.all %}
+                    {% for etapa in projeto.metodologia.etapas.all %}
+                        <a
+                            href="#etapa_{{ etapa.id }}" id="li-menu-etapa-{{ etapa.id }}"
+                            class="list-group-item list-group-item-action"
+                        >
+                            {{ etapa.nome }}
+                        </a>
+                    {% endfor %}
+                {% endif%}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row m-y-2" id="div-row-nova-etapa">
+                <div class="row">
+                    <div class="col-md-11 offset-md-1">
+                        <h3 class="">
+                            <span>Etapas:</span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row col-md-11 offset-md-1" id="div-listagem-etapas">
+                <!-- Inserir etapas aqui -->
+                {% if projeto.metodologia.etapas.all %}
+                    {% for etapa in projeto.metodologia.etapas.all %}
+                        <a id='etapa_{{ etapa.id }}'></a>
+                        <div class='row'>
+                            <div class='row'>
+                                <div class='card card-outline-secondary border-square'>
+                                    <div class='card-block'>
+                                        <h3 class='card-title'>
+                                            <span>{{ etapa.nome }}</span>
+                                        </h3>
+                                        <blockquote class='card-blockquote'>
+                                            {%if etapa.descricao %}
+                                                <p>{{ etapa.descricao }}</p>
+                                            {% else %}
+                                                <p><i>Nenhuma descrição fornecida para esta etapa!</i></p>
+                                            {% endif %}
+                                        </blockquote>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-5 offset-md-1 m-y-1">
+                                           <h3 class="">
+                                               <span>Atividades:</span>
+                                           </h3>
+                                        </div>
+                                    </div>
+                                    <div id="div-listagem-atividades{{ etapa.pk }}">
+                                    {% if etapa.atividades.all %}
+                                        {% for atividade in etapa.atividades.all %}
+                                            <div class="row">
+                                                <div class="col-md-11 offset-md-1">
+                                                    <div class="card unbordered">
+                                                        <div class='card-block'>
+                                                            <h3 class='card-title'>
+                                                                <span>{{ atividade.nome }}</span>
+                                                                <button 
+                                                                    class="btn btn-secondary border-square" id="btn-edit-etapa"
+                                                                    data-tooltip="tooltip" data-placement="top"
+                                                                    title="Adicionar recurso" disabled 
+                                                                >
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                            </h3>
+                                                            <blockquote class='card-blockquote'>
+                                                                {%if atividade.descricao %}
+                                                                    <p>{{ atividade.descricao }}</p>
+                                                                {% else %}
+                                                                    <p><i>Nenhuma descrição fornecida para esta atividade!</i></p>
+                                                                {% endif %}
+                                                            </blockquote>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                    <div class="row" id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
+                                        <div class="col-md-11 offset-md-1">
+                                            <div class="card unbordered">
+                                                <div class='card-block'>
+                                                    <blockquote class='card-blockquote'>
+                                                        <i>
+                                                            Nenhuma atividade cadastrada para esta etapa.
+                                                        </i>
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row m-y-2'></div>
+                    {% endfor %}
+                {% endif%}
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
