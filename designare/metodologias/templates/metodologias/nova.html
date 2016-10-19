@@ -1,43 +1,6 @@
 {% extends 'designare/esqueleto.html' %}
 {% block body %}
 <div class="container">
-    <div class="row m-t-3">
-        <div class="col-md-2 offset-md-10">
-            <div class="btn-group" role="group">
-                <a 
-                    href="/" class="btn btn-secondary border-square"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                    data-tooltip="tooltip" data-placement="top" title="Página Inicial"
-                >
-                    <b>Designare</b>
-                </a>
-                <div class="btn-group">
-                    <button
-                        type="button"
-                        class="btn btn-secondary border-square"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        data-tooltip="tooltip" data-placement="top" title="Menu"
-                    >
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
-                    <div class="dropdown-menu border-square">
-                        <a class="dropdown-item" href="/">
-                            <i class="fa fa-home" aria-hidden="true"></i>&nbsp;Início
-                        </a>
-                        <a class="dropdown-item" href="/metodologias/">
-                            <i class="fa fa-database" aria-hidden="true"></i>&nbsp;Metodologias
-                        </a>
-                        <a class="dropdown-item" href="/projetos/">
-                            <i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;Projetos
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row hidden">
-        <h1 align="center">Designare</h1>
-    </div>
     <div class="row m-y-1">
         <h2 align="center">{{ titulo_da_pagina }}</h2>
     </div>
@@ -116,7 +79,7 @@
     </div>
     <div class="row" id="div-row-etapas">
         <div class="col-md-3" style="position: relative;">
-            <div class="list-group" id="div-menu-etapas" style="position: relative;">
+            <div class="list-group" id="div-menu-etapas" style="position: fixed;">
                 <!-- Inserir links de etapas aqui -->
                 <a 
                     class="list-group-item list-group-item-action" id="li-menu-primeiro-item"

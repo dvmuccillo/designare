@@ -16,15 +16,24 @@ def index(request):
           }
     return render(request, 'projetos/index.html', context)
 
+def detalhes(request, projeto_id):
+    projeto = get_object_or_404(Projeto,pk=projeto_id)
+    context = {
+        'projeto' : projeto,
+    }
+    return render(request,'projetos/projeto.html', context)
+
 def novo(request):
     try:
         capa = request.FILES['capa']
     except MultiValueDictKeyError:
         capa = 'static/img/projetos/capas/default.png'
+    metodologia = get_object_or_404(Metodologia,pk=request.POST.get('metodologia'))
     projeto = Projeto(
                 nome=request.POST.get('nome'),
                 descricao=request.POST.get('descricao'),
-                imagem_capa=capa                
+                imagem_capa=capa,
+                metodologia=metodologia,
             )
     projeto.save();
     return redirect('projetos:index')

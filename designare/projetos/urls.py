@@ -6,6 +6,8 @@ app_name = 'projetos'
 urlpatterns = [
     # /projetos/
     url(r'^$', views.index, name='index'),
+    # /projetos/id/
+    url(r'^(?P<projeto_id>[0-9]+)/$', views.detalhes, name='detalhes'),
     # /projetos/novo/
     url(r'^novo/$', views.novo, name='novo'),
     # /projetos/id/excluir-projeto/
