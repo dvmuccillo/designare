@@ -33,7 +33,7 @@ def novo(request):
         capa = 'static/img/projetos/capas/default.png'
 
     id_metodologia = request.POST.get('metodologia')
-    if not request.POST.get('metodologia'):
+    if request.POST.get('metodologia') != "0":
         estado='ES'
         metodologia = get_object_or_404(Metodologia,pk=request.POST.get('metodologia'))
     else:
