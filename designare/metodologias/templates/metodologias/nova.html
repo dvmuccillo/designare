@@ -79,15 +79,8 @@
     </div>
     <div class="row" id="div-row-etapas">
         <div class="col-md-3" style="position: relative;">
-            <div class="list-group" id="div-menu-etapas" style="position: fixed;">
+            <div class="list-group" id="div-menu-etapas">
                 <!-- Inserir links de etapas aqui -->
-                <a 
-                    class="list-group-item list-group-item-action" id="li-menu-primeiro-item"
-                    data-toggle="collapse" href="#CadastrarEtapa"
-                    aria-expanded="false" aria-controls="CadastrarEtapa"
-                >
-                    <i class="fa fa-plus"></i>&nbsp;Adicionar nova etapa
-                </a>
                 {% if metodologia.etapas.all %}
                     {% for etapa in metodologia.etapas.all %}
                         <a
@@ -98,287 +91,235 @@
                         </a>
                     {% endfor %}
                 {% endif%}
+                <a 
+                    class="list-group-item list-group-item-action" id="li-menu-ultimo-item"
+                    data-toggle="collapse" href="#CadastrarEtapa"
+                    aria-expanded="false" aria-controls="CadastrarEtapa"
+                >
+                    <i class="fa fa-plus"></i>&nbsp;Adicionar nova etapa
+                </a>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="row m-y-2" id="div-row-nova-etapa">
-                <div class="row">
-                    <div class="col-md-11 offset-md-1">
-                        <h3 class="">
-                            <span>Etapas:</span>
-                            <button 
-                                class="btn btn-secondary border-square" id="btn-edit-etapa"
-                                data-tooltip="tooltip" data-placement="top"
-                                title="Adicionar nova etapa"
-                                data-toggle="collapse" data-target="#CadastrarEtapa"
-                                aria-expanded="false" aria-controls="CadastrarEtapa"
-                            >
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </h3>
-                    </div>
+            <div class="row">
+                <div class="col-md-11 offset-md-1" id="div-listagem-etapas">
+                    <!-- Inserir etapas aqui -->
+                    {% if metodologia.etapas.all %}
+                        {% for etapa in metodologia.etapas.all %}
+                            <a id='etapa_{{ etapa.id }}'></a>
+                            <div class='row'>
+                                <div class='row'>
+                                    <div class='card card-outline-secondary border-square'>
+                                        <div class='card-block'>
+                                            <h3 class='card-title'>
+                                                <span>{{ etapa.nome }}</span>
+                                                <button 
+                                                    class='btn btn-secondary border-square' id='btn-edit-etapa'
+                                                    data-tooltip='tooltip' data-placement='top'
+                                                    title='Editar etapa'
+                                                >
+                                                    <i class='fa fa-pencil'></i>
+                                                </button>
+                                            </h3>
+                                            <blockquote class='card-blockquote'>
+                                                {%if etapa.descricao %}
+                                                    <p>{{ etapa.descricao }}</p>
+                                                {% else %}
+                                                    <p><i>Nenhuma descrição fornecida para esta etapa!</i></p>
+                                                {% endif %}
+                                            </blockquote>
+                                        </div>
+                                        <hr>
+                                        <div id='div-listagem-atividades{{ etapa.pk }}'>
+                                        {% if etapa.atividades.all %}
+                                            {% for atividade in etapa.atividades.all %}
+                                                <div class='row'>
+                                                    <div class='col-md-11 offset-md-1'>
+                                                        <div class='card unbordered'>
+                                                            <div class='card-block'>
+                                                                <h3 class='card-title'>
+                                                                    <span>{{ atividade.nome }}</span>
+                                                                    <button 
+                                                                        class='btn btn-secondary border-square' id='btn-edit-etapa'
+                                                                        data-tooltip='tooltip' data-placement='top'
+                                                                        title='Editar atividade'
+                                                                    >
+                                                                        <i class='fa fa-pencil'></i>
+                                                                    </button>
+                                                                </h3>
+                                                                <blockquote class='card-blockquote'>
+                                                                    {%if atividade.descricao %}
+                                                                        <p>{{ atividade.descricao }}</p>
+                                                                    {% else %}
+                                                                        <p><i>Nenhuma descrição fornecida para esta atividade!</i></p>
+                                                                    {% endif %}
+                                                                </blockquote>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                        <div class='row' id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
+                                            <div class='col-md-11 offset-md-1'>
+                                                <div class='card unbordered'>
+                                                    <div class='card-block'>
+                                                        <blockquote class='card-blockquote'>
+                                                            <i>
+                                                                Nenhuma atividade cadastrada para esta etapa.
+                                                                Utilize o botão abaixo para cadastrar uma!
+                                                            </i>
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        <div class='row m-l-0' id='row-btn-nova-atividade{{ etapa.pk }}'>
+                                            <div class='col-md-5 offset-md-1 m-y-1'>
+                                               <h3 class=''>
+                                                    <button 
+                                                        class='btn btn-secondary border-square' id='btn-edit-etapa'
+                                                        data-tooltip='tooltip' data-placement='top'
+                                                        title='Adicionar nova atividade'
+                                                        data-toggle='collapse' data-target='#CadastrarAtividade{{ etapa.pk }}'
+                                                        aria-expanded='false' aria-controls='CadastrarAtividade{{ etapa.pk }}'
+                                                    >
+                                                        Adicionar Atividade <i class='fa fa-plus'></i>
+                                                    </button>
+                                               </h3>
+                                            </div>
+                                        </div>
+                                        <div class='row collapse m-b-1' id='CadastrarAtividade{{ etapa.pk }}'>
+                                            <div class='col-md-6 offset-md-3'>
+                                                <h4 class='m-t-1'>Adicionar nova atividade:</h4>
+                                                <form id='form-nova-atividade{{ etapa.pk }}' name='form_nova_atividade{{ etapa.pk }}'>
+                                                    <fieldset id='fieldset-nova-atividade{{ etapa.pk }}'>
+                                                        {% csrf_token %}
+                                                        <div class='form-group' id='div-input-atividade-nome{{ etapa.pk }}'>
+                                                            <label>
+                                                                <b>Nome</b>&nbsp;
+                                                                <i
+                                                                    class='fa fa-asterisk'  data-tooltip='tooltip' 
+                                                                    data-placement='top'
+                                                                    title='Este campo é obrigatório!'
+                                                                ></i>
+                                                            </label>
+                                                            <div class='input-group'>
+                                                                <span class='input-group-addon border-square'>
+                                                                    <i class='fa fa-tag'></i>
+                                                                </span>
+                                                                <input name='nome' 
+                                                                    type='text'
+                                                                    class='form-control border-square'
+                                                                    placeholder='Nome da atividade'
+                                                                    id='input-atividade-nome{{ etapa.pk }}' 
+                                                                >
+                                                            </div>
+                                                            <div 
+                                                                class='form-control-feedback' 
+                                                                id='div-atividade-{{etapa.pk }}-nome-feedback'
+                                                            ></div>
+                                                        </div>
+                                                        <label><b>Descrição</b></label>
+                                                        <div class='input-group'>
+                                                            <span class='input-group-addon border-square'>
+                                                                <i class='fa fa-info'></i>
+                                                            </span>
+                                                            <textarea name='descricao' 
+                                                                class='form-control border-square'
+                                                                placeholder='Descrição da Atividade'
+                                                                rows='5' maxlength='300'
+                                                                id='input-atividade-descricao{{ etapa.pk }}'
+                                                            ></textarea>
+                                                        </div>
+                                                        <p class='form-text text-muted'>
+                                                            Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada atividade ou facilitar o aprendizado de novos membros. 
+                                                        </p>
+                                                        <br>
+                                                        <div align='center'>
+                                                            <div class='btn-group' role='group'>
+                                                                <button 
+                                                                    type='button' class='btn btn-secondary' 
+                                                                    id='btn-nova-atividade{{ etapa.pk }}'
+                                                                    onclick='CadastrarAtividade("{{ etapa.pk}}")' 
+                                                                >
+                                                                    Cadastrar Atividade
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>                                
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='row m-y-2'></div>
+                        {% endfor %}
+                    {% endif%}
                 </div>
-                <div class="row collapse" id="CadastrarEtapa">
-                    <div class="col-md-6 offset-md-3">
-                        <h4 class="m-t-1">Adicionar nova etapa:</h4>
-                        <form id="form-etapa" name="form_etapa">
-                            <fieldset id="fieldset-nova-etapa">
-                                {% csrf_token %}
-                                <div class="form-group" id="div-input-etapa-nome">
-                                    <label>
-                                        <b>Nome</b>&nbsp;
-                                        <i
-                                            class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
-                                            title="Este campo é obrigatório!"
-                                        ></i>
-                                    </label>
+
+            </div>
+            <div class="row m-y-2" id="div-row-nova-etapa">
+                <div class="col-md-11">
+                    <div class="row collapse" id="CadastrarEtapa">
+                        <div class="col-md-6 offset-md-3">
+                            <h4 class="m-t-1">Adicionar nova etapa:</h4>
+                            <form id="form-etapa" name="form_etapa">
+                                <fieldset id="fieldset-nova-etapa">
+                                    {% csrf_token %}
+                                    <div class="form-group" id="div-input-etapa-nome">
+                                        <label>
+                                            <b>Nome</b>&nbsp;
+                                            <i
+                                                class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
+                                                title="Este campo é obrigatório!"
+                                            ></i>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-tag"></i>
+                                            </span>
+                                            <input name="nome" 
+                                                type="text"
+                                                class="form-control border-square"
+                                                placeholder="Nome da Etapa"
+                                                id="input-etapa-nome" 
+                                            >
+                                        </div>
+                                        <div class="form-control-feedback" id="div-etapa-nome-feedback"></div>
+                                    </div>
+                                    <label><b>Descrição</b></label>
                                     <div class="input-group">
                                         <span class="input-group-addon border-square">
-                                            <i class="fa fa-tag"></i>
+                                            <i class="fa fa-info"></i>
                                         </span>
-                                        <input name="nome" 
-                                            type="text"
+                                        <textarea name="descricao" 
                                             class="form-control border-square"
-                                            placeholder="Nome da Etapa"
-                                            id="input-etapa-nome" 
-                                        >
+                                            placeholder="Descrição da Etapa"
+                                            rows="5" maxlength="300"
+                                            id="input-etapa-descricao"
+                                        ></textarea>
                                     </div>
-                                    <div class="form-control-feedback" id="div-etapa-nome-feedback"></div>
-                                </div>
-                                <label><b>Descrição</b></label>
-                                <div class="input-group">
-                                    <span class="input-group-addon border-square">
-                                        <i class="fa fa-info"></i>
-                                    </span>
-                                    <textarea name="descricao" 
-                                        class="form-control border-square"
-                                        placeholder="Descrição da Etapa"
-                                        rows="5" maxlength="300"
-                                        id="input-etapa-descricao"
-                                    ></textarea>
-                                </div>
-                                <p class="form-text text-muted">
-                                    Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
-                                </p>
-                                <br>
-                                <div align="center">
-                                    <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-secondary" id="btn-nova-etapa">
-                                            Cadastrar Etapa
-                                        </button>
+                                    <p class="form-text text-muted">
+                                        Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
+                                    </p>
+                                    <br>
+                                    <div align="center">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-secondary" id="btn-nova-etapa">
+                                                Cadastrar Etapa
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </fieldset>                                
-                        </form>
+                                </fieldset>                                
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row col-md-11 offset-md-1" id="div-listagem-etapas">
-                <!-- Inserir etapas aqui -->
-                {% if metodologia.etapas.all %}
-                    {% for etapa in metodologia.etapas.all %}
-                        <a id='etapa_{{ etapa.id }}'></a>
-                        <div class='row'>
-                            <div class='row'>
-                                <div class='card card-outline-secondary border-square'>
-                                    <div class='card-block'>
-                                        <h3 class='card-title'>
-                                            <span>{{ etapa.nome }}</span>
-                                            <button 
-                                                class="btn btn-secondary border-square" id="btn-edit-etapa"
-                                                data-tooltip="tooltip" data-placement="top"
-                                                title="Editar etapa"
-                                            >
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                        </h3>
-                                        <blockquote class='card-blockquote'>
-                                            {%if etapa.descricao %}
-                                                <p>{{ etapa.descricao }}</p>
-                                            {% else %}
-                                                <p><i>Nenhuma descrição fornecida para esta etapa!</i></p>
-                                            {% endif %}
-                                        </blockquote>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-5 offset-md-1 m-y-1">
-                                           <h3 class="">
-                                               <span>Atividades:</span>
-                                                <button 
-                                                    class="btn btn-secondary border-square" id="btn-edit-etapa"
-                                                    data-tooltip="tooltip" data-placement="top"
-                                                    title="Adicionar nova atividade"
-                                                    data-toggle="collapse" data-target="#CadastrarAtividade{{ etapa.pk }}"
-                                                    aria-expanded="false" aria-controls="CadastrarAtividade{{ etapa.pk }}"
-                                                >
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                           </h3>
-                                        </div>
-                                    </div>
-                                    <div class="row collapse" id="CadastrarAtividade{{ etapa.pk }}">
-                                        <div class="col-md-6 offset-md-3">
-                                            <h4 class="m-t-1">Adicionar nova atividade:</h4>
-                                            <form id="form-nova-atividade{{ etapa.pk }}" name="form_nova_atividade{{ etapa.pk }}">
-                                                <fieldset id="fieldset-nova-atividade{{ etapa.pk }}">
-                                                    {% csrf_token %}
-                                                    <div class="form-group" id="div-input-atividade-nome{{ etapa.pk }}">
-                                                        <label>
-                                                            <b>Nome</b>&nbsp;
-                                                            <i
-                                                                class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
-                                                                title="Este campo é obrigatório!"
-                                                            ></i>
-                                                        </label>
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon border-square">
-                                                                <i class="fa fa-tag"></i>
-                                                            </span>
-                                                            <input name="nome" 
-                                                                type="text"
-                                                                class="form-control border-square"
-                                                                placeholder="Nome da atividade"
-                                                                id="input-atividade-nome{{ etapa.pk }}" 
-                                                            >
-                                                        </div>
-                                                        <div 
-                                                            class="form-control-feedback" 
-                                                            id="div-atividade-{{etapa.pk }}-nome-feedback"
-                                                        ></div>
-                                                    </div>
-                                                    <label><b>Descrição</b></label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon border-square">
-                                                            <i class="fa fa-info"></i>
-                                                        </span>
-                                                        <textarea name="descricao" 
-                                                            class="form-control border-square"
-                                                            placeholder="Descrição da Atividade"
-                                                            rows="5" maxlength="300"
-                                                            id="input-atividade-descricao{{ etapa.pk }}"
-                                                        ></textarea>
-                                                    </div>
-                                                    <p class="form-text text-muted">
-                                                        Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada atividade ou facilitar o aprendizado de novos membros. 
-                                                    </p>
-                                                    <br>
-                                                    <div align="center">
-                                                        <div class="btn-group" role="group">
-                                                            <button 
-                                                                type="button" class="btn btn-secondary" 
-                                                                id="btn-nova-atividade{{ etapa.pk }}"
-                                                                onclick="CadastrarAtividade('{{ etapa.pk}}')" 
-                                                            >
-                                                                Cadastrar Atividade
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>                                
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div id="div-listagem-atividades{{ etapa.pk }}">
-                                    {% if etapa.atividades.all %}
-                                        {% for atividade in etapa.atividades.all %}
-                                            <div class="row">
-                                                <div class="col-md-11 offset-md-1">
-                                                    <div class="card unbordered">
-                                                        <div class='card-block'>
-                                                            <h3 class='card-title'>
-                                                                <span>{{ atividade.nome }}</span>
-                                                                <button 
-                                                                    class="btn btn-secondary border-square" id="btn-edit-etapa"
-                                                                    data-tooltip="tooltip" data-placement="top"
-                                                                    title="Editar atividade"
-                                                                >
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </button>
-                                                            </h3>
-                                                            <blockquote class='card-blockquote'>
-                                                                {%if atividade.descricao %}
-                                                                    <p>{{ atividade.descricao }}</p>
-                                                                {% else %}
-                                                                    <p><i>Nenhuma descrição fornecida para esta atividade!</i></p>
-                                                                {% endif %}
-                                                            </blockquote>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    {% else %}
-                                    <div class="row" id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
-                                        <div class="col-md-11 offset-md-1">
-                                            <div class="card unbordered">
-                                                <div class='card-block'>
-                                                    <blockquote class='card-blockquote'>
-                                                        <i>
-                                                            Nenhuma atividade cadastrada para esta etapa.
-                                                            Utilize o botão acima para cadastrar uma!
-                                                        </i>
-                                                    </blockquote>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class='row hidden' id='div-etapa-"+ide+"-atividades'>
-                                <!-- Inserir Atividades da Etapa aqui -->
-                            </div>
-                            <div class='row hidden'>
-                                <div class='row'>
-                                    <form "
-                                        class='col-md-7 offset-md-2'
-                                        name="form_nova_atividade" id='form-nova-atividade'
-                                    >
-                                        {% csrf_token %}
-                                        <div class='form-group' id='div-input-atividade-nome'>
-                                            <label><b>Nome</b></label>
-                                            <div class='input-group'>
-                                                <span class='input-group-addon border-square'>
-                                                    <i class='fa fa-tag'></i>
-                                                </span>
-                                                <input name='nome'
-                                                    type='text'
-                                                    class='form-control border-square'
-                                                    placeholder='Nome da Atividade'
-                                                    id='input-atividade-nome'
-                                                >
-                                            </div>
-                                        </div>
-                                        <label><b>Descrição</b></label>
-                                        <div class='input-group'>
-                                            <span class='input-group-addon border-square'>
-                                                <i class='fa fa-info'></i>
-                                            </span>
-                                            <textarea name='descricao'
-                                                class='form-control border-square'
-                                                placeholder='Descrição da Atividade'
-                                                rows='5'
-                                                id='input-atividade-descricao'
-                                            ></textarea>
-                                        </div>
-                                        <br>
-                                        <div  align='center'>
-                                            <div class='btn-group' role='group'>
-                                                <button type='button' class='btn btn-secondary' id='btn-nova-atividade'>
-                                                    Cadastrar Atividade
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>                  
-                        </div>
-                        <div class='row m-y-2'></div>
-                    {% endfor %}
-                {% endif%}
-            </div>
-            
+            </div>            
         </div>
     </div>
 </div>
@@ -481,7 +422,7 @@ $(document).ready(function(){
     });
 
     /*  
-    $("#li-menu-primeiro-item").click(function(){
+    $("#li-menu-ultimo-item").click(function(){
         event.preventDefault();
         if($("#fieldset-nova-etapa").prop("disabled")){
             // Requisita foco para o campo de nome da metodologia 
@@ -552,39 +493,55 @@ $(document).ready(function(){
                                                             +"title='Editar etapa'"
                                                         +">"
                                                             +"<i class='fa fa-pencil'></i>"
-                                                       +"</button>"
+                                                        +"</button>"
                                                     +"</h3>"
                                                     +"<blockquote class='card-blockquote'>"
-                                                        + "<p>"+descricao+"</p>"
+                                                        + descricao
                                                     +"</blockquote>"
                                                 +"</div>"
                                                 +"<hr>"
-                                                +"<div class='row'>"
+                                                +"<div id='div-listagem-atividades" + ide + "'>"
+                                                +"<div class='row' id='row-nenhuma-etapa-aviso-" + ide + "'>"
+                                                    +"<div class='col-md-11 offset-md-1'>"
+                                                        +"<div class='card unbordered'>"
+                                                            +"<div class='card-block'>"
+                                                                +"<blockquote class='card-blockquote'>"
+                                                                    +"<i>"
+                                                                        +"Nenhuma atividade cadastrada para esta etapa."
+                                                                        +"Utilize o botão abaixo para cadastrar uma!"
+                                                                    +"</i>"
+                                                                +"</blockquote>"
+                                                            +"</div>"
+                                                        +"</div>"
+                                                    +"</div>"
+                                                +"</div>"
+                                                +"<div class='row m-l-0' id='row-btn-nova-atividade" + ide + "'>"
                                                     +"<div class='col-md-5 offset-md-1 m-y-1'>"
                                                        +"<h3 class=''>"
-                                                           +"<span>Atividades:</span>&nbsp;"
                                                             +"<button "
-                                                               +"class='btn btn-secondary border-square' id='btn-edit-etapa'"
+                                                                +"class='btn btn-secondary border-square' id='btn-edit-etapa'"
                                                                 +"data-tooltip='tooltip' data-placement='top'"
                                                                 +"title='Adicionar nova atividade'"
-                                                                +"data-toggle='collapse' data-target='#CadastrarAtividade"+ide+"'"
-                                                                +"aria-expanded='false' aria-controls='CadastrarAtividade"+ide+"'"
+                                                                +"data-toggle='collapse' data-target='#CadastrarAtividade" + ide + "'"
+                                                                +"aria-expanded='false' aria-controls='CadastrarAtividade" + ide + "'"
                                                             +">"
-                                                                +"<i class='fa fa-plus'></i>"
+                                                                +"Adicionar Atividade <i class='fa fa-plus'></i>"
                                                             +"</button>"
                                                        +"</h3>"
                                                     +"</div>"
                                                 +"</div>"
-                                                +"<div class='row collapse' id='CadastrarAtividade"+ide+"'>"
+                                                +"<div class='row collapse m-b-1' id='CadastrarAtividade" + ide + "'>"
                                                     +"<div class='col-md-6 offset-md-3'>"
                                                         +"<h4 class='m-t-1'>Adicionar nova atividade:</h4>"
-                                                        +"<form id='form-nova-atividade"+ide+"' name='form_nova_atividade"+ide+"'>"
-                                                            +"<fieldset id='fieldset-nova-atividade"+ide+"'>"
-                                                                +"<div class='form-group' id='div-input-atividade-nome"+ide+"'>"
+                                                        +"<form id='form-nova-atividade" + ide + "' name='form_nova_atividade" + ide + "'>"
+                                                            +"<fieldset id='fieldset-nova-atividade" + ide + "'>"
+                                                                +"{% csrf_token %}"
+                                                                +"<div class='form-group' id='div-input-atividade-nome" + ide + "'>"
                                                                     +"<label>"
                                                                         +"<b>Nome</b>&nbsp;"
                                                                         +"<i"
-                                                                            +"class='fa fa-asterisk'  data-tooltip='tooltip' data-placement='top'"
+                                                                            +"class='fa fa-asterisk'  data-tooltip='tooltip' "
+                                                                            +"data-placement='top'"
                                                                             +"title='Este campo é obrigatório!'"
                                                                         +"></i>"
                                                                     +"</label>"
@@ -592,11 +549,11 @@ $(document).ready(function(){
                                                                         +"<span class='input-group-addon border-square'>"
                                                                             +"<i class='fa fa-tag'></i>"
                                                                         +"</span>"
-                                                                        +"<input name='nome'" 
+                                                                        +"<input name='nome' "
                                                                             +"type='text'"
                                                                             +"class='form-control border-square'"
                                                                             +"placeholder='Nome da atividade'"
-                                                                            +"id='input-atividade-nome"+ide+"'" 
+                                                                            +"id='input-atividade-nome" + ide + "' "
                                                                         +">"
                                                                     +"</div>"
                                                                     +"<div "
@@ -609,11 +566,11 @@ $(document).ready(function(){
                                                                     +"<span class='input-group-addon border-square'>"
                                                                         +"<i class='fa fa-info'></i>"
                                                                     +"</span>"
-                                                                    +"<textarea name='descricao'" 
+                                                                    +"<textarea name='descricao' "
                                                                         +"class='form-control border-square'"
                                                                         +"placeholder='Descrição da Atividade'"
                                                                         +"rows='5' maxlength='300'"
-                                                                        +"id='input-atividade-descricao"+ide+"'"
+                                                                        +"id='input-atividade-descricao" + ide + "'"
                                                                     +"></textarea>"
                                                                 +"</div>"
                                                                 +"<p class='form-text text-muted'>"
@@ -624,8 +581,8 @@ $(document).ready(function(){
                                                                     +"<div class='btn-group' role='group'>"
                                                                         +"<button "
                                                                             +"type='button' class='btn btn-secondary' "
-                                                                            +"id='btn-nova-atividade"+ide+"'"
-                                                                            +"onclick=\"CadastrarAtividade('"+ide+"')\"" 
+                                                                            +"id='btn-nova-atividade" + ide + "'"
+                                                                            +"onclick='CadastrarAtividade(\""+ide+"\")' "
                                                                         +">"
                                                                             +"Cadastrar Atividade"
                                                                         +"</button>"
@@ -635,23 +592,8 @@ $(document).ready(function(){
                                                         +"</form>"
                                                     +"</div>"
                                                 +"</div>"
-                                                +"<div id='div-listagem-atividades"+ide+"'>"
-                                                    +"<div class='row' id='row-nenhuma-etapa-aviso-"+ide+"'>"
-                                                        +"<div class='col-md-11 offset-md-1'>"
-                                                            +"<div class='card unbordered'>"
-                                                                +"<div class='card-block'>"
-                                                                    +"<blockquote class='card-blockquote'>"
-                                                                        +"<i>"
-                                                                            +"Nenhuma atividade cadastrada para esta etapa."
-                                                                            +"Utilize o botão acima para cadastrar uma!"
-                                                                        +"</i>"
-                                                                    +"</blockquote>"
-                                                                +"</div>"
-                                                            +"</div>"
-                                                        +"</div>"
-                                                    +"</div>"
                                                 +"</div>"
-                                            +"</div>"
+                                           +" </div>"
                                         +"</div>"
                                     +"</div>"
                                     +"<div class='row m-y-2'></div>";
@@ -662,7 +604,8 @@ $(document).ready(function(){
                         $("#input-etapa-descricao").val("");
                         /* Insere os elementos HTML no corpo */
                         $("#div-listagem-etapas").append(div_etapa);
-                        $("#div-menu-etapas").append(link_etapa);
+                        //$("#div-menu-etapas").append(link_etapa);
+                        $(link_etapa).insertBefore("#li-menu-ultimo-item")
                         $("#CadastrarEtapa").collapse('toggle');
                         /*
                         $("#li-menu-etapa-"+nome).on("click",function(){
@@ -749,7 +692,8 @@ function CadastrarAtividade(id_etapa){
                     $("#input-atividade-descricao" + id_etapa).val("");
                     $("#row-nenhuma-etapa-aviso-" + id_etapa).empty();
                     /* Insere os elementos HTML no corpo */
-                    $("#div-listagem-atividades" + id_etapa).append(div_atividade);
+                    //$("#div-listagem-atividades" + id_etapa).append(div_atividade);
+                    $(div_atividade).insertBefore("#row-btn-nova-atividade" + id_etapa);
                     $("#CadastrarAtividade" + id_etapa).collapse('toggle');
                 }
             }
