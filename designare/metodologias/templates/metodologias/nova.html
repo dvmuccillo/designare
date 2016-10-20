@@ -79,7 +79,7 @@
     </div>
     <div class="row" id="div-row-etapas">
         <div class="col-md-3" style="position: relative;">
-            <div class="list-group" id="div-menu-etapas">
+            <div class="list-group" id="div-menu-etapas" style="position: fixed;">
                 <!-- Inserir links de etapas aqui -->
                 {% if metodologia.etapas.all %}
                     {% for etapa in metodologia.etapas.all %}
@@ -240,7 +240,7 @@
                                                         <div align='center'>
                                                             <div class='btn-group' role='group'>
                                                                 <button 
-                                                                    type='button' class='btn btn-secondary' 
+                                                                    type='button' class='btn btn-secondary border-square' 
                                                                     id='btn-nova-atividade{{ etapa.pk }}'
                                                                     onclick='CadastrarAtividade("{{ etapa.pk}}")' 
                                                                 >
@@ -262,6 +262,7 @@
                 </div>
 
             </div>
+            <a id="CadastrarNovaEtapa"></a>
             <div class="row m-y-2" id="div-row-nova-etapa">
                 <div class="col-md-11">
                     <div class="row collapse" id="CadastrarEtapa">
@@ -309,7 +310,7 @@
                                     <br>
                                     <div align="center">
                                         <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-secondary" id="btn-nova-etapa">
+                                            <button type="button" class="btn btn-secondary border-square" id="btn-nova-etapa">
                                                 Cadastrar Etapa
                                             </button>
                                         </div>
@@ -580,7 +581,7 @@ $(document).ready(function(){
                                                                 +"<div align='center'>"
                                                                     +"<div class='btn-group' role='group'>"
                                                                         +"<button "
-                                                                            +"type='button' class='btn btn-secondary' "
+                                                                            +"type='button' class='btn btn-secondary border-square' "
                                                                             +"id='btn-nova-atividade" + ide + "'"
                                                                             +"onclick='CadastrarAtividade(\""+ide+"\")' "
                                                                         +">"
@@ -699,5 +700,13 @@ function CadastrarAtividade(id_etapa){
             }
         });
     }
+}
+function smoothScroll(target){
+    event.preventDefault();
+    //id = nome;
+    //alert(id);
+    $('html, body').animate({
+        scrollTop: $("#"+target).offset().top
+    }, 1000);
 }
 {% endblock %}

@@ -9,9 +9,11 @@ from metodologias.models import Metodologia
 def index(request):
     metodologias = Metodologia.objects.all().order_by('nome')
     projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
+    projetos_espera = Projeto.objects.all().filter(estado='ES').order_by('pk')
     context = {
         'titulo_da_pagina'   : "Projetos",
         'projetos_definidos' : projetos_definidos,
+        'projetos_espera'    : projetos_espera,
         'metodologias'       : metodologias,
           }
     return render(request, 'projetos/index.html', context)
@@ -29,12 +31,21 @@ def novo(request):
         capa = request.FILES['capa']
     except MultiValueDictKeyError:
         capa = 'static/img/projetos/capas/default.png'
-    metodologia = get_object_or_404(Metodologia,pk=request.POST.get('metodologia'))
+
+    id_metodologia = request.POST.get('metodologia')
+    if not request.POST.get('metodologia'):
+        estado='ES'
+        metodologia = get_object_or_404(Metodologia,pk=request.POST.get('metodologia'))
+    else:
+        estado='DE'
+        metodologia=None
+        
     projeto = Projeto(
                 nome=request.POST.get('nome'),
                 descricao=request.POST.get('descricao'),
                 imagem_capa=capa,
                 metodologia=metodologia,
+                estado=estado
             )
     projeto.save();
     return redirect('projetos:index')
