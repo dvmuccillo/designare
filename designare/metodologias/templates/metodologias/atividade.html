@@ -1,0 +1,25 @@
+<div class='row'>
+    <div class='col-md-11 offset-md-1'>
+        <div class='card unbordered'>
+            <div class='card-block'>
+                <h3 class='card-title'>
+                    <span>{{ atividade.nome }}</span>
+                    <button 
+                        class='btn btn-secondary border-square' id='btn-edit-etapa'
+                        data-tooltip='tooltip' data-placement='top'
+                        title='Editar atividade'
+                    >
+                        <i class='fa fa-pencil'></i>
+                    </button>
+                </h3>
+                <blockquote class='card-blockquote'>
+                    {%if atividade.descricao %}
+                        <p>{{ atividade.descricao }}</p>
+                    {% else %}
+                        <p><i>Nenhuma descrição fornecida para esta atividade!</i></p>
+                    {% endif %}
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
