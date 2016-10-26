@@ -330,131 +330,13 @@ $(document).ready(function(){
                         if(descricao==""){
                             descricao = "<i>Nenhuma descrição fornecida para esta etapa!</i>";
                         }
-                        /* Elemento HTML que representa uma etapa */       
-                        div_etapa = "<a id='etapa_"+ide+"'></a>"
-                                    +"<div class='row'>"
-                                        +"<div class='row'>"
-                                            +"<div class='card card-outline-secondary border-square'>"
-                                                +"<div class='card-block'>"
-                                                    +"<h3 class='card-title'>"
-                                                        +"<span>"+nome+"</span>&nbsp;"
-                                                        +"<button "
-                                                            +"class='btn btn-secondary border-square' id='btn-edit-etapa'"
-                                                            +"data-tooltip='tooltip' data-placement='top'"
-                                                            +"title='Editar etapa'"
-                                                        +">"
-                                                            +"<i class='fa fa-pencil'></i>"
-                                                        +"</button>"
-                                                    +"</h3>"
-                                                    +"<blockquote class='card-blockquote'>"
-                                                        + descricao
-                                                    +"</blockquote>"
-                                                +"</div>"
-                                                +"<hr>"
-                                                +"<div id='div-listagem-atividades" + ide + "'>"
-                                                +"<div class='row' id='row-nenhuma-etapa-aviso-" + ide + "'>"
-                                                    +"<div class='col-md-11 offset-md-1'>"
-                                                        +"<div class='card unbordered'>"
-                                                            +"<div class='card-block'>"
-                                                                +"<blockquote class='card-blockquote'>"
-                                                                    +"<i>"
-                                                                        +"Nenhuma atividade cadastrada para esta etapa."
-                                                                        +"Utilize o botão abaixo para cadastrar uma!"
-                                                                    +"</i>"
-                                                                +"</blockquote>"
-                                                            +"</div>"
-                                                        +"</div>"
-                                                    +"</div>"
-                                                +"</div>"
-                                                +"<div class='row m-l-0' id='row-btn-nova-atividade" + ide + "'>"
-                                                    +"<div class='col-md-5 offset-md-1 m-y-1'>"
-                                                       +"<h3 class=''>"
-                                                            +"<button "
-                                                                +"class='btn btn-secondary border-square' id='btn-edit-etapa'"
-                                                                +"data-tooltip='tooltip' data-placement='top'"
-                                                                +"title='Adicionar nova atividade'"
-                                                                +"data-toggle='collapse' data-target='#CadastrarAtividade" + ide + "'"
-                                                                +"aria-expanded='false' aria-controls='CadastrarAtividade" + ide + "'"
-                                                            +">"
-                                                                +"Adicionar Atividade <i class='fa fa-plus'></i>"
-                                                            +"</button>"
-                                                       +"</h3>"
-                                                    +"</div>"
-                                                +"</div>"
-                                                +"<div class='row collapse m-b-1' id='CadastrarAtividade" + ide + "'>"
-                                                    +"<div class='col-md-6 offset-md-3'>"
-                                                        +"<h4 class='m-t-1'>Adicionar nova atividade:</h4>"
-                                                        +"<form id='form-nova-atividade" + ide + "' name='form_nova_atividade" + ide + "'>"
-                                                            +"<fieldset id='fieldset-nova-atividade" + ide + "'>"
-                                                                +"{% csrf_token %}"
-                                                                +"<div class='form-group' id='div-input-atividade-nome" + ide + "'>"
-                                                                    +"<label>"
-                                                                        +"<b>Nome</b>&nbsp;"
-                                                                        +"<i"
-                                                                            +"class='fa fa-asterisk'  data-tooltip='tooltip' "
-                                                                            +"data-placement='top'"
-                                                                            +"title='Este campo é obrigatório!'"
-                                                                        +"></i>"
-                                                                    +"</label>"
-                                                                    +"<div class='input-group'>"
-                                                                        +"<span class='input-group-addon border-square'>"
-                                                                            +"<i class='fa fa-tag'></i>"
-                                                                        +"</span>"
-                                                                        +"<input name='nome' "
-                                                                            +"type='text'"
-                                                                            +"class='form-control border-square'"
-                                                                            +"placeholder='Nome da atividade'"
-                                                                            +"id='input-atividade-nome" + ide + "' "
-                                                                        +">"
-                                                                    +"</div>"
-                                                                    +"<div "
-                                                                        +"class='form-control-feedback' "
-                                                                        +"id='div-atividade-"+ide+"-nome-feedback'"
-                                                                    +"></div>"
-                                                                +"</div>"
-                                                                +"<label><b>Descrição</b></label>"
-                                                                +"<div class='input-group'>"
-                                                                    +"<span class='input-group-addon border-square'>"
-                                                                        +"<i class='fa fa-info'></i>"
-                                                                    +"</span>"
-                                                                    +"<textarea name='descricao' "
-                                                                        +"class='form-control border-square'"
-                                                                        +"placeholder='Descrição da Atividade'"
-                                                                        +"rows='5' maxlength='300'"
-                                                                        +"id='input-atividade-descricao" + ide + "'"
-                                                                    +"></textarea>"
-                                                                +"</div>"
-                                                                +"<p class='form-text text-muted'>"
-                                                                    +"Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada atividade ou facilitar o aprendizado de novos membros. "
-                                                                +"</p>"
-                                                                +"<br>"
-                                                                +"<div align='center'>"
-                                                                    +"<div class='btn-group' role='group'>"
-                                                                        +"<button "
-                                                                            +"type='button' class='btn btn-secondary border-square' "
-                                                                            +"id='btn-nova-atividade" + ide + "'"
-                                                                            +"onclick='CadastrarAtividade(\""+ide+"\")' "
-                                                                        +">"
-                                                                            +"Cadastrar Atividade"
-                                                                        +"</button>"
-                                                                    +"</div>"
-                                                                +"</div>"
-                                                            +"</fieldset>"                                
-                                                        +"</form>"
-                                                    +"</div>"
-                                                +"</div>"
-                                                +"</div>"
-                                           +" </div>"
-                                        +"</div>"
-                                    +"</div>"
-                                    +"<div class='row m-y-2'></div>";
                         /* Elemento HTML que representa o menu com link interno para etapa */
                         link_etapa = "<a href='#etapa_"+ide+"' class='list-group-item list-group-item-action' id='li-menu-etapa-"+nome+"'>"+nome+"</a>";
                         /* Limpa os campos do formulário de cadastro de etapas */
                         $("#input-etapa-nome").val("");
                         $("#input-etapa-descricao").val("");
                         /* Insere os elementos HTML no corpo */
-                        $("#div-listagem-etapas").append(div_etapa);
+                        $("#div-listagem-etapas").append(data.template);
                         //$("#div-menu-etapas").append(link_etapa);
                         $(link_etapa).insertBefore("#li-menu-ultimo-item")
                         $("#CadastrarEtapa").collapse('toggle');
@@ -516,35 +398,13 @@ function CadastrarAtividade(id_etapa){
                     if(descricao==""){
                         descricao = "<i>Nenhuma descrição fornecida para esta atividade!</i>";
                     }
-                    /* Elemento HTML que representa uma atividade */       
-                    div_atividade = "<div class='row'>"
-                                        +"<div class='col-md-11 offset-md-1'>"
-                                            +"<div class='card unbordered'>"
-                                                +"<div class='card-block'>"
-                                                    +"<h3 class='card-title'>"
-                                                        +"<span>"+nome+"</span>&nbsp;"
-                                                        +"<button "
-                                                            +"class='btn btn-secondary border-square' id='btn-edit-etapa'"
-                                                            +"data-tooltip='tooltip' data-placement='top'"
-                                                            +"title='Editar atividade'"
-                                                        +">"
-                                                            +"<i class='fa fa-pencil'></i>"
-                                                        +"</button>"
-                                                    +"</h3>"
-                                                    +"<blockquote class='card-blockquote'>"
-                                                        + descricao
-                                                    +"</blockquote>"
-                                                +"</div>"
-                                            +"</div>"
-                                        +"</div>"
-                                    +"</div>"
                     /* Limpa os campos do formulário de cadastro de etapas */
                     $("#input-atividade-nome" + id_etapa).val("");
                     $("#input-atividade-descricao" + id_etapa).val("");
                     $("#row-nenhuma-etapa-aviso-" + id_etapa).empty();
                     /* Insere os elementos HTML no corpo */
-                    //$("#div-listagem-atividades" + id_etapa).append(div_atividade);
-                    $(div_atividade).insertBefore("#row-btn-nova-atividade" + id_etapa);
+                    //$("#div-listagem-atividades" + id_etapa).append("div_atividade");
+                    $(data.template).insertBefore("#row-btn-nova-atividade" + id_etapa);
                     $("#CadastrarAtividade" + id_etapa).collapse('toggle');
                 }
             }

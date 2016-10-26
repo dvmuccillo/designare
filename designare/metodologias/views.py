@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404,render,redirect
 from django.http import HttpResponse,JsonResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template import loader
+from django.template.loader import render_to_string
 from metodologias.models import Metodologia,Etapa,Atividade
 
 def index(request):
@@ -35,7 +36,8 @@ def cadastrar_etapa(request, metodologia_id):
                 ordem = proxima_pos,
             )
     etapa.save()
-    return JsonResponse({ 'etapa_id': etapa.pk ,'sucesso': True})
+    template = render_to_string('metodologias/etapa.html',{'etapa' : etapa})
+    return JsonResponse({ 'etapa_id': etapa.pk, 'template' : template ,'sucesso': True})
 
 def cadastrar_atividade(request, metodologia_id, etapa_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
@@ -48,7 +50,8 @@ def cadastrar_atividade(request, metodologia_id, etapa_id):
                 ordem = proxima_pos,
             )
     atividade.save()
-    return JsonResponse({ 'atividade_id': atividade.pk ,'sucesso': True})
+    template = render_to_string('metodologias/atividade.html',{'atividade' : atividade})
+    return JsonResponse({ 'atividade_id': atividade.pk , 'template' : template ,'sucesso': True})
 
 def nova(request):
     return render(request,'metodologias/nova.html')
