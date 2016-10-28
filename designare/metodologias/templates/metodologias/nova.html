@@ -92,9 +92,8 @@
                     {% endfor %}
                 {% endif%}
                 <a 
-                    class="list-group-item list-group-item-action" id="li-menu-ultimo-item"
-                    data-toggle="collapse" href="#CadastrarEtapa"
-                    aria-expanded="false" aria-controls="CadastrarEtapa"
+                    class="list-group-item list-group-item-action" id="li-menu-adicionar-etapa"
+                    href="#CadastrarEtapa"
                 >
                     <i class="fa fa-plus"></i>&nbsp;Adicionar nova etapa
                 </a>
@@ -112,10 +111,10 @@
                 </div>
 
             </div>
-            <a id="CadastrarNovaEtapa"></a>
+            <a id="CadastrarEtapa"></a>
             <div class="row my-2" id="div-row-nova-etapa">
                 <div class="col-md-11">
-                    <div class="row collapse" id="CadastrarEtapa">
+                    <div class="row collapse" id="collapse-cadastrar-etapa">
                         <div class="col-md-6 offset-md-3">
                             <h4 class="mt-1">Adicionar nova etapa:</h4>
                             <form id="form-etapa" name="form_etapa">
@@ -159,11 +158,12 @@
                                     </p>
                                     <br>
                                     <div align="center">
-                                        <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-secondary border-square" id="btn-nova-etapa">
-                                                Cadastrar Etapa
-                                            </button>
-                                        </div>
+                                        <button type="button" class="btn btn-danger border-square" id="btn-cancelar-etapa">
+                                            cancelar
+                                        </button>
+                                        <button type="button" class="btn btn-success border-square" id="btn-nova-etapa">
+                                            Cadastrar Etapa
+                                        </button>
                                     </div>
                                 </fieldset>                                
                             </form>
@@ -196,7 +196,7 @@ $(document).ready(function(){
 
     /* Exibe o formulário de cadastro de etapas se não houverem etapas cadastradas */
     if(($("#div-menu-etapas").children().length) == 1){
-        $("#CadastrarEtapa").toggleClass("in",true);
+        $("#collapse-cadastrar-etapa").toggleClass("in",true);
     }
 
     /* Ação de cadastro de metodologia (definição do nome) */
@@ -272,22 +272,18 @@ $(document).ready(function(){
         }
     });
 
-    /*  
-    $("#li-menu-ultimo-item").click(function(){
+      
+    $("#li-menu-adicionar-etapa").click(function(){
         event.preventDefault();
-        if($("#fieldset-nova-etapa").prop("disabled")){
-            // Requisita foco para o campo de nome da metodologia 
-            $("#input-metodologia-nome").focus();
-            // Exibe tooltip do campo
-            $("#input-metodologia-nome").tooltip('show');
-        } else {
+        if(!$("#collapse-cadastrar-etapa").hasClass("in")){
+            $("#collapse-cadastrar-etapa").collapse('toggle');
             $('html, body').animate({
-                scrollTop: $("#form-etapa").offset().top
+                scrollTop: $("#collapse-cadastrar-etapa").offset().top
             }, 1000);
-            $("#input-etapa-nome").focus();
-        }
+        }        
     });
-    */
+    
+    /* Ação de Cadastro de Etapa */
     $("#btn-nova-etapa").click(function(){
         /* Limpeza de estilos de validação */
         $("#div-input-etapa-nome").toggleClass("has-danger",false);
@@ -338,8 +334,8 @@ $(document).ready(function(){
                         /* Insere os elementos HTML no corpo */
                         $("#div-listagem-etapas").append(data.template);
                         //$("#div-menu-etapas").append(link_etapa);
-                        $(link_etapa).insertBefore("#li-menu-ultimo-item")
-                        $("#CadastrarEtapa").collapse('toggle');
+                        $(link_etapa).insertBefore("#li-menu-adicionar-etapa")
+                        $("#collapse-cadastrar-etapa").collapse('toggle');
                         /*
                         $("#li-menu-etapa-"+nome).on("click",function(){
                             //event.preventDefault();
@@ -354,6 +350,19 @@ $(document).ready(function(){
                 }
             });
         }
+    });
+
+    /* Ação de cancelar cadastro de etapa */
+    $("#btn-cancelar-etapa").click(function(){
+        /* Limpeza do valor de campos */
+        $("#input-etapa-nome").val("");
+        $("#input-etapa-descricao").val("");
+        /* Limpeza de estilos de validação */
+        $("#div-input-etapa-nome").toggleClass("has-danger",false);
+        $("#input-etapa-nome").toggleClass("form-control-danger",false);
+        $("#div-etapa-nome-feedback").empty();
+        /* Fecha o collapse */
+        $("#collapse-cadastrar-etapa").collapse('toggle');
     });
 });
 function CadastrarAtividade(id_etapa){
