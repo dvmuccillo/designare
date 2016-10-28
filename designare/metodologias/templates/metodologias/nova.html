@@ -1,10 +1,10 @@
 {% extends 'designare/esqueleto.html' %}
 {% block body %}
 <div class="container">
-    <div class="row m-y-1">
+    <div class="row my-1">
         <h2 align="center">{{ titulo_da_pagina }}</h2>
     </div>
-    <div class="row m-y-2 {% if metodologia %} hidden {% endif %}" align="center" id="div-form-metodologia">
+    <div class="row my-2 {% if metodologia %} hidden {% endif %}" align="center" id="div-form-metodologia">
         <div class="col-md-6 offset-md-3">
             <form class="form-inline" id="form-metodologia" name="form_metodologia">
                 {% csrf_token %}
@@ -41,9 +41,9 @@
     </div>
     <div
         {% if metodologia %}
-            class="row m-y-1"                    
+            class="row my-1"                    
         {% else %}
-            class="row m-y-1 hidden" 
+            class="row my-1 hidden" 
         {% endif %} 
         id="div-metodologia-nome"
     >
@@ -113,11 +113,11 @@
 
             </div>
             <a id="CadastrarNovaEtapa"></a>
-            <div class="row m-y-2" id="div-row-nova-etapa">
+            <div class="row my-2" id="div-row-nova-etapa">
                 <div class="col-md-11">
                     <div class="row collapse" id="CadastrarEtapa">
                         <div class="col-md-6 offset-md-3">
-                            <h4 class="m-t-1">Adicionar nova etapa:</h4>
+                            <h4 class="mt-1">Adicionar nova etapa:</h4>
                             <form id="form-etapa" name="form_etapa">
                                 <fieldset id="fieldset-nova-etapa">
                                     {% csrf_token %}

@@ -43,8 +43,8 @@
                 </div>
             </div>
             {% endif %}
-            <div class='row m-l-0' id='row-btn-nova-atividade{{ etapa.pk }}'>
-                <div class='col-md-5 offset-md-1 m-y-1'>
+            <div class='row ml-0' id='row-btn-nova-atividade{{ etapa.pk }}'>
+                <div class='col-md-5 offset-md-1 my-1'>
                    <h3 class=''>
                         <button 
                             class='btn btn-secondary border-square' id='btn-edit-etapa'
@@ -58,9 +58,9 @@
                    </h3>
                 </div>
             </div>
-            <div class='row collapse m-b-1' id='CadastrarAtividade{{ etapa.pk }}'>
+            <div class='row collapse mb-1' id='CadastrarAtividade{{ etapa.pk }}'>
                 <div class='col-md-6 offset-md-3'>
-                    <h4 class='m-t-1'>Adicionar nova atividade:</h4>
+                    <h4 class='mt-1'>Adicionar nova atividade:</h4>
                     <form id='form-nova-atividade{{ etapa.pk }}' name='form_nova_atividade{{ etapa.pk }}'>
                         <fieldset id='fieldset-nova-atividade{{ etapa.pk }}'>
                             {% csrf_token %}
@@ -124,4 +124,4 @@
         </div>
     </div>
 </div>
-<div class='row m-y-2'></div>
+<div class='row my-2'></div>

@@ -1,6 +1,6 @@
 {% extends 'projetos/base.html' %}
 {% block subtitle_content %}
-<div class="row m-y-2" align="center">
+<div class="row my-2" align="center">
     
     <div class="div-btn-form-projeto">
         <button 
@@ -103,7 +103,7 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <div class="row m-y-2">
+        <div class="row my-2">
             <h3>Em execução</h3>
         </div>
         <div class="row">
@@ -119,17 +119,17 @@
         </div>
     </div>
     <div class="container">
-        <div class="row m-y-2">
+        <div class="row my-2">
             <h3>Em espera</h3>
         </div>
         {% if projetos_espera %}
                 {% for projeto in projetos_espera %}
                     <div class="col-md-4">
-                        <div class="row m-a-0">
-                            <div class="card border-square m-b-0">
+                        <div class="row m-0">
+                            <div class="card border-square mb-0">
                                 <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
                                 <div class="card-img-overlay">
-                                    <div class="pull-md-right">
+                                    <div class="float-md-right">
                                         <a 
                                             href="{% url 'projetos:excluir_projeto' projeto.pk %}" class="btn btn-danger btn-sm"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row m-a-0">
+                        <div class="row m-0">
                             <div class="card border-square">
                                 <a 
                                     class="btn btn-secondary card-block btn-block border-square" 
@@ -167,18 +167,18 @@
             {% endif %}
     </div>
     <div class="container">
-        <div class="row m-y-2">
+        <div class="row my-2">
             <h3>Definidos</h3>
         </div>
         <div class="row">
             {% if projetos_definidos %}
                 {% for projeto in projetos_definidos %}
                     <div class="col-md-4">
-                        <div class="row m-a-0">
-                            <div class="card border-square m-b-0">
+                        <div class="row m-0">
+                            <div class="card border-square mb-0">
                                 <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
                                 <div class="card-img-overlay">
-                                    <div class="pull-md-right">
+                                    <div class="float-md-right">
                                         <a 
                                             href="{% url 'projetos:excluir_projeto' projeto.pk %}" class="btn btn-danger btn-sm"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
@@ -189,7 +189,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row m-a-0">
+                        <div class="row m-0">
                             <div class="card border-square">
                                 <a 
                                     class="btn btn-secondary card-block btn-block border-square" 
@@ -217,7 +217,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="row m-y-2">
+        <div class="row my-2">
             <h3>Concluídos</h3>
         </div>
         <div class="row">
