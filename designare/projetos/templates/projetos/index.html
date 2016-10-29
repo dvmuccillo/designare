@@ -1,8 +1,7 @@
 {% extends 'projetos/base.html' %}
 {% block subtitle_content %}
 <div class="row my-2" align="center">
-    
-    <div class="div-btn-form-projeto">
+    <div id="div-btn-form-projeto" class="collapse in">
         <button 
             class="btn btn-secondary btn-circle" 
             alt="Adicionar novo projeto"
@@ -12,24 +11,6 @@
             data-tooltip="tooltip" data-placement="top" title="Adicionar Novo Projeto"
         >
             <i class="fa fa-plus" aria-hidden="true"></i>
-        </button>
-        <button 
-            class="btn btn-danger btn-circle hidden"
-            alt="Adicionar novo projeto"
-            id="btn-cancelar-novo-projeto"
-            data-toggle="collapse"
-            href="#div-form-novo-projeto"
-            data-tooltip="tooltip" data-placement="top" title="Cancelar"                
-        >
-            <i class="fa fa-times" aria-hidden="true"></i>
-        </button>
-        <button
-            class="btn btn-success btn-circle hidden"
-            alt="Adicionar novo projeto"i
-            id="btn-adicionar-novo-projeto"
-            data-tooltip="tooltip" data-placement="top" title="Cadastrar Projeto"
-        >
-            <i class="fa fa-check" aria-hidden="true"></i>
         </button>
     </div>
 </div>
@@ -93,9 +74,27 @@
                         <span class="input-group-addon border-square">
                             <i class="fa fa-picture-o"></i>
                         </span>
-                        <input type="file" name="capa" class="form-control">
+                        <input type="file" name="capa" class="form-control border-square">
                     </div>
                 </form>
+                <div class="my-1" align="center">
+                    <button 
+                        class="btn btn-danger border-square"
+                        alt="Adicionar novo projeto"
+                        id="btn-cancelar-novo-projeto"
+                        data-toggle="collapse"
+                        href="#div-form-novo-projeto"
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        class="btn btn-success border-square"
+                        alt="Adicionar novo projeto"
+                        id="btn-adicionar-novo-projeto"
+                    >
+                        Adicionar Projeto
+                    </button>
+                </div>
             </div>
         </div>        
     </div>
@@ -131,7 +130,8 @@
                                 <div class="card-img-overlay">
                                     <div class="float-md-right">
                                         <a 
-                                            href="{% url 'projetos:excluir_projeto' projeto.pk %}" class="btn btn-danger btn-sm"
+                                            href="{% url 'projetos:excluir_projeto' projeto.pk %}" 
+                                            class="btn btn-danger btn-sm border-square"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
                                         >
                                             <i class="fa fa-times"></i>
@@ -180,7 +180,8 @@
                                 <div class="card-img-overlay">
                                     <div class="float-md-right">
                                         <a 
-                                            href="{% url 'projetos:excluir_projeto' projeto.pk %}" class="btn btn-danger btn-sm"
+                                            href="{% url 'projetos:excluir_projeto' projeto.pk %}" 
+                                            class="btn btn-danger btn-sm border-square"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
                                         >
                                             <i class="fa fa-times"></i>
@@ -237,15 +238,20 @@
 {% block javascript_functions %}
     $(document).ready(function(){
         $("#btn-novo-projeto").click(function(){
-           $("#btn-novo-projeto").toggleClass('hidden',true);
+           $("#div-btn-form-projeto").collapse('toggle');
            $("#btn-cancelar-novo-projeto").toggleClass('hidden',false);
            $("#btn-adicionar-novo-projeto").toggleClass('hidden',false);
         });
         
         $("#btn-cancelar-novo-projeto").click(function(){
-           $("#btn-novo-projeto").toggleClass('hidden',false);
-           $("#btn-cancelar-novo-projeto").toggleClass('hidden',true);
-           $("#btn-adicionar-novo-projeto").toggleClass('hidden',true);
+            /* Limpa estilos de erro */
+            $('#div-input-projeto-nome').toggleClass('has-danger',false);
+            $('#input-projeto-nome').toggleClass('form-control-danger',false);
+            $('#div-projeto-nome-txt').toggleClass('invisible',true);
+            /* Limpa campos */
+            document.getElementById("form-novo-projeto").reset();
+            /* Exibe linha (row) do botão de adicionar novo projeto */ 
+            $("#div-btn-form-projeto").collapse('toggle');
         });
 
         $("#btn-adicionar-novo-projeto").click(function(){
