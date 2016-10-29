@@ -365,6 +365,7 @@ $(document).ready(function(){
         $("#collapse-cadastrar-etapa").collapse('toggle');
     });
 });
+/* Ação de Cadastrar Atividade */
 function CadastrarAtividade(id_etapa){
     /* Limpeza de estilos de validação */
     $("#div-input-atividade-nome" + id_etapa).toggleClass("has-danger",false);
@@ -419,6 +420,24 @@ function CadastrarAtividade(id_etapa){
             }
         });
     }
+}
+/* Ação de Cancelar Cadastro de Atividade */
+function CancelarCadastrarAtividade(id_etapa){
+    /* Limpeza de campos */
+    $("#input-atividade-nome" + id_etapa).val("");
+    $("#input-atividade-descricao" + id_etapa).val("");
+    /* Limpeza de estilos de validação */
+    $("#div-input-atividade-nome" + id_etapa).toggleClass("has-danger",false);
+    $("#input-atividade-nome" + id_etapa).toggleClass("form-control-danger",false);
+    $("#div-atividade-" + id_etapa + "-nome-feedback").empty();
+    /* Esconde Formulário de Cadastro de Atividade */
+    $("#CadastrarAtividade" + id_etapa).collapse('toggle');
+    /* Exibe Linha (row) de botão 'Adicionar nova atividade' */
+    $("#row-btn-nova-atividade" + id_etapa).collapse('toggle'); 
+}
+function EsconderBtnNovaAtividade(id_etapa){
+    /* Esconde Linha (row) de botão 'Adicionar nova atividade' */
+    $("#row-btn-nova-atividade" + id_etapa).collapse('toggle');
 }
 function smoothScroll(target){
     event.preventDefault();

@@ -43,7 +43,7 @@
                 </div>
             </div>
             {% endif %}
-            <div class='row ml-0' id='row-btn-nova-atividade{{ etapa.pk }}'>
+            <div class='row ml-0 collapse in' id='row-btn-nova-atividade{{ etapa.pk }}'>
                 <div class='col-md-5 offset-md-1 my-1'>
                    <h3 class=''>
                         <button 
@@ -52,6 +52,7 @@
                             title='Adicionar nova atividade'
                             data-toggle='collapse' data-target='#CadastrarAtividade{{ etapa.pk }}'
                             aria-expanded='false' aria-controls='CadastrarAtividade{{ etapa.pk }}'
+                            onclick='EsconderBtnNovaAtividade("{{ etapa.pk }}");' 
                         >
                             Adicionar Atividade <i class='fa fa-plus'></i>
                         </button>
@@ -106,15 +107,20 @@
                             </p>
                             <br>
                             <div align='center'>
-                                <div class='btn-group' role='group'>
-                                    <button 
-                                        type='button' class='btn btn-secondary border-square' 
-                                        id='btn-nova-atividade{{ etapa.pk }}'
-                                        onclick='CadastrarAtividade("{{ etapa.pk}}")' 
-                                    >
-                                        Cadastrar Atividade
-                                    </button>
-                                </div>
+                                <button 
+                                    type='button' class='btn btn-danger border-square' 
+                                    id='btn-cancelar-atividade{{ etapa.pk }}'
+                                    onclick='CancelarCadastrarAtividade("{{ etapa.pk}}")' 
+                                >
+                                    Cancelar
+                                </button>
+                                <button 
+                                    type='button' class='btn btn-success border-square' 
+                                    id='btn-nova-atividade{{ etapa.pk }}'
+                                    onclick='CadastrarAtividade("{{ etapa.pk}}")' 
+                                >
+                                    Cadastrar Atividade
+                                </button>
                             </div>
                         </fieldset>                                
                     </form>
