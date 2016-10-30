@@ -102,6 +102,31 @@
 {% endblock %}
 {% block content %}
     <div class="container">
+        <div class="row">
+            <div class="modal fade" id="modal-excluir-projeto" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content border-square" id="modal-excluir-projeto-conteudo">
+                        <div class="modal-header">
+                            <h4>Confirmar exclusão de projeto:</h4>
+                        </div>
+                        <div class="modal-body">
+                            Deseja realmente excluir o projeto <b id="modal-excluir-projeto-nome"></b>?
+                        </div>
+                        <div class="modal-footer">
+                            <button 
+                                class="btn btn-info float-md-left border-square" 
+                                data-dismiss="modal" id="btn-cancelar-exclusao"
+                            >
+                                <i class="fa fa-ban"></i>&nbsp;Cancelar
+                            </button>
+                            <a class="btn btn-danger border-square" id="btn-excluir-projeto">
+                                <i class="fa fa-times"></i>&nbsp;Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
         <div class="row my-2">
             <h3>Em execução</h3>
         </div>
@@ -129,13 +154,13 @@
                                 <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
                                 <div class="card-img-overlay">
                                     <div class="float-md-right">
-                                        <a 
-                                            href="{% url 'projetos:excluir_projeto' projeto.pk %}" 
+                                        <button 
                                             class="btn btn-danger btn-sm border-square"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                            onclick='ExcluirProjeto("{{ projeto.pk }}","{{ projeto.nome }}");' 
                                         >
                                             <i class="fa fa-times"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -153,24 +178,24 @@
                     </div>
                 {% endfor %}
             {% else %}
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="card card-outline-secondary text-xs-center border-square">
-                        <div class="card-block">
-                            <blockquote class="card-blockquote">
-                                <p>Nenhum projeto em espera no momento!</p>
-                            </blockquote>
-                        </div>
-                    </div>                
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card card-outline-secondary text-xs-center border-square">
+                            <div class="card-block">
+                                <blockquote class="card-blockquote">
+                                    <p>Nenhum projeto em espera no momento!</p>
+                                </blockquote>
+                            </div>
+                        </div>                
+                    </div>
                 </div>
-            </div>
             {% endif %}
     </div>
     <div class="container">
         <div class="row my-2">
             <h3>Definidos</h3>
         </div>
-        <div class="row">
+        <div class="">
             {% if projetos_definidos %}
                 {% for projeto in projetos_definidos %}
                     <div class="col-md-4">
@@ -179,13 +204,13 @@
                                 <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
                                 <div class="card-img-overlay">
                                     <div class="float-md-right">
-                                        <a 
-                                            href="{% url 'projetos:excluir_projeto' projeto.pk %}" 
+                                        <button 
                                             class="btn btn-danger btn-sm border-square"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                            onclick='ExcluirProjeto("{{ projeto.pk }}","{{ projeto.nome }}");' 
                                         >
                                             <i class="fa fa-times"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -203,17 +228,17 @@
                     </div>
                 {% endfor %}
             {% else %}
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="card card-outline-secondary text-xs-center border-square">
-                        <div class="card-block">
-                            <blockquote class="card-blockquote">
-                                <p>Nenhum projeto definido no momento!</p>
-                            </blockquote>
-                        </div>
-                    </div>                
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="card card-outline-secondary text-xs-center border-square">
+                            <div class="card-block">
+                                <blockquote class="card-blockquote">
+                                    <p>Nenhum projeto definido no momento!</p>
+                                </blockquote>
+                            </div>
+                        </div>                
+                    </div>
                 </div>
-            </div>
             {% endif %}                
         </div>
     </div>
@@ -267,7 +292,10 @@
                 $("#form-novo-projeto").submit();
             }
         });
-
-        
     });
+    function ExcluirProjeto(id_projeto,nome){
+        $("#modal-excluir-projeto").modal('show');
+        $("#modal-excluir-projeto-nome").html(nome);
+        $("#btn-excluir-projeto").attr("href", "/projetos/"+id_projeto+"/excluir-projeto/");
+    }
 {% endblock %}

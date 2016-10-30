@@ -29,7 +29,7 @@
                                 <h4>Confirmar exclusão de metodologia:</h4>
                             </div>
                             <div class="modal-body">
-                                Deseja Realmente excluir a metodologia <b id="modal-excluir-metodologia-nome"></b>?
+                                Deseja eealmente excluir a metodologia <b id="modal-excluir-metodologia-nome"></b>?
                             </div>
                             <div class="modal-footer">
                                 <button 
@@ -56,7 +56,7 @@
                                     <div class="btn-group float-md-right">
                                         <button 
                                             class="btn btn-danger"
-                                            data-tooltip="tooltip" data-placement="top" title="Excluir (Modal)"
+                                            data-tooltip="tooltip" data-placement="top" title="Excluir"
                                             onclick='ExcluirMetodologia("{{ metodologia.pk }}","{{ metodologia.nome }}");' 
                                         >
                                             <i class="fa fa-times"></i>
@@ -77,9 +77,9 @@
     {% endblock %}
 {% endblock %}
 {% block javascript_functions %}
-function ExcluirMetodologia(id_metodologia,nome){
-    $("#modal-excluir-metodologia").modal('show');
-    $("#modal-excluir-metodologia-nome").html(nome);
-    $("#btn-excluir-metodologia").attr("href", "/metodologias/"+id_metodologia+"/excluir-metodologia/");
-}
+    function ExcluirMetodologia(id_metodologia,nome){
+        $("#modal-excluir-metodologia").modal('show');
+        $("#modal-excluir-metodologia-nome").html(nome);
+        $("#btn-excluir-metodologia").attr("href", "/metodologias/"+id_metodologia+"/excluir-metodologia/");
+    }
 {% endblock %}
