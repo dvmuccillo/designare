@@ -12,8 +12,10 @@ urlpatterns = [
     url(r'^(?P<metodologia_id>[0-9]+)/atualizar-nome/$', views.atualizar_nome, name='atualizar_nome'),
     # /metodologias/id/cadastrar-etapa/
     url(r'^(?P<metodologia_id>[0-9]+)/cadastrar-etapa/$', views.cadastrar_etapa, name='cadastrar_etapa'),
-    # /metodologias/id/etapa/id/cadastrar-atividade/
+    # /metodologias/id/etapa/id/atualizar-etapa/
     url(r'^(?P<metodologia_id>[0-9]+)/etapa/(?P<etapa_id>[0-9]+)/atualizar-etapa/$', views.atualizar_etapa, name='atualizar_etapa'),
+    # /metodologias/id/etapa/id/excluir-etapa/
+    url(r'^(?P<metodologia_id>[0-9]+)/etapa/(?P<etapa_id>[0-9]+)/excluir-etapa/$', views.excluir_etapa, name='excluir_etapa'),
     # /metodologias/id/etapa/id/cadastrar-atividade/
     url(r'^(?P<metodologia_id>[0-9]+)/etapa/(?P<etapa_id>[0-9]+)/cadastrar-atividade/$', views.cadastrar_atividade, name='cadastrar_atividade'),
     # /metodologias/nova/

@@ -47,6 +47,12 @@ def atualizar_etapa(request, metodologia_id, etapa_id):
     etapa.save()
     return JsonResponse({ 'etapa_id': etapa.pk , 'sucesso': True})
 
+def excluir_etapa(request, metodologia_id, etapa_id):
+    metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    etapa = get_object_or_404(Etapa,pk=etapa_id)
+    etapa.delete()
+    return JsonResponse({'sucesso': True})
+
 def cadastrar_atividade(request, metodologia_id, etapa_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
     etapa = get_object_or_404(Etapa,pk=etapa_id)
