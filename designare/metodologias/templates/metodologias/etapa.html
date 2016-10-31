@@ -2,27 +2,91 @@
 <div class='row'>
     <div class='row'>
         <div class='card card-outline-secondary border-square'>
-            <div class='card-block'>
+            <div class='card-block collapse in' id="card-etapa-info-{{ etapa.pk }}">
                 <h3 class='card-title'>
-                    <span>{{ etapa.nome }}</span>
+                    <span id="etapa-nome-{{etapa.pk}}">{{ etapa.nome }}</span>
                     <button 
-                        class='btn btn-secondary border-square' id='btn-edit-etapa'
+                        class='btn btn-secondary border-square' id='btn-edit-etapa-{{ etapa.pk }}'
                         data-tooltip='tooltip' data-placement='top'
                         title='Editar etapa'
+                        onclick='EditarEtapa("{{ etapa.pk }}");' 
                     >
                         <i class='fa fa-pencil'></i>
                     </button>
                 </h3>
                 <blockquote class='card-blockquote'>
                     {%if etapa.descricao %}
-                        <p>{{ etapa.descricao }}</p>
+                        <p id="etapa-descricao-{{ etapa.pk }}">{{ etapa.descricao }}</p>
                     {% else %}
-                        <p><i>Nenhuma descrição fornecida para esta etapa!</i></p>
+                        <p id="etapa-descricao-{{ etapa.pk }}"><i>Nenhuma descrição fornecida para esta etapa!</i></p>
                     {% endif %}
                 </blockquote>
             </div>
+            <div class='card-block collapse' id="card-etapa-editar-{{ etapa.pk }}">
+                <div class="col-md-6 offset-md-3">
+                    <h4 class="mt-1">Editar etapa:</h4>
+                    <form id="form-etapa-{{ etapa.pk }}" name="form_etapa_{{ etapa.pk }}">
+                        <fieldset id="fieldset-editar-etapa-{{ etapa.pk }}">
+                            {% csrf_token %}
+                            <div class="form-group" id="div-input-etapa-nome-{{ etapa.pk }}">
+                                <label>
+                                    <b>Nome</b>&nbsp;
+                                    <i
+                                        class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
+                                        title="Este campo é obrigatório!"
+                                    ></i>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon border-square">
+                                        <i class="fa fa-tag"></i>
+                                    </span>
+                                    <input name="nome" 
+                                        type="text"
+                                        class="form-control border-square"
+                                        placeholder="Nome da Etapa"
+                                        id="input-etapa-nome-{{ etapa.pk }}" 
+                                    >
+                                </div>
+                                <div class="form-control-feedback" id="div-etapa-nome-feedback-{{ etapa.pk }}"></div>
+                            </div>
+                            <label><b>Descrição</b></label>
+                            <div class="input-group">
+                                <span class="input-group-addon border-square">
+                                    <i class="fa fa-info"></i>
+                                </span>
+                                <textarea name="descricao" 
+                                    class="form-control border-square"
+                                    placeholder="Descrição da Etapa"
+                                    rows="5" maxlength="300"
+                                    id="input-etapa-descricao-{{ etapa.pk }}"
+                                ></textarea>
+                            </div>
+                            <p class="form-text text-muted">
+                                Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
+                            </p>
+                            <br>
+                            <div align="center">
+                                <button 
+                                    type="button" class="btn btn-danger border-square" 
+                                    id="btn-cancelar-etapa-{{ etapa.pk }}"
+                                    onclick='CancelarEditarEtapa("{{ etapa.pk }}");' 
+                                >
+                                    Cancelar
+                                </button>
+                                <button 
+                                    type="button" class="btn btn-success border-square" 
+                                    id="btn-nova-etapa-{{ etapa.pk }}"
+                                    onclick='EnviarEditarEtapa("{{ etapa.pk }}");'
+                                >
+                                    Atualizar
+                                </button>
+                            </div>
+                        </fieldset>                                
+                    </form>
+                </div>
+            </div>
             <hr>
-            <div id='div-listagem-atividades{{ etapa.pk }}'>
+            <div id='div-listagem-atividades{{ etapa.pk }}' class="collapse in">
             {% if etapa.atividades.all %}
                 {% for atividade in etapa.atividades.all %}
                     {% include "metodologias/atividade.html" with atividade=atividade %}
