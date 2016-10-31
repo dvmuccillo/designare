@@ -67,6 +67,15 @@ def cadastrar_atividade(request, metodologia_id, etapa_id):
     template = render_to_string('metodologias/atividade.html',{'etapa': etapa, 'atividade' : atividade})
     return JsonResponse({ 'atividade_id': atividade.pk , 'template' : template ,'sucesso': True})
 
+def atualizar_atividade(request, metodologia_id, etapa_id, atividade_id):
+    metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    etapa = get_object_or_404(Etapa,pk=etapa_id)
+    atividade = get_object_or_404(Atividade,pk=atividade_id)
+    atividade.nome = request.POST.get('nome')
+    atividade.descricao = descricao = request.POST.get('descricao')
+    atividade.save()
+    return JsonResponse({ 'atividade_id': atividade.pk , 'sucesso': True})
+
 def excluir_atividade(request, metodologia_id, etapa_id, atividade_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
     etapa = get_object_or_404(Etapa,pk=etapa_id)

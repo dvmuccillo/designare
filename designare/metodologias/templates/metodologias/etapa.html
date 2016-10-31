@@ -94,6 +94,69 @@
                         </form>
                     </div>
                 </div>
+                <div class='card-block collapse' id="card-atividade-editar-{{ etapa.pk }}">
+                    <div class="col-md-6 offset-md-3">
+                        <h4 class="mt-1">Editar atividade:</h4>
+                        <form id="form-atividade-{{ etapa.pk }}" name="form_atividade_{{ etapa.pk }}">
+                            <fieldset id="fieldset-editar-atividade-{{ etapa.pk }}">
+                                {% csrf_token %}
+                                <div class="form-group" id="div-input-atividade-nome-{{ etapa.pk }}">
+                                    <label>
+                                        <b>Nome</b>&nbsp;
+                                        <i
+                                            class="fa fa-asterisk"  data-tooltip="tooltip" data-placement="top"
+                                            title="Este campo é obrigatório!"
+                                        ></i>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon border-square">
+                                            <i class="fa fa-tag"></i>
+                                        </span>
+                                        <input name="nome" 
+                                            type="text"
+                                            class="form-control border-square"
+                                            placeholder="Nome da Atividade"
+                                            id="input-atividade-nome-{{ etapa.pk }}" 
+                                        >
+                                    </div>
+                                    <div class="form-control-feedback" id="div-atividade-nome-feedback-{{ etapa.pk }}"></div>
+                                </div>
+                                <label><b>Descrição</b></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon border-square">
+                                        <i class="fa fa-info"></i>
+                                    </span>
+                                    <textarea name="descricao" 
+                                        class="form-control border-square"
+                                        placeholder="Descrição da Atividade"
+                                        rows="5" maxlength="300"
+                                        id="input-atividade-descricao-{{ etapa.pk }}"
+                                    ></textarea>
+                                </div>
+                                <p class="form-text text-muted">
+                                    Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada atividade ou facilitar o aprendizado de novos membros. 
+                                </p>
+                                <br>
+                                <div align="center">
+                                    <button 
+                                        type="button" class="btn btn-danger border-square" 
+                                        id="btn-cancelar-atividade-{{ etapa.pk }}"
+                                        onclick='CancelarEditarAtividade("{{ etapa.pk }}");' 
+                                    >
+                                        Cancelar
+                                    </button>
+                                    <button 
+                                        type="button" class="btn btn-success border-square" 
+                                        id="btn-atualizar-atividade-{{ etapa.pk }}"
+                                        onclick='EnviarEditarAtividade("{{ etapa.pk }}");'
+                                    >
+                                        Atualizar
+                                    </button>
+                                </div>
+                            </fieldset>                                
+                        </form>
+                    </div>
+                </div>
                 <hr>
                 <div id='div-listagem-atividades{{ etapa.pk }}' class="collapse in">
                     {% if etapa.atividades.all %}
@@ -200,10 +263,9 @@
                             </form>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class='row my-2'></div>
     </div>
+    <div class='row my-2'></div>
 </div>

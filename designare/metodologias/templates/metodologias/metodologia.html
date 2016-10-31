@@ -457,7 +457,7 @@ function CadastrarAtividade(id_etapa){
                 //Cria um log da data recebida no console
                 console.log(data);
                 //Verifica se a operação foi bem sucedida
-                $('#btn-nova-atividade' + id_etapa).html("Cadastrar Etapa");
+                $('#btn-nova-atividade' + id_etapa).html("Cadastrar Atividade");
                 if(data.sucesso)
                 {
                     ide = data.atividade_id;
@@ -558,7 +558,7 @@ function EnviarEditarEtapa(id_etapa){
                 //Cria um log da data recebida no console
                 console.log(data);
                 //Verifica se a operação foi bem sucedida
-                $('#btn-nova-etapa-'+id_etapa).html("Cadastrar Etapa");
+                $('#btn-nova-etapa-'+id_etapa).html("Atualizar");
                 if(data.sucesso)
                 {
                     ide = data.etapa_id;
@@ -669,6 +669,95 @@ function ExcluirAtividade(id_etapa,id_atividade){
         });
 }
 /* Fim das Ações de Exclusão de Atividade */
+/* Ações de Edição de Atividade */
+function EditarAtividade(id_etapa,id_atividade){
+    $("#input-atividade-nome-"+id_etapa).val($("#atividade-nome-"+id_atividade).html());
+    if($("#atividade-descricao-"+id_atividade).html() == "<i>Nenhuma descrição fornecida para esta atividade!</i>"){
+        $("#input-atividade-descricao-"+id_etapa).val("");
+    } else {
+        $("#input-atividade-descricao-"+id_etapa).val($("#atividade-descricao-"+id_atividade).html());
+    }
+    $("#btn-atualizar-atividade-"+id_etapa).attr("onclick", "EnviarEditarAtividade('"+id_etapa+"','"+id_atividade+"');");
+    $("#btn-edit-atividade-"+id_atividade).tooltip('hide');
+    $("#card-etapa-info-"+id_etapa).collapse('toggle');
+    $("#div-listagem-atividades"+id_etapa).collapse('toggle');
+    $("#card-atividade-editar-"+id_etapa).collapse('toggle');
+}
+function CancelarEditarAtividade(id_etapa){
+    /* Limpeza do valor de campos */
+    $("#input-atividade-nome-"+id_etapa).val("");
+    $("#input-atividade-descricao-"+id_etapa).val("");
+    /* Limpeza de estilos de validação */
+    $("#div-input-atividade-nome-"+id_etapa).toggleClass("has-danger",false);
+    $("#input-atividade-nome-"+id_etapa).toggleClass("form-control-danger",false);
+    $("#div-atividade-nome-feedback-"+id_etapa).empty();
+    /* Fecha o collapse */
+    $("#card-etapa-info-"+id_etapa).collapse('toggle');
+    $("#div-listagem-atividades"+id_etapa).collapse('toggle');
+    $("#card-atividade-editar-"+id_etapa).collapse('toggle');
+}
+function EnviarEditarAtividade(id_etapa,id_atividade){
+    /* Limpeza de estilos de validação */
+    $("#div-input-atividade-nome-"+id_etapa).toggleClass("has-danger",false);
+    $("#input-atividade-nome-"+id_etapa).toggleClass("form-control-danger",false);
+    $("#div-atividade-nome-feedback-"+id_etapa).empty();
+    /* Valor das propriedades de etapa */
+    nome = $("#input-atividade-nome-"+id_etapa).val();
+    descricao = $("#input-atividade-descricao-"+id_etapa).val();
+    idm = $("#input-metodologia-id").val();
+    endereco = "/metodologias/" + idm + "/etapa/" +id_etapa + "/atividade/" + id_atividade + "/atualizar-atividade/";
+    /* Verifica se o nome da etapa foi informado */
+    if(!nome){
+        /* Aplica estilos de aviso se o nome da etapa não foi informado */
+        $("#div-input-atividade-nome-"+id_etapa).toggleClass("has-danger",true);
+        $("#input-atividade-nome-"+id_etapa).toggleClass("form-control-danger",true);
+        $("#div-atividade-nome-feedback-"+id_etapa).append("Informe o nome da atividade!");
+    } else {
+        /* Realiza a requisição ajax para cadastro */
+        $.ajax({
+            type    : "POST",
+            url     : endereco,
+            data    : { 'nome' : nome,
+                        'descricao' : descricao, 
+                        'csrfmiddlewaretoken' : document.form_etapa.csrfmiddlewaretoken.value,
+                    },
+            dataType: "json",
+            encode  : true,
+
+            beforeSend: function(){
+                $("#fieldset-editar-atividade-" + id_etapa).prop("disabled",true);
+                $('#btn-atualizar-atividade-'+id_etapa).html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>&nbsp;Processando');
+            },
+            success: function(data){
+                //Cria um log da data recebida no console
+                console.log(data);
+                //Verifica se a operação foi bem sucedida
+                if(data.sucesso)
+                {
+                    ide = data.etapa_id;
+                    if(descricao==""){
+                        descricao = "<i>Nenhuma descrição fornecida para esta atividade!</i>";
+                    }
+                    /* Limpa os campos do formulário de atualização de atividades */
+                    $("#input-atividade-nome-"+id_etapa).val("");
+                    $("#input-atividade-descricao-"+id_etapa).val("");
+                    /* Atualiza os elementos HTML no corpo */
+                    $("#atividade-nome-"+id_atividade).html(nome);
+                    $("#atividade-descricao-"+id_atividade).html(descricao);
+                    /* Restaura os collapses aos estados originais */
+                    $("#card-etapa-info-"+id_etapa).collapse('toggle');
+                    $("#div-listagem-atividades"+id_etapa).collapse('toggle');
+                    $("#card-atividade-editar-"+id_etapa).collapse('toggle');
+                    /* Libera o formulário para edição */
+                    $("#fieldset-editar-atividade-" + id_etapa).prop("disabled",false);
+                    $('#btn-atualizar-atividade-'+id_etapa).html('Atualizar');
+                                                              
+                }
+            }
+        });
+    }
+}
+/* Fim das Ações de Edição de Etapa */
 function smoothScroll(target){
     event.preventDefault();
     //id = nome;
