@@ -64,8 +64,15 @@ def cadastrar_atividade(request, metodologia_id, etapa_id):
                 ordem = proxima_pos,
             )
     atividade.save()
-    template = render_to_string('metodologias/atividade.html',{'atividade' : atividade})
+    template = render_to_string('metodologias/atividade.html',{'etapa': etapa, 'atividade' : atividade})
     return JsonResponse({ 'atividade_id': atividade.pk , 'template' : template ,'sucesso': True})
+
+def excluir_atividade(request, metodologia_id, etapa_id, atividade_id):
+    metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    etapa = get_object_or_404(Etapa,pk=etapa_id)
+    atividade = get_object_or_404(Atividade,pk=atividade_id)
+    atividade.delete()
+    return JsonResponse({'sucesso': True})
 
 def nova(request):
     return render(request,'metodologias/nova.html')

@@ -105,6 +105,33 @@
                 </div>
             </div>                    
         </div>
+        <div class="modal fade" id="modal-excluir-atividade" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content border-square" id="modal-excluir-atividade-conteudo">
+                    <div class="modal-header">
+                        <h4>Confirmar exclusão de metodologia:</h4>
+                    </div>
+                    <div class="modal-body">
+                        Deseja realmente excluir a atividade <b id="modal-excluir-atividade-nome"></b>?
+                    </div>
+                    <div class="modal-footer">
+                        <form>
+                            <fieldset id="fieldset-excluir-atividade-footer">
+                                <button 
+                                    class="btn btn-info float-md-left border-square" 
+                                    data-dismiss="modal" id="btn-cancelar-exclusao"
+                                >
+                                    <i class="fa fa-ban"></i>&nbsp;Cancelar
+                                </button>
+                                <button class="btn btn-danger border-square" id="btn-excluir-atividade">
+                                    <i class="fa fa-times"></i>&nbsp;Excluir
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>                    
+        </div>
     </div>
     <div class="row" id="div-row-etapas">
         <div class="col-md-3" style="position: relative;">
@@ -440,11 +467,12 @@ function CadastrarAtividade(id_etapa){
                     /* Limpa os campos do formulário de cadastro de etapas */
                     $("#input-atividade-nome" + id_etapa).val("");
                     $("#input-atividade-descricao" + id_etapa).val("");
-                    $("#row-nenhuma-etapa-aviso-" + id_etapa).empty();
+                    $("#row-nenhuma-etapa-aviso-" + id_etapa).collapse('toggle');
                     /* Insere os elementos HTML no corpo */
                     //$("#div-listagem-atividades" + id_etapa).append("div_atividade");
                     $(data.template).insertBefore("#row-btn-nova-atividade" + id_etapa);
                     $("#CadastrarAtividade" + id_etapa).collapse('toggle');
+                    $("#row-btn-nova-atividade" + id_etapa).collapse('toggle');
                 }
             }
         });
@@ -583,7 +611,6 @@ function ExcluirEtapa(id_etapa){
                 //Cria um log da data recebida no console
                 console.log(data);
                 //Verifica se a operação foi bem sucedida
-                $('#btn-nova-etapa-'+id_etapa).html("Cadastrar Etapa");
                 if(data.sucesso)
                 {
                     $("#modal-excluir-etapa").modal('hide');
@@ -601,6 +628,47 @@ function ExcluirEtapa(id_etapa){
         });
 }
 /* Fim das Ações de Exclusão de Etapa */
+/* Ações de Exclusão de Atividade */
+function ConfirmarExcluirAtividade(id_etapa,id_atividade,nome){
+    $("#btn-excluir-atividade-"+id_atividade).tooltip('hide');
+    $("#modal-excluir-atividade").modal('show');
+    $("#modal-excluir-atividade-nome").html(nome);
+    $("#btn-excluir-atividade").attr("onclick", "ExcluirAtividade('"+id_etapa+"','"+id_atividade+"');");
+}
+function ExcluirAtividade(id_etapa,id_atividade){
+    event.preventDefault();
+    idm = $("#input-metodologia-id").val();
+    endereco = "/metodologias/" + idm + "/etapa/" +id_etapa + "/atividade/" + id_atividade + "/excluir-atividade/";
+    $.ajax({
+            type    : "POST",
+            url     : endereco,
+            data    : {'csrfmiddlewaretoken' : document.form_etapa.csrfmiddlewaretoken.value},
+            dataType: "json",
+            encode  : true,
+
+            beforeSend: function(){
+                $("#fieldset-excluir-atividade-footer").prop("disabled",true);
+                $('#btn-excluir-atividade').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>&nbsp;Processando');
+            },
+            success: function(data){
+                //Cria um log da data recebida no console
+                console.log(data);
+                //Verifica se a operação foi bem sucedida
+                if(data.sucesso)
+                {
+                    $("#modal-excluir-atividade").modal('hide');
+                    $('#btn-excluir-atividade').html('<i class="fa fa-times"></i>&nbsp;Excluir');
+                    $("#fieldset-excluir-atividade-footer").prop("disabled",false);
+                    //$("#collapse-atividade-"+id_atividade).collapse('toggle');
+                    $("#collapse-atividade-"+id_atividade).remove();
+                    if(($("#div-listagem-atividades"+id_etapa).children().length) == 3){
+                        $("#row-nenhuma-etapa-aviso-"+id_etapa).collapse('toggle');
+                    }                   
+                }
+            }
+        });
+}
+/* Fim das Ações de Exclusão de Atividade */
 function smoothScroll(target){
     event.preventDefault();
     //id = nome;
