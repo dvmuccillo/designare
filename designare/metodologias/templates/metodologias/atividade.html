@@ -1,0 +1,34 @@
+<div class='row collapse in' id="collapse-atividade-{{ atividade.pk }}">
+    <div class='col-md-11 offset-md-1'>
+        <div class='card unbordered'>
+            <div class='card-block'>
+                <h3 class='card-title'>
+                    <span id="atividade-nome-{{ atividade.pk }}">{{ atividade.nome }}</span>
+                    <button 
+                        class='btn btn-secondary border-square' id='btn-edit-atividade-{{ atividade.pk }}'
+                        data-tooltip='tooltip' data-placement='top'
+                        title='Editar atividade'
+                        onclick='EditarAtividade("{{ etapa.pk }}","{{ atividade.pk }}");'
+                    >
+                        <i class='fa fa-pencil'></i>
+                    </button>
+                    <button 
+                        class='btn btn-danger border-square' id='btn-excluir-atividade-{{ atividade.pk }}'
+                        data-tooltip='tooltip' data-placement='top'
+                        title='Excluir atividade'
+                        onclick='ConfirmarExcluirAtividade("{{ etapa.pk }}","{{ atividade.pk }}","{{ atividade.nome }}");' 
+                    >
+                        <i class='fa fa-times'></i>
+                    </button>
+                </h3>
+                <blockquote class='card-blockquote'>
+                    {%if atividade.descricao %}
+                        <p id="atividade-descricao-{{ atividade.pk }}">{{ atividade.descricao }}</p>
+                    {% else %}
+                        <p id="atividade-descricao-{{ atividade.pk }}"><i>Nenhuma descrição fornecida para esta atividade!</i></p>
+                    {% endif %}
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>

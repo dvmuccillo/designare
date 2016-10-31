@@ -46,12 +46,11 @@
     </head>
     <body>
         <div class="container">
-            <div class="row m-t-3">
+            <div class="row mt-3">
                 <div class="col-md-2 offset-md-10">
                     <div class="btn-group" role="group">
                         <a 
                             href="/" class="btn btn-secondary border-square"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                             data-tooltip="tooltip" data-placement="top" title="Página Inicial"
                         >
                             Designare
@@ -66,14 +65,15 @@
                                 <i class="fa fa-bars" aria-hidden="true"></i>
                             </button>
                             <div class="dropdown-menu border-square">
-                                <a class="dropdown-item" href="/">
-                                    <i class="fa fa-home" aria-hidden="true"></i>&nbsp;Início
-                                </a>
                                 <a class="dropdown-item" href="/metodologias/">
-                                    <i class="fa fa-database" aria-hidden="true"></i>&nbsp;Metodologias
+                                    Metodologias&nbsp;<i class="fa fa-database" aria-hidden="true"></i>
                                 </a>
                                 <a class="dropdown-item" href="/projetos/">
-                                    <i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;Projetos
+                                    Projetos&nbsp;<i class="fa fa-briefcase" aria-hidden="true"></i>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/faq/">
+                                    Ajuda&nbsp;<i class="fa fa-question" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
         <!-- jQuery first, then Tether, then Bootstrap JS. -->
         <script src="/static/js/jquery.min.js"></script>
         <script src="/static/js/tether.1.2.0.min.js"></script>
-        <script src="/static/js/bootstrap.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
         {% block javascript_functions %}

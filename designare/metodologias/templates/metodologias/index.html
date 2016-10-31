@@ -2,10 +2,10 @@
 {% block body %}
 <!DOCTYPE html>
     <div class="container">
-        <div class="row m-y-1">
+        <div class="row my-1">
             <h2 align="center">{{ titulo_da_pagina }}</h2>
         </div>
-        <div class="row m-y-2" align="center">
+        <div class="row my-2" align="center">
             <a 
                 class="btn btn-secondary btn-circle" 
                 id="btn-novo-projeto"
@@ -20,7 +20,32 @@
         </div>
     </div>
     {% block content %}
-            <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="modal fade" id="modal-excluir-metodologia" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content border-square" id="modal-excluir-metodologia-conteudo">
+                            <div class="modal-header">
+                                <h4>Confirmar exclusão de metodologia:</h4>
+                            </div>
+                            <div class="modal-body">
+                                Deseja realmente excluir a metodologia <b id="modal-excluir-metodologia-nome"></b>?
+                            </div>
+                            <div class="modal-footer">
+                                <button 
+                                    class="btn btn-info float-md-left border-square" 
+                                    data-dismiss="modal" id="btn-cancelar-exclusao"
+                                >
+                                    <i class="fa fa-ban"></i>&nbsp;Cancelar
+                                </button>
+                                <a class="btn btn-danger border-square" id="btn-excluir-metodologia">
+                                    <i class="fa fa-times"></i>&nbsp;Excluir
+                                </a>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <ul class="list-group">
@@ -28,19 +53,14 @@
                             {% for metodologia in metodologias %}
                                 <li class="list-group-item">
                                     <a href="{% url 'metodologias:detalhes' metodologia.pk %}" class="btn btn-link">{{ metodologia.nome }}</a>
-                                    <div class="btn-group pull-md-right">
-                                        <a 
-                                            href="" class="btn btn-secondary"
-                                            data-tooltip="tooltip" data-placement="top" title="Editar"
-                                        >
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <a 
-                                            href="{% url 'metodologias:excluir_metodologia' metodologia.pk %}" class="btn btn-danger"
+                                    <div class="btn-group float-md-right">
+                                        <button 
+                                            class="btn btn-danger"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                            onclick='ExcluirMetodologia("{{ metodologia.pk }}","{{ metodologia.nome }}");' 
                                         >
                                             <i class="fa fa-times"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </li>
                             {% endfor %}
@@ -53,9 +73,13 @@
                     </ul>
                 </div>
             </div>
-
-                 
-
         </div>
     {% endblock %}
+{% endblock %}
+{% block javascript_functions %}
+    function ExcluirMetodologia(id_metodologia,nome){
+        $("#modal-excluir-metodologia").modal('show');
+        $("#modal-excluir-metodologia-nome").html(nome);
+        $("#btn-excluir-metodologia").attr("href", "/metodologias/"+id_metodologia+"/excluir-metodologia/");
+    }
 {% endblock %}

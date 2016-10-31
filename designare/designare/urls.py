@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^projetos/', include('projetos.urls'), name='projetos'),
     url(r'^metodologias/', include('metodologias.urls'), name='metodologias'),
-    url(r'^inicial/', TemplateView.as_view(template_name='designare/teste_tela_inicial.html')),
-    url(r'^faq/', TemplateView.as_view(template_name='designare/tela_faq.html')),
+    url(r'^faq/$', TemplateView.as_view(template_name='designare/tela_faq.html')),
+    url(r'^$', TemplateView.as_view(template_name='designare/teste_tela_inicial.html')),
 ]
