@@ -18,7 +18,7 @@ def detalhes(request, metodologia_id):
     context = {
         'metodologia' : metodologia,
     }
-    return render(request,'metodologias/nova.html', context)
+    return render(request,'metodologias/metodologia.html', context)
 
 def atualizar_nome(request, metodologia_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
@@ -75,7 +75,7 @@ def excluir_atividade(request, metodologia_id, etapa_id, atividade_id):
     return JsonResponse({'sucesso': True})
 
 def nova(request):
-    return render(request,'metodologias/nova.html')
+    return render(request,'metodologias/metodologia.html')
 
 def cadastrar_metodologia(request):
     metodologia = Metodologia (
