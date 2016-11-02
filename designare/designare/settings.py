@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'metodologias.apps.MetodologiasConfig',
     'projetos.apps.ProjetosConfig',
+    'projetos.editor',
+    'projetos.galeria',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'designare',
         'USER': 'root',
-        'PASSWORD': 'senha',
+        'PASSWORD': 'mysql',
         'HOST': 'localhost',
         'PORT': '3306'
     }
