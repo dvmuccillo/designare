@@ -1,6 +1,46 @@
 {% extends 'projetos/base.html' %}
 {% block content %}
 <div class="container">
+    <div class="row">
+        <div class="modal fade" id="modal-adicionar-recurso" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content border-square" id="modal-excluir-etapa-conteudo">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4>Selecione o recurso para adicionar a atividade:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            {% for recurso in recursos %}
+                                {{ recurso.carrega_propriedades }}
+                                <a href="#" class="list-group-item list-group-item-action unbordered">
+                                    <h5 class="list-group-item-heading">{{ recurso.nome }}</h5>
+                                    <p class="list-group-item-text">{{ recurso.descricao }}</p>                                  
+                                </a>
+                            {% endfor %}                            
+                        </ul>
+                    </div>
+                    <div class="modal-footer hidden">
+                        <form>
+                            <fieldset id="fieldset-excluir-etapa-footer">
+                                <button 
+                                    class="btn btn-info float-md-left border-square" 
+                                    data-dismiss="modal" id="btn-cancelar-recurso"
+                                >
+                                    <i class="fa fa-ban"></i>&nbsp;Cancelar
+                                </button>
+                                <button class="btn btn-danger border-square" id="btn-excluir-etapa">
+                                    <i class="fa fa-times"></i>&nbsp;Excluir
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>                    
+        </div>
+    </div>
     <div class="row" id="div-row-etapas">
         <div class="col-md-3" style="position: relative;">
             <div class="list-group" id="div-menu-etapas">
@@ -59,9 +99,11 @@
                                                                     {% endif %}
                                                                 </blockquote>
                                                                 <button 
-                                                                    class='btn btn-secondary border-square' id="btn-edit-etapa"
+                                                                    class='btn btn-secondary border-square' 
+                                                                    id="btn-adiciona-recurso-{{ atividade.pk }}"
                                                                     data-tooltip="tooltip" data-placement="top"
-                                                                    title="Adicionar recurso"  
+                                                                    title="Adicionar recurso"
+                                                                    onclick="AdicionarRecurso('{{ atividade.pk }}');"  
                                                                 >
                                                                     Adicionar recurso <i class="fa fa-plus"></i>
                                                                 </button>
@@ -98,4 +140,10 @@
         </div>
     </div>
 </div>
+{% endblock %}
+{% block javascript_functions %}
+    function AdicionarRecurso(id_atividade){
+        $("#btn-adiciona-recurso-"+id_atividade).tooltip('hide');
+        $("#modal-adicionar-recurso").modal('show');
+    }
 {% endblock %}
