@@ -1,5 +1,5 @@
 from django.db import models
+from projetos.models import Recurso
 
-class Editor(models.Model):
-	#titulo = models.CharField(max_length=50)
-	texto = models.TextField()
+class Texto(Recurso):
+	conteudo = models.TextField()

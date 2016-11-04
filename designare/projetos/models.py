@@ -1,5 +1,5 @@
 from django.db import models
-from metodologias.models import Metodologia
+from metodologias.models import Metodologia, Atividade
 import json, os
 
 class Projeto(models.Model):
@@ -36,6 +36,17 @@ class Projeto(models.Model):
     def __str__(self):
         return self.nome
 
+""" Recursos: utilizados para executar uma atividade
+
+    - A classe contem 3 propriedades:
+        - app_name: identifica um único recurso instalado e precisa ser registrado pela interface admin do Django
+        - nome e descricao: preenchidos a cada execucao com base no documento propriedades.json do app registrado
+                            é necessário usar carrega_propriedades() para preencher estes campos devido ao Django
+                            desencorajar o uso de __init__()
+                            referência:  
+    - Todo app/pacote de recurso precisa ter uma classe principal que extenda a classe recurso
+        referência: https://docs.djangoproject.com/pt-br/1.10/topics/db/models/#multi-table-inheritance 
+"""
 class Recurso(models.Model):
     nome = None
     descricao = None
@@ -52,5 +63,21 @@ class Recurso(models.Model):
         self.descricao = propriedades['descricao']
         return ""
 
-
-
+class Execucao(models.Model):
+#    data
+#    usuario
+    projeto = models.ForeignKey(
+        Projeto,
+        on_delete=models.CASCADE,
+        related_name='execucoes',
+    )
+    recurso = models.ForeignKey(
+        Recurso,
+        on_delete=models.CASCADE,
+        related_name='execucoes',
+    )
+    atividade = models.ForeignKey(
+       Atividade,
+        on_delete=models.CASCADE,
+        related_name='execucoes',
+    )
