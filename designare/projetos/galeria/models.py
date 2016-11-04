@@ -1,8 +1,13 @@
 from django.db import models
 from projetos.models import Recurso
 
-class Galeria(Recurso):
+class Galeria(models.Model):
     nome = models.CharField(max_length=50)
+    recurso = models.ForeignKey(
+        Recurso,
+        on_delete=models.PROTECT,
+    )
+
 
 class Imagem(models.Model):
     nome = models.CharField(max_length=50)
