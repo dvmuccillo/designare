@@ -2,8 +2,9 @@ from django.shortcuts import get_object_or_404,render,redirect
 from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template import loader
-from projetos.models import Projeto
+from projetos.models import Projeto, Recurso
 from metodologias.models import Metodologia
+#from projetos import resources
 
 # Create your views here.
 def index(request):
@@ -20,8 +21,10 @@ def index(request):
 
 def detalhes(request, projeto_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
+    recursos = Recurso.objects.all()
     context = {
         'projeto' : projeto,
+        'recursos' : recursos,
         'titulo_da_pagina' : projeto.nome,
     }
     return render(request,'projetos/projeto.html', context)
