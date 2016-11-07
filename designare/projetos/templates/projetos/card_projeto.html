@@ -1,5 +1,9 @@
-<p class="hidden" id="projeto-descricao-{{ projeto.pk }}">{{ projeto.descricao }}</p>
+
 <div class="col-md-4">
+    <div class="row hidden">
+        <p class="hidden" id="projeto-descricao-{{ projeto.pk }}">{{ projeto.descricao }}</p>
+        <p class="hidden" id="projeto-metodologia-{{ projeto.pk }}">{{ projeto.metodologia.nome }}</p>
+    </div>
     <div class="row m-0">
         <div class="card border-square mb-0">
             <img 

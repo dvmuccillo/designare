@@ -140,8 +140,12 @@
                             </div>    
                             <div class="row">
                                 <div class="col-md-10 offset-md-1">
-                                    <h4>Descrição:</h4>
-                                    <blockquote id="modal-info-projeto-descricao"></blockquote>
+                                    <dl>
+                                        <dt>Metodologia:</dt>
+                                        <dd id="modal-info-projeto-metodologia"></dd>
+                                        <dt>Descrição:</dt>
+                                        <dd id="modal-info-projeto-descricao"></dd>
+                                    </dl>
                                 </div>                                    
                             </div>
                         </div>
@@ -289,13 +293,18 @@
     }
     function InfoProjeto(id_projeto){
         $("#btn-info-projeto-"+id_projeto).tooltip('hide');
+        $("#modal-info-projeto-capa").attr("src",$("#projeto-capa-"+id_projeto).attr("src"));
         $("#modal-info-projeto-nome").html($("#projeto-nome-"+id_projeto).html());
         if($("#projeto-descricao-"+id_projeto).html() == ""){
             descricao = "<i>Nenhuma descrição informada!</i>";
         }
         else descricao = $("#projeto-descricao-"+id_projeto).html();
         $("#modal-info-projeto-descricao").html(descricao);
-        $("#modal-info-projeto-capa").attr("src",$("#projeto-capa-"+id_projeto).attr("src"));
+        if($("#projeto-metodologia-"+id_projeto).html() == ""){
+            metodologia = "<i>Nenhuma metodologia foi atribuida para este projeto ainda!</i>";
+        }
+        else metodologia = $("#projeto-metodologia-"+id_projeto).html();
+        $("#modal-info-projeto-metodologia").html(metodologia);
         $("#modal-info-editar").modal('show');
     }
 {% endblock %}
