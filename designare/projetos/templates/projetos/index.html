@@ -161,13 +161,13 @@
                                 class="btn btn-info float-md-left border-square" 
                                 data-dismiss="modal" id="btn-cancelar-exclusao"
                             >
-                                <i class="fa fa-times"></i>&nbsp;Fechar
+                                <i class="fa fa-times"></i>&nbsp;Não, Fechar
                             </button>
                             <button 
                                 class="btn btn-secondary border-square" 
                                 id="btn-excluir-info" onclick="" 
                             >
-                                <i class="fa fa-pencil"></i>&nbsp;Exibir informações
+                                <i class="fa fa-eye"></i>&nbsp;Não, Exibir informações
                             </button>
                             <a class="btn btn-danger border-square" id="btn-excluir-projeto">
                                 <i class="fa fa-trash"></i>&nbsp;Sim, Excluir o Projeto
@@ -292,6 +292,7 @@
     function ExcluirProjeto(id_projeto){
         $("#btn-excluir-projeto-"+id_projeto).tooltip('hide');
         PreencheExcluirProjeto(id_projeto)
+        $("#modal-info").toggleClass('in', false);
         $("#modal-excluir").toggleClass('in',true);
         $("#modal-acoes").modal('show');        
     }
@@ -318,6 +319,7 @@
     function InfoProjeto(id_projeto){
         $("#btn-info-projeto-"+id_projeto).tooltip('hide');
         PreencheInfoProjeto(id_projeto);
+        $("#modal-excluir").toggleClass('in', false);
         $("#modal-info").toggleClass('in',true)
         $("#modal-acoes").modal('show');
     }
