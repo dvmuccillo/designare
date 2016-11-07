@@ -43,7 +43,7 @@
             <a 
                 class="btn btn-secondary card-block btn-block border-square"
                 {% if projeto.estado == 'DE' %}
-                    onclick="alert('Corrigir isso aqui para seleção de metodologia!');" 
+                    onclick="alert('Nenhuma metodologia atribuída para este projeto!\nEdite o projeto e selecione a metodologia desejada!');" 
                 {% else %}
                     href="{% url 'projetos:detalhes' projeto.pk %}"
                 {% endif %}

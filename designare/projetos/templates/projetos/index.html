@@ -412,7 +412,7 @@
         if($("#projeto-metodologia-id-"+id_projeto).html() == ""){
             id_metodologia = 0;
         } else id_metodologia = $("#projeto-metodologia-id-"+id_projeto).html();
-        $("#select-metodologia-editar").val()
+        $("#select-metodologia-editar").val(id_metodologia);
         $("#form-editar-projeto").attr("action","/projetos/"+id_projeto+"/atualizar-projeto/");
         $("#btn-editar-info").attr("onclick", "EditarProjetoInfo('"+id_projeto+"');");
         $("#btn-atualizar-projeto").attr("onclick", "AtualizarProjeto('"+id_projeto+"');");
