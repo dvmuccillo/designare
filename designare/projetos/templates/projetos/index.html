@@ -15,7 +15,7 @@
     </div>
 </div>
 <div class="collapse" id="div-form-novo-projeto">
-    <div class="row" align="center">
+    <div class="row"    >
         <div class="col-md-6 offset-md-3">
             <div>
                 <form 
@@ -23,7 +23,8 @@
                     enctype="multipart/form-data" id="form-novo-projeto"
                 >
                     {% csrf_token %}
-                    <div class="form-group" id="div-input-projeto-nome">
+                    <div class="form-group mb-0" id="div-input-projeto-nome">
+                        <label for="input-projeto-nome">Nome:</label>
                         <div class="input-group">
                             <span class="input-group-addon border-square">
                                 <i class="fa fa-tag"></i>
@@ -39,18 +40,19 @@
                             Este campo é obrigatório!
                         </div>
                     </div>
-                    <div class="input-group">
+                    <label for="input-projeto-descricao">Descrição:</label>
+                    <div class="input-group mb-1">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-info"></i>
                         </span>
                         <textarea name="descricao" 
                             class="form-control border-square"
                             placeholder="Descrição do Projeto"
-                            rows="5"
+                            rows="5" maxlength="300" id="input-projeto-descricao" 
                         ></textarea>
                     </div>
-                    <br>
-                    <div class="input-group">
+                    <label for="select-metodologia">Metodologia:</label>
+                    <div class="input-group mb-1">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-database"></i>
                         </span>
@@ -69,12 +71,12 @@
                             {% endif %}
                         </select>
                     </div>
-                    <br>
+                    <label for="projeto-capa">Imagem de capa:</label>
                     <div class="input-group text-md-left">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-picture-o"></i>
                         </span>
-                        <input type="file" name="capa" class="form-control border-square">
+                        <input type="file" name="capa" class="form-control border-square" id="projeto-capa">
                     </div>
                 </form>
                 <div class="my-1" align="center">
@@ -103,8 +105,143 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="modal fade" id="modal-excluir-projeto" data-backdrop="static">
-                <div class="modal-dialog">
+            <div class="modal fade" id="modal-acoes" data-backdrop="static">
+                <div class="modal-dialog collapse" id="modal-info">
+                    <div class="modal-content border-square" id="modal-info-conteudo">
+                        <div class="modal-header">
+                            <h4>Informações do projeto <span id="modal-info-projeto-nome"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mb-1">
+                                <div class="col-md-10 offset-md-1">
+                                    <img src="" id="modal-info-projeto-capa" class="img-fluid img-thumbnail border-square">
+                                </div>
+                            </div>    
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <dl>
+                                        <dt>Metodologia:</dt>
+                                        <dd id="modal-info-projeto-metodologia"></dd>
+                                        <dt>Descrição:</dt>
+                                        <dd id="modal-info-projeto-descricao"></dd>
+                                    </dl>
+                                </div>                                    
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button 
+                                class="btn btn-info float-md-left border-square" 
+                                data-dismiss="modal"
+                            >
+                                <i class="fa fa-times"></i>&nbsp;Fechar
+                            </button>
+                            <button 
+                                class="btn btn-secondary border-square" 
+                                id="btn-info-editar" onclick="" 
+                            >
+                                <i class="fa fa-pencil"></i>&nbsp;Editar informações
+                            </button>
+                            <button 
+                                class="btn btn-danger border-square" 
+                                id="btn-info-excluir" 
+                            >
+                                <i class="fa fa-trash"></i>&nbsp;Excluir Projeto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-dialog collapse in" id="modal-editar">
+                    <div class="modal-content border-square" id="modal-editar-projeto-conteudo">
+                        <div class="modal-header">
+                            <h4>Editar informações do projeto:</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <form 
+                                        action="" method="post"
+                                        enctype="multipart/form-data" id="form-editar-projeto"
+                                    >
+                                        {% csrf_token %}
+                                        <div class="form-group mb-0" id="div-input-editar-nome">
+                                            <label for="input-editar-nome">Nome:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon border-square">
+                                                    <i class="fa fa-tag"></i>
+                                                </span>
+                                                <input name="nome" 
+                                                    type="text"
+                                                    class="form-control border-square"
+                                                    placeholder="Título do Projeto"
+                                                    id="input-editar-nome" 
+                                                >
+                                            </div>
+                                            <div class="form-control-feedback text-md-left invisible" id="div-editar-nome-txt">
+                                                Este campo é obrigatório!
+                                            </div>
+                                        </div>
+                                        <label for="input-editar-descricao" class="mt-0">Descrição:</label>
+                                        <div class="input-group mb-1">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-info"></i>
+                                            </span>
+                                            <textarea name="descricao" 
+                                                class="form-control border-square"
+                                                placeholder="Descrição do Projeto"
+                                                rows="5" id="input-editar-descricao" maxlength="300" 
+                                            ></textarea>
+                                        </div>
+                                        <label for="select-metodologia-editar">Metodologia:</label>
+                                        <div class="input-group mb-1">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-database"></i>
+                                            </span>
+                                            <select class="form-control border-square" id="select-metodologia-editar" name="metodologia">
+                                                {% if metodologias %}
+                                                    <optgroup label="Selecionar mais tarde">
+                                                        <option value="0">Não aplicar nenhuma metodologia agora</option>
+                                                    </optgroup>
+                                                    <optgroup label="Selecione uma metodologia">
+                                                        {% for metodologia in metodologias %}
+                                                            <option value="{{ metodologia.pk }}">{{ metodologia.nome }}</option>
+                                                        {% endfor %}
+                                                    </optgroup>
+                                                {% else %}
+                                                    <option value="0">Nenhuma metodologia cadastrada</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                        <label for="editar-capa">Imagem de capa:</label>
+                                        <div class="input-group text-md-left">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-picture-o"></i>
+                                            </span>
+                                            <input type="file" name="capa" class="form-control border-square" id="editar-capa">
+                                        </div>
+                                    </form>
+                                </div>        
+                            </div>                            
+                        </div>
+                        <div class="modal-footer">
+                            <button 
+                                class="btn btn-info float-md-left border-square" 
+                                data-dismiss="modal" id="btn-cancelar-exclusao"
+                            >
+                                <i class="fa fa-times"></i>&nbsp;Fechar
+                            </button>
+                            <button 
+                                class="btn btn-secondary border-square" 
+                                id="btn-editar-info" onclick="" 
+                            >
+                                <i class="fa fa-info-circle"></i>&nbsp;Cancelar, Exibir Informações
+                            </button>
+                            <button class="btn btn-success border-square" id="btn-atualizar-projeto">
+                                <i class="fa fa-trash"></i>&nbsp;<b>Atualizar</b> o Projeto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-dialog collapse" id="modal-excluir">
                     <div class="modal-content border-square" id="modal-excluir-projeto-conteudo">
                         <div class="modal-header">
                             <h4>Confirmar exclusão de projeto:</h4>
@@ -117,14 +254,20 @@
                                 class="btn btn-info float-md-left border-square" 
                                 data-dismiss="modal" id="btn-cancelar-exclusao"
                             >
-                                <i class="fa fa-ban"></i>&nbsp;Cancelar
+                                <i class="fa fa-times"></i>&nbsp;Não, Fechar
+                            </button>
+                            <button 
+                                class="btn btn-secondary border-square" 
+                                id="btn-excluir-info" onclick="" 
+                            >
+                                <i class="fa fa-info-circle"></i>&nbsp;Não, Exibir informações
                             </button>
                             <a class="btn btn-danger border-square" id="btn-excluir-projeto">
-                                <i class="fa fa-times"></i>&nbsp;Excluir
+                                <i class="fa fa-trash"></i>&nbsp;Sim, <b>Excluir</b> o Projeto
                             </a>
                         </div>
                     </div>
-                </div>                    
+                </div>                      
             </div>
         </div>
         <div class="row my-2">
@@ -148,34 +291,7 @@
         </div>
         {% if projetos_espera %}
                 {% for projeto in projetos_espera %}
-                    <div class="col-md-4">
-                        <div class="row m-0">
-                            <div class="card border-square mb-0">
-                                <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
-                                <div class="card-img-overlay">
-                                    <div class="float-md-right">
-                                        <button 
-                                            class="btn btn-danger btn-sm border-square"
-                                            data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                            onclick='ExcluirProjeto("{{ projeto.pk }}","{{ projeto.nome }}");' 
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-0">
-                            <div class="card border-square">
-                                <a 
-                                    class="btn btn-secondary card-block btn-block border-square" 
-                                    href="{% url 'projetos:detalhes' projeto.pk %}"
-                                >
-                                    <b>{{ projeto.nome }}</b>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% include "projetos/card_projeto.html" with projeto=projeto %}
                 {% endfor %}
             {% else %}
                 <div class="row">
@@ -198,34 +314,7 @@
         <div class="">
             {% if projetos_definidos %}
                 {% for projeto in projetos_definidos %}
-                    <div class="col-md-4">
-                        <div class="row m-0">
-                            <div class="card border-square mb-0">
-                                <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
-                                <div class="card-img-overlay">
-                                    <div class="float-md-right">
-                                        <button 
-                                            class="btn btn-danger btn-sm border-square"
-                                            data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                            onclick='ExcluirProjeto("{{ projeto.pk }}","{{ projeto.nome }}");' 
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-0">
-                            <div class="card border-square">
-                                <a 
-                                    class="btn btn-secondary card-block btn-block border-square" 
-                                    href="{% url 'projetos:detalhes' projeto.pk %}"
-                                >
-                                    <b>{{ projeto.nome }}</b>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% include "projetos/card_projeto.html" with projeto=projeto %}
                 {% endfor %}
             {% else %}
                 <div class="row">
@@ -293,9 +382,94 @@
             }
         });
     });
-    function ExcluirProjeto(id_projeto,nome){
-        $("#modal-excluir-projeto").modal('show');
-        $("#modal-excluir-projeto-nome").html(nome);
+    function ExcluirProjeto(id_projeto){
+        $("#btn-excluir-projeto-"+id_projeto).tooltip('hide');
+        PreencheExcluirProjeto(id_projeto)
+        $("#modal-info").toggleClass('in', false);
+        $("#modal-editar").toggleClass('in',false);
+        $("#modal-excluir").toggleClass('in',true);
+        $("#modal-acoes").modal('show');        
+    }
+    function PreencheInfoProjeto(id_projeto){
+        $("#modal-info-projeto-capa").attr("src",$("#projeto-capa-"+id_projeto).attr("src"));
+        $("#modal-info-projeto-nome").html($("#projeto-nome-"+id_projeto).html());
+        if($("#projeto-descricao-"+id_projeto).html() == ""){
+            descricao = "<i>Nenhuma descrição informada!</i>";
+        }
+        else descricao = $("#projeto-descricao-"+id_projeto).html();
+        $("#modal-info-projeto-descricao").html(descricao);
+        if($("#projeto-metodologia-"+id_projeto).html() == ""){
+            metodologia = "<i>Nenhuma metodologia foi atribuida para este projeto ainda!</i>";
+        }
+        else metodologia = $("#projeto-metodologia-"+id_projeto).html();
+        $("#modal-info-projeto-metodologia").html(metodologia);
+        $("#btn-info-excluir").attr("onclick", "InfoProjetoExcluir('"+id_projeto+"');");
+        $("#btn-info-editar").attr("onclick", "InfoProjetoEditar('"+id_projeto+"');");   
+    }
+    function PreencheEditarProjeto(id_projeto){
+        $("#input-editar-nome").val($("#projeto-nome-"+id_projeto).html());
+        $("#input-editar-descricao").val($("#projeto-descricao-"+id_projeto).html());
+        if($("#projeto-metodologia-id-"+id_projeto).html() == ""){
+            id_metodologia = 0;
+        } else id_metodologia = $("#projeto-metodologia-id-"+id_projeto).html();
+        $("#select-metodologia-editar").val(id_metodologia);
+        $("#form-editar-projeto").attr("action","/projetos/"+id_projeto+"/atualizar-projeto/");
+        $("#btn-editar-info").attr("onclick", "EditarProjetoInfo('"+id_projeto+"');");
+        $("#btn-atualizar-projeto").attr("onclick", "AtualizarProjeto('"+id_projeto+"');");
+    }
+    function PreencheExcluirProjeto(id_projeto){
+        $("#modal-excluir-projeto-nome").html($("#projeto-nome-"+id_projeto).html());
         $("#btn-excluir-projeto").attr("href", "/projetos/"+id_projeto+"/excluir-projeto/");
+        $("#btn-excluir-info").attr("onclick", "ExcluirProjetoInfo('"+id_projeto+"');");
+    }
+    function InfoProjeto(id_projeto){
+        $("#btn-info-projeto-"+id_projeto).tooltip('hide');
+        PreencheInfoProjeto(id_projeto);
+        $("#modal-excluir").toggleClass('in', false);
+        $("#modal-info").toggleClass('in',true);
+        $("#modal-editar").toggleClass('in',false);
+        $("#modal-acoes").modal('show');
+    }
+    function InfoProjetoEditar(id_projeto){
+        PreencheEditarProjeto(id_projeto);
+        $("#modal-info").toggleClass('in', false);
+        $("#modal-editar").toggleClass('in', true);
+    }
+    function InfoProjetoExcluir(id_projeto){
+        PreencheExcluirProjeto(id_projeto);
+        $("#modal-info").toggleClass('in', false);
+        $("#modal-excluir").toggleClass('in', true);
+    }
+    function ExcluirProjetoInfo(id_projeto){
+        PreencheInfoProjeto(id_projeto);
+        $("#modal-excluir").toggleClass('in', false);
+        $("#modal-info").toggleClass('in', true);
+    }
+    function EditarProjeto(id_projeto){
+        $("#btn-editar-projeto-"+id_projeto).tooltip('hide');
+        PreencheEditarProjeto(id_projeto);
+        $("#modal-excluir").toggleClass('in', false);
+        $("#modal-info").toggleClass('in',false);
+        $("#modal-editar").toggleClass('in',true);
+        $("#modal-acoes").modal('show');
+    }
+    function EditarProjetoInfo(id_projeto){
+        PreencheInfoProjeto(id_projeto);
+        $("#modal-excluir").toggleClass('in', false);
+        $("#modal-editar").toggleClass('in',false);
+        $("#modal-info").toggleClass('in',true);
+    }
+    function AtualizarProjeto(id_projeto){
+        $('#div-input-editar-nome').toggleClass('has-danger',false);
+            $('#input-editar-nome').toggleClass('form-control-danger',false);
+            $('#div-editar-nome-txt').toggleClass('invisible',true);
+            if($('#input-editar-nome').val() == ""){
+                $('#div-input-editar-nome').toggleClass('has-danger',true);
+                $('#input-editar-nome').toggleClass('form-control-danger',true);
+                $('#div-editar-nome-txt').toggleClass('invisible',false);
+            }
+            else{
+                $("#form-editar-projeto").submit();
+            }
     }
 {% endblock %}

@@ -44,8 +44,7 @@ class Projeto(models.Model):
                             é necessário usar carrega_propriedades() para preencher estes campos devido ao Django
                             desencorajar o uso de __init__()
                             referência:  
-    - Todo app/pacote de recurso precisa ter uma classe principal que extenda a classe recurso
-        referência: https://docs.djangoproject.com/pt-br/1.10/topics/db/models/#multi-table-inheritance 
+    - Todo app/pacote de recurso precisa ter uma classe principal que inclua um objeto da classe recurso
 """
 class Recurso(models.Model):
     nome = None

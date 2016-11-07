@@ -56,3 +56,30 @@ def excluir_projeto(request,projeto_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     projeto.delete();
     return redirect('projetos:index')
+
+def atualizar_projeto(request,projeto_id):
+    projeto = get_object_or_404(Projeto,pk=projeto_id)
+
+    try:
+        capa = request.FILES['capa']
+    except MultiValueDictKeyError:
+        capa = 'static/img/projetos/capas/default.png'
+
+    if request.POST.get('metodologia') != "0":
+        estado='ES'
+        metodologia = get_object_or_404(Metodologia,pk=request.POST.get('metodologia'))
+    else:
+        estado='DE'
+        metodologia=None
+
+    projeto.nome = request.POST.get('nome')
+    projeto.descricao = request.POST.get('descricao')
+    projeto.metodologia = metodologia
+    projeto.estado = estado
+
+    if capa != 'static/img/projetos/capas/default.png':
+        projeto.imagem_capa = capa;
+
+    projeto.save()
+
+    return redirect('projetos:index')
