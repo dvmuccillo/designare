@@ -3,6 +3,7 @@
     <div class="row hidden">
         <p class="hidden" id="projeto-descricao-{{ projeto.pk }}">{{ projeto.descricao }}</p>
         <p class="hidden" id="projeto-metodologia-{{ projeto.pk }}">{{ projeto.metodologia.nome }}</p>
+        <p class="hidden" id="projeto-metodologia-id-{{ projeto.pk }}">{{ projeto.metodologia.pk }}</p>
     </div>
     <div class="row m-0">
         <div class="card border-square mb-0">
@@ -18,6 +19,13 @@
                         onclick='InfoProjeto("{{ projeto.pk }}");' 
                     >
                         <i class="fa fa-info-circle "></i>
+                    </button>
+                    <button 
+                        class="btn btn-secondary btn-sm border-square" id="btn-editar-projeto-{{ projeto.pk }}" 
+                        data-tooltip="tooltip" data-placement="top" title="Editar"
+                        onclick='EditarProjeto("{{ projeto.pk }}");' 
+                    >
+                        <i class="fa fa-pencil"></i>
                     </button>
                     <button 
                         class="btn btn-danger btn-sm border-square" id="btn-excluir-projeto-{{ projeto.pk }}" 
@@ -39,9 +47,9 @@
                 {% else %}
                     href="{% url 'projetos:detalhes' projeto.pk %}"
                 {% endif %}
-                id="projeto-nome-{{ projeto.pk }}" 
+                 
             >
-                <b>{{ projeto.nome }}</b>
+                <b id="projeto-nome-{{ projeto.pk }}">{{ projeto.nome }}</b>
             </a>
         </div>
     </div>

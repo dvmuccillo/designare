@@ -15,7 +15,7 @@
     </div>
 </div>
 <div class="collapse" id="div-form-novo-projeto">
-    <div class="row" align="center">
+    <div class="row"    >
         <div class="col-md-6 offset-md-3">
             <div>
                 <form 
@@ -23,7 +23,8 @@
                     enctype="multipart/form-data" id="form-novo-projeto"
                 >
                     {% csrf_token %}
-                    <div class="form-group" id="div-input-projeto-nome">
+                    <div class="form-group mb-0" id="div-input-projeto-nome">
+                        <label for="input-projeto-nome">Nome:</label>
                         <div class="input-group">
                             <span class="input-group-addon border-square">
                                 <i class="fa fa-tag"></i>
@@ -39,18 +40,19 @@
                             Este campo é obrigatório!
                         </div>
                     </div>
-                    <div class="input-group">
+                    <label for="input-projeto-descricao">Descrição:</label>
+                    <div class="input-group mb-1">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-info"></i>
                         </span>
                         <textarea name="descricao" 
                             class="form-control border-square"
                             placeholder="Descrição do Projeto"
-                            rows="5"
+                            rows="5" maxlength="300" id="input-projeto-descricao" 
                         ></textarea>
                     </div>
-                    <br>
-                    <div class="input-group">
+                    <label for="select-metodologia">Metodologia:</label>
+                    <div class="input-group mb-1">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-database"></i>
                         </span>
@@ -69,12 +71,12 @@
                             {% endif %}
                         </select>
                     </div>
-                    <br>
+                    <label for="projeto-capa">Imagem de capa:</label>
                     <div class="input-group text-md-left">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-picture-o"></i>
                         </span>
-                        <input type="file" name="capa" class="form-control border-square">
+                        <input type="file" name="capa" class="form-control border-square" id="projeto-capa">
                     </div>
                 </form>
                 <div class="my-1" align="center">
@@ -148,6 +150,97 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-dialog collapse in" id="modal-editar">
+                    <div class="modal-content border-square" id="modal-editar-projeto-conteudo">
+                        <div class="modal-header">
+                            <h4>Editar informações do projeto:</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <form 
+                                        action="" method="post"
+                                        enctype="multipart/form-data" id="form-editar-projeto"
+                                    >
+                                        {% csrf_token %}
+                                        <div class="form-group mb-0" id="div-input-editar-nome">
+                                            <label for="input-editar-nome">Nome:</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon border-square">
+                                                    <i class="fa fa-tag"></i>
+                                                </span>
+                                                <input name="nome" 
+                                                    type="text"
+                                                    class="form-control border-square"
+                                                    placeholder="Título do Projeto"
+                                                    id="input-editar-nome" 
+                                                >
+                                            </div>
+                                            <div class="form-control-feedback text-md-left invisible" id="div-editar-nome-txt">
+                                                Este campo é obrigatório!
+                                            </div>
+                                        </div>
+                                        <label for="input-editar-descricao" class="mt-0">Descrição:</label>
+                                        <div class="input-group mb-1">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-info"></i>
+                                            </span>
+                                            <textarea name="descricao" 
+                                                class="form-control border-square"
+                                                placeholder="Descrição do Projeto"
+                                                rows="5" id="input-editar-descricao" maxlength="300" 
+                                            ></textarea>
+                                        </div>
+                                        <label for="select-metodologia-editar">Metodologia:</label>
+                                        <div class="input-group mb-1">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-database"></i>
+                                            </span>
+                                            <select class="form-control border-square" id="select-metodologia-editar" name="metodologia">
+                                                {% if metodologias %}
+                                                    <optgroup label="Selecionar mais tarde">
+                                                        <option value="0">Não aplicar nenhuma metodologia agora</option>
+                                                    </optgroup>
+                                                    <optgroup label="Selecione uma metodologia">
+                                                        {% for metodologia in metodologias %}
+                                                            <option value="{{ metodologia.pk }}">{{ metodologia.nome }}</option>
+                                                        {% endfor %}
+                                                    </optgroup>
+                                                {% else %}
+                                                    <option value="0">Nenhuma metodologia cadastrada</option>
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                        <label for="editar-capa">Imagem de capa:</label>
+                                        <div class="input-group text-md-left">
+                                            <span class="input-group-addon border-square">
+                                                <i class="fa fa-picture-o"></i>
+                                            </span>
+                                            <input type="file" name="capa" class="form-control border-square" id="editar-capa">
+                                        </div>
+                                    </form>
+                                </div>        
+                            </div>                            
+                        </div>
+                        <div class="modal-footer">
+                            <button 
+                                class="btn btn-info float-md-left border-square" 
+                                data-dismiss="modal" id="btn-cancelar-exclusao"
+                            >
+                                <i class="fa fa-times"></i>&nbsp;Fechar
+                            </button>
+                            <button 
+                                class="btn btn-secondary border-square" 
+                                id="btn-editar-info" onclick="" 
+                            >
+                                <i class="fa fa-info-circle"></i>&nbsp;Cancelar, Exibir Informações
+                            </button>
+                            <button class="btn btn-success border-square" id="btn-atualizar-projeto">
+                                <i class="fa fa-trash"></i>&nbsp;<b>Atualizar</b> o Projeto
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-dialog collapse" id="modal-excluir">
                     <div class="modal-content border-square" id="modal-excluir-projeto-conteudo">
                         <div class="modal-header">
@@ -167,10 +260,10 @@
                                 class="btn btn-secondary border-square" 
                                 id="btn-excluir-info" onclick="" 
                             >
-                                <i class="fa fa-eye"></i>&nbsp;Não, Exibir informações
+                                <i class="fa fa-info-circle"></i>&nbsp;Não, Exibir informações
                             </button>
                             <a class="btn btn-danger border-square" id="btn-excluir-projeto">
-                                <i class="fa fa-trash"></i>&nbsp;Sim, Excluir o Projeto
+                                <i class="fa fa-trash"></i>&nbsp;Sim, <b>Excluir</b> o Projeto
                             </a>
                         </div>
                     </div>
@@ -293,6 +386,7 @@
         $("#btn-excluir-projeto-"+id_projeto).tooltip('hide');
         PreencheExcluirProjeto(id_projeto)
         $("#modal-info").toggleClass('in', false);
+        $("#modal-editar").toggleClass('in',false);
         $("#modal-excluir").toggleClass('in',true);
         $("#modal-acoes").modal('show');        
     }
@@ -310,6 +404,18 @@
         else metodologia = $("#projeto-metodologia-"+id_projeto).html();
         $("#modal-info-projeto-metodologia").html(metodologia);
         $("#btn-info-excluir").attr("onclick", "InfoProjetoExcluir('"+id_projeto+"');");
+        $("#btn-info-editar").attr("onclick", "InfoProjetoEditar('"+id_projeto+"');");   
+    }
+    function PreencheEditarProjeto(id_projeto){
+        $("#input-editar-nome").val($("#projeto-nome-"+id_projeto).html());
+        $("#input-editar-descricao").val($("#projeto-descricao-"+id_projeto).html());
+        if($("#projeto-metodologia-id-"+id_projeto).html() == ""){
+            id_metodologia = 0;
+        } else id_metodologia = $("#projeto-metodologia-id-"+id_projeto).html();
+        $("#select-metodologia-editar").val()
+        $("#form-editar-projeto").attr("action","/projetos/"+id_projeto+"/atualizar-projeto/");
+        $("#btn-editar-info").attr("onclick", "EditarProjetoInfo('"+id_projeto+"');");
+        $("#btn-atualizar-projeto").attr("onclick", "AtualizarProjeto('"+id_projeto+"');");
     }
     function PreencheExcluirProjeto(id_projeto){
         $("#modal-excluir-projeto-nome").html($("#projeto-nome-"+id_projeto).html());
@@ -320,8 +426,14 @@
         $("#btn-info-projeto-"+id_projeto).tooltip('hide');
         PreencheInfoProjeto(id_projeto);
         $("#modal-excluir").toggleClass('in', false);
-        $("#modal-info").toggleClass('in',true)
+        $("#modal-info").toggleClass('in',true);
+        $("#modal-editar").toggleClass('in',false);
         $("#modal-acoes").modal('show');
+    }
+    function InfoProjetoEditar(id_projeto){
+        PreencheEditarProjeto(id_projeto);
+        $("#modal-info").toggleClass('in', false);
+        $("#modal-editar").toggleClass('in', true);
     }
     function InfoProjetoExcluir(id_projeto){
         PreencheExcluirProjeto(id_projeto);
@@ -332,5 +444,32 @@
         PreencheInfoProjeto(id_projeto);
         $("#modal-excluir").toggleClass('in', false);
         $("#modal-info").toggleClass('in', true);
+    }
+    function EditarProjeto(id_projeto){
+        $("#btn-editar-projeto-"+id_projeto).tooltip('hide');
+        PreencheEditarProjeto(id_projeto);
+        $("#modal-excluir").toggleClass('in', false);
+        $("#modal-info").toggleClass('in',false);
+        $("#modal-editar").toggleClass('in',true);
+        $("#modal-acoes").modal('show');
+    }
+    function EditarProjetoInfo(id_projeto){
+        PreencheInfoProjeto(id_projeto);
+        $("#modal-excluir").toggleClass('in', false);
+        $("#modal-editar").toggleClass('in',false);
+        $("#modal-info").toggleClass('in',true);
+    }
+    function AtualizarProjeto(id_projeto){
+        $('#div-input-editar-nome').toggleClass('has-danger',false);
+            $('#input-editar-nome').toggleClass('form-control-danger',false);
+            $('#div-editar-nome-txt').toggleClass('invisible',true);
+            if($('#input-editar-nome').val() == ""){
+                $('#div-input-editar-nome').toggleClass('has-danger',true);
+                $('#input-editar-nome').toggleClass('form-control-danger',true);
+                $('#div-editar-nome-txt').toggleClass('invisible',false);
+            }
+            else{
+                $("#form-editar-projeto").submit();
+            }
     }
 {% endblock %}

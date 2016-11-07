@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^novo/$', views.novo, name='novo'),
     # /projetos/id/excluir-projeto/
     url(r'^(?P<projeto_id>[0-9]+)/excluir-projeto/$', views.excluir_projeto, name='excluir_projeto'),
+    # /projetos/id/atualizar-projeto/
+    url(r'^(?P<projeto_id>[0-9]+)/atualizar-projeto/$', views.atualizar_projeto, name='atualizar_projeto'),
 ]
