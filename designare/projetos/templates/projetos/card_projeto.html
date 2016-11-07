@@ -3,14 +3,15 @@
     <div class="row m-0">
         <div class="card border-square mb-0">
             <img 
-                src="/{{ projeto.imagem_capa }}" class="card-img border-square" 
-                width="100%" height="100%" id="projeto-imagem-{{ projeto.pk }}" 
+                src="/{{ projeto.imagem_capa }}" class="card-img img-fluid border-square" 
+                id="projeto-capa-{{ projeto.pk }}" 
             >
             <div class="card-img-overlay">
                 <div class="float-md-right">
                     <button 
-                        class="btn btn-secondary btn-sm border-square"
-                        data-tooltip="tooltip" data-placement="top" title="Detalhes" 
+                        class="btn btn-secondary btn-sm border-square" id="btn-info-projeto-{{ projeto.pk }}" 
+                        data-tooltip="tooltip" data-placement="top" title="Detalhes"
+                        onclick='InfoProjeto("{{ projeto.pk }}");' 
                     >
                         <i class="fa fa-info-circle "></i>
                     </button>

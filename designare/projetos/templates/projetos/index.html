@@ -126,26 +126,44 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal fade" id="modal-info-editar" data-backdrop="static">
+            <div class="modal fade" id="modal-info-editar" data-backdrop="static">
                 <div class="modal-dialog">
                     <div class="modal-content border-square" id="modal-info-editar-conteudo">
                         <div class="modal-header">
-                            <h4>Informações do projeto <span id="modal-projeto-nome"></span></h4>
+                            <h4>Informações do projeto <span id="modal-info-projeto-nome"></span></h4>
                         </div>
                         <div class="modal-body">
-                            <p></p>
+                            <div class="row mb-1">
+                                <div class="col-md-10 offset-md-1">
+                                    <img src="" id="modal-info-projeto-capa" class="img-fluid img-thumbnail border-square">
+                                </div>
+                            </div>    
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1">
+                                    <h4>Descrição:</h4>
+                                    <blockquote id="modal-info-projeto-descricao"></blockquote>
+                                </div>                                    
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button 
                                 class="btn btn-info float-md-left border-square" 
-                                data-dismiss="modal" id="btn-cancelar-exclusao"
+                                data-dismiss="modal"
                             >
-                                <i class="fa fa-ban"></i>&nbsp;Cancelar
+                                <i class="fa fa-times"></i>&nbsp;Fechar
                             </button>
-                            <a class="btn btn-danger border-square" id="btn-excluir-projeto">
-                                <i class="fa fa-times"></i>&nbsp;Excluir
-                            </a>
+                            <button 
+                                class="btn btn-secondary border-square" 
+                                id="btn-info-editar" onclick="" 
+                            >
+                                <i class="fa fa-pencil"></i>&nbsp;Editar informações
+                            </button>
+                            <button 
+                                class="btn btn-danger border-square" 
+                                id="btn-info-excluir" onclick="" 
+                            >
+                                <i class="fa fa-times"></i>&nbsp;Excluir Projeto
+                            </button>
                         </div>
                     </div>
                 </div>                      
@@ -268,5 +286,16 @@
         $("#modal-excluir-projeto").modal('show');
         $("#modal-excluir-projeto-nome").html(nome);
         $("#btn-excluir-projeto").attr("href", "/projetos/"+id_projeto+"/excluir-projeto/");
+    }
+    function InfoProjeto(id_projeto){
+        $("#btn-info-projeto-"+id_projeto).tooltip('hide');
+        $("#modal-info-projeto-nome").html($("#projeto-nome-"+id_projeto).html());
+        if($("#projeto-descricao-"+id_projeto).html() == ""){
+            descricao = "<i>Nenhuma descrição informada!</i>";
+        }
+        else descricao = $("#projeto-descricao-"+id_projeto).html();
+        $("#modal-info-projeto-descricao").html(descricao);
+        $("#modal-info-projeto-capa").attr("src",$("#projeto-capa-"+id_projeto).attr("src"));
+        $("#modal-info-editar").modal('show');
     }
 {% endblock %}
