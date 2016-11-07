@@ -124,7 +124,28 @@
                             </a>
                         </div>
                     </div>
-                </div>                    
+                </div>
+                <div class="modal-dialog">
+                    <div class="modal-content border-square" id="modal-info-editar">
+                        <div class="modal-header">
+                            <h4>Informações do projeto <span id="modal-projeto-nome"></span></h4>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button 
+                                class="btn btn-info float-md-left border-square" 
+                                data-dismiss="modal" id="btn-cancelar-exclusao"
+                            >
+                                <i class="fa fa-ban"></i>&nbsp;Cancelar
+                            </button>
+                            <a class="btn btn-danger border-square" id="btn-excluir-projeto">
+                                <i class="fa fa-times"></i>&nbsp;Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>                      
             </div>
         </div>
         <div class="row my-2">
@@ -148,34 +169,7 @@
         </div>
         {% if projetos_espera %}
                 {% for projeto in projetos_espera %}
-                    <div class="col-md-4">
-                        <div class="row m-0">
-                            <div class="card border-square mb-0">
-                                <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
-                                <div class="card-img-overlay">
-                                    <div class="float-md-right">
-                                        <button 
-                                            class="btn btn-danger btn-sm border-square"
-                                            data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                            onclick='ExcluirProjeto("{{ projeto.pk }}","{{ projeto.nome }}");' 
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-0">
-                            <div class="card border-square">
-                                <a 
-                                    class="btn btn-secondary card-block btn-block border-square" 
-                                    href="{% url 'projetos:detalhes' projeto.pk %}"
-                                >
-                                    <b>{{ projeto.nome }}</b>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% include "projetos/card_projeto.html" with projeto=projeto %}
                 {% endfor %}
             {% else %}
                 <div class="row">
@@ -198,34 +192,7 @@
         <div class="">
             {% if projetos_definidos %}
                 {% for projeto in projetos_definidos %}
-                    <div class="col-md-4">
-                        <div class="row m-0">
-                            <div class="card border-square mb-0">
-                                <img src="/{{ projeto.imagem_capa }}" class="card-img border-square" width="100%" height="100%">
-                                <div class="card-img-overlay">
-                                    <div class="float-md-right">
-                                        <button 
-                                            class="btn btn-danger btn-sm border-square"
-                                            data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                            onclick='ExcluirProjeto("{{ projeto.pk }}","{{ projeto.nome }}");' 
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-0">
-                            <div class="card border-square">
-                                <a 
-                                    class="btn btn-secondary card-block btn-block border-square" 
-                                    href="{% url 'projetos:detalhes' projeto.pk %}"
-                                >
-                                    <b>{{ projeto.nome }}</b>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {% include "projetos/card_projeto.html" with projeto=projeto %}
                 {% endfor %}
             {% else %}
                 <div class="row">
