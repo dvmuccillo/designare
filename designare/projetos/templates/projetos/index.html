@@ -125,8 +125,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-info-editar" data-backdrop="static">
                 <div class="modal-dialog">
-                    <div class="modal-content border-square" id="modal-info-editar">
+                    <div class="modal-content border-square" id="modal-info-editar-conteudo">
                         <div class="modal-header">
                             <h4>Informações do projeto <span id="modal-projeto-nome"></span></h4>
                         </div>
@@ -261,6 +264,7 @@
         });
     });
     function ExcluirProjeto(id_projeto,nome){
+        $("#btn-excluir-projeto-"+id_projeto).tooltip('hide');
         $("#modal-excluir-projeto").modal('show');
         $("#modal-excluir-projeto-nome").html(nome);
         $("#btn-excluir-projeto").attr("href", "/projetos/"+id_projeto+"/excluir-projeto/");
