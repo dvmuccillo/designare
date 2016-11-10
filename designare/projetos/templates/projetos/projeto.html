@@ -58,85 +58,54 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="row" id="div-listagem-etapas">
-                <div class="col-md-11 offset-md-1">
-                    <!-- Inserir etapas aqui -->
+            <div class="row">
+                <div class="col-md-12">
                     {% if projeto.metodologia.etapas.all %}
                         {% for etapa in projeto.metodologia.etapas.all %}
-                            <a id='etapa_{{ etapa.id }}'></a>
-                            <div class='row'>
-                                <div class='row'>
-                                    <div class='card card-outline-secondary border-square'>
-                                        <div class='card-block'>
-                                            <h3 class='card-title'>
-                                                <span>{{ etapa.nome }}</span>
-                                            </h3>
-                                            <blockquote class='card-blockquote'>
-                                                {%if etapa.descricao %}
-                                                    <p>{{ etapa.descricao }}</p>
-                                                {% else %}
-                                                    <p><i>Nenhuma descrição fornecida para esta etapa!</i></p>
-                                                {% endif %}
-                                            </blockquote>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a id='etapa_{{ etapa.id }}'></a>
+                                    <div class="card unbordered">
+                                        <div class="card-block">
+                                            <h2 class="card-title">{{ etapa.nome }}</h2>                                         
+                                            <hr class="mb-0">
                                         </div>
-                                        <hr>
-                                        <div id='div-listagem-atividades{{ etapa.pk }}'>
-                                        {% if etapa.atividades.all %}
-                                            {% for atividade in etapa.atividades.all %}
-                                                <div class='row'>
-                                                    <div class='col-md-11 offset-md-1'>
-                                                        <div class='card unbordered'>
-                                                            <div class='card-block'>
-                                                                <h3 class='card-title'>
-                                                                    <span>{{ atividade.nome }}</span>
-                                                                    
-                                                                </h3>
-                                                                <blockquote class='card-blockquote'>
-                                                                    {%if atividade.descricao %}
-                                                                        <p>{{ atividade.descricao }}</p>
-                                                                    {% else %}
-                                                                        <p><i>Nenhuma descrição fornecida para esta atividade!</i></p>
-                                                                    {% endif %}
-                                                                </blockquote>
-                                                                <button 
-                                                                    class='btn btn-secondary border-square' 
-                                                                    id="btn-adiciona-recurso-{{ atividade.pk }}"
-                                                                    data-tooltip="tooltip" data-placement="top"
-                                                                    title="Adicionar recurso"
-                                                                    onclick="AdicionarRecurso('{{ atividade.pk }}');"  
-                                                                >
-                                                                    Adicionar recurso <i class="fa fa-plus"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                        {% else %}
-                                        <div class="row" id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
+                                        <div class="row">
                                             <div class="col-md-11 offset-md-1">
-                                                <div class="card unbordered">
-                                                    <div class='card-block'>
-                                                        <blockquote class='card-blockquote'>
-                                                            <i>
-                                                                Nenhuma atividade cadastrada para esta etapa.
-                                                            </i>
-                                                        </blockquote>
-                                                    </div>
-                                                </div>
+                                                {% if etapa.atividades.all %}
+                                                    {% for atividade in etapa.atividades.all %}
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="card unbordered">
+                                                                    <div class="card-block pt-0">
+                                                                        <h3>
+                                                                            {{ atividade.nome}}
+                                                                        </h3>
+                                                                        <hr class="">
+                                                                        <button 
+                                                                            class='btn btn-secondary border-square offset-md-1' 
+                                                                            id="btn-adiciona-recurso-{{ atividade.pk }}"
+                                                                            data-tooltip="tooltip" data-placement="top"
+                                                                            title="Adicionar recurso"
+                                                                            onclick="AdicionarRecurso('{{ atividade.pk }}');"  
+                                                                        >
+                                                                            Adicionar recurso <i class="fa fa-plus"></i>
+                                                                        </button>
+                                                                    </div>   
+                                                                </div>                                        
+                                                            </div>                                                            
+                                                        </div>                              
+                                                    {% endfor %}
+                                                {% endif %}                                       
                                             </div>
                                         </div>
-                                        {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
+                                    </div>                                    
+                                </div>                                
                             </div>
-                            <div class='row my-2'></div>
                         {% endfor %}
-                    {% endif%}
+                    {% endif %}                
                 </div>
             </div>
-            
         </div>
     </div>
 </div>

@@ -29,7 +29,7 @@ $(document).ready(function(){
         nome = $("#input-metodologia-nome").val();
         idm = $("#input-metodologia-id").val();
         if (idm == "") {
-            endereco = "{% url 'metodologias:cadastrar_metodologia' %}";
+            endereco = "/metodologias/nova/cadastrar-metodologia/";
         } else {
             endereco = "/metodologias/" + idm + "/atualizar-nome/";
         }
