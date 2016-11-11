@@ -4,10 +4,22 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 p-0">
-                    <div class="card m-0 border-square unbordered">
-                        <img src="/{{ projeto.imagem_capa }}" class="card-img img-fluid border-square w-100 full-height">
+                    <div class="card m-0 border-square unbordered background-color-black">
+                        <img 
+                            src="/{{ projeto.imagem_capa }}" 
+                            class="card-img img-fluid border-square w-100 full-height opacity-5"
+                        >
                         <div class="card-img-overlay p-0">
                             {% include "designare/menu.html" %}
+                            <div class="container-fluid">
+                                <div class="row mt-3">
+                                    <div class="col-md-6 offset-md-3 mt-3 text-xs-center text-white">
+                                        <h1 class="my-3">{{ projeto.nome }}</h1>
+                                        <h3 class="font-italic">{{ projeto.metodologia.nome }}</h3>
+                                        <p class="mt-3 font-italic">{{ projeto.descricao }}</p>
+                                    </div>                                    
+                                </div>
+                            </div>
                         </div>
                     </div>                  
                 </div>
@@ -15,7 +27,7 @@
         </div>        
     </div>
 {% endblock %}
-{% block content %}
+{% block body %}
 <div class="container">
     <div class="row">
         <div class="modal fade" id="modal-adicionar-recurso" data-backdrop="static">
@@ -57,7 +69,7 @@
             </div>                    
         </div>
     </div>
-    <div class="row" id="div-row-etapas">
+    <div class="row" id="div-row-etapas full-height">
         <div class="col-md-3" style="position: relative;">
             <div class="list-group" id="div-menu-etapas">
                 <!-- Inserir links de etapas aqui -->
