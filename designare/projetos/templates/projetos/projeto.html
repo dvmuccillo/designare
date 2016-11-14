@@ -95,7 +95,7 @@
                                     <a id='etapa_{{ etapa.id }}'></a>
                                     <div class="card unbordered">
                                         <div class="card-block">
-                                            <h2 class="card-title">{{ etapa.nome }}</h2>                                         
+                                            <h2 class="display-4">{{ etapa.nome }}</h2>                                         
                                             <hr class="mb-0">
                                         </div>
                                         <div class="row">
@@ -106,19 +106,24 @@
                                                             <div class="col-md-12">
                                                                 <div class="card unbordered">
                                                                     <div class="card-block pt-0">
-                                                                        <h3>
+                                                                        <h3 class="">
                                                                             {{ atividade.nome}}
                                                                         </h3>
                                                                         <hr class="">
                                                                         <button 
-                                                                            class='btn btn-secondary border-square offset-md-1' 
+                                                                            class='btn btn-secondary border-square' 
                                                                             id="btn-adiciona-recurso-{{ atividade.pk }}"
-                                                                            data-tooltip="tooltip" data-placement="top"
-                                                                            title="Adicionar recurso"
                                                                             onclick="AdicionarRecurso('{{ atividade.pk }}');"  
                                                                         >
                                                                             Adicionar recurso <i class="fa fa-plus"></i>
                                                                         </button>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div
+                                                                            class="col-md-11 offset-md-1" 
+                                                                            id="atividade-{{ atividade.id }}-recursos"
+                                                                        >   
+                                                                        </div>
                                                                     </div>   
                                                                 </div>                                        
                                                             </div>                                                            
