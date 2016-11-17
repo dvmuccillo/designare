@@ -1,13 +1,25 @@
 <div class="row mb-1">
     <div class="col-md-12">
-        <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+        <div class="btn-toolbar" data-role="editor-{{ execucao.pk}}-toolbar" data-target="#editor-{{ execucao.pk }}">
             <div class="btn-group mb-1">
                 <a class="btn btn-secondary dropdown-toggle border-square" data-toggle="dropdown" title="Font Size">
                     <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-                    <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-                    <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                    <li>
+                        <a data-edit="fontSize 5">
+                            <font size="5">Huge</font>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-edit="fontSize 3">
+                            <font size="3">Normal</font>
+                        </a>
+                    </li>
+                    <li>
+                        <a data-edit="fontSize 1">
+                            <font size="1">Small</font>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="btn-group mb-1">
@@ -64,10 +76,6 @@
                     <i class="fa fa-cut"></i>
                 </a>
             </div>
-            <div class="btn-group mb-1 hidden">
-                <a class="btn btn-secondary border-square" title="Insert picture (or just drag & drop)" id="picturebtn btn-secondary border-square"><i class="fa fa-picture"></i></a>
-                <input type="file" data-role="magic-overlay" data-target="#picturebtn btn-secondary border-square" data-edit="insertImage" />
-            </div>
             <div class="btn-group mb-1">
                 <a class="btn btn-secondary border-square" data-edit="undo" title="Undo (Ctrl/Cmd+Z)">
                     <i class="fa fa-undo"></i></a>
@@ -83,6 +91,6 @@
                 </button>
             </div>
         </div>
-        <div id="editor" class="border-square"></div>
+        <div id="editor-{{ execucao.pk }}" data-toggle="designare-editor" class="designare-editor border-square mr-1"></div>
     </div>
 </div>

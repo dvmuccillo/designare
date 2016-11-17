@@ -3,7 +3,7 @@ from django.http import HttpResponse,JsonResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template import loader
 from django.template.loader import render_to_string
-from projetos.models import Projeto, Recurso
+from projetos.models import Projeto, Recurso, Execucao
 from metodologias.models import Metodologia,Atividade
 from django.contrib.auth.decorators import login_required
 #from projetos import resources
@@ -91,7 +91,13 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     atividade = get_object_or_404(Atividade,pk=atividade_id)
     recurso = get_object_or_404(Recurso,pk=recurso_id)
+    execucao = Execucao(
+                projeto = projeto,
+                atividade = atividade,
+                recurso = recurso
+            )
+    execucao.save()
     recurso.carrega_propriedades()
     caminho = "%s/%s" % (recurso.propriedades['app_name'], recurso.propriedades['template_principal'])
-    template = render_to_string(caminho)
+    template = render_to_string(caminho,{'execucao',execucao})
     return JsonResponse({'template' : template ,'sucesso': True})

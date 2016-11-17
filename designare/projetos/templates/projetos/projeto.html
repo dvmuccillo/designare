@@ -48,7 +48,7 @@
                         <ul class="list-group">
                             {% for recurso in recursos %}
                                 {{ recurso.carrega_propriedades }}
-                                <a onclick="AdicionarRecurso({{ recurso.pk }})" class="list-group-item list-group-item-action unbordered">
+                                <a onclick="AdicionarRecurso({{ recurso.pk }})" class="list-group-item list-group-item-action unbordered" style="cursor: pointer;">
                                     <h5 class="list-group-item-heading">{{ recurso.nome }}</h5>
                                     <p class="list-group-item-text">{{ recurso.descricao }}</p>                                  
                                 </a>
@@ -127,7 +127,13 @@
                                                                         <div
                                                                             class="col-md-11 offset-md-1" 
                                                                             id="atividade-{{ atividade.id }}-recursos"
-                                                                        >     
+                                                                        >
+                                                                        {% if atividade.execucoes.all %}
+                                                                            {% for execucao in atividade.execucoes.all %}
+                                                                                {{ execucao.recurso.carrega_propriedades }}
+                                                                                {% include execucao.recurso.template with execucao=execucao %}
+                                                                            {% endfor %}
+                                                                        {% endif %}     
                                                                         </div>
                                                                     </div>   
                                                                 </div>                                        
@@ -167,6 +173,14 @@
     {% endfor %}
 {% endblock %}
 {% block javascript_functions %}
+    $(document).ready(function(){
+        $(function(){
+            $('div[data-toggle="designare-editor"]').each(function(index,value){
+                var editor_id = $(this).attr('id');
+                $(this).wysiwyg({ toolbarSelector: "[data-role='"+editor_id+"-toolbar']" });
+            });
+        });
+    });
     function SelecionarRecurso(id_atividade){
         $("#id-atividade").val(id_atividade);
         $("#modal-adicionar-recurso").modal('show');
@@ -175,7 +189,7 @@
     function AdicionarRecurso(id_recurso){
         id_projeto = $("#id-projeto").val();
         id_atividade = $("#id-atividade").val();
-        endereco = "/projetos/"+id_projeto+"/atividade/"+id_recurso+"/adicionar-recurso/"+id_recurso+"/";
+        endereco = "/projetos/"+id_projeto+"/atividade/"+id_atividade+"/adicionar-recurso/"+id_recurso+"/";
         $.ajax({
             type    : "POST",
             url     : endereco,
@@ -206,7 +220,7 @@
                     if(idm == ""){window.history.replaceState(null, null, "/metodologias/"+data.metodologia_id+"/")};*/
                     //alert(data.template); 
                     $("#atividade-"+id_atividade+"-recursos").append(data.template);
-                    $("#editor").wysiwyg();
+                    //$("#editor").wysiwyg();
                     $("#modal-adicionar-recurso").modal('hide');                      
                 }
             }

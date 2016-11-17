@@ -64,9 +64,10 @@ class Recurso(models.Model):
         self.propriedades = propriedades
         return ""
 
+    def template(self):
+        return "%s/%s" % (self.propriedades['app_name'], self.propriedades['template_principal'])
+
 class Execucao(models.Model):
-#    data
-#    usuario
     projeto = models.ForeignKey(
         Projeto,
         on_delete=models.CASCADE,
