@@ -49,10 +49,11 @@ class Projeto(models.Model):
 class Recurso(models.Model):
     nome = None
     descricao = None
+    propriedades = None
     app_name = models.CharField(max_length=50)
     
     def __str__(self):
-        return self.app_name
+        return "%s" % self.app_name
 
     def carrega_propriedades(self):
         app_path = os.path.join(os.getcwd(),os.path.join("projetos",self.app_name))
@@ -60,6 +61,7 @@ class Recurso(models.Model):
             propriedades = json.load(arquivo)
         self.nome = propriedades['nome']
         self.descricao = propriedades['descricao']
+        self.propriedades = propriedades
         return ""
 
 class Execucao(models.Model):

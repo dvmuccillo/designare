@@ -1,12 +1,15 @@
 from django.shortcuts import get_object_or_404,render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template import loader
+from django.template.loader import render_to_string
 from projetos.models import Projeto, Recurso
-from metodologias.models import Metodologia
+from metodologias.models import Metodologia,Atividade
+from django.contrib.auth.decorators import login_required
 #from projetos import resources
 
 # Create your views here.
+#@login_required
 def index(request):
     metodologias = Metodologia.objects.all().order_by('nome')
     projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
@@ -83,3 +86,12 @@ def atualizar_projeto(request,projeto_id):
     projeto.save()
 
     return redirect('projetos:index')
+
+def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
+    projeto = get_object_or_404(Projeto,pk=projeto_id)
+    atividade = get_object_or_404(Atividade,pk=atividade_id)
+    recurso = get_object_or_404(Recurso,pk=recurso_id)
+    recurso.carrega_propriedades()
+    caminho = "%s/%s" % (recurso.propriedades['app_name'], recurso.propriedades['template_principal'])
+    template = render_to_string(caminho)
+    return JsonResponse({'template' : template ,'sucesso': True})

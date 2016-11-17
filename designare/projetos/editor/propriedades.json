@@ -1,4 +1,9 @@
 {
+    "app_name" : "editor",
     "nome": "Editor",
-    "descricao": "O editor é um recurso ao qual pode realizar uma expecificação do projeto"
+    "descricao": "O editor é um recurso ao qual pode realizar uma expecificação do projeto",
+    "classe_principal" : "Texto",
+    "template_principal" : "index.html",
+    "script" : ["jquery.hotkeys.js","google-code-prettify/prettify.js","bootstrap-wysiwyg.js"],
+    "css" : ["style.css"]
 }
