@@ -4,6 +4,14 @@
     "descricao": "O editor é um recurso ao qual pode realizar uma expecificação do projeto",
     "classe_principal" : "Texto",
     "template_principal" : "index.html",
-    "script" : ["jquery.hotkeys.js","google-code-prettify/prettify.js","bootstrap-wysiwyg.js"],
-    "css" : ["style.css"]
+    "script" : [
+                    "jquery.hotkeys.js",
+                    "google-code-prettify/prettify.js",
+                    "bootstrap-wysiwyg.js",
+                    "editor.js"
+                ],
+    "script_inicializacao" : "inicializacao.js",
+    "css" : [
+                "style.css"
+            ]
 }

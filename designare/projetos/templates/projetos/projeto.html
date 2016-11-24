@@ -131,7 +131,7 @@
                                                                         {% if atividade.execucoes.all %}
                                                                             {% for execucao in atividade.execucoes.all %}
                                                                                 {{ execucao.recurso.carrega_propriedades }}
-                                                                                {% include execucao.recurso.template with execucao=execucao %}
+                                                                                {% include execucao.recurso.getTemplate with execucao=execucao %}
                                                                             {% endfor %}
                                                                         {% endif %}     
                                                                         </div>
@@ -174,56 +174,13 @@
 {% endblock %}
 {% block javascript_functions %}
     $(document).ready(function(){
-        $(function(){
-            $('div[data-toggle="designare-editor"]').each(function(index,value){
-                var editor_id = $(this).attr('id');
-                $(this).wysiwyg({ toolbarSelector: "[data-role='"+editor_id+"-toolbar']" });
-            });
-        });
+        {% for recurso in recursos %}
+            {{ recurso.carrega_propriedades }}
+            {% if recurso.propriedades.script_inicializacao %} {}
+                //JS de inicialização do recurso {{ recurso.nome }}
+                {% include recurso.getScriptInicializacao %}
+            {% endif %}        
+        {% endfor %}
     });
-    function SelecionarRecurso(id_atividade){
-        $("#id-atividade").val(id_atividade);
-        $("#modal-adicionar-recurso").modal('show');
-
-    }
-    function AdicionarRecurso(id_recurso){
-        id_projeto = $("#id-projeto").val();
-        id_atividade = $("#id-atividade").val();
-        endereco = "/projetos/"+id_projeto+"/atividade/"+id_atividade+"/adicionar-recurso/"+id_recurso+"/";
-        $.ajax({
-            type    : "POST",
-            url     : endereco,
-            data    : { 'csrfmiddlewaretoken' : document.info.csrfmiddlewaretoken.value,
-                    },
-            dataType: "json",
-            encode  : true,
-
-            beforeSend: function(){
-                //$('#btn-nova-metodologia').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>&nbsp;Processando');
-            },
-            success: function(data){
-                //Cria um log da data recebida no console
-                console.log(data);
-                //Verifica se a operação foi bem sucedida
-                $('#btn-nova-metodologia').html("<i class='fa fa-check'></i>");
-                if(data.sucesso)
-                {
-                    /*$("#input-metodologia-id").val(data.metodologia_id);
-                    $("#metodologia-nome").empty();
-                    $("#metodologia-nome").append(nome);
-                    $("#div-form-metodologia").toggleClass("hidden",true);
-                    $("#div-metodologia-nome").toggleClass("hidden",false);
-                    $("#div-row-info").toggleClass("hidden",true);
-                    $("#div-row-etapas").toggleClass("hidden",false);
-                    // Habilita o formulário de cadastro de etapas
-                    $("#fieldset-nova-etapa").prop("disabled",false)
-                    if(idm == ""){window.history.replaceState(null, null, "/metodologias/"+data.metodologia_id+"/")};*/
-                    //alert(data.template); 
-                    $("#atividade-"+id_atividade+"-recursos").append(data.template);
-                    //$("#editor").wysiwyg();
-                    $("#modal-adicionar-recurso").modal('hide');                      
-                }
-            }
-        });
-    }
+    {% include "projetos/projeto.js" %}
 {% endblock %}

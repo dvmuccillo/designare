@@ -99,5 +99,5 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
     execucao.save()
     recurso.carrega_propriedades()
     caminho = "%s/%s" % (recurso.propriedades['app_name'], recurso.propriedades['template_principal'])
-    template = render_to_string(caminho,{'execucao',execucao})
+    template = render_to_string(caminho,{'execucao':execucao})
     return JsonResponse({'template' : template ,'sucesso': True})

@@ -64,8 +64,11 @@ class Recurso(models.Model):
         self.propriedades = propriedades
         return ""
 
-    def template(self):
+    def getTemplate(self):
         return "%s/%s" % (self.propriedades['app_name'], self.propriedades['template_principal'])
+
+    def getScriptInicializacao(self):
+        return "%s/%s" % (self.propriedades['app_name'], self.propriedades['script_inicializacao'])
 
 class Execucao(models.Model):
     projeto = models.ForeignKey(

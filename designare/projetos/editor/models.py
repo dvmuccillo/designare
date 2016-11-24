@@ -1,9 +1,10 @@
 from django.db import models
-from projetos.models import Recurso
+from projetos.models import Execucao
 
 class Texto(models.Model):
     conteudo = models.TextField()
-    recurso = models.ForeignKey(
-        Recurso,
+    execucao = models.ForeignKey(
+        Execucao,
         on_delete=models.PROTECT,
+        related_name='editor',
     )
