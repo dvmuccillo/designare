@@ -116,5 +116,4 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
             'template' : template ,
             'sucesso': True, 
             'function': json.dumps(function), 
-            'arguments': 'Teste de execução'
         })
