@@ -99,8 +99,8 @@
                                 <div class="col-md-12">
                                     <a id='etapa_{{ etapa.id }}'></a>
                                     <div class="card unbordered">
-                                        <div class="card-block">
-                                            <h2 class="display-4">{{ etapa.nome }}</h2>                                         
+                                        <div class="card-block pr-0">
+                                            <h2 class="display-3">{{ etapa.nome }}</h2>                                         
                                             <hr class="mb-0">
                                         </div>
                                         <div class="row">
@@ -110,18 +110,11 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="card unbordered">
-                                                                    <div class="card-block pt-0">
-                                                                        <h3 class="">
+                                                                    <div class="card-block pt-0 pr-0">
+                                                                        <h3 class="display-4">
                                                                             {{ atividade.nome}}
                                                                         </h3>
-                                                                        <hr class="">
-                                                                        <button 
-                                                                            class='btn btn-secondary border-square' 
-                                                                            id="btn-adiciona-recurso-{{ atividade.pk }}"
-                                                                            onclick="SelecionarRecurso('{{ atividade.pk }}');"  
-                                                                        >
-                                                                            Adicionar recurso <i class="fa fa-plus"></i>
-                                                                        </button>
+                                                                        <hr class="mb-0">
                                                                     </div>
                                                                     <div class="row">
                                                                         <div
@@ -131,10 +124,21 @@
                                                                         {% if atividade.execucoes.all %}
                                                                             {% for execucao in atividade.execucoes.all %}
                                                                                 {{ execucao.recurso.carrega_propriedades }}
-                                                                                {% include execucao.recurso.getTemplate with execucao=execucao %}
+                                                                                {% include "projetos/recurso.html" with execucao=execucao %}
                                                                             {% endfor %}
                                                                         {% endif %}     
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-11 offset-md-1">
+                                                                            <button 
+                                                                            class='btn btn-secondary border-square' 
+                                                                            id="btn-adiciona-recurso-{{ atividade.pk }}"
+                                                                            onclick="SelecionarRecurso('{{ atividade.pk }}');"  
+                                                                        >
+                                                                            Adicionar recurso <i class="fa fa-plus"></i>
+                                                                        </button>
+                                                                        </div>                                                                 
                                                                     </div>   
                                                                 </div>                                        
                                                             </div>                                                            

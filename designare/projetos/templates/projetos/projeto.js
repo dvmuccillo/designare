@@ -56,3 +56,12 @@ function executeFunctionByName(functionName, context /*, args */) {
 function InicializaRecurso(funcao, argumentos){
     executeFunctionByName(funcao, window, argumentos);
 }
+
+function ExcluirRecurso(execucao_id){
+    aviso = "Deseja realmente excluir esse recurso?";
+    if(confirm(aviso)){
+        $("#execucao-"+execucao_id).collapse('toggle');
+    } else {
+        //do nothin 2.0
+    }
+}
