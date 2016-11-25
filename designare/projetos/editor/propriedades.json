@@ -13,5 +13,6 @@
     "script_inicializacao" : "inicializacao.js",
     "css" : [
                 "style.css"
-            ]
+            ],
+    "funcao_ativacao" : "EditorAtivacao"
 }

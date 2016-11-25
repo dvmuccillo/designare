@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from projetos.models import Projeto, Recurso, Execucao
 from metodologias.models import Metodologia,Atividade
 from django.contrib.auth.decorators import login_required
+import json
 #from projetos import resources
 
 # Create your views here.
@@ -100,4 +101,20 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
     recurso.carrega_propriedades()
     caminho = "%s/%s" % (recurso.propriedades['app_name'], recurso.propriedades['template_principal'])
     template = render_to_string(caminho,{'execucao':execucao})
-    return JsonResponse({'template' : template ,'sucesso': True})
+    if (recurso.propriedades['funcao_ativacao']):
+        function = {
+            'ativacao' : True,
+            'nome' : recurso.propriedades['funcao_ativacao'],
+            'argumentos' : {
+                'execucao_id' : execucao.pk
+            }
+        }
+    else:
+        function = { 'ativacao' : False }
+
+    return JsonResponse({
+            'template' : template ,
+            'sucesso': True, 
+            'function': json.dumps(function), 
+            'arguments': 'Teste de execução'
+        })

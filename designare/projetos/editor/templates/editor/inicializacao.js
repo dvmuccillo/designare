@@ -1,4 +1,4 @@
-/* script de inicialização dos editores */
+/* script de inicialização dos editores ao carregar a página*/
 $(function(){
     $('div[data-toggle="designare-editor"]').each(function(index,value){
         var editor_id = $(this).attr('id');

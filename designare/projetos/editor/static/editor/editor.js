@@ -1,3 +1,8 @@
+/* script de inicialização do editor ao carregar o recurso por ajax */
+function EditorAtivacao(argumentos){
+    $("#editor-"+argumentos.execucao_id).wysiwyg({ toolbarSelector: "[data-role='editor-"+argumentos.execucao_id+"-toolbar']" });
+}
+/* fim do script de inicialização do editor */
 function EditorSalvar(execucao_id){
     conteudo = $("#editor-"+execucao_id).html();
     if (conteudo.trim() == "") { 
