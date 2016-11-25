@@ -55,7 +55,7 @@
                                     <a href="{% url 'metodologias:detalhes' metodologia.pk %}" class="btn btn-link">{{ metodologia.nome }}</a>
                                     <div class="btn-group float-md-right">
                                         <button 
-                                            class="btn btn-danger"
+                                            class="btn btn-danger border-square"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
                                             onclick='ExcluirMetodologia("{{ metodologia.pk }}","{{ metodologia.nome }}");' 
                                         >

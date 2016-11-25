@@ -1,7 +1,7 @@
 body{
     background-color: #fffffd;
 }
-    .border-square{
+.border-square, .list-group-item:first-child, .list-group-item:last-child{
     border-radius: 0px;
 }
     .btn-circle{
