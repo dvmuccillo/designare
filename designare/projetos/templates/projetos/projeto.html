@@ -124,12 +124,12 @@
                                                                         {% if atividade.execucoes.all %}
                                                                             {% for execucao in atividade.execucoes.all %}
                                                                                 {{ execucao.recurso.carrega_propriedades }}
-                                                                                {% include "projetos/recurso.html" with execucao=execucao %}
+                                                                                {% include execucao.recurso.getTemplate with execucao=execucao %}
                                                                             {% endfor %}
                                                                         {% endif %}     
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row">
+                                                                    <div class="row mb-1">
                                                                         <div class="col-md-11 offset-md-1">
                                                                             <button 
                                                                             class='btn btn-secondary border-square' 

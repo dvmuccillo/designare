@@ -5,7 +5,9 @@ $(function(){
         $(this).wysiwyg({ toolbarSelector: "[data-role='"+editor_id+"-toolbar']" });
         if(($("#"+editor_id+"-conteudo").html()).trim() != ""){
             $("#"+editor_id+"-edicao").collapse('toggle');
+            $("#"+editor_id+"-toolbar-editor").collapse('toggle');
             $("#"+editor_id+"-exibicao").collapse('toggle');
+            $("#"+editor_id+"-toolbar-exibicao").collapse('toggle');
         }
     });
 });

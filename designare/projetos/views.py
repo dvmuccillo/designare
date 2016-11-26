@@ -100,7 +100,8 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
     execucao.save()
     recurso.carrega_propriedades()
     #caminho = "%s/%s" % (recurso.propriedades['app_name'], recurso.propriedades['template_principal'])
-    template = render_to_string("projetos/recurso.html",{'execucao':execucao})
+    #{% include execucao.recurso.getTemplate with execucao=execucao %}
+    template = render_to_string(execucao.recurso.getTemplate() ,{'execucao':execucao})
     if (recurso.propriedades['funcao_ativacao']):
         function = {
             'ativacao' : True,
@@ -118,14 +119,9 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
             'function': json.dumps(function), 
         })
 
-def excluir_recurso(request, projeto_id, atividade_id, recurso_id):
+def excluir_recurso(request, projeto_id, atividade_id, execucao_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     atividade = get_object_or_404(Atividade,pk=atividade_id)
-    execucao = get_object_or_404(Execucao,pk=recurso_id)
+    execucao = get_object_or_404(Execucao,pk=execucao_id)
     execucao.delete();
-
-    return JsonResponse({
-            'template' : template ,
-            'sucesso': True, 
-            'function': json.dumps(function), 
-        })
+    return JsonResponse({ 'sucesso': True })

@@ -4,6 +4,7 @@ function EditorAtivacao(argumentos){
 }
 /* fim do script de inicialização do editor */
 function EditorSalvar(execucao_id){
+    var editor_id = "editor-"+ execucao_id;
     conteudo = $("#editor-"+execucao_id).html();
     if (conteudo.trim() == "") { 
         alert("Nada a salvar!");
@@ -18,35 +19,43 @@ function EditorSalvar(execucao_id){
             encode  : true,
 
             beforeSend: function(){
-                $('#btn-editor-'+execucao_id+'-salvar').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>&nbsp;Processando');
+                $('#btn-editor-'+execucao_id+'-salvar').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
             },
             success: function(data){
                 //Cria um log da data recebida no console
                 console.log(data);
                 //Verifica se a operação foi bem sucedida
-                $('#btn-editor-'+execucao_id+'-salvar').html("<i class='fa fa-check'></i> Salvar");
+                $('#btn-editor-'+execucao_id+'-salvar').html("<i class='fa fa-save'></i>");
                 if(data.sucesso)
                 {
                     $("#editor-"+execucao_id+"-conteudo").html(conteudo);
-                    $("#editor-"+execucao_id+"-edicao").collapse('toggle');
-                    $("#editor-"+execucao_id+"-exibicao").collapse('toggle');                      
+                    $("#"+editor_id+"-edicao").collapse('toggle');
+                    $("#"+editor_id+"-toolbar-editor").collapse('toggle');
+                    $("#"+editor_id+"-exibicao").collapse('toggle');
+                    $("#"+editor_id+"-toolbar-exibicao").collapse('toggle');                      
                 }
             }
         });
     }
 }
 function EditorEditar(execucao_id){
+    var editor_id = "editor-"+ execucao_id;
     conteudo = $("#editor-"+execucao_id+"-conteudo").html();
     $("#editor-"+execucao_id).html(conteudo);
-    $("#editor-"+execucao_id+"-exibicao").collapse('toggle');
-    $("#editor-"+execucao_id+"-edicao").collapse('toggle');
+    $("#"+editor_id+"-edicao").collapse('toggle');
+    $("#"+editor_id+"-toolbar-editor").collapse('toggle');
+    $("#"+editor_id+"-exibicao").collapse('toggle');
+    $("#"+editor_id+"-toolbar-exibicao").collapse('toggle');;
 }
 function EditorCancelar(execucao_id){
+    var editor_id = "editor-"+ execucao_id;
     conteudo = $("#editor-"+execucao_id).html();
     if (conteudo.trim() == "") { 
         alert("Nada a cancelar!");
     } else {
-        $("#editor-"+execucao_id+"-edicao").collapse('toggle');
-        $("#editor-"+execucao_id+"-exibicao").collapse('toggle');
+        $("#"+editor_id+"-edicao").collapse('toggle');
+        $("#"+editor_id+"-toolbar-editor").collapse('toggle');
+        $("#"+editor_id+"-exibicao").collapse('toggle');
+        $("#"+editor_id+"-toolbar-exibicao").collapse('toggle');
     }
 }

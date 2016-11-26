@@ -78,7 +78,7 @@ class Execucao(models.Model):
     )
     recurso = models.ForeignKey(
         Recurso,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         related_name='execucoes',
     )
     atividade = models.ForeignKey(

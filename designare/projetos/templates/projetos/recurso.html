@@ -1,7 +1,11 @@
 <div class="row mb-1 collapse in" id="execucao-{{ execucao.pk }}">
     <div class="col-md-1 float-md-right">
         <div class="card unbordered">
-                <div class="btn-group-vertical">
+                {%  block recurso_extra_toolbar %}
+                {% endblock %}
+                <div class="btn-group-vertical mb-1">
+                    {%  block recurso_main_toolbar %}
+                    {% endblock %}                      
                     <button 
                         class="btn btn-secondary border-square"
                         data-tooltip="tooltip" data-placement="left" title="Executar separado"
@@ -10,15 +14,17 @@
                     </button>
                     <button 
                         class="btn btn-danger border-square"
-                        data-tooltip="tooltip" data-placement="left" title="Excluir"
-                        onclick="ExcluirRecurso({{ execucao.pk }});" 
+                        data-tooltip="tooltip" data-placement="left" title="Excluir recurso"
+                        onclick="ExcluirRecurso({{ execucao.projeto.pk }},{{ execucao.atividade.pk }},{{ execucao.pk }});"
+                        id="btn-execucao-{{ execucao.pk }}-excluir" 
                     >
                         <i class="fa fa-trash"></i>                        
-                    </button>                      
+                    </button>
                 </div>
         </div>
     </div>
     <div class="col-md-11">
-        {% include execucao.recurso.getTemplate with execucao=execucao %}
+        {% block recurso_content %}
+        {% endblock %}
     </div>
 </div>

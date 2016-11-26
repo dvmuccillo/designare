@@ -57,11 +57,31 @@ function InicializaRecurso(funcao, argumentos){
     executeFunctionByName(funcao, window, argumentos);
 }
 
-function ExcluirRecurso(execucao_id){
+function ExcluirRecurso(projeto_id,atividade_id,execucao_id){
     aviso = "Deseja realmente excluir esse recurso?";
     if(confirm(aviso)){
-        $("#execucao-"+execucao_id).collapse('toggle');
-    } else {
-        //do nothin 2.0
+        endereco = "/projetos/"+projeto_id+"/atividade/"+atividade_id+"/excluir-recurso/"+execucao_id+"/";
+        $.ajax({
+            type    : "POST",
+            url     : endereco,
+            data    : { 'csrfmiddlewaretoken' : document.info.csrfmiddlewaretoken.value,
+                    },
+            dataType: "json",
+            encode  : true,
+
+            beforeSend: function(){
+                $('#btn-execucao-'+execucao_id+'-excluir').html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
+            },
+            success: function(data){
+                //Cria um log da data recebida no console
+                console.log(data);
+                //Verifica se a operação foi bem sucedida
+                if(data.sucesso)
+                {
+                    $('#btn-execucao-'+execucao_id+'-excluir').tooltip('dispose');
+                    $("#execucao-"+execucao_id).collapse('toggle');                      
+                }
+            }
+        });
     }
 }
