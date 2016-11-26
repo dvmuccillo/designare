@@ -119,6 +119,16 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
             'function': json.dumps(function), 
         })
 
+def executar_recurso(request, projeto_id, atividade_id, execucao_id):
+    projeto = get_object_or_404(Projeto,pk=projeto_id)
+    atividade = get_object_or_404(Atividade,pk=atividade_id)
+    execucao = get_object_or_404(Execucao,pk=execucao_id)
+    context = {
+        'execucao' : execucao,
+        'full_page' : True
+    }
+    return render(request,'projetos/execucao.html', context)
+
 def excluir_recurso(request, projeto_id, atividade_id, execucao_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     atividade = get_object_or_404(Atividade,pk=atividade_id)

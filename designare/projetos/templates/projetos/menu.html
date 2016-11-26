@@ -1,0 +1,17 @@
+{% extends "designare/menu.html" %}
+{% block menu_extra %}
+    {% if execucao %}
+    <a 
+        href="{% url 'projetos:detalhes' execucao.projeto.pk %}" class="btn btn-secondary border-square"
+        data-tooltip="tooltip" data-placement="top" title="Retornar ao projeto"
+    >
+        {{ execucao.projeto.nome }}
+    </a>
+    {% endif %}
+    <a 
+        href="/" class="btn btn-secondary border-square"
+        data-tooltip="tooltip" data-placement="top" title="Exibir todos os projetos"
+    >
+        Projetos
+    </a>
+{% endblock %}

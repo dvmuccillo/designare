@@ -57,7 +57,7 @@ function InicializaRecurso(funcao, argumentos){
     executeFunctionByName(funcao, window, argumentos);
 }
 
-function ExcluirRecurso(projeto_id,atividade_id,execucao_id){
+function ExcluirRecurso(projeto_id,atividade_id,execucao_id, redirect=false){
     aviso = "Deseja realmente excluir esse recurso?";
     if(confirm(aviso)){
         endereco = "/projetos/"+projeto_id+"/atividade/"+atividade_id+"/excluir-recurso/"+execucao_id+"/";
@@ -78,6 +78,9 @@ function ExcluirRecurso(projeto_id,atividade_id,execucao_id){
                 //Verifica se a operação foi bem sucedida
                 if(data.sucesso)
                 {
+                    if(redirect){
+                        window.location.replace("/projetos/"+projeto_id);
+                    }
                     $('#btn-execucao-'+execucao_id+'-excluir').tooltip('dispose');
                     $("#execucao-"+execucao_id).collapse('toggle');                      
                 }

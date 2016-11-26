@@ -16,6 +16,8 @@ urlpatterns = [
     url(r'^(?P<projeto_id>[0-9]+)/atualizar-projeto/$', views.atualizar_projeto, name='atualizar_projeto'),
     # /projetos/id/atividade/id/adicionar-recurso/id/
     url(r'^(?P<projeto_id>[0-9]+)/atividade/(?P<atividade_id>[0-9]+)/adicionar-recurso/(?P<recurso_id>[0-9]+)', views.adicionar_recurso, name='adicionar_recurso'),
+    # /projetos/id/atividade/id/executar-recurso/id/
+    url(r'^(?P<projeto_id>[0-9]+)/atividade/(?P<atividade_id>[0-9]+)/executar-recurso/(?P<execucao_id>[0-9]+)', views.executar_recurso, name='executar_recurso'),
     # /projetos/id/atividade/id/adicionar-recurso/id/
     url(r'^(?P<projeto_id>[0-9]+)/atividade/(?P<atividade_id>[0-9]+)/excluir-recurso/(?P<execucao_id>[0-9]+)', views.excluir_recurso, name='excluir_recurso'),
     # urls de recurso:

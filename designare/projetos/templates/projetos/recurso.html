@@ -5,17 +5,28 @@
                 {% endblock %}
                 <div class="btn-group-vertical mb-1">
                     {%  block recurso_main_toolbar %}
-                    {% endblock %}                      
-                    <button 
+                    {% endblock %}
+                    {% if not full_page %}                      
+                    <a 
                         class="btn btn-secondary border-square"
                         data-tooltip="tooltip" data-placement="left" title="Executar separado"
+                        href="{% url 'projetos:executar_recurso' execucao.projeto.pk execucao.atividade.pk execucao.pk %}" 
                     >
                         <i class="fa fa-expand"></i>                        
-                    </button>
+                    </a>
+                    {% endif %}
                     <button 
                         class="btn btn-danger border-square"
                         data-tooltip="tooltip" data-placement="left" title="Excluir recurso"
-                        onclick="ExcluirRecurso({{ execucao.projeto.pk }},{{ execucao.atividade.pk }},{{ execucao.pk }});"
+                        onclick="
+                            ExcluirRecurso(
+                                {{ execucao.projeto.pk }},
+                                {{ execucao.atividade.pk }},
+                                {{ execucao.pk }}
+                            {% if full_page %}
+                                ,true
+                            {% endif %}
+                            );"
                         id="btn-execucao-{{ execucao.pk }}-excluir" 
                     >
                         <i class="fa fa-trash"></i>                        

@@ -1,0 +1,41 @@
+{% extends 'projetos/base.html' %}
+{% block header %}
+    {% include "projetos/menu.html" with execucao=execucao %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row mt-3">
+            <form class="hidden" name="info">
+                {% csrf_token %}
+                <input type="hidden" id="id-projeto" value="{{ projeto.pk }}">
+                <input type="hidden" id="id-atividade">
+            </form>
+            {{ execucao.recurso.carrega_propriedades }}
+            {% include execucao.recurso.getTemplate with execucao=execucao %}
+        </div>        
+    </div>
+{% endblock %}
+{% block css_links %}
+    {{ execucao.recurso.carrega_propriedades }}
+    <!-- CSS do recurso {{ recurso.nome }} -->
+    {% for css in execucao.recurso.propriedades.css %}
+        <link rel="stylesheet" type="text/css" href="/static/{{ execucao.recurso.app_name }}/{{ css }}">
+    {% endfor %}
+{% endblock %}
+{% block javascript_links %}
+    {{ execucao.recurso.carrega_propriedades }}
+    <!-- JS do recurso {{ recurso.nome }} -->
+    {% for js in execucao.recurso.propriedades.script %}
+        <script src="/static/{{ execucao.recurso.app_name }}/{{ js }}"></script>
+    {% endfor %}
+{% endblock %}
+{% block javascript_functions %}
+    $(document).ready(function(){
+        {{ execucao.recurso.carrega_propriedades }}
+        {% if execucao.recurso.propriedades.script_inicializacao %} {}
+            //JS de inicialização do recurso {{ recurso.nome }}
+            {% include execucao.recurso.getScriptInicializacao %}
+        {% endif %}        
+    });
+    {% include "projetos/projeto.js" %}
+{% endblock %}

@@ -1,5 +1,4 @@
 .designare-editor {
-    max-height: 250px;
     height: 250px;
     background-color: white;
     border-collapse: separate; 
@@ -8,7 +7,8 @@
     box-sizing: content-box; 
     -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
     box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
-    overflow: scroll;
+    display: block;
+    overflow: auto;
     outline: none;
 }
 #voiceBtn {
