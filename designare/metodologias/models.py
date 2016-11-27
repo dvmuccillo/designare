@@ -1,4 +1,5 @@
 from django.db import models
+import json
 
 class Metodologia(models.Model):
     nome = models.CharField(max_length=50)
@@ -34,6 +35,29 @@ class Metodologia(models.Model):
                 )
                 atividade_copia.save()
         return metodologia_copia
+
+    @classmethod
+    def get_json(Metodologia,metodologia):
+        obj_metodologia = {
+            'nome' : metodologia.nome,
+            'etapas' : []
+        }
+        for etapa in metodologia.etapas.all():
+            obj_etapa = {
+                'nome' : etapa.nome,
+                'descricao' : etapa.descricao,
+                'ordem' : etapa.ordem,
+                'atividades' : []
+            }
+            obj_metodologia['etapas'].append(obj_etapa)
+            for atividade in etapa.atividades.all():
+                obj_atividade = {
+                'nome' : atividade.nome,
+                'descricao' : atividade.descricao,
+                'ordem' : atividade.ordem,
+                }
+                obj_etapa['atividades'].append(obj_atividade)
+        return json.dumps(obj_metodologia)
 
 class Etapa(models.Model):
     nome = models.CharField(max_length=50)

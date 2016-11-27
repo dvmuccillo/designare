@@ -28,4 +28,6 @@ urlpatterns = [
     url(r'^nova/cadastrar-metodologia/$', views.cadastrar_metodologia, name='cadastrar_metodologia'),
     # /metodologias/id/excluir-metodologia/
     url(r'^(?P<metodologia_id>[0-9]+)/excluir-metodologia/$', views.excluir_metodologia, name='excluir_metodologia'),
+    # /metodologias/id/exportar-metodologia/
+    url(r'^(?P<metodologia_id>[0-9]+)/exportar-metodologia/$', views.exportar_metodologia, name='exportar_metodologia'),
 ]

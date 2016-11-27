@@ -97,3 +97,10 @@ def excluir_metodologia(request,metodologia_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
     metodologia.delete();
     return redirect('metodologias:index')
+
+def exportar_metodologia(request,metodologia_id):
+    metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
+    json = Metodologia.get_json(metodologia)
+    response = HttpResponse(json, content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename="%s.json"' % (metodologia.nome)
+    return response

@@ -54,6 +54,13 @@
                                 <li class="list-group-item">
                                     <a href="{% url 'metodologias:detalhes' metodologia.pk %}" class="btn btn-link">{{ metodologia.nome }}</a>
                                     <div class="btn-group float-md-right">
+                                        <a 
+                                            class="btn btn-secondary border-square" 
+                                            href="{% url 'metodologias:exportar_metodologia' metodologia.pk %}"
+                                            data-tooltip="tooltip" data-placement="top" title="Exportar para JSON"
+                                        >
+                                            <i class="fa fa-download"></i>
+                                        </a>
                                         <button 
                                             class="btn btn-danger border-square"
                                             data-tooltip="tooltip" data-placement="top" title="Excluir"
