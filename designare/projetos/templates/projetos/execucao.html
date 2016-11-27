@@ -7,7 +7,7 @@
         <div class="row mt-3">
             <form class="hidden" name="info">
                 {% csrf_token %}
-                <input type="hidden" id="id-projeto" value="{{ projeto.pk }}">
+                <input type="hidden" id="id-projeto" value="{{ execucao.projeto.pk }}">
                 <input type="hidden" id="id-atividade">
             </form>
             {{ execucao.recurso.carrega_propriedades }}

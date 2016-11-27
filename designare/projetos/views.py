@@ -41,7 +41,7 @@ def novo(request):
 
     if request.POST.get('metodologia') != "0":
         estado='ES'
-        metodologia = get_object_or_404(Metodologia,pk=request.POST.get('metodologia'))
+        metodologia = Metodologia.get_copy(get_object_or_404(Metodologia,pk=request.POST.get('metodologia')))
     else:
         estado='DE'
         metodologia=None

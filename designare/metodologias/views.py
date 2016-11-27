@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from metodologias.models import Metodologia,Etapa,Atividade
 
 def index(request):
-    metodologias = Metodologia.objects.all().order_by('nome')
+    metodologias = Metodologia.objects.all().filter(is_copy=False).order_by('nome')
     context = {
         'titulo_da_pagina' : "Metodologias",
         'metodologias'     : metodologias,

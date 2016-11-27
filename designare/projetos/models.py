@@ -5,9 +5,9 @@ import json, os
 class Projeto(models.Model):
     nome = models.CharField(max_length=50)
     descricao = models.CharField(max_length=300)
-    metodologia = models.ForeignKey(
+    metodologia = models.OneToOneField(
             Metodologia,
-            on_delete=models.SET_NULL,
+            on_delete=models.PROTECT,
             blank=True,
             null=True
     )

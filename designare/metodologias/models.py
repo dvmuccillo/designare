@@ -2,12 +2,38 @@ from django.db import models
 
 class Metodologia(models.Model):
     nome = models.CharField(max_length=50)
-    
+    is_copy = models.BooleanField(default=False)
+
     def __str__(self):
         return self.nome
 
     def etapas_ordenadas():
         return self.etapas.all().order_by('ordem')
+
+    @classmethod
+    def get_copy(Metodologia,metodologia):
+        metodologia_copia = Metodologia (
+            nome = metodologia.nome,
+            is_copy=True
+        )
+        metodologia_copia.save()
+        for etapa in metodologia.etapas.all():
+            etapa_copia = Etapa (
+                nome = etapa.nome,
+                descricao = etapa.descricao,
+                metodologia = metodologia_copia,
+                ordem = etapa.ordem,
+            )
+            etapa_copia.save()
+            for atividade in etapa.atividades.all():
+                atividade_copia = Atividade (
+                    nome = atividade.nome,
+                    descricao = atividade.descricao,
+                    etapa = etapa_copia,
+                    ordem = atividade.ordem,
+                )
+                atividade_copia.save()
+        return metodologia_copia
 
 class Etapa(models.Model):
     nome = models.CharField(max_length=50)
