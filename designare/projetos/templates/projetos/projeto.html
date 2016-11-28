@@ -29,7 +29,7 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-    <div class="row">
+    <div class="row" id="row-modais">
         <div class="modal fade" id="modal-adicionar-recurso" data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content border-square" id="modal-excluir-etapa-conteudo">
@@ -73,6 +73,13 @@
                 </div>
             </div>                    
         </div>
+        <!-- Modais de recursos -->
+        {% for recurso in recursos %}
+            {% if recurso.propriedades.modals %}
+                <!--  Modais do recurso {{ recurso.nome }} -->
+                {% include recurso.getModals %}
+            {% endif %}
+        {% endfor %}
     </div>
     <div class="row" id="div-row-etapas full-height">
         <div class="col-md-2" style="position: relative;">

@@ -1,0 +1,35 @@
+{% extends "projetos/recurso.html" %}
+{% block recurso_extra_toolbar %}
+    <div class="collapse in" id="galeria-{{ execucao.pk }}-toolbar">
+        <div class="btn-group-vertical mb-1">
+            <button 
+                class="btn btn-success border-square"
+                data-tooltip="tooltip" data-placement="left" title="Adicionar imagem"
+                id="btn-editor-{{ execucao.pk }}-salvar" 
+                onclick="GaleriaAdicionarImagem({{ execucao.pk }});"
+            >
+                <i class="fa fa-plus"></i>                        
+            </button>
+        </div>
+    </div>
+{% endblock %}
+{% block recurso_content %}
+    <div class="col-md-6 offset-md-3 collapse in" id="galeria-{{ execucao.pk }}-aviso">
+        <div class="card card-outline-info border-square">
+            <div class="card-block">
+                <p>
+                    <i>Ops, esta galeria está vazia!</i>
+                    <br>
+                    Utilize o botão adicionar <font size="5">[ </font><i class="fa fa-plus"></i><font size="5"> ]</font> na barra ao lado para inserir uma nova imagem!
+                </p>
+            </div>            
+        </div>        
+    </div>
+    <div class="card-colums" id="galeria-{{ execucao.pk }}">
+        {% for galeria in galeria.execucao.all %}
+            {% for imagem in galeria.imagens.all %}
+                {% include 'galeria/imagem.html' with imagem=imagem %}
+            {% endfor %}
+        {% endfor %}        
+    </div>
+{% endblock %}

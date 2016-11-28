@@ -70,6 +70,9 @@ class Recurso(models.Model):
     def getScriptInicializacao(self):
         return "%s/%s" % (self.propriedades['app_name'], self.propriedades['script_inicializacao'])
 
+    def getModals(self):
+        return "%s/%s" % (self.propriedades['app_name'], self.propriedades['modals'])
+
 class Execucao(models.Model):
     projeto = models.ForeignKey(
         Projeto,

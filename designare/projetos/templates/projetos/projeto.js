@@ -32,7 +32,10 @@ function AdicionarRecurso(id_recurso){
                 console.log(fn);
                 if(fn.ativacao){
                     InicializaRecurso(fn.nome, fn.argumentos);
-                }                   
+                }
+                $(function () {
+                    $('[data-tooltip="tooltip"]').tooltip()
+                })                   
             }
         }
     });

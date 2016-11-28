@@ -11,7 +11,7 @@ def salvar(request,execucao_id):
     conteudo = request.POST.get('conteudo')
     if (execucao.editor.all().count() == 0):
         editor = Texto(
-                conteudo = conteudo,
+                conteudo=conteudo,
                 execucao=execucao,
             )
     else:
