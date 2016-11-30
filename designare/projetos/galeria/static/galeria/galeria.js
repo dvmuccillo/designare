@@ -58,6 +58,7 @@ function GaleriaInicializacao(execucao_id){
         }
     });
     $("#input-fotos-"+execucao_id).on('filebatchpreupload', function(event, data, previewId, index) {
+        $("#btn-galeria-"+execucao_id+"-upload").tooltip('dispose');
         $("#btn-galeria-"+execucao_id+"-upload").html('<i class="fa fa-circle-o-notch fa-spin fa-fw"></i>');
         $("#btn-galeria-"+execucao_id+"-upload").attr('disabled',true);
         $("#btn-galeria-"+execucao_id+"-cancelar").attr('disabled',true);
@@ -87,5 +88,8 @@ function GaleriaCancelar(execucao_id){
     $('#galeria-'+execucao_id+'-toolbar-exibicao').collapse('show');    
 }
 function GaleriaUploadImagem(execucao_id){
-    $("#input-fotos-"+execucao_id).fileinput('upload').fileinput('disable');
+    var count = $('#input-fotos-'+execucao_id).fileinput('getFilesCount');
+    if(count != 0){
+        $("#input-fotos-"+execucao_id).fileinput('upload').fileinput('disable');
+    }
 }
