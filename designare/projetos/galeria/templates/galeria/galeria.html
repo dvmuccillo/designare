@@ -1,6 +1,26 @@
 {% extends "projetos/recurso.html" %}
 {% block recurso_extra_toolbar %}
-    <div class="collapse in" id="galeria-{{ execucao.pk }}-toolbar">
+    <div class="collapse in" id="galeria-{{ execucao.pk }}-toolbar-upload">
+        <div class="btn-group-vertical mb-1">
+            <button 
+                class="btn btn-success border-square"
+                data-tooltip="tooltip" data-placement="left" title="Enviar arquivos"
+                id="btn-galeria-{{ execucao.pk }}-upload" 
+                onclick="GaleriaUploadImagem({{ execucao.pk }});"
+            >
+                <i class="fa fa-upload"></i>
+            </button>
+            <button 
+                class="btn btn-danger border-square"
+                data-tooltip="tooltip" data-placement="left" title="Cancelar"
+                id="btn-galeria-{{ execucao.pk }}-cancelar" 
+                onclick="GaleriaCancelar({{ execucao.pk }});"
+            >
+                <i class="fa fa-times"></i>                        
+            </button>
+        </div>
+    </div>
+    <div class="collapse" id="galeria-{{ execucao.pk }}-toolbar-exibicao">
         <div class="btn-group-vertical mb-1">
             <button 
                 class="btn btn-success border-square"
@@ -14,19 +34,23 @@
     </div>
 {% endblock %}
 {% block recurso_content %}
-    <div class="col-md-6 offset-md-3 collapse in" id="galeria-{{ execucao.pk }}-aviso">
-        <div class="card card-outline-info border-square">
-            <div class="card-block">
-                <p>
-                    <i>Ops, esta galeria está vazia!</i>
-                    <br>
-                    Utilize o botão adicionar <font size="5">[ </font><i class="fa fa-plus"></i><font size="5"> ]</font> na barra ao lado para inserir uma nova imagem!
-                </p>
-            </div>            
-        </div>        
+    <div class="collapse in" id="galeria-input-{{ execucao.pk }}">
+        <form
+            class="mb-1" 
+            enctype="multipart/form-data" id="form-add-imagem"
+        >
+            {% csrf_token %}
+            <input 
+                type="file" multiple 
+                name="input-fotos-{{ execucao.pk }}" 
+                data-execucao="{{ execucao.pk }}" 
+                class="hidden" id="input-fotos-{{ execucao.pk }}"
+            >
+
+        </form>        
     </div>
-    <div class="card-colums" id="galeria-{{ execucao.pk }}">
-        {% for galeria in galeria.execucao.all %}
+    <div class="card-columns" id="galeria-{{ execucao.pk }}">
+        {% for galeria in execucao.galeria.all %}
             {% for imagem in galeria.imagens.all %}
                 {% include 'galeria/imagem.html' with imagem=imagem %}
             {% endfor %}

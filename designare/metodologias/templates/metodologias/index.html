@@ -51,7 +51,7 @@
                     <ul class="list-group">
                         {% if metodologias %}
                             {% for metodologia in metodologias %}
-                                <li class="list-group-item">
+                                <li class="list-group-item border-square">
                                     <a href="{% url 'metodologias:detalhes' metodologia.pk %}" class="btn btn-link">{{ metodologia.nome }}</a>
                                     <div class="btn-group float-md-right">
                                         <a 

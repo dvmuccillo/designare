@@ -141,14 +141,14 @@
                     {% for etapa in metodologia.etapas.all %}
                         <a
                             href="#etapa_{{ etapa.id }}" id="li-menu-etapa-{{ etapa.id }}"
-                            class="list-group-item list-group-item-action collapse in"
+                            class="list-group-item list-group-item-action collapse in border-square"
                         >
                             {{ etapa.nome }}
                         </a>
                     {% endfor %}
                 {% endif%}
                 <a 
-                    class="list-group-item list-group-item-action" id="li-menu-adicionar-etapa"
+                    class="list-group-item list-group-item-action" id="li-menu-adicionar-etapa border-square"
                     href="#CadastrarEtapa"
                 >
                     <i class="fa fa-plus"></i>&nbsp;Adicionar nova etapa

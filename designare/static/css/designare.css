@@ -1,14 +1,14 @@
 body{
     background-color: #fffffd;
 }
-.border-square, .list-group-item:first-child, .list-group-item:last-child{
-    border-radius: 0px;
+.border-square, .border-square:first-child, .border-square:last-child{
+    border-radius: 0px !important;
 }
-    .btn-circle{
+.btn-circle{
     border-radius: 50%;
 }
 .hidden{
-    display: none;
+    display: none !important;
 }
 .unbordered{
     border: 0px;

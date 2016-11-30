@@ -6,11 +6,14 @@
     "template_principal" : "galeria.html",
     "script" : [
                     "galeria.js",
-                    "file-input/js/fileinput.min.js"
+                    "file-input/js/fileinput.min.js",
+                    "file-input/themes/fa/theme.js",
+                    "file-input/js/locales/pt-BR.js"
                ],
     "css" : [
                 "file-input/css/fileinput.min.css"
             ],
     "funcao_ativacao" : "GaleriaAtivacao",
-    "modals" : "modal.html"
+    "modals" : "modal.html",
+    "script_inicializacao" : "inicializacao.js"
 }
