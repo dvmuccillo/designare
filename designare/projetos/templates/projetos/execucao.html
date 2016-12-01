@@ -3,14 +3,20 @@
     {% include "projetos/menu.html" with execucao=execucao %}
 {% endblock %}
 {% block body %}
+    {{ execucao.recurso.carrega_propriedades }}
     <div class="container">
+        <div class="row">
+            {% if execucao.recurso.propriedades.modals %}
+                <!--  Modais do recurso {{ recurso.nome }} -->
+                {% include execucao.recurso.getModals %}
+            {% endif %}
+        </div>
         <div class="row mt-3">
             <form class="hidden" name="info">
                 {% csrf_token %}
                 <input type="hidden" id="id-projeto" value="{{ execucao.projeto.pk }}">
                 <input type="hidden" id="id-atividade">
             </form>
-            {{ execucao.recurso.carrega_propriedades }}
             {% include execucao.recurso.getTemplate with execucao=execucao %}
         </div>        
     </div>

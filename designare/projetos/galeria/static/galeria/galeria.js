@@ -93,3 +93,8 @@ function GaleriaUploadImagem(execucao_id){
         $("#input-fotos-"+execucao_id).fileinput('upload').fileinput('disable');
     }
 }
+function GaleriaVisualizaImagem(imagem_id){
+    var image_src = $("#galeria-imagem-"+imagem_id).attr('src');
+    $("#modal-galeria-visualiza-imagem").attr('src',image_src);
+    $("#modal-galeria-visualiza").modal('show');
+}
