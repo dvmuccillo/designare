@@ -58,7 +58,9 @@ def novo(request):
 
 def excluir_projeto(request,projeto_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
-    projeto.delete();
+    metodologia = projeto.metodologia
+    projeto.delete()
+    metodologia.delete()
     return redirect('projetos:index')
 
 def atualizar_projeto(request,projeto_id):
