@@ -10,7 +10,7 @@ import json
 #from projetos import resources
 
 # Create your views here.
-#@login_required
+@login_required
 def index(request):
     metodologias = Metodologia.objects.all().filter(is_copy=False).order_by('nome')
     projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
@@ -23,6 +23,7 @@ def index(request):
           }
     return render(request, 'projetos/index.html', context)
 
+@login_required
 def detalhes(request, projeto_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     recursos = Recurso.objects.all()
@@ -33,6 +34,7 @@ def detalhes(request, projeto_id):
     }
     return render(request,'projetos/projeto.html', context)
 
+@login_required
 def novo(request):
     try:
         capa = request.FILES['capa']
@@ -56,6 +58,7 @@ def novo(request):
     projeto.save();
     return redirect('projetos:index')
 
+@login_required
 def excluir_projeto(request,projeto_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     metodologia = projeto.metodologia
@@ -63,6 +66,7 @@ def excluir_projeto(request,projeto_id):
     metodologia.delete()
     return redirect('projetos:index')
 
+@login_required
 def atualizar_projeto(request,projeto_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
 
@@ -91,6 +95,7 @@ def atualizar_projeto(request,projeto_id):
 
     return redirect('projetos:index')
 
+@login_required
 def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     atividade = get_object_or_404(Atividade,pk=atividade_id)
@@ -122,6 +127,7 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
             'function': json.dumps(function), 
         })
 
+@login_required
 def executar_recurso(request, projeto_id, atividade_id, execucao_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     atividade = get_object_or_404(Atividade,pk=atividade_id)
@@ -132,6 +138,7 @@ def executar_recurso(request, projeto_id, atividade_id, execucao_id):
     }
     return render(request,'projetos/execucao.html', context)
 
+@login_required
 def excluir_recurso(request, projeto_id, atividade_id, execucao_id):
     projeto = get_object_or_404(Projeto,pk=projeto_id)
     atividade = get_object_or_404(Atividade,pk=atividade_id)

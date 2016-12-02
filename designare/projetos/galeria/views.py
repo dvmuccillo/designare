@@ -4,7 +4,9 @@ from projetos.models import Execucao
 from projetos.galeria.models import Galeria,Imagem
 from django.utils.datastructures import MultiValueDictKeyError
 from django.template.loader import render_to_string
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def nova(request,execucao_id):
     execucao = get_object_or_404(Execucao,pk=execucao_id)
     galeria = Galeria(
@@ -14,6 +16,7 @@ def nova(request,execucao_id):
     galeria.save()
     return JsonResponse({'galeria_id': galeria.pk, 'sucesso': True})
 
+@login_required
 def adicionar_imagem(request,execucao_id):
     execucao = get_object_or_404(Execucao,pk=execucao_id)
     galeria = execucao.galeria.all()[0]
