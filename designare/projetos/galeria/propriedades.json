@@ -1,7 +1,7 @@
 {
     "app_name" : "galeria",
 	"nome": "Galeria",
-	"descricao": "A galeria é um recurso que oferece o upload de imagens ao projeto",
+	"descricao": "Permite a adição de imagens para formar painéis semânticos.",
     "classe_principal" : "Galeria",
     "template_principal" : "galeria.html",
     "script" : [

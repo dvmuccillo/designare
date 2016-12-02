@@ -1,6 +1,6 @@
-<div class="card border-square" id="card-galeria-imagem-{{ imagem.pk }}">
+<div class="card border-square unbordered" id="card-galeria-imagem-{{ imagem.pk }}" align="center">
     <img src="/{{ imagem.foto }}" class="card-img img-fluid border-square unbordered" id="galeria-imagem-{{ imagem.pk }}">
-    <div class="card-img-overlay" onclick="GaleriaVisualizaImagem({{ imagem.pk }})">
+    <div class="card-img-overlay click" onclick="GaleriaVisualizaImagem({{ imagem.pk }})">
         <div class="float-md-right">
             <button 
                 class="btn btn-secondary btn-sm border-square hidden" id="btn-info-galeria-imagem-{{ imagem.pk }}" 

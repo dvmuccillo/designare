@@ -1,6 +1,7 @@
+# encoding: utf-8
 from django.db import models
 from metodologias.models import Metodologia, Atividade
-import json, os
+import json, os, io
 
 class Projeto(models.Model):
     nome = models.CharField(max_length=50)
@@ -28,13 +29,19 @@ class Projeto(models.Model):
     )
     imagem_capa = models.ImageField(
         upload_to='static/img/projetos/capas/',
-        default='static/img/projetos/capas/default.png',
+        #default='static/img/projetos/capas/default.png',
     )
     #dt_inicio = models.DateField(False)
     #dt_fim = models.DateField(False)
 
     def __str__(self):
         return self.nome
+
+    def getCapa(self):
+        if not self.imagem_capa:
+            return 'static/img/projetos/capas/default.png'
+        else:
+            return self.imagem_capa
 
 """ Recursos: utilizados para executar uma atividade
 
@@ -57,8 +64,8 @@ class Recurso(models.Model):
 
     def carrega_propriedades(self):
         app_path = os.path.join(os.getcwd(),os.path.join("projetos",self.app_name))
-        with open(os.path.join(app_path,"propriedades.json")) as arquivo:
-            propriedades = json.load(arquivo)
+        with io.open(os.path.join(app_path,"propriedades.json")) as arquivo:
+            propriedades = json.load(arquivo,encoding='utf-8-sig')
         self.nome = propriedades['nome']
         self.descricao = propriedades['descricao']
         self.propriedades = propriedades

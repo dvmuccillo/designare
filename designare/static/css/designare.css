@@ -13,6 +13,9 @@ body{
 .unbordered{
     border: 0px;
 }
+.click{
+    cursor: pointer;
+}
 .bd-callout {
     padding: 1.25rem;
     margin-top: 1.25rem;

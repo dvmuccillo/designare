@@ -12,7 +12,7 @@ import json
 # Create your views here.
 #@login_required
 def index(request):
-    metodologias = Metodologia.objects.all().order_by('nome')
+    metodologias = Metodologia.objects.all().filter(is_copy=False).order_by('nome')
     projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
     projetos_espera = Projeto.objects.all().filter(estado='ES').order_by('pk')
     context = {
@@ -37,7 +37,7 @@ def novo(request):
     try:
         capa = request.FILES['capa']
     except MultiValueDictKeyError:
-        capa = 'static/img/projetos/capas/default.png'
+        capa = None
 
     if request.POST.get('metodologia') != "0":
         estado='ES'
@@ -67,7 +67,8 @@ def atualizar_projeto(request,projeto_id):
     try:
         capa = request.FILES['capa']
     except MultiValueDictKeyError:
-        capa = 'static/img/projetos/capas/default.png'
+        #capa = 'static/img/projetos/capas/default.png'
+        capa = None
 
     if request.POST.get('metodologia') != "0":
         estado='ES'
@@ -81,7 +82,7 @@ def atualizar_projeto(request,projeto_id):
     projeto.metodologia = metodologia
     projeto.estado = estado
 
-    if capa != 'static/img/projetos/capas/default.png':
+    if capa != None:
         projeto.imagem_capa = capa;
 
     projeto.save()
