@@ -13,12 +13,15 @@ import json
 @login_required
 def index(request):
     metodologias = Metodologia.objects.all().filter(is_copy=False).order_by('nome')
-    projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('pk')
-    projetos_espera = Projeto.objects.all().filter(estado='ES').order_by('pk')
+    projetos_definidos = Projeto.objects.all().filter(estado='DE').order_by('nome')
+    projetos_espera = Projeto.objects.all().filter(estado='ES').order_by('nome')
+    projetos_execucao = Projeto.objects.all().filter(estado='EX').order_by('pk')
+
     context = {
         'titulo_da_pagina'   : "Projetos",
         'projetos_definidos' : projetos_definidos,
         'projetos_espera'    : projetos_espera,
+        'projetos_execucao'  : projetos_execucao,
         'metodologias'       : metodologias,
           }
     return render(request, 'projetos/index.html', context)
@@ -120,6 +123,10 @@ def adicionar_recurso(request, projeto_id, atividade_id, recurso_id):
         }
     else:
         function = { 'ativacao' : False }
+
+    if projeto.estado == Projeto.EM_ESPERA:
+        projeto.estado = Projeto.EM_EXECUCAO
+        projeto.save()
 
     return JsonResponse({
             'template' : template ,
