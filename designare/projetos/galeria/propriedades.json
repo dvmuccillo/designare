@@ -9,11 +9,11 @@
                     "file-input/js/fileinput.min.js",
                     "file-input/themes/fa/theme.js",
                     "file-input/js/locales/pt-BR.js",
-                    "lightbox-5.0.0/dist/ekko-lightbox.min.js"
+                    "lightbox-5.0.0/ekko-lightbox.min.js"
                ],
     "css" : [
                 "file-input/css/fileinput.min.css",
-                "lightbox-5.0.0/dist/ekko-lightbox.min.css"
+                "lightbox-5.0.0/ekko-lightbox.min.css"
             ],
     "funcao_ativacao" : "GaleriaAtivacao",
     "modals" : "modal.html",
