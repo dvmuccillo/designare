@@ -6,8 +6,12 @@ $(function(){
         if(($("#galeria-"+execucao_id).html()).trim() != ""){
             $('#galeria-input-'+execucao_id).collapse('hide');
             $('#galeria-'+execucao_id+'-toolbar-upload').collapse('hide');
-            $('#galeria-'+execucao_id+'-toolbar-exibicao').collapse('show');    
+            $('#galeria-'+execucao_id+'-toolbar-exibicao').collapse('show');   
         }
+    });
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox({alwaysShowClose: true});
     });
 });
 /* fim do script de inicialização das galerias */

@@ -1,14 +1,16 @@
 <div class="card border-square unbordered" id="card-galeria-imagem-{{ imagem.pk }}" align="center">
-    <img src="/{{ imagem.foto }}" class="card-img img-fluid border-square unbordered" id="galeria-imagem-{{ imagem.pk }}">
-    <div class="card-img-overlay click" onclick="GaleriaVisualizaImagem({{ imagem.pk }})">
-        <div class="float-md-right">
-            <button 
-                class="btn btn-secondary btn-sm border-square hidden" id="btn-info-galeria-imagem-{{ imagem.pk }}" 
-                data-tooltip="tooltip" data-placement="top" title="Detalhes"
-                onclick='GaleriaInfoImagem("{{ projeto.pk }}");' 
-            >
-                <i class="fa fa-info-circle "></i>
-            </button>
-        </div>
-    </div>    
+    <a 
+        href="/{{ imagem.foto }}" 
+        data-toggle="lightbox" 
+        data-gallery="lightbox-galeria-{{ imagem.galeria.pk }}"
+        data-title="Galeria - Visualização de imagem"
+        rel="lightbox[lightbox-galeria-{{ imagem.galeria.pk }}]"
+        id="galeria-imagem-{{ imagem.pk }}"
+    >
+        <img 
+            src="/{{ imagem.foto }}" 
+            class="card-img img-fluid border-square unbordered" 
+
+        >
+    </a>
 </div>

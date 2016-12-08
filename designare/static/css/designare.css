@@ -54,3 +54,6 @@ body{
 .background-color-black{
     background-color: black;
 }
+.background-transparent{
+    background-color: transparent !important;
+}
