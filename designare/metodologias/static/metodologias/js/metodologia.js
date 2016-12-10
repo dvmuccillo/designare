@@ -152,7 +152,7 @@ $(document).ready(function(){
                         link_etapa = "<a href='#etapa_"+ide+"' class='list-group-item list-group-item-action' id='li-menu-etapa-"+ide+"'>"+nome+"</a>";
                         /* Limpa os campos do formulário de cadastro de etapas */
                         $("#input-etapa-nome").val("");
-                        $("#input-etapa-descricao").val("");
+                        $("#input-etapa-descricao").html("");
                         /* Insere os elementos HTML no corpo */
                         $("#div-listagem-etapas").append(data.template);
                         //$("#div-menu-etapas").append(link_etapa);
@@ -178,7 +178,7 @@ $(document).ready(function(){
     $("#btn-cancelar-etapa").click(function(){
         /* Limpeza do valor de campos */
         $("#input-etapa-nome").val("");
-        $("#input-etapa-descricao").val("");
+        $("#input-etapa-descricao").html("");
         /* Limpeza de estilos de validação */
         $("#div-input-etapa-nome").toggleClass("has-danger",false);
         $("#input-etapa-nome").toggleClass("form-control-danger",false);
@@ -209,7 +209,8 @@ function CadastrarAtividade(id_etapa){
         $.ajax({
             type    : "POST",
             url     : endereco,
-            data    : { 'nome' : nome,
+            data    : { 
+                        'nome' : nome,
                         'descricao' : descricao, 
                         'csrfmiddlewaretoken' : document.form_etapa.csrfmiddlewaretoken.value,
                     },
