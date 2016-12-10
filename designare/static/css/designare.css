@@ -63,3 +63,16 @@ body{
 .shadow-on-hover:hover{
     box-shadow: 0 10px 20px rgba(0,0,0,.19),0 6px 6px rgba(0,0,0,.23);
 }
+.designare-editor {
+    height: 250px;
+    background-color: white;
+    border-collapse: separate; 
+    border: 1px solid rgb(204, 204, 204); 
+    padding: 4px; 
+    box-sizing: content-box; 
+    -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset; 
+    box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+    display: block;
+    overflow: auto;
+    outline: none;
+}

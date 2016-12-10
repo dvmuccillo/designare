@@ -174,12 +174,12 @@
             <div class="row my-2" id="div-row-nova-etapa">
                 <div class="col-md-11">
                     <div class="row collapse" id="collapse-cadastrar-etapa">
-                        <div class="col-md-6 offset-md-3">
+                        <div class="col-md-11 offset-md-1">
                             <h4 class="mt-1">Adicionar nova etapa:</h4>
                             <form id="form-etapa" name="form_etapa">
                                 <fieldset id="fieldset-nova-etapa">
                                     {% csrf_token %}
-                                    <div class="form-group" id="div-input-etapa-nome">
+                                    <div class="form-group mr-1" id="div-input-etapa-nome">
                                         <label>
                                             <b>Nome</b>&nbsp;
                                             <i
@@ -201,16 +201,101 @@
                                         <div class="form-control-feedback" id="div-etapa-nome-feedback"></div>
                                     </div>
                                     <label><b>Descrição</b></label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon border-square">
-                                            <i class="fa fa-info"></i>
-                                        </span>
-                                        <textarea name="descricao" 
-                                            class="form-control border-square"
-                                            placeholder="Descrição da Etapa"
-                                            rows="5" maxlength="300"
-                                            id="input-etapa-descricao"
-                                        ></textarea>
+                                    <div>
+                                        <div 
+                                            class="btn-toolbar" 
+                                            data-role="input-etapa-descricao-toolbar" 
+                                            data-target="#input-etapa-descricao"
+                                            id="input-etapa-descricao-toolbar"
+                                        >
+                                            <div class="btn-group mb-1">
+                                                <a class="btn btn-secondary dropdown-toggle border-square" data-toggle="dropdown" title="Font Size">
+                                                    <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                                <ul class="dropdown-menu border-square">
+                                                    <li>
+                                                        <a data-edit="fontSize 5">
+                                                            <font size="5">Huge</font>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-edit="fontSize 3">
+                                                            <font size="3">Normal</font>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-edit="fontSize 1">
+                                                            <font size="1">Small</font>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="btn-group mb-1">
+                                                <a class="btn btn-secondary border-square" data-edit="bold" title="Bold (Ctrl/Cmd+B)">
+                                                    <i class="fa fa-bold"></i>
+                                                </a>
+                                                <a class="btn btn-secondary" data-edit="italic" title="Italic (Ctrl/Cmd+I)">
+                                                    <i class="fa fa-italic"></i>
+                                                </a>
+                                                <a class="btn btn-secondary" data-edit="strikethrough" title="Strikethrough">
+                                                    <i class="fa fa-strikethrough"></i>
+                                                </a>
+                                                <a class="btn btn-secondary border-square" data-edit="underline" title="Underline (Ctrl/Cmd+U)">
+                                                    <i class="fa fa-underline"></i>
+                                                </a>
+                                            </div>
+                                            <div class="btn-group mb-1">
+                                                <a class="btn btn-secondary border-square" data-edit="insertunorderedlist" title="Bullet list">
+                                                    <i class="fa fa-list-ul"></i>
+                                                </a>
+                                                <a class="btn btn-secondary border-square" data-edit="insertorderedlist" title="Number list">
+                                                    <i class="fa fa-list-ol"></i>
+                                                </a>
+                                                <a class="btn btn-secondary border-square" data-edit="outdent" title="Reduce indent (Shift+Tab)">
+                                                    <i class="fa fa-outdent"></i>
+                                                </a>
+                                                <a class="btn btn-secondary border-square" data-edit="indent" title="Indent (Tab)">
+                                                    <i class="fa fa-indent"></i>
+                                                </a>
+                                            </div>
+                                            <div class="btn-group mb-1">
+                                                <a class="btn btn-secondary border-square" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)">
+                                                    <i class="fa fa-align-left"></i>
+                                                </a>
+                                                <a class="btn btn-secondary border-square" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)">
+                                                    <i class="fa fa-align-center"></i>
+                                                </a>
+                                                <a class="btn btn-secondary border-square" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)">
+                                                    <i class="fa fa-align-right"></i>
+                                                </a>
+                                                <a class="btn btn-secondary border-square" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)">
+                                                    <i class="fa fa-align-justify"></i>
+                                                </a>
+                                            </div>
+                                            <div class="btn-group mb-1">
+                                                <a class="btn btn-secondary border-square dropdown-toggle" data-toggle="dropdown" title="Hyperlink">
+                                                    <i class="fa fa-link"></i>
+                                                </a>
+                                                <div class="dropdown-menu input-append p-1 m-0 border-square">
+                                                    <input class="border-square mb-1" placeholder="URL" type="text" data-edit="createLink"/>
+                                                    <button class="btn btn-secondary border-square" type="button">Adicionar</button>
+                                                </div>
+                                                <a class="btn btn-secondary border-square" data-edit="unlink" title="Remover Hyperlink">
+                                                    <i class="fa fa-cut"></i>
+                                                </a>
+                                            </div>
+                                            <div class="btn-group mb-1">
+                                                <a class="btn btn-secondary border-square" data-edit="undo" title="Undo (Ctrl/Cmd+Z)">
+                                                    <i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-secondary border-square" data-edit="redo" title="Redo (Ctrl/Cmd+Y)">
+                                                    <i class="fa fa-repeat"></i></a>
+                                            </div>
+                                        </div>
+                                        <div 
+                                            id="input-etapa-descricao" 
+                                            data-toggle="bootstrap-wysiwyg" 
+                                            class="border-square mr-1 designare-editor"
+                                        >
+                                    </div>
                                     </div>
                                     <p class="form-text text-muted">
                                         Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
@@ -236,4 +321,13 @@
 {% endblock %}
 {% block javascript_links %}
     <script src="/static/metodologias/js/metodologia.js"></script>
+    <!-- Bootstrap WYSIWYG -->
+    <script src="/static/plugins/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="/static/plugins/bootstrap-wysiwyg/jquery.hotkeys.js"></script>
+{% endblock %}
+{% block javascript_functions %}
+    $('div[data-toggle="bootstrap-wysiwyg"]').each(function(index,value){
+        var editor_id = $(this).attr('id');
+        $(this).wysiwyg({ toolbarSelector: "[data-role='"+editor_id+"-toolbar']" });
+    });
 {% endblock %}

@@ -113,7 +113,7 @@ $(document).ready(function(){
         $("#div-etapa-nome-feedback").empty();
         /* Valor das propriedades de etapa */
         nome = $("#input-etapa-nome").val();
-        descricao = $("#input-etapa-descricao").val();
+        descricao = $("#input-etapa-descricao").html();
         idm = $("#input-metodologia-id").val();
         endereco = "/metodologias/" + idm + "/cadastrar-etapa/";
         /* Verifica se o nome da etapa foi informado */
@@ -266,9 +266,9 @@ function EsconderBtnNovaAtividade(id_etapa){
 function EditarEtapa(id_etapa){
     $("#input-etapa-nome-"+id_etapa).val($("#etapa-nome-"+id_etapa).html());
     if($("#etapa-descricao-"+id_etapa).html() == "<i>Nenhuma descrição fornecida para esta etapa!</i>"){
-        $("#input-etapa-descricao-"+id_etapa).val("");
+        $("#input-etapa-descricao-"+id_etapa).html("");
     } else {
-        $("#input-etapa-descricao-"+id_etapa).val($("#etapa-descricao-"+id_etapa).html());
+        $("#input-etapa-descricao-"+id_etapa).html($("#etapa-descricao-"+id_etapa).html());
     }
     $("#btn-edit-etapa-"+id_etapa).tooltip('hide');
     $("#card-etapa-info-"+id_etapa).collapse('toggle');
@@ -278,7 +278,7 @@ function EditarEtapa(id_etapa){
 function CancelarEditarEtapa(id_etapa){
     /* Limpeza do valor de campos */
     $("#input-etapa-nome-"+id_etapa).val("");
-    $("#input-etapa-descricao-"+id_etapa).val("");
+    $("#input-etapa-descricao-"+id_etapa).html("");
     /* Limpeza de estilos de validação */
     $("#div-input-etapa-nome-"+id_etapa).toggleClass("has-danger",false);
     $("#input-etapa-nome-"+id_etapa).toggleClass("form-control-danger",false);
@@ -295,7 +295,7 @@ function EnviarEditarEtapa(id_etapa){
     $("#div-etapa-nome-feedback-"+id_etapa).empty();
     /* Valor das propriedades de etapa */
     nome = $("#input-etapa-nome-"+id_etapa).val();
-    descricao = $("#input-etapa-descricao-"+id_etapa).val();
+    descricao = $("#input-etapa-descricao-"+id_etapa).html();
     idm = $("#input-metodologia-id").val();
     endereco = "/metodologias/" + idm + "/etapa/" +id_etapa + "/atualizar-etapa/";
     /* Verifica se o nome da etapa foi informado */
