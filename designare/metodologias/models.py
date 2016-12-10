@@ -61,7 +61,7 @@ class Metodologia(models.Model):
 
 class Etapa(models.Model):
     nome = models.CharField(max_length=50)
-    descricao = models.CharField(max_length=300)
+    descricao = models.TextField()
     ordem = models.IntegerField(null=True)
     metodologia = models.ForeignKey(
         Metodologia,
@@ -74,7 +74,7 @@ class Etapa(models.Model):
 
 class Atividade(models.Model):
     nome = models.CharField(max_length=50)
-    descricao = models.CharField(max_length=300)
+    descricao = models.TextField()
     ordem = models.IntegerField(null=True)
     etapa = models.ForeignKey(
         Etapa,
@@ -87,15 +87,3 @@ class Atividade(models.Model):
 
     def proximas_atividades_possiveis(self):
         return self.etapa.atividades.all().exclude(pk=self.pk)
-    
-    
-
-
-#class Execução(models.Model):
-#    data = models.DateField(False)
-#    usuario = models.CharField(max_length=50)
-#  recurso = models.
-
-#class Recurso(models.Model)
-#    acao = models.
-#    nome = models.
