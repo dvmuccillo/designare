@@ -1,6 +1,7 @@
 <div class="card border-square unbordered" id="card-galeria-imagem-{{ imagem.pk }}" align="center">
     <a 
-        href="/{{ imagem.foto }}" 
+        href="/{{ imagem.foto }}"
+        class="" 
         data-toggle="lightbox" 
         data-gallery="lightbox-galeria-{{ imagem.galeria.pk }}"
         data-title="Galeria - Visualização de imagem"
@@ -9,7 +10,7 @@
     >
         <img 
             src="/{{ imagem.foto }}" 
-            class="card-img img-fluid border-square unbordered" 
+            class="card-img img-fluid border-square unbordered background-transparent shadow-on-hover" 
 
         >
     </a>
