@@ -33,7 +33,10 @@ def atualizar_nome(request, metodologia_id):
 @login_required
 def cadastrar_etapa(request, metodologia_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
-    proxima_pos = Etapa.objects.all().filter(metodologia=metodologia).count() + 1
+    if metodologia.etapas.all().count() == 0:
+        proxima_pos = 1;
+    else:
+        proxima_pos = metodologia.etapas.all().order_by('-ordem')[0].ordem + 1
     etapa = Etapa (
                 nome = request.POST.get('nome'),
                 descricao = request.POST.get('descricao'),
@@ -64,7 +67,10 @@ def excluir_etapa(request, metodologia_id, etapa_id):
 def cadastrar_atividade(request, metodologia_id, etapa_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
     etapa = get_object_or_404(Etapa,pk=etapa_id)
-    proxima_pos = Atividade.objects.all().filter(etapa=etapa).count() + 1
+    if etapa.atividades.all().count() == 0:
+        proxima_pos = 1;
+    else:
+        proxima_pos = etapa.atividades.all().order_by('-ordem')[0].ordem + 1
     atividade = Atividade (
                 nome = request.POST.get('nome'),
                 descricao = request.POST.get('descricao'),
