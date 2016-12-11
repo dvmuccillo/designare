@@ -23,7 +23,7 @@
                 </h3>
                 <blockquote class='card-blockquote'>
                     {%if atividade.descricao %}
-                        <p id="atividade-descricao-{{ atividade.pk }}">{{ atividade.descricao }}</p>
+                        <p id="atividade-descricao-{{ atividade.pk }}">{{ atividade.descricao | safe }}</p>
                     {% else %}
                         <p id="atividade-descricao-{{ atividade.pk }}"><i>Nenhuma descrição fornecida para esta atividade!</i></p>
                     {% endif %}

@@ -158,6 +158,7 @@ $(document).ready(function(){
                         //$("#div-menu-etapas").append(link_etapa);
                         $(link_etapa).insertBefore("#li-menu-adicionar-etapa")
                         $("#collapse-cadastrar-etapa").collapse('toggle');
+                        AtivaEditores();
                         /*
                         $("#li-menu-etapa-"+nome).on("click",function(){
                             //event.preventDefault();
@@ -195,7 +196,7 @@ function CadastrarAtividade(id_etapa){
     $("#div-atividade-" + id_etapa + "-nome-feedback").empty();
     /* Valor das propriedades de etapa */
     nome = $("#input-atividade-nome" + id_etapa).val();
-    descricao = $("#input-atividade-descricao" + id_etapa).val();
+    descricao = $("#input-atividade-descricao" + id_etapa).html();
     idm = $("#input-metodologia-id").val();
     endereco = "/metodologias/" + idm + "/etapa/" + id_etapa + "/cadastrar-atividade/";
     /* Verifica se o nome da atividade foi informado */
@@ -233,13 +234,14 @@ function CadastrarAtividade(id_etapa){
                     }
                     /* Limpa os campos do formulário de cadastro de etapas */
                     $("#input-atividade-nome" + id_etapa).val("");
-                    $("#input-atividade-descricao" + id_etapa).val("");
+                    $("#input-atividade-descricao" + id_etapa).html("");
                     $("#row-nenhuma-etapa-aviso-" + id_etapa).collapse('toggle');
                     /* Insere os elementos HTML no corpo */
                     //$("#div-listagem-atividades" + id_etapa).append("div_atividade");
                     $(data.template).insertBefore("#row-btn-nova-atividade" + id_etapa);
                     $("#CadastrarAtividade" + id_etapa).collapse('toggle');
                     $("#row-btn-nova-atividade" + id_etapa).collapse('toggle');
+                    AtivaEditores();
                 }
             }
         });
@@ -249,7 +251,7 @@ function CadastrarAtividade(id_etapa){
 function CancelarCadastrarAtividade(id_etapa){
     /* Limpeza de campos */
     $("#input-atividade-nome" + id_etapa).val("");
-    $("#input-atividade-descricao" + id_etapa).val("");
+    $("#input-atividade-descricao" + id_etapa).html("");
     /* Limpeza de estilos de validação */
     $("#div-input-atividade-nome" + id_etapa).toggleClass("has-danger",false);
     $("#input-atividade-nome" + id_etapa).toggleClass("form-control-danger",false);
@@ -334,7 +336,7 @@ function EnviarEditarEtapa(id_etapa){
                     }
                     /* Limpa os campos do formulário de cadastro de etapas */
                     $("#input-etapa-nome-"+id_etapa).val("");
-                    $("#input-etapa-descricao-"+id_etapa).val("");
+                    $("#input-etapa-descricao-"+id_etapa).html("");
                     /* Atualiza os elementos HTML no corpo */
                     $("#etapa-nome-"+id_etapa).html(nome);
                     $("#etapa-descricao-"+id_etapa).html(descricao);
@@ -440,9 +442,9 @@ function ExcluirAtividade(id_etapa,id_atividade){
 function EditarAtividade(id_etapa,id_atividade){
     $("#input-atividade-nome-"+id_etapa).val($("#atividade-nome-"+id_atividade).html());
     if($("#atividade-descricao-"+id_atividade).html() == "<i>Nenhuma descrição fornecida para esta atividade!</i>"){
-        $("#input-atividade-descricao-"+id_etapa).val("");
+        $("#input-atividade-descricao-"+id_etapa).html("");
     } else {
-        $("#input-atividade-descricao-"+id_etapa).val($("#atividade-descricao-"+id_atividade).html());
+        $("#input-atividade-descricao-"+id_etapa).html($("#atividade-descricao-"+id_atividade).html());
     }
     $("#btn-atualizar-atividade-"+id_etapa).attr("onclick", "EnviarEditarAtividade('"+id_etapa+"','"+id_atividade+"');");
     $("#btn-edit-atividade-"+id_atividade).tooltip('hide');
@@ -453,7 +455,7 @@ function EditarAtividade(id_etapa,id_atividade){
 function CancelarEditarAtividade(id_etapa){
     /* Limpeza do valor de campos */
     $("#input-atividade-nome-"+id_etapa).val("");
-    $("#input-atividade-descricao-"+id_etapa).val("");
+    $("#input-atividade-descricao-"+id_etapa).html("");
     /* Limpeza de estilos de validação */
     $("#div-input-atividade-nome-"+id_etapa).toggleClass("has-danger",false);
     $("#input-atividade-nome-"+id_etapa).toggleClass("form-control-danger",false);
@@ -470,7 +472,7 @@ function EnviarEditarAtividade(id_etapa,id_atividade){
     $("#div-atividade-nome-feedback-"+id_etapa).empty();
     /* Valor das propriedades de etapa */
     nome = $("#input-atividade-nome-"+id_etapa).val();
-    descricao = $("#input-atividade-descricao-"+id_etapa).val();
+    descricao = $("#input-atividade-descricao-"+id_etapa).html();
     idm = $("#input-metodologia-id").val();
     endereco = "/metodologias/" + idm + "/etapa/" +id_etapa + "/atividade/" + id_atividade + "/atualizar-atividade/";
     /* Verifica se o nome da etapa foi informado */
@@ -484,7 +486,8 @@ function EnviarEditarAtividade(id_etapa,id_atividade){
         $.ajax({
             type    : "POST",
             url     : endereco,
-            data    : { 'nome' : nome,
+            data    : { 
+                        'nome' : nome,
                         'descricao' : descricao, 
                         'csrfmiddlewaretoken' : document.form_etapa.csrfmiddlewaretoken.value,
                     },
@@ -507,7 +510,7 @@ function EnviarEditarAtividade(id_etapa,id_atividade){
                     }
                     /* Limpa os campos do formulário de atualização de atividades */
                     $("#input-atividade-nome-"+id_etapa).val("");
-                    $("#input-atividade-descricao-"+id_etapa).val("");
+                    $("#input-atividade-descricao-"+id_etapa).html("");
                     /* Atualiza os elementos HTML no corpo */
                     $("#atividade-nome-"+id_atividade).html(nome);
                     $("#atividade-descricao-"+id_atividade).html(descricao);
@@ -525,6 +528,12 @@ function EnviarEditarAtividade(id_etapa,id_atividade){
     }
 }
 /* Fim das Ações de Edição de Etapa */
+function AtivaEditores(){
+    $('div[data-toggle="bootstrap-wysiwyg"]').each(function(index,value){
+        var editor_id = $(this).attr('id');
+        $(this).wysiwyg({ toolbarSelector: "[data-role='"+editor_id+"-toolbar']" });
+    });
+}
 function smoothScroll(target){
     event.preventDefault();
     //id = nome;
