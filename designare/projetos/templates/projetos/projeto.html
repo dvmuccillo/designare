@@ -81,15 +81,15 @@
             {% endif %}
         {% endfor %}
     </div>
-    <div class="row" id="div-row-etapas full-height">
-        <div class="col-md-3" style="position: relative;">
-            <div class="list-group" id="div-menu-etapas">
-                <!-- Inserir links de etapas aqui -->
+    <div class="row" id="div-row-etapas">
+        <div class="col-md-3">
+            <div class="list-group" id="div-menu-etapas" data-toggle="sticky-onscroll">
                 {% if projeto.metodologia.etapas.all %}
                     {% for etapa in projeto.metodologia.etapas.all %}
                         <a
                             href="#etapa_{{ etapa.id }}" id="li-menu-etapa-{{ etapa.id }}"
-                            class="list-group-item list-group-item-action"
+                            class="list-group-item list-group-item-action border-square"
+                            data-scroll
                         >
                             {{ etapa.nome }}
                         </a>
@@ -98,7 +98,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="row">
+            <div class="row" id="div-row-card-etapas">
                 <div class="col-md-12">
                     {% if projeto.metodologia.etapas.all %}
                         {% for etapa in projeto.metodologia.etapas.all %}
@@ -107,7 +107,7 @@
                                     <a id='etapa_{{ etapa.id }}'></a>
                                     <div class="card unbordered">
                                         <div class="card-block pr-0">
-                                            <h2 class="display-3">{{ etapa.nome }}</h2>                                         
+                                            <h2 class="display-3" id="etapa-{{ etapa.pk }}">{{ etapa.nome }}</h2>                                         
                                             <hr class="mb-0">
                                         </div>
                                         <div class="row">
@@ -118,7 +118,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="card unbordered">
                                                                     <div class="card-block pt-0 pr-0">
-                                                                        <h3 class="display-4">
+                                                                        <h3 class="display-4" id="atividade-{{ atividade.pk }}" style="font-size: 30px !important;">
                                                                             {{ atividade.nome}}
                                                                         </h3>
                                                                         <hr class="mb-0">
@@ -175,6 +175,10 @@
     {% endfor %}
 {% endblock %}
 {% block javascript_links %}
+    <script src="/static/plugins/smooth-scroll/smooth-scroll.min.js"></script>
+        <!-- Bootstrap WYSIWYG -->
+    <script src="/static/plugins/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="/static/plugins/bootstrap-wysiwyg/jquery.hotkeys.js"></script>
     {% for recurso in recursos %}
         {{ recurso.carrega_propriedades }}
         <!-- JS do recurso {{ recurso.nome }} -->
@@ -182,9 +186,11 @@
             <script src="/static/{{ recurso.app_name }}/{{ js }}"></script>
         {% endfor %}
     {% endfor %}
+
 {% endblock %}
 {% block javascript_functions %}
     $(document).ready(function(){
+        smoothScroll.init();
         {% for recurso in recursos %}
             {{ recurso.carrega_propriedades }}
             {% if recurso.propriedades.script_inicializacao %} {}
@@ -194,4 +200,35 @@
         {% endfor %}
     });
     {% include "projetos/projeto.js" %}
+    $(document).ready(function() {
+  // Custom 
+  var stickyToggle = function(sticky, stickyWrapper, scrollElement) {
+    var stickyHeight = sticky.outerHeight();
+    var stickyTop = stickyWrapper.offset().top;
+    if (scrollElement.scrollTop() >= stickyTop){
+      stickyWrapper.height(stickyHeight);
+      sticky.addClass("is-sticky");
+    }
+    else{
+      sticky.removeClass("is-sticky");
+      stickyWrapper.height('auto');
+    }
+  };
+  
+  // Find all data-toggle="sticky-onscroll" elements
+  $('[data-toggle="sticky-onscroll"]').each(function() {
+    var sticky = $(this);
+    var stickyWrapper = $('<div>').addClass('sticky-wrapper'); // insert hidden element to maintain actual top offset on page
+    sticky.before(stickyWrapper);
+    sticky.addClass('sticky');
+    
+    // Scroll & resize events
+    $(window).on('scroll.sticky-onscroll resize.sticky-onscroll', function() {
+      stickyToggle(sticky, stickyWrapper, $(this));
+    });
+    
+    // On page load
+    stickyToggle(sticky, stickyWrapper, $(window));
+  });
+});
 {% endblock %}

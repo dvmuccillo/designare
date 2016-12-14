@@ -76,3 +76,12 @@ body{
     overflow: auto;
     outline: none;
 }
+
+.sticky.is-sticky {
+  position: fixed;
+  left: 9%;
+  right: 0;
+  top: 4%;
+  z-index: 1000;
+  width: 18.8%;
+}

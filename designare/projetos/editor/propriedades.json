@@ -5,9 +5,6 @@
     "classe_principal" : "Texto",
     "template_principal" : "index.html",
     "script" : [
-                    "jquery.hotkeys.js",
-                    "google-code-prettify/prettify.js",
-                    "bootstrap-wysiwyg.js",
                     "editor.js"
                 ],
     "script_inicializacao" : "inicializacao.js",

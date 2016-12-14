@@ -33,6 +33,8 @@
     <!-- JS do recurso {{ recurso.nome }} -->
     {% for js in execucao.recurso.propriedades.script %}
         <script src="/static/{{ execucao.recurso.app_name }}/{{ js }}"></script>
+            <script src="/static/plugins/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+    <script src="/static/plugins/bootstrap-wysiwyg/jquery.hotkeys.js"></script>
     {% endfor %}
 {% endblock %}
 {% block javascript_functions %}
