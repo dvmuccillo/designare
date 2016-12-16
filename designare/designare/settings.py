@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'assets.apps.AssetsConfig',
     'metodologias.apps.MetodologiasConfig',
     'projetos.apps.ProjetosConfig',
     'projetos.editor',
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'assets.context_processors.assets_manager',
             ],
         },
     },
