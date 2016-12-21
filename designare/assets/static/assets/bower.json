@@ -1,0 +1,21 @@
+{
+  "name": "Designare",
+  "homepage": "https://github.com/dvmuccillo/designare",
+  "authors": [
+    "Daniel Vargas Muccillo <daniel.vargasmuccillo@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.5"
+  }
+}

@@ -1,4 +1,4 @@
-from models import AssetsManager
+from assets.models import AssetsManager
 
 def assets_manager(request):
     assets_manager = AssetsManager()
