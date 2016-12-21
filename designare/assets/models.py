@@ -23,9 +23,12 @@ class AssetsManager(object):
     def registerBower(self,package):
         if package not in self.bower_components:
             self.bower_components.append(package)
-            main_files = self.loadBowerPackageProperties(package)['main']
+            properties = self.loadBowerPackageProperties(package)
+            if 'dependencies' in properties:
+                for dependencie in properties['dependencies']:
+                    self.registerBower(dependencie)
             package_dir = self.BOWER_COMPONENTS_DIR + package
-            self.allocateAssets(package_dir + "/",main_files)
+            self.allocateAssets(package_dir + "/",properties['main'])
 
     """def registerPlugin(self,package):
         if package not in plugins:
@@ -40,4 +43,20 @@ class AssetsManager(object):
                 self.js.append(assets_base_dir + asset)
                 continue
             if asset.lower().endswith('.css'):
-                self.css.append(assets_base_dir + asset)       
+                self.css.append(assets_base_dir + asset)
+
+    def getCssLinks(self):
+        css_links = '<!-- Links gerados com o Assets Manager -->\n'
+        if type(self.css) is str:
+            self.css = [self.css]
+        for link in self.css:
+            css_links += "<link rel='stylesheet' href='"+link+">\n"
+        return css_links
+
+    def getJsLinks(self):
+        js_links = '<!-- Links gerados com o Assets Manager -->\n'
+        if type(self.js) is str:
+            self.js = [self.js]
+        for link in self.js:
+            js_links += "<script src='"+link+"></script>\n"
+        return js_links
