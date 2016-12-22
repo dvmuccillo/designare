@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
+
 from . import views
 
 urlpatterns = [
@@ -25,7 +25,6 @@ urlpatterns = [
     url(r'^metodologias/', include('metodologias.urls'), name='metodologias'),
     url(r'^editor/', include('projetos.editor.urls'),name='editor'),
     url(r'^galeria/', include('projetos.galeria.urls'),name='galeria'),
-    url(r'^faq/$', TemplateView.as_view(template_name='designare/tela_faq.html')),
-    url(r'^$', login_required(TemplateView.as_view(template_name='designare/teste_tela_inicial.html'))),
     url(r'^logout/$', views.logout_view, name='logout'),
+    url(r'^', include('assets.urls'),name='assets'),
 ]

@@ -62,7 +62,7 @@
                                 <label><b>Descrição</b></label>
                                 <div>
                                     {% with "input-etapa-descricao-"|addstr:etapa.pk as id %}
-                                        {% include "designare/plugins/editor-wysiwyg.html" with editor_id=id %}
+                                        {% include "assets/components/editor-wysiwyg.html" with editor_id=id %}
                                     {% endwith %}
                                 </div>
                                 <p class="form-text text-muted">
@@ -119,7 +119,7 @@
                                 <label><b>Descrição</b></label>
                                 <div>
                                     {% with "input-atividade-descricao-"|addstr:etapa.pk as id %}
-                                        {% include "designare/plugins/editor-wysiwyg.html" with editor_id=id %}
+                                        {% include "assets/components/editor-wysiwyg.html" with editor_id=id %}
                                     {% endwith %}
                                 </div>
                                 <p class="form-text text-muted">
@@ -219,7 +219,7 @@
                                     <label><b>Descrição</b></label>
                                     <div>
                                         {% with "input-atividade-descricao"|addstr:etapa.pk as id %}
-                                            {% include "designare/plugins/editor-wysiwyg.html" with editor_id=id %}
+                                            {% include "assets/components/editor-wysiwyg.html" with editor_id=id %}
                                         {% endwith %}
                                     </div>
                                     <p class='form-text text-muted'>

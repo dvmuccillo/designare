@@ -1,0 +1,147 @@
+{% load designare_tags %}
+{{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap-wysiwyg' }}
+<!-- Editor WYSIWYG  utilizando o plugin bootstrap-wyisyg-->
+<div 
+    class="btn-toolbar" 
+    data-role="{{ editor_id }}-toolbar" 
+    data-target="#{{ editor_id }}"
+    id="{{ editor_id }}-toolbar"
+>
+    <div class="btn-group mb-1">
+        <a 
+            class="btn btn-secondary dropdown-toggle border-square" title="Tamanho da fonte"
+            data-toggle="dropdown" data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+        <ul class="dropdown-menu border-square">
+            <li>
+                <a data-edit="fontSize 5" class="click">
+                    <font size="5">Grande</font>
+                </a>
+            </li>
+            <li>
+                <a data-edit="fontSize 3" class="click">
+                    <font size="3">Normal</font>
+                </a>
+            </li>
+            <li>
+                <a data-edit="fontSize 1" class="click">
+                    <font size="1">Pequena</font>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="btn-group mb-1">
+        <a 
+            class="btn btn-secondary border-square" data-edit="bold" title="Negrito (Ctrl/Cmd+B)" 
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-bold"></i>
+        </a>
+        <a 
+            class="btn btn-secondary" data-edit="italic" title="Itálico (Ctrl/Cmd+I)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-italic"></i>
+        </a>
+        <a
+            class="btn btn-secondary" data-edit="strikethrough" title="Riscado"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-strikethrough"></i>
+        </a>
+        <a 
+            class="btn btn-secondary border-square" data-edit="underline" title="Sublinhado (Ctrl/Cmd+U)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-underline"></i>
+        </a>
+    </div>
+    <div class="btn-group mb-1">
+        <a 
+            class="btn btn-secondary border-square" data-edit="insertunorderedlist" title="Lista de Marcadores"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-list-ul"></i>
+        </a>
+        <a
+            class="btn btn-secondary border-square" data-edit="insertorderedlist" title="Lista de Números"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-list-ol"></i>
+        </a>
+        <a 
+            class="btn btn-secondary border-square" data-edit="outdent" title="Reduzir Recuo (Shift+Tab)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-outdent"></i>
+        </a>
+        <a 
+            class="btn btn-secondary border-square" data-edit="indent" title="Aumentar Recuo (Tab)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-indent"></i>
+        </a>
+    </div>
+    <div class="btn-group mb-1">
+        <a 
+            class="btn btn-secondary border-square" data-edit="justifyleft" title="Alinhar à Esquerda  (Ctrl/Cmd+L)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-align-left"></i>
+        </a>
+        <a 
+            class="btn btn-secondary border-square" data-edit="justifycenter" title="Centralizar (Ctrl/Cmd+E)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-align-center"></i>
+        </a>
+        <a 
+            class="btn btn-secondary border-square" data-edit="justifyright" title="Alinhar à Direita (Ctrl/Cmd+R)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-align-right"></i>
+        </a>
+        <a 
+            class="btn btn-secondary border-square" data-edit="justifyfull" title="Justificar (Ctrl/Cmd+J)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-align-justify"></i>
+        </a>
+    </div>
+    <div class="btn-group mb-1">
+        <a 
+            class="btn btn-secondary border-square dropdown-toggle" data-toggle="dropdown" title=" Inserir Hyperlink"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-link"></i>
+        </a>
+        <div class="dropdown-menu input-append p-1 m-0 border-square">
+            <input class="border-square mb-1" placeholder="URL" type="text" data-edit="createLink"/>
+            <button class="btn btn-secondary border-square" type="button">Adicionar</button>
+        </div>
+        <a 
+            class="btn btn-secondary border-square" data-edit="unlink" title="Remover Hyperlink"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-cut"></i>
+        </a>
+    </div>
+    <div class="btn-group mb-1">
+        <a 
+            class="btn btn-secondary border-square" data-edit="undo" title="Desfazer (Ctrl/Cmd+Z)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-undo"></i></a>
+        <a 
+            class="btn btn-secondary border-square" data-edit="redo" title="Refazer (Ctrl/Cmd+Y)"
+            data-tooltip="tooltip" data-placement="top"
+        >
+            <i class="fa fa-repeat"></i></a>
+    </div>
+</div>
+<div 
+    id="{{ editor_id }}" 
+    data-toggle="bootstrap-wysiwyg" 
+    class="border-square mr-1 designare-editor"
+></div>

@@ -356,5 +356,6 @@
 </div>
 {% endblock content %}
 {% block javascript_links %}
+    {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
     <script src="/static/projetos/js/index.js"></script>
 {% endblock %}

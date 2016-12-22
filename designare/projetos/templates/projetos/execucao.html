@@ -23,6 +23,7 @@
 {% endblock %}
 {% block css_links %}
     {{ execucao.recurso.carrega_propriedades }}
+    {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
     <!-- CSS do recurso {{ recurso.nome }} -->
     {% for css in execucao.recurso.propriedades.css %}
         <link rel="stylesheet" type="text/css" href="/static/{{ execucao.recurso.app_name }}/{{ css }}">
@@ -30,6 +31,7 @@
 {% endblock %}
 {% block javascript_links %}
     {{ execucao.recurso.carrega_propriedades }}
+    {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
     <!-- JS do recurso {{ recurso.nome }} -->
     {% for js in execucao.recurso.propriedades.script %}
         <script src="/static/{{ execucao.recurso.app_name }}/{{ js }}"></script>

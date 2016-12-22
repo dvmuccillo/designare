@@ -1,4 +1,4 @@
-{% extends 'designare/esqueleto.html' %}
+{% extends 'assets/esqueleto.html' %}
 {% block header %}
     {% include "metodologias/menu.html" %}
 {% endblock %}
@@ -202,7 +202,7 @@
                                     </div>
                                     <label><b>Descrição</b></label>
                                     <div>
-                                        {% include "designare/plugins/editor-wysiwyg.html" with editor_id="input-etapa-descricao" %}
+                                        {% include "assets/components/editor-wysiwyg.html" with editor_id="input-etapa-descricao" %}
                                     </div>
                                     <p class="form-text text-muted">
                                         Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros. 
@@ -227,10 +227,8 @@
 </div>
 {% endblock %}
 {% block javascript_links %}
+    {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
     <script src="/static/metodologias/js/metodologia.js"></script>
-    <!-- Bootstrap WYSIWYG -->
-    <script src="/static/plugins/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
-    <script src="/static/plugins/bootstrap-wysiwyg/jquery.hotkeys.js"></script>
 {% endblock %}
 {% block javascript_functions %}
     AtivaEditores();

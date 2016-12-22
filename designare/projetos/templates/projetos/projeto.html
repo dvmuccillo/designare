@@ -1,5 +1,8 @@
 {% extends 'projetos/base.html' %}
+{% load designare_tags %}
 {% block header %}
+{{ DESIGNARE_ASSETS_MANAGER |registerBower:'smooth-scroll' }}
+{{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap-wysiwyg' }}
     <div class="jumbotron jumbotron-fluid p-0">
         <div class="container-fluid">
             <div class="row">
@@ -166,6 +169,7 @@
 </div>
 {% endblock %}
 {% block css_links %}
+    {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
     {% for recurso in recursos %}
         {{ recurso.carrega_propriedades }}
         <!-- CSS do recurso {{ recurso.nome }} -->
@@ -175,10 +179,7 @@
     {% endfor %}
 {% endblock %}
 {% block javascript_links %}
-    <script src="/static/plugins/smooth-scroll/smooth-scroll.min.js"></script>
-        <!-- Bootstrap WYSIWYG -->
-    <script src="/static/plugins/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
-    <script src="/static/plugins/bootstrap-wysiwyg/jquery.hotkeys.js"></script>
+    {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
     {% for recurso in recursos %}
         {{ recurso.carrega_propriedades }}
         <!-- JS do recurso {{ recurso.nome }} -->

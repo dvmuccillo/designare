@@ -1,0 +1,43 @@
+{
+  "name": "Designare",
+  "homepage": "https://github.com/dvmuccillo/designare",
+  "authors": [
+    "Daniel Vargas Muccillo <daniel.vargasmuccillo@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.5",
+    "components-font-awesome": "^4.7.0",
+    "bootstrap-wysiwyg": "*",
+    "smooth-scroll": "https://github.com/cferdinandi/smooth-scroll.git#^10.2.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "bootstrap-wysiwyg": {
+      "main": [
+        "external/jquery.hotkeys.js",
+        "bootstrap-wysiwyg.js"
+      ]
+    },
+    "smooth-scroll": {
+      "main": [
+        "dist/js/smooth-scroll.min.js"
+      ]
+    }
+  }
+}

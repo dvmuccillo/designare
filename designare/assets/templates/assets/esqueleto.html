@@ -1,0 +1,46 @@
+{% load designare_tags %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags always come first -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta http-equiv="Content-Language" content="pt-br">
+        <title>{{ titulo_da_pagina }} Designare</title>
+        {{ DESIGNARE_ASSETS_MANAGER.clearAll }}
+        {{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap' }}
+        {{ DESIGNARE_ASSETS_MANAGER |registerBower:'components-font-awesome' }}
+        {% block css_links %}
+            {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
+        {% endblock %}
+        <link rel="stylesheet" type="text/css" href="/static/css/designare.css">
+    </head>
+    <body>
+        {% block header %}
+            {% include "assets/components/menu.html" %}
+        {% endblock %}
+        {% block body %}
+        {% endblock %}
+        <div class="container">
+            <div class="row">
+                <hr>
+                <p>
+                    Designare - Versão 0.0.1
+                </p>                
+            </div>            
+        </div>
+        {% block javascript_links %}
+            {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
+        {% endblock %}
+        <script type="text/javascript">
+            {% block javascript_functions %}
+            {% endblock %}
+            $(document).ready(function(){
+                $(function () {
+                    $('[data-tooltip="tooltip"]').tooltip()
+                })
+            });
+        </script>
+    </body>
+</html>
