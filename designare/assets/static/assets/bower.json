@@ -18,19 +18,25 @@
   "dependencies": {
     "bootstrap": "4.0.0-alpha.5",
     "components-font-awesome": "^4.7.0",
-    "bootstrap-wysiwyg": "*"
+    "bootstrap-wysiwyg": "*",
+    "smooth-scroll": "https://github.com/cferdinandi/smooth-scroll.git#^10.2.0"
   },
   "overrides": {
-    "bootstrap" : {
+    "bootstrap": {
       "main": [
         "dist/css/bootstrap.min.css",
         "dist/js/bootstrap.js"
       ]
     },
-    "bootstrap-wysiwyg" : {
+    "bootstrap-wysiwyg": {
       "main": [
-        "jquery.hotkeys.js",
+        "external/jquery.hotkeys.js",
         "bootstrap-wysiwyg.js"
+      ]
+    },
+    "smooth-scroll": {
+      "main": [
+        "dist/js/smooth-scroll.min.js"
       ]
     }
   }

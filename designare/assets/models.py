@@ -19,10 +19,10 @@ class AssetsManager(object):
 
     def loadProperties(self,path_to_json_file):
         if path_to_json_file in self.CACHED_JSON:
-            #print ('in cache ' + path_to_json_file +'\n')
+            print ('in cache ' + path_to_json_file +'\n')
             properties = self.CACHED_JSON[path_to_json_file]
         else:
-            #print ('loading ' + path_to_json_file +'\n')
+            print ('loading ' + path_to_json_file +'\n')
             with io.open(path_to_json_file) as json_file:
                 properties = json.load(json_file)
                 self.CACHED_JSON[path_to_json_file] = properties
