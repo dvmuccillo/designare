@@ -17,6 +17,21 @@
   ],
   "dependencies": {
     "bootstrap": "4.0.0-alpha.5",
-    "components-font-awesome": "^4.7.0"
+    "components-font-awesome": "^4.7.0",
+    "bootstrap-wysiwyg": "*"
+  },
+  "overrides": {
+    "bootstrap" : {
+      "main": [
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "bootstrap-wysiwyg" : {
+      "main": [
+        "jquery.hotkeys.js",
+        "bootstrap-wysiwyg.js"
+      ]
+    }
   }
 }

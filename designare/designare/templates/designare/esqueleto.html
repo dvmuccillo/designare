@@ -8,16 +8,13 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta http-equiv="Content-Language" content="pt-br">
         <title>{{ titulo_da_pagina }} Designare</title>
-        <!-- Bootstrap CSS -->
-        <!--link rel="stylesheet" href="/static/css/bootstrap.min.css"-->
+        {{ DESIGNARE_ASSETS_MANAGER.clearAll }}
         {{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap' }}
         {{ DESIGNARE_ASSETS_MANAGER |registerBower:'components-font-awesome' }}
-        {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
-
-
-        <link rel="stylesheet" type="text/css" href="/static/css/designare.css">
         {% block css_links %}
+            {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
         {% endblock %}
+        <link rel="stylesheet" type="text/css" href="/static/css/designare.css">
     </head>
     <body>
         {% block header %}
@@ -33,8 +30,8 @@
                 </p>                
             </div>            
         </div>
-        {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
         {% block javascript_links %}
+            {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
         {% endblock %}
         <script type="text/javascript">
             {% block javascript_functions %}

@@ -227,10 +227,8 @@
 </div>
 {% endblock %}
 {% block javascript_links %}
+    {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
     <script src="/static/metodologias/js/metodologia.js"></script>
-    <!-- Bootstrap WYSIWYG -->
-    <script src="/static/plugins/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
-    <script src="/static/plugins/bootstrap-wysiwyg/jquery.hotkeys.js"></script>
 {% endblock %}
 {% block javascript_functions %}
     AtivaEditores();
