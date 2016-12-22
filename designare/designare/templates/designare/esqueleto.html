@@ -10,9 +10,10 @@
         <title>{{ titulo_da_pagina }} Designare</title>
         <!-- Bootstrap CSS -->
         <!--link rel="stylesheet" href="/static/css/bootstrap.min.css"-->
-        <link rel="stylesheet" href="/static/assets/bower_components/bootstrap/scss/bootstrap.scss">
-        <!-- Font Awesome -->    
-        <link rel="stylesheet" href="/static/font-awesome-4.6.3/css/font-awesome.min.css">
+        {{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap' }}
+        {{ DESIGNARE_ASSETS_MANAGER |registerBower:'components-font-awesome' }}
+        {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
+
 
         <link rel="stylesheet" type="text/css" href="/static/css/designare.css">
         {% block css_links %}
@@ -32,10 +33,7 @@
                 </p>                
             </div>            
         </div>
-        <!-- jQuery first, then Tether, then Bootstrap JS. -->
-        <script src="/static/js/jquery.min.js"></script>
-        <script src="/static/js/tether.1.2.0.min.js"></script>
-        <script src="/static/js/bootstrap.min.js"></script>
+        {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
         {% block javascript_links %}
         {% endblock %}
         <script type="text/javascript">
