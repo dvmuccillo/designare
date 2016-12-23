@@ -22,14 +22,16 @@
         {% endblock %}
         {% block body %}
         {% endblock %}
-        <div class="container">
-            <div class="row">
-                <hr>
-                <p>
-                    Designare - Versão 0.0.1
-                </p>                
-            </div>            
-        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <hr>
+                    <p>
+                        Designare - Versão 0.0.1
+                    </p>                
+                </div>            
+            </div>
+        </footer>
         {% block javascript_links %}
             {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
         {% endblock %}

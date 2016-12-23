@@ -17,14 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 
-from . import views
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/',include('accounts.urls'), name='accounts'),
     url(r'^projetos/', include('projetos.urls'), name='projetos'),
     url(r'^metodologias/', include('metodologias.urls'), name='metodologias'),
     url(r'^editor/', include('projetos.editor.urls'),name='editor'),
     url(r'^galeria/', include('projetos.galeria.urls'),name='galeria'),
-    url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^', include('assets.urls'),name='assets'),
 ]

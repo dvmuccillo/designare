@@ -1,0 +1,38 @@
+{% extends "assets/esqueleto.html" %}
+{% block header %}
+{% endblock %}
+{% block body %}
+    <div class="container py-3">
+        <div class="row mt-3">
+            <div class="col-md-4 offset-md-4 mt-3">
+                <form class="form-signin" method="post" action="/accounts/login/?next={{ next }}">
+                    {% csrf_token %}
+                    <h2 class="form-signin-heading mb-2 ">Faça Login</h2>
+                    {% if error %}
+                        <div class="alert alert-danger border-square" role="alert">
+                            <strong>Usuário ou senha incorreto!</strong>
+                        </div>
+                    {% endif %}
+                    <label for="username" class="sr-only">Nome de usuário:</label>
+                    <input
+                        type="text"
+                        id="username" name="username"
+                        class="form-control form-signin-first border-square"
+                        placeholder="Seu nome de usuário"
+                        required autofocus
+                    >
+                    <label for="password" class="sr-only">Senha:</label>
+                    <input
+                        type="password" 
+                        id="password" name="password"
+                        class="form-control border-square" placeholder="Sua senha" 
+                        required
+                    >
+                    <button class="btn btn-lg btn-primary btn-block border-square" type="submit">
+                        Entrar <i class="fa fa-sign-in"></i>
+                    </button>
+                </form>
+            </div>
+        </div>        
+    </div>
+{% endblock %}
