@@ -1,0 +1,43 @@
+{% extends "assets/esqueleto.html" %}
+{% block body %}
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 
+                            class="display-4"
+                            style="border-bottom: 1px solid;">
+                            Informações Pessoais
+                        </h1>
+                        <button class="btn btn-secondary border-square float-md-right">
+                            <i class="fa fa-pencil"></i> Editar
+                        </button>
+                        <dl>
+                            <dd class="mb-0">Nome</dd><dt class="mb-1">{{ user.first_name }}</dt>
+                            <dd class="mb-0">Sobrenome</dd><dt class="mb-1">{{ user.last_name }}</dt>
+                            <dd class="mb-0">E-mail</dd><dt class="mb-1">{{ user.email }}</dt>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 
+                            class="display-4"
+                            style="border-bottom: 1px solid;">
+                            Informações de Acesso
+                        </h1>
+                        <button class="btn btn-secondary border-square float-md-right">
+                            <i class="fa fa-key"></i> Alterar senha
+                        </button>
+                        <dl>
+                            <dd class="mb-0">Nome de usuário</dd><dt class="mb-1">{{ user.username }}</dt>
+                            <dd class="mb-0">Data do último acesso</dd><dt class="mb-1">{{ user.last_login }}</dt>
+                            <dd class="mb-0">Data da criação da conta</dd><dt class="mb-1">{{ user.date_joined }}</dt>
+                        </dl>
+                    </div>
+                </div>                
+            </div>
+        </div>        
+    </div>
+{% endblock %}

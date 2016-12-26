@@ -1,6 +1,14 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-11 mt-3">
+        <div class="col-md-10 offset-md-1 mt-3">
+            <a href="/accounts/my/profile/" style="text-decoration: none;">
+               <img 
+                    src="/{{ user.profile.image }}" 
+                    class="img-thumbnail btn-circle img-fluid" 
+                    style="width: 10% !important;"
+                    data-tooltip="tooltip" data-placement="top" title="Meu Perfil"
+                >
+            </a>
             <div class="btn-group float-md-right" role="group">
                 {% block menu_extra %}
                 {% endblock %}
