@@ -10,14 +10,67 @@
                             style="border-bottom: 1px solid;">
                             Informações Pessoais
                         </h1>
-                        <button class="btn btn-secondary border-square float-md-right">
-                            <i class="fa fa-pencil"></i> Editar
-                        </button>
-                        <dl>
-                            <dd class="mb-0">Nome</dd><dt class="mb-1">{{ user.first_name }}</dt>
-                            <dd class="mb-0">Sobrenome</dd><dt class="mb-1">{{ user.last_name }}</dt>
-                            <dd class="mb-0">E-mail</dd><dt class="mb-1">{{ user.email }}</dt>
-                        </dl>
+                        <div class="collapse in" id="profile-personal-info">
+                            <button 
+                                class="btn btn-secondary border-square float-md-right" 
+                                onclick="Designare.Accounts.Profile.EditPersonalInfo();"
+                            >
+                                <i class="fa fa-pencil"></i> Editar
+                            </button>
+                            <dl>
+                                <dd class="mb-0">Nome</dd>
+                                <dt class="mb-1" id="profile-first-name">{{ user.first_name }}</dt>
+                                <dd class="mb-0">Sobrenome</dd>
+                                <dt class="mb-1" id="profile-last-name">{{ user.last_name }}</dt>
+                                <dd class="mb-0">E-mail</dd>
+                                <dt class="mb-1" id="profile-email">{{ user.email }}</dt>
+                            </dl>
+                        </div>
+                        <div class="collapse" id="profile-personal-info-form">
+                            <form class="col-md-6 offset-md-3 my-1">
+                                <div class="form-group">
+                                    <label for="">Nome</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control border-square" 
+                                        id="input-profile-first-name" 
+                                        placeholder="Informe seu(s) primeiro(s) nome(s)"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Sobrenome</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control border-square" 
+                                        id="input-profile-last-name" 
+                                        placeholder="Informe seu(s) primeiro(s) nome(s)"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="">E-mail</label>
+                                    <input 
+                                        type="email" 
+                                        class="form-control border-square" 
+                                        id="input-profile-email" 
+                                        placeholder="Informe seu endereço de e-mail"
+                                    >
+                                    <small id="" class="form-text text-muted">
+                                        Fique tranquilo, nunca compartilharemos seu e-mail com ninguém! :)
+                                    </small>
+                                </div>
+                                <div class="text-md-center">
+                                    <button 
+                                        class="btn btn-secondary border-square"
+                                        onclick="Designare.Accounts.Profile.CancelEditPersonalInfo();"
+                                    >
+                                        <i class="fa fa-times"></i> Cancelar
+                                    </button>
+                                    <button class="btn btn-success border-square">
+                                        <i class="fa fa-check"></i> Atualizar
+                                    </button>    
+                                </div>
+                            </form>                            
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -27,9 +80,57 @@
                             style="border-bottom: 1px solid;">
                             Informações de Acesso
                         </h1>
-                        <button class="btn btn-secondary border-square float-md-right">
-                            <i class="fa fa-key"></i> Alterar senha
-                        </button>
+                        <div class="collapse in" id="profile-password-btn">
+                            <button 
+                                class="btn btn-secondary border-square float-md-right"
+                                onclick="Designare.Accounts.Profile.EditPassword();"
+                            >
+                                <i class="fa fa-key"></i> Alterar senha
+                            </button>
+                        </div>
+                        <div class="collapse" id="profile-password-form">
+                            <form class="col-md-6 offset-md-3 my-1">
+                                <div class="form-group">
+                                    <label for="input-profile-current-password">Senha atual</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control border-square" 
+                                        id="input-profile-current-password" 
+                                        placeholder="Insira sua senha atual"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nova senha</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control border-square" 
+                                        id="input-profile-new-password" 
+                                        placeholder="Insira a nova senha"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Confirme a nova senha</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control border-square" 
+                                        id="input-profile-confirm-password" 
+                                        placeholder="Redigite a nova senha"
+                                    >
+                                </div>
+                                <div class="text-md-center">
+                                    <button 
+                                        class="btn btn-secondary border-square"
+                                        onclick="Designare.Accounts.Profile.CancelEditPassword();"
+                                    >
+                                        <i class="fa fa-times"></i> Cancelar
+                                    </button>
+                                    <button class="btn btn-success border-square">
+                                        <i class="fa fa-check"></i> Atualizar
+                                    </button>    
+                                </div>
+                            </form>                            
+                        </div>
+                        <div class="clearfix"></div>
                         <dl>
                             <dd class="mb-0">Nome de usuário</dd><dt class="mb-1">{{ user.username }}</dt>
                             <dd class="mb-0">Data do último acesso</dd><dt class="mb-1">{{ user.last_login }}</dt>
