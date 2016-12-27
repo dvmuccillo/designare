@@ -86,6 +86,11 @@
                 success : function(data){
                     console.log(data);
                     if (data.success) {
+                        iziToast.success({
+                            title: 'Tudo certo!',
+                            message: 'Seus dados foram atualizados!',
+                            position: 'center',
+                        });
                         p = Designare.Accounts.Profile;
                         p.firstName.html(p.inputFirstName.val());
                         p.lastName.html(p.inputLastName.val());
@@ -97,6 +102,11 @@
                 }
             });
         } else {
+            iziToast.error({
+                title: 'Epa, temos um erro!',
+                message: 'Todos os campos devem ser preenchidos!',
+                position: 'center',
+            });
             this.personalInfoFormFieldset.attr('disabled',false);
             this.personalInfoFormBtnUpdate.html('<i class="fa fa-check"></i> Atualizar');
         }
