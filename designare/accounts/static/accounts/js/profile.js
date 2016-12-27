@@ -66,7 +66,7 @@
         }
         /* Verifica se não houve erros */
         if (errors == 0) {
-
+            alert(Designare.csrfToken);
             this.personalInfoFormFieldset.attr('disabled',false);
             this.personalInfoFormBtnUpdate.html('<i class="fa fa-check"></i> Atualizar');
         } else {

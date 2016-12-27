@@ -17,6 +17,11 @@
         <link rel="stylesheet" type="text/css" href="/static/css/designare.css">
     </head>
     <body>
+        <div class="hidden">
+            <form name="designare">
+                {% csrf_token %}
+            </form>
+        </div>
         {% block header %}
             {% include "assets/components/menu.html" %}
         {% endblock %}
