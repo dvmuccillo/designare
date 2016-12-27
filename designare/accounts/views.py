@@ -1,5 +1,6 @@
 from django.contrib.auth import logout,login,authenticate
 from django.shortcuts import get_object_or_404,render,redirect
+from django.http import HttpResponse,JsonResponse
 
 def login_view(request):
     username = request.POST.get('username','')
@@ -21,3 +22,8 @@ def logout_view(request):
 
 def user_profile(request):
     return render(request,"accounts/profile.html")
+
+def update_personal_info(request):
+    return JsonResponse({
+            'success' : True,
+        })
