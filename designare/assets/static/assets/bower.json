@@ -19,7 +19,8 @@
     "bootstrap": "4.0.0-alpha.5",
     "components-font-awesome": "^4.7.0",
     "bootstrap-wysiwyg": "*",
-    "smooth-scroll": "https://github.com/cferdinandi/smooth-scroll.git#^10.2.0"
+    "smooth-scroll": "https://github.com/cferdinandi/smooth-scroll.git#^10.2.0",
+    "izitoast": "^1.0.2"
   },
   "overrides": {
     "bootstrap": {
@@ -37,6 +38,12 @@
     "smooth-scroll": {
       "main": [
         "dist/js/smooth-scroll.min.js"
+      ]
+    },
+    "izitoast": {
+      "main": [
+        "dist/js/izitoast.js",
+        "dist/css/izitoast.css"
       ]
     }
   }

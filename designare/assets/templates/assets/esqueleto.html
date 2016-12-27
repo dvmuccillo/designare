@@ -11,6 +11,7 @@
         {{ DESIGNARE_ASSETS_MANAGER.clearAll }}
         {{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap' }}
         {{ DESIGNARE_ASSETS_MANAGER |registerBower:'components-font-awesome' }}
+        {{ DESIGNARE_ASSETS_MANAGER |registerBower:'izitoast' }}
         {% block css_links %}
             {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
         {% endblock %}
