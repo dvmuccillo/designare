@@ -80,48 +80,49 @@
                 },
                 dataType: 'json',
                 encode  : true,
+                /* Mapeia o namespace para o contexto atual */
+                p: Designare.Accounts.Profile,                    
                 beforeSend: function(){
-                    //do nothing...
+                    this.p.personalInfoFormFieldset.attr('disabled',true);
+                    this.p.personalInfoFormBtnUpdate.html('<i class="fa fa-circle-o-notch fa-spin"></i> Processando');
                 },
                 error: function(){
-                    /* Mapeia o namespace para o contexto atual */
-                    p = Designare.Accounts.Profile;
-                    p.notify.error({
+                    this.p.notify.error({
                         title: 'Não conseguimos atualizar seus dados neste momento!',
-                        message: 'Verifique sua conexão com a internet e tente novamente!',
+                        message: 'Verifique sua conexão com a internet e tente novamente.',
                         position: 'center',
                     });
-                    p.personalInfoFormFieldset.attr('disabled',false);
-                    p.personalInfoFormBtnUpdate.html('<i class="fa fa-check"></i> Atualizar');                   
                 },
                 success : function(data){
                     console.log(data);
                     if (data.success) {
                         /* Mapeia o namespace para o contexto atual */
-                        p = Designare.Accounts.Profile;
-                        p.notify.success({
-                            title: 'Tudo certo!',
-                            message: 'Seus dados foram atualizados!',
+                        this.p.notify.success({
+                            title: 'Seus dados foram atualizados!',
                             position: 'center',
                         });
-                        p.firstName.html(p.inputFirstName.val());
-                        p.lastName.html(p.inputLastName.val());
-                        p.email.html(p.inputEmail.val());
-                        p.ClearPersonalInfoForm();
-                        p.personalInfoFormFieldset.attr('disabled',false);
-                        p.personalInfoFormBtnUpdate.html('<i class="fa fa-check"></i> Atualizar');
+                        this.p.firstName.html(this.p.inputFirstName.val());
+                        this.p.lastName.html(this.p.inputLastName.val());
+                        this.p.email.html(this.p.inputEmail.val());
+                        this.p.ClearPersonalInfoForm();                        
+                    }
+                    else {
+                        this.p.notify.error({
+                            title: 'Todos os campos devem ser preenchidos!',
+                            position: 'center',
+                        });
                     }
                 }
             });
         } else {
             this.notify.error({
-                title: 'Epa, temos um erro!',
-                message: 'Todos os campos devem ser preenchidos!',
+                title: 'Todos os campos devem ser preenchidos!',
                 position: 'center',
             });
-            this.personalInfoFormFieldset.attr('disabled',false);
-            this.personalInfoFormBtnUpdate.html('<i class="fa fa-check"></i> Atualizar');
+            
         }
+        this.personalInfoFormFieldset.attr('disabled',false);
+        this.personalInfoFormBtnUpdate.html('<i class="fa fa-check"></i> Atualizar');;
     },
     /* Exibe o formulário de alteração de senha */
     EditPassword: function(){

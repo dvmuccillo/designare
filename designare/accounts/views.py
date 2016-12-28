@@ -26,14 +26,16 @@ def user_profile(request):
 
 @login_required
 def update_personal_info(request):
-    user = request.user
-    firstName = request.POST.get('firstName')
-    lastName = request.POST.get('lastName')
+    first_name = request.POST.get('firstName')
+    last_name = request.POST.get('lastName')
     email = request.POST.get('email')
-    user.first_name = firstName
-    user.last_name = lastName
-    user.email = email
-    user.save()
-    return JsonResponse({
-            'success' : True,
-        })
+    if first_name and last_name and email:
+        user = request.user
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+        user.save()
+        success = True
+    else:
+        success = False
+    return JsonResponse({'success' : success})
