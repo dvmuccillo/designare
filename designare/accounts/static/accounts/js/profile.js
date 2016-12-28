@@ -1,4 +1,6 @@
 ;Designare.Accounts.Profile = {
+    /* Referência a outros namespaces */
+    notify: Designare.Notifications,
     /* Elementos HTML com base nos seletores */
     firstName                   : $('#profile-first-name'),
     lastName                    : $('#profile-last-name'),
@@ -83,15 +85,27 @@
                 beforeSend: function(){
                     //do nothing...
                 },
+                error: function(){
+                    /* Mapeia o namespace para o contexto atual */
+                    p = Designare.Accounts.Profile;
+                    p.notify.error({
+                        title: 'Não conseguimos atualizar seus dados neste momento!',
+                        message: 'Verifique sua conexão com a internet e tente novamente!',
+                        position: 'center',
+                    });
+                    p.personalInfoFormFieldset.attr('disabled',false);
+                    p.personalInfoFormBtnUpdate.html('<i class="fa fa-check"></i> Atualizar');                   
+                },
                 success : function(data){
                     console.log(data);
                     if (data.success) {
-                        iziToast.success({
+                        /* Mapeia o namespace para o contexto atual */
+                        p = Designare.Accounts.Profile;
+                        p.notify.success({
                             title: 'Tudo certo!',
                             message: 'Seus dados foram atualizados!',
                             position: 'center',
                         });
-                        p = Designare.Accounts.Profile;
                         p.firstName.html(p.inputFirstName.val());
                         p.lastName.html(p.inputLastName.val());
                         p.email.html(p.inputEmail.val());
@@ -102,7 +116,7 @@
                 }
             });
         } else {
-            iziToast.error({
+            this.notify.error({
                 title: 'Epa, temos um erro!',
                 message: 'Todos os campos devem ser preenchidos!',
                 position: 'center',
