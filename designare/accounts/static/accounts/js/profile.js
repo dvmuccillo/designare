@@ -43,12 +43,10 @@
         this.divPersonalInfoForm.collapse('hide');
     },
     CancelEditPersonalInfo: function(){
-        event.preventDefault();
         this.ClearPersonalInfoForm();
     },
     /* Executa o processo de validar e atualizar informações pessoais */
     UpdatePersonalInfo: function(){
-        event.preventDefault();
         errors = 0;
         this.InputStateUpdate(this.inputFirstName,'danger',false);
         this.InputStateUpdate(this.inputLastName,'danger',false);
@@ -133,7 +131,6 @@
     },
     /* Recolhe o formulário de alteração de senha e limpa os campos */
     CancelEditPassword: function() {
-        event.preventDefault();
         this.divPasswordBtn.collapse('show');
         this.divPasswordForm.collapse('hide');
         this.inputCurrentPassword.val('');
