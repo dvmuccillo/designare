@@ -29,6 +29,8 @@ def update_personal_info(request):
     first_name = request.POST.get('firstName')
     last_name = request.POST.get('lastName')
     email = request.POST.get('email')
+    error_title = ''
+    error_message = ''
     if first_name and last_name and email:
         user = request.user
         user.first_name = first_name
@@ -39,3 +41,42 @@ def update_personal_info(request):
     else:
         success = False
     return JsonResponse({'success' : success})
+
+@login_required
+def update_password(request):
+    current_password = request.POST.get('current')
+    new_password = request.POST.get('new')
+    confirm = request.POST.get('confirm')
+    error_type = ''
+    error_title = ''
+    error_message = ''
+    #Verifica se nenhum campo está vazio
+    if current_password and new_password and confirm:
+        user = request.user
+        #verifica a senha atual
+        if user.check_password(current_password):
+            #verifica se a nova senha é igual a confirmação
+            if new_password == confirm:
+                user.set_password(new_password)
+                user.save()
+                success = True
+            else:         
+                success = False
+                error_type = 'confirm_dont_match'
+                error_title = 'As senhas não conferem!'
+                error_message = 'A confirmação precisa ser igual a nova senha.'
+        else:
+            success = False
+            error_type = 'wrong_password'
+            error_title = 'A senha atual está incorreta!'
+            error_message = 'A senha informada não corresponde a sua senha atual.'
+    else:
+        success = False
+        error_title = 'Preencha todos os campos!'
+        error_message = ''
+    return JsonResponse({
+        'success'       : success,
+        'error_type'    : error_type,
+        'error_title'   : error_title, 
+        'error_message' : error_message 
+    })

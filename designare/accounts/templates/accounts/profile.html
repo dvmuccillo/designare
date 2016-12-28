@@ -1,8 +1,26 @@
 {% extends "assets/esqueleto.html" %}
 {% block body %}
     <div class="container mt-2">
-        <div>
-            
+        <div class="row">
+            <div class="modal fade" id="modal-password-change-success" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content border-square">
+                        <div class="modal-header">
+                            <h4>Sua senha foi alterada com sucesso!</h4>
+                        </div>
+                        <div class="modal-body">
+                            Alteramos sua senha conforme sua solicitação, porém precisamos que você autentique-se novamente para continuar utilizando o sistema.
+                            <br>
+                            Quando você estiver pronto(a) clique no botão abaixo para realizar a autenticação.
+                        </div>
+                        <div class="modal-footer text-md-center">
+                            <a class="btn btn-success border-square" href="/accounts/my/profile/">
+                                Ir para autenticação&nbsp;<i class="fa fa-sign-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -35,7 +53,7 @@
                                     <div class="form-group" id="input-profile-first-name-group">
                                         <label for="" class="form-control-label">Nome</label>
                                         <input 
-                                            type="text" 
+                                            type="text" maxlength="30" 
                                             class="form-control border-square" 
                                             id="input-profile-first-name" 
                                             placeholder="Informe seu(s) primeiro(s) nome(s)"
@@ -44,7 +62,7 @@
                                     <div class="form-group" id="input-profile-last-name-group">
                                         <label for="" class="form-control-label">Sobrenome</label>
                                         <input 
-                                            type="text" 
+                                            type="text" maxlength="30" 
                                             class="form-control border-square" 
                                             id="input-profile-last-name" 
                                             placeholder="Informe seu(s) primeiro(s) nome(s)"
@@ -101,48 +119,52 @@
                         </div>
                         <div class="collapse" id="profile-password-form">
                             <form class="col-md-6 offset-md-3 my-1">
-                                <div class="form-group">
-                                    <label for="input-profile-current-password" class="form-control-label">Senha atual</label>
-                                    <input 
-                                        type="password" 
-                                        class="form-control border-square" 
-                                        id="input-profile-current-password" 
-                                        placeholder="Insira sua senha atual"
-                                    >
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-control-label">Nova senha</label>
-                                    <input 
-                                        type="password" 
-                                        class="form-control border-square" 
-                                        id="input-profile-new-password" 
-                                        placeholder="Insira a nova senha"
-                                    >
-                                </div>
-                                <div class="form-group">
-                                    <label for="" class="form-control-label">Confirme a nova senha</label>
-                                    <input 
-                                        type="password" 
-                                        class="form-control border-square" 
-                                        id="input-profile-confirm-password" 
-                                        placeholder="Redigite a nova senha"
-                                    >
-                                </div>
-                                <div class="text-md-center">
-                                    <button 
-                                        type="button" 
-                                        class="btn btn-secondary border-square"
-                                        onclick="Designare.Accounts.Profile.CancelEditPassword();"
-                                    >
-                                        <i class="fa fa-times"></i> Cancelar
-                                    </button>
-                                    <button 
-                                        type="button" 
-                                        class="btn btn-success border-square"
-                                    >
-                                        <i class="fa fa-check"></i> Atualizar
-                                    </button>    
-                                </div>
+                                <fieldset id="profile-password-fieldset">
+                                    <div class="form-group" id="input-profile-current-password-group">
+                                        <label for="input-profile-current-password" class="form-control-label">Senha atual</label>
+                                        <input 
+                                            type="password" 
+                                            class="form-control border-square" 
+                                            id="input-profile-current-password" 
+                                            placeholder="Insira sua senha atual"
+                                        >
+                                    </div>
+                                    <div class="form-group" id="input-profile-new-password-group">
+                                        <label for="" class="form-control-label">Nova senha</label>
+                                        <input 
+                                            type="password" 
+                                            class="form-control border-square" 
+                                            id="input-profile-new-password" 
+                                            placeholder="Insira a nova senha"
+                                        >
+                                    </div>
+                                    <div class="form-group" id="input-profile-confirm-password-group">
+                                        <label for="" class="form-control-label">Confirme a nova senha</label>
+                                        <input 
+                                            type="password" 
+                                            class="form-control border-square" 
+                                            id="input-profile-confirm-password" 
+                                            placeholder="Redigite a nova senha"
+                                        >
+                                    </div>
+                                    <div class="text-md-center">
+                                        <button 
+                                            type="button" 
+                                            class="btn btn-secondary border-square"
+                                            onclick="Designare.Accounts.Profile.CancelEditPassword();"
+                                        >
+                                            <i class="fa fa-times"></i> Cancelar
+                                        </button>
+                                        <button 
+                                            type="button"
+                                            id="profile-password-btn-update" 
+                                            class="btn btn-success border-square"
+                                            onclick="Designare.Accounts.Profile.UpdatePassword();" 
+                                        >
+                                            <i class="fa fa-check"></i> Atualizar
+                                        </button>    
+                                    </div>
+                                </fieldset>
                             </form>                            
                             <div class="clearfix"></div>
                         </div>
