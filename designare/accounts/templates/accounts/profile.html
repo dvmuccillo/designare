@@ -1,5 +1,6 @@
 {% extends "assets/esqueleto.html" %}
 {% block body %}
+    {% include "accounts/components/tabs.html" with active="profile" %}
     <div class="container mt-2">
         <div class="row">
             <div class="modal fade" id="modal-password-change-success" data-backdrop="static">
@@ -22,7 +23,7 @@
                 </div>                    
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-1">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">

@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^my/profile/$', views.user_profile, name='user_profile'),
     url(r'^my/profile/update-personal-info/$', views.update_personal_info, name='update_personal_info'),
     url(r'^my/profile/update-password/$', views.update_password, name='update_password'),
+    url(r'^my/contacts/$', views.user_contacts, name='user_contacts'),
 ]
    

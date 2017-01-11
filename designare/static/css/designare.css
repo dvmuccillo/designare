@@ -1,7 +1,7 @@
 body{
     background-color: #fffffd;
 }
-.border-square, .border-square:first-child, .border-square:last-child{
+.border-square, .border-square:first-child, .border-square:last-child, .border-square a {
     border-radius: 0px !important;
 }
 .btn-circle{

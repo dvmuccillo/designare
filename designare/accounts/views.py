@@ -80,3 +80,8 @@ def update_password(request):
         'error_title'   : error_title, 
         'error_message' : error_message 
     })
+
+@login_required
+def user_contacts(request):
+    return render(request, "accounts/contacts.html")
+
