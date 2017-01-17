@@ -31,12 +31,16 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 class Invite(models.Model):
-    host_user = models.ForeignKey()
-    target_name = models.CharField()
-    target_email = models.CharField()
-    message = models.CharField()
-    code = models.CharField()
-    send_date = models.??
+    host_user = models.ForeignKey(
+        User, 
+        on_delete=models.CASCADE,
+        related_name='invites'
+    )
+    target_name = models.CharField(max_length=100)
+    target_email = models.CharField(max_length=254)
+    message = models.CharField(max_length=255)
+    code = models.CharField(max_length=30)
+    send_date = models.DateTimeField()
 
     def create_invite_code(self,size):
         try:

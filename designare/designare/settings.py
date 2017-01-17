@@ -84,18 +84,20 @@ WSGI_APPLICATION = 'designare.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+"""
+
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'designare',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -144,3 +146,10 @@ STATICFILES_FINDERS = [
 ]
 
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'assets/static/assets/')
+
+#Local Settings
+try:
+    from designare.local_settings import *
+except ImportError:
+    print("\nImport Error: File local_settings.py not found!\n")
+    pass
