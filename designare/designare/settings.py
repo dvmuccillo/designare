@@ -85,7 +85,9 @@ WSGI_APPLICATION = 'designare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 """
-
+By default we use the database settings in the local_settings.py file.
+Use the default django database configuration (below) for reference 
+and configure access to your local database in local_settings.py.
 
 DATABASES = {
     'default': {
