@@ -44,7 +44,7 @@ def cadastrar_etapa(request, metodologia_id):
                 ordem = proxima_pos,
             )
     etapa.save()
-    template = render_to_string('metodologias/etapa.html',{'etapa' : etapa})
+    template = render_to_string('metodologias/etapa.html',{'etapa' : etapa}, request=request)
     return JsonResponse({ 'etapa_id': etapa.pk, 'template' : template ,'sucesso': True})
 
 @login_required
