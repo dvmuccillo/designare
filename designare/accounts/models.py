@@ -14,6 +14,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return "%s" % self.user.get_full_name()
+    
+    def getUserPicture(self):
+        if not self.image:
+            return 'static/img/accounts/default.jpeg'
+        else:
+            return self.image
 """
 Listen for when an user is created,
 then create a new profile with user = the recently created user
