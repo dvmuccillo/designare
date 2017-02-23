@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'assets.apps.AssetsConfig',
+    'utils.apps.UtilsConfig',
     'accounts.apps.AccountsConfig',
     'metodologias.apps.MetodologiasConfig',
     'projetos.apps.ProjetosConfig',

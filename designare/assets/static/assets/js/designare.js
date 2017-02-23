@@ -3,3 +3,4 @@
 }
 ;Designare.Accounts = {}
 ;Designare.Notifications = iziToast;
+;Designare.Utils = {}

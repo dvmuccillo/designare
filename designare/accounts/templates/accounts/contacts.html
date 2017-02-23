@@ -3,8 +3,76 @@
     {% include "accounts/components/tabs.html" with active="contacts" %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                
+            <div class="col-md-12 mt-1">
+                <div class="col-md-12">
+                    <div class="collapse in float-xs-right" id="div-options">
+                        <button
+                            class="btn btn-secondary border-square"
+                            onclick="Designare.Accounts.Contacts.Invite.ShowInviteForm();"
+                        >
+                            <i class="fa fa-envelope"></i> Convidar
+                        </button>
+                    </div>
+                    <div class="collapse" id="invite-user-form">
+                        <form class="col-md-6 offset-md-3 my-1">
+                            <fieldset id="invite-user-form-fieldset">
+                                <div class="form-group" id="input-invite-name-group">
+                                    <label for"" class="form-control-label">Nome</label>
+                                    <input
+                                        type="text" maxlength="100"
+                                        class="form-control border-square"
+                                        id="input-invite-name"
+                                        placeholder="Informe o nome do destinatário"
+                                    >
+                                </div>
+                                <div class="form-group" id="input-invite-email-group">
+                                    <label for"" class="form-control-label">Email</label>
+                                    <input
+                                        type="email" maxlength="254"
+                                        class="form-control border-square"
+                                        id="input-invite-email"
+                                        placeholder="Informe o e-mail do destinatário"
+                                    >
+                                    <small id="input-invite-email-help" class="form-text form-muted">
+                                        Insira o e-mail para o qual o convite deve ser enviado.
+                                    </small>
+                                </div>
+                                <div class="form-group" id="input-invite-message-group">
+                                    <label for"" class="form-control-label">Mensagem <small>(Opcional)</small></label>
+                                    <textarea
+                                        maxlength="255" rows="5"
+                                        class="form-control border-square"
+                                        id="input-invite-message"
+                                        placeholder="Personalize seu convite incluindo uma mensagem"
+                                    ></textarea>
+                                </div>
+                                <div class="text-md-center">
+                                    <button 
+                                        type="button" 
+                                        class="btn btn-secondary border-square"
+                                        onclick="Designare.Accounts.Contacts.Invite.ClearInviteForm();"
+                                    >
+                                        <i class="fa fa-times"></i> Cancelar
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-success border-square"
+                                        onclick=""
+                                        id="invite-btn-send"
+                                    >
+                                        <i class="fa fa-check"></i> Enviar convite
+                                    </button>
+                                </div>                              
+                            </fieldset>
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="card card-outline-info border-square col-md-10  " id="div-none-friend">
+                        <div class="card-block">
+                            <p>Você não possuim nenhum contato ainda!</p>
+                        </div>
+                    </div>                        
+                </div>
             </div>           
         </div>        
     </div>
