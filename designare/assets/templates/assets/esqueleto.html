@@ -12,6 +12,7 @@
         {{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap' }}
         {{ DESIGNARE_ASSETS_MANAGER |registerBower:'components-font-awesome' }}
         {{ DESIGNARE_ASSETS_MANAGER |registerBower:'izitoast' }}
+        {{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Assets.Designare' }}
         {% block css_links %}
             {{ DESIGNARE_ASSETS_MANAGER.getCssLinks | safe }}
         {% endblock %}
@@ -40,11 +41,6 @@
         </footer>
         {% block javascript_links %}
             {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
-            <script src='/static/assets/js/designare.js'></script>
-            <script src='/static/accounts/js/profile.js'></script>
-            <script src='/static/utils/js/forms.js'></script>
-            <script src='/static/accounts/js/contacts.js'></script>
-
         {% endblock %}
         <script type="text/javascript">
             {% block javascript_functions %}

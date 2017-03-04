@@ -13,3 +13,8 @@ def addstr(str1,str2):
 def registerBower(DESIGNARE_ASSETS_MANAGER, package):
     DESIGNARE_ASSETS_MANAGER.registerBower(package)
     return ""
+
+@register.filter
+def registerNamespace(DESIGNARE_ASSETS_MANAGER, namespace):
+    DESIGNARE_ASSETS_MANAGER.registerNamespace(namespace)
+    return ""

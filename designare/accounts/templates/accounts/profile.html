@@ -1,5 +1,8 @@
 {% extends "assets/esqueleto.html" %}
+{% load designare_tags %}
 {% block body %}
+    {{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Utils.Forms' }}
+    {{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Accounts.Profile' }}
     {% include "accounts/components/tabs.html" with active="profile" %}
     <div class="container mt-2">
         <div class="row">
