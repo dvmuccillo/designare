@@ -1,6 +1,7 @@
 ;Designare.Accounts.Profile = {
     /* Referência a outros namespaces */
     notify: Designare.Notifications,
+    forms   : Designare.Utils.Forms,
     /* Elementos HTML com base nos seletores */
     /* Informações Pessoais */
     firstName                   : $('#profile-first-name'),
@@ -24,12 +25,6 @@
     passwordFormFieldset        : $('#profile-password-fieldset'),
     passwordFormBtnUpdate       : $('#profile-password-btn-update'),
     /* Fim dos elementos HTML */
-    /* Atualiza elementos de feedback de input */
-    InputStateUpdate: function(input,css_class,toggle){
-        base_id = input.attr('id');
-        $("#"+base_id+"-group").toggleClass('has-'+css_class,toggle);
-        input.toggleClass('form-control-'+css_class,toggle);
-    },
     /* Exibe o formulário de alteração de informações pessoais */
     EditPersonalInfo: function(){
         this.inputFirstName.val(this.firstName.html());
@@ -43,9 +38,9 @@
         this.inputFirstName.val('');
         this.inputLastName.val('');
         this.inputEmail.val('');
-        this.InputStateUpdate(this.inputFirstName,'danger',false);
-        this.InputStateUpdate(this.inputLastName,'danger',false);
-        this.InputStateUpdate(this.inputEmail,'danger',false);
+        this.forms.InputStateUpdate(this.inputFirstName,'clear');
+        this.forms.InputStateUpdate(this.inputLastName,'clear');
+        this.forms.InputStateUpdate(this.inputEmail,'clear');
         this.divPersonalInfo.collapse('show');
         this.divPersonalInfoForm.collapse('hide');
     },
@@ -55,23 +50,23 @@
     /* Executa o processo de validar e atualizar informações pessoais */
     UpdatePersonalInfo: function(){
         errors = 0;
-        this.InputStateUpdate(this.inputFirstName,'danger',false);
-        this.InputStateUpdate(this.inputLastName,'danger',false);
-        this.InputStateUpdate(this.inputEmail,'danger',false);
+        this.forms.InputStateUpdate(this.inputFirstName,'danger',false);
+        this.forms.InputStateUpdate(this.inputLastName,'danger',false);
+        this.forms.InputStateUpdate(this.inputEmail,'danger',false);
         /* Bloqueia o formulário durante o processamento */
         this.personalInfoFormFieldset.attr('disabled',true);
         this.personalInfoFormBtnUpdate.html('<i class="fa fa-circle-o-notch fa-spin"></i> Processando');
         /* Valida os campos */
         if ($.trim(this.inputFirstName.val()).length == 0){
-            this.InputStateUpdate(this.inputFirstName,'danger',true);
+            this.forms.InputStateUpdate(this.inputFirstName,'danger',true);
             errors++;
         }
         if ($.trim(this.inputLastName.val()).length == 0){
-            this.InputStateUpdate(this.inputLastName,'danger',true);
+            this.forms.InputStateUpdate(this.inputLastName,'danger',true);
             errors++;
         }
         if ($.trim(this.inputEmail.val()).length == 0){
-            this.InputStateUpdate(this.inputEmail,'danger',true);
+            this.forms.InputStateUpdate(this.inputEmail,'danger',true);
             errors++;
         }
         /* Verifica se não houve erros */
@@ -148,23 +143,23 @@
     /* Executa o processo de validar e atualizar senha */
     UpdatePassword: function(){
         errors = 0;
-        this.InputStateUpdate(this.inputCurrentPassword,'danger',false);
-        this.InputStateUpdate(this.inputNewPassword,'danger',false);
-        this.InputStateUpdate(this.inputConfirmPassword,'danger',false);
+        this.forms.InputStateUpdate(this.inputCurrentPassword,'danger',false);
+        this.forms.InputStateUpdate(this.inputNewPassword,'danger',false);
+        this.forms.InputStateUpdate(this.inputConfirmPassword,'danger',false);
         /* Bloqueia o formulário durante o processamento */
         this.passwordFormFieldset.attr('disabled',true);
         this.passwordFormBtnUpdate.html('<i class="fa fa-circle-o-notch fa-spin"></i> Processando');
         /* Valida os campos */
         if ($.trim(this.inputCurrentPassword.val()).length == 0){
-            this.InputStateUpdate(this.inputCurrentPassword,'danger',true);
+            this.forms.InputStateUpdate(this.inputCurrentPassword,'danger',true);
             errors++;
         }
         if ($.trim(this.inputNewPassword.val()).length == 0){
-            this.InputStateUpdate(this.inputNewPassword,'danger',true);
+            this.forms.InputStateUpdate(this.inputNewPassword,'danger',true);
             errors++;
         }
         if ($.trim(this.inputConfirmPassword.val()).length == 0){
-            this.InputStateUpdate(this.inputConfirmPassword,'danger',true);
+            this.forms.InputStateUpdate(this.inputConfirmPassword,'danger',true);
             errors++;
         }
         /* Verifica se não houve erros */
@@ -203,11 +198,11 @@
                     else {
                         switch(data.error_type){
                             case 'wrong_password':
-                                this.p.InputStateUpdate(this.p.inputCurrentPassword,'danger',true);
+                                this.p.forms.InputStateUpdate(this.p.inputCurrentPassword,'danger',true);
                                 break;
                             case 'confirm_dont_match':
-                                this.p.InputStateUpdate(this.p.inputNewPassword,'danger',true);
-                                this.p.InputStateUpdate(this.p.inputConfirmPassword,'danger',true);
+                                this.p.forms.InputStateUpdate(this.p.inputNewPassword,'danger',true);
+                                this.p.forms.InputStateUpdate(this.p.inputConfirmPassword,'danger',true);
                                 break;
                         }
                         this.p.notify.error({

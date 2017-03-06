@@ -22,5 +22,10 @@
         this.inputEmail.val('');
         this.inputMessage.val('');
         this.divInviteForm.collapse('hide');
+    },
+    /* Valida as informações e envia o convite */
+    SendInvite: function(){
+        errors = 0;
+        
     }
 }
