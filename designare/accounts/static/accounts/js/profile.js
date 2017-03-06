@@ -143,9 +143,9 @@
     /* Executa o processo de validar e atualizar senha */
     UpdatePassword: function(){
         errors = 0;
-        this.forms.InputStateUpdate(this.inputCurrentPassword,'danger',false);
-        this.forms.InputStateUpdate(this.inputNewPassword,'danger',false);
-        this.forms.InputStateUpdate(this.inputConfirmPassword,'danger',false);
+        this.forms.InputStateUpdate(this.inputCurrentPassword,'clear');
+        this.forms.InputStateUpdate(this.inputNewPassword,'clear');
+        this.forms.InputStateUpdate(this.inputConfirmPassword,'clear');
         /* Bloqueia o formulário durante o processamento */
         this.passwordFormFieldset.attr('disabled',true);
         this.passwordFormBtnUpdate.html('<i class="fa fa-circle-o-notch fa-spin"></i> Processando');
