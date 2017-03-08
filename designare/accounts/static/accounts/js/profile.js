@@ -50,23 +50,23 @@
     /* Executa o processo de validar e atualizar informações pessoais */
     UpdatePersonalInfo: function(){
         errors = 0;
-        this.forms.InputStateUpdate(this.inputFirstName,'danger',false);
-        this.forms.InputStateUpdate(this.inputLastName,'danger',false);
-        this.forms.InputStateUpdate(this.inputEmail,'danger',false);
+        this.forms.InputStateUpdate(this.inputFirstName,'clear');
+        this.forms.InputStateUpdate(this.inputLastName,'clear');
+        this.forms.InputStateUpdate(this.inputEmail,'clear');
         /* Bloqueia o formulário durante o processamento */
         this.personalInfoFormFieldset.attr('disabled',true);
         this.personalInfoFormBtnUpdate.html('<i class="fa fa-circle-o-notch fa-spin"></i> Processando');
-        /* Valida os campos */
-        if ($.trim(this.inputFirstName.val()).length == 0){
-            this.forms.InputStateUpdate(this.inputFirstName,'danger',true);
+        /* Verifica por campos vazios */
+        if (this.forms.InputIsEmpty(this.inputFirstName)){
+            this.forms.InputStateUpdate(this.inputFirstName,'danger');
             errors++;
         }
-        if ($.trim(this.inputLastName.val()).length == 0){
-            this.forms.InputStateUpdate(this.inputLastName,'danger',true);
+        if (this.forms.InputIsEmpty(this.inputLastName)){
+            this.forms.InputStateUpdate(this.inputLastName,'danger');
             errors++;
         }
-        if ($.trim(this.inputEmail.val()).length == 0){
-            this.forms.InputStateUpdate(this.inputEmail,'danger',true);
+        if (this.forms.InputIsEmpty(this.inputEmail)){
+            this.forms.InputStateUpdate(this.inputEmail,'danger');
             errors++;
         }
         /* Verifica se não houve erros */
@@ -137,8 +137,11 @@
         this.divPasswordBtn.collapse('show');
         this.divPasswordForm.collapse('hide');
         this.inputCurrentPassword.val('');
+        this.forms.InputStateUpdate(this.inputCurrentPassword,'clear');
         this.inputNewPassword.val('');
-        this.inputConfirmPassword.val('');        
+        this.forms.InputStateUpdate(this.inputNewPassword,'clear');
+        this.inputConfirmPassword.val('');
+        this.forms.InputStateUpdate(this.inputConfirmPassword,'clear');    
     },
     /* Executa o processo de validar e atualizar senha */
     UpdatePassword: function(){
@@ -149,17 +152,17 @@
         /* Bloqueia o formulário durante o processamento */
         this.passwordFormFieldset.attr('disabled',true);
         this.passwordFormBtnUpdate.html('<i class="fa fa-circle-o-notch fa-spin"></i> Processando');
-        /* Valida os campos */
+        /* Verifica por campos vazios */
         if ($.trim(this.inputCurrentPassword.val()).length == 0){
-            this.forms.InputStateUpdate(this.inputCurrentPassword,'danger',true);
+            this.forms.InputStateUpdate(this.inputCurrentPassword,'danger');
             errors++;
         }
         if ($.trim(this.inputNewPassword.val()).length == 0){
-            this.forms.InputStateUpdate(this.inputNewPassword,'danger',true);
+            this.forms.InputStateUpdate(this.inputNewPassword,'danger');
             errors++;
         }
         if ($.trim(this.inputConfirmPassword.val()).length == 0){
-            this.forms.InputStateUpdate(this.inputConfirmPassword,'danger',true);
+            this.forms.InputStateUpdate(this.inputConfirmPassword,'danger');
             errors++;
         }
         /* Verifica se não houve erros */
