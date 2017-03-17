@@ -2,6 +2,8 @@ from django.contrib.auth import logout,login,authenticate
 from django.shortcuts import get_object_or_404,render,redirect
 from django.http import HttpResponse,JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ValidationError
+from .models import Invite
 
 def login_view(request):
     username = request.POST.get('username','')
@@ -85,3 +87,46 @@ def update_password(request):
 def user_contacts(request):
     return render(request, "accounts/contacts.html")
 
+@login_required
+def user_send_invite(request):
+    target_name = request.POST.get('name')
+    target_email = request.POST.get('email')
+    message = request.POST.get('message')
+    error_type = ''
+    error_title = ''
+    error_message = ''
+    #Verifica se nenhum campo está vazio
+    if target_name and target_email:
+        invite = Invite(
+            host_user = request.user,
+            target_name = target_name,
+            target_email = target_email,
+            message = message
+        )
+        try:
+            invite.clean_fields()
+            invite.save()
+            try:
+                invite.send_mail()
+                success = True
+            except:
+                invite.unsent = True
+                invite.save()
+                success = False
+                error_type = "unable_to_send_email"
+                error_title = "Não conseguimos enviar o convite no momento!"
+                error_message = "Por favor, tente novamente mais tarde."
+        except ValidationError:
+            success = False
+            error_type = "invalid_email_address"
+            error_title = "Informe um e-mail válido!"
+    else:
+        success = False
+        error_title = 'Nome e E-mail são campos obrigatórios!'
+
+    return JsonResponse({
+        'success'       : success,
+        'error_type'    : error_type,
+        'error_title'   : error_title, 
+        'error_message' : error_message 
+    })

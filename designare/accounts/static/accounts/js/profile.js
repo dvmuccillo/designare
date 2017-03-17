@@ -187,14 +187,13 @@
                 error: function(){
                     this.p.notify.error({
                         title: 'Não conseguimos atualizar sua senha neste momento!',
-                        message: 'Verifique sua conexão com a internet e tente novamente.',
+                        message: 'Tente novamente mais tarde.',
                         position: 'center',
                     });
                 },
                 success : function(data){
                     console.log(data);
                     if (data.success) {
-                        /* Mapeia o namespace para o contexto atual */
                         this.p.modalPasswordNotify.modal('show');
                         this.p.CancelEditPassword();                        
                     }

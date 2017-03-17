@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^my/profile/update-personal-info/$', views.update_personal_info, name='update_personal_info'),
     url(r'^my/profile/update-password/$', views.update_password, name='update_password'),
     url(r'^my/contacts/$', views.user_contacts, name='user_contacts'),
+    url(r'^my/contacts/send-invite/$', views.user_send_invite, name='user_send_invite'),
 ]
    

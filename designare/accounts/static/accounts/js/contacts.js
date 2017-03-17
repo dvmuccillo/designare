@@ -14,7 +14,6 @@
     /* Fim dos elementos HTML */
     /* Exibe o formulário de convite */
     ShowInviteForm: function(){
-        this.divInviteForm.collapse('show');
         this.inputName.focus();
     },
     /* Limpa e recolhe o formulário de convite */
@@ -24,7 +23,6 @@
         this.inputEmail.val('');
         this.forms.InputStateUpdate(this.inputEmail,'clear');
         this.inputMessage.val('');
-        this.divInviteForm.collapse('hide');
     },
     /* Valida as informações e envia o convite */
     SendInvite: function(){
@@ -45,7 +43,56 @@
         }
         /* Verifica se não foram encontrados erros */
         if(errors == 0){
-
+            $.ajax({
+                type    : 'POST',
+                url     : '/accounts/my/contacts/send-invite/',
+                data    : {
+                    'csrfmiddlewaretoken'   : Designare.csrfToken,
+                    'name'                  : this.inputName.val(),
+                    'email'                 : this.inputEmail.val(),
+                    'message'               : this.inputMessage.val(),
+                },
+                dataType: 'json',
+                encode  : true,
+                /* Mapeia o namespace para o contexto atual */
+                i       : Designare.Accounts.Contacts.Invite,
+                error: function(){
+                    this.i.notify.error({
+                        title: 'Não conseguimos enviar seu convite neste momento!',
+                        message: 'Tente novamente mais tarde.',
+                        position: 'center',
+                    });
+                },
+                success: function (data) {
+                    if(data.success){
+                        this.i.notify.success({
+                            title   : 'Seu convite foi enviado!',
+                            position: 'center',
+                        });
+                        this.i.ClearInviteForm();
+                    } else {
+                        switch(data.error_type){
+                            case 'invalid_email_address':
+                                this.i.forms.InputStateUpdate(this.i.inputEmail,'danger');
+                                this.i.notify.error({
+                                    title: data.error_title,
+                                    message: data.error_message,
+                                    position: 'center',
+                                });
+                                break;
+                            case 'unable_to_send_email':
+                                this.i.notify.warning({
+                                    title: data.error_title,
+                                    message: data.error_message,
+                                    position: 'center',
+                                });
+                                this.i.ClearInviteForm();
+                                break;
+                        };
+                        
+                    }
+                }
+            });
         }else{
             this.notify.error({
                 title: 'Nome e E-mail são campos obrigatórios!',

@@ -1,0 +1,16 @@
+
+    <div class="card border-square {% if not invite.unsent %} card-outline-primary {% else %} card-outline-warning {% endif %}" mb-0>
+        <div class="card-header border-square {% if not invite.unsent %} bg-primary {% else %} bg-warning {% endif %} mb-0">
+            <a class="card-text text-white">{{ invite.target_name }}</a>
+        </div>
+        <div class="card-block">
+            <dl>
+                <dd class="mb-0">E-mail</dd>
+                <dt class="mb-1" >{{ invite.target_email }}</dt>
+                <dd class="mb-0">Mensagem</dd>
+                <dt class="mb-1">{{ invite.message }}</dt>
+                <dd class="mb-0">Criado em</dd>
+                <dt class="mb-1" >{{ invite.creation_date }}</dt>
+            </dl>
+        </div>        
+    </div>
