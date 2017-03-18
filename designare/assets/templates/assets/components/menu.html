@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 offset-md-1 mt-3">
+        <div class="col-md-10 offset-md-1 mt-5">
             <a href="/accounts/my/profile/" style="text-decoration: none;">
                <img 
                     src="/{{ user.profile.getUserPicture }}" 
@@ -9,7 +9,7 @@
                     data-tooltip="tooltip" data-placement="top" title="Meu Perfil"
                 >
             </a>
-            <div class="btn-group float-xs-right" role="group">
+            <div class="btn-group float-right mt-5" role="group">
                 {% block menu_extra %}
                 {% endblock %}
                 <a 

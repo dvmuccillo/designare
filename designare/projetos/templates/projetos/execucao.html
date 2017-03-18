@@ -11,7 +11,7 @@
                 {% include execucao.recurso.getModals %}
             {% endif %}
         </div>
-        <div class="row mt-3">
+        <div class="row mt-5">
             <form class="hidden" name="info">
                 {% csrf_token %}
                 <input type="hidden" id="id-projeto" value="{{ execucao.projeto.pk }}">

@@ -144,7 +144,7 @@
                     {% for etapa in metodologia.etapas.all %}
                         <a
                             href="#etapa_{{ etapa.id }}" id="li-menu-etapa-{{ etapa.id }}"
-                            class="list-group-item list-group-item-action collapse in border-square"
+                            class="list-group-item list-group-item-action collapse show border-square"
                         >
                             {{ etapa.nome }}
                         </a>
@@ -175,11 +175,11 @@
                 <div class="col-md-11">
                     <div class="row collapse" id="collapse-cadastrar-etapa">
                         <div class="col-md-11 offset-md-1">
-                            <h4 class="mt-1">Adicionar nova etapa:</h4>
+                            <h4 class="mt-3">Adicionar nova etapa:</h4>
                             <form id="form-etapa" name="form_etapa">
                                 <fieldset id="fieldset-nova-etapa">
                                     {% csrf_token %}
-                                    <div class="form-group mr-1" id="div-input-etapa-nome">
+                                    <div class="form-group mr-3" id="div-input-etapa-nome">
                                         <label>
                                             <b>Nome</b>&nbsp;
                                             <i

@@ -1,7 +1,7 @@
 {% extends 'projetos/base.html' %}
 {% block subtitle_content %}
 <div class="row my-2" align="center">
-    <div id="div-btn-form-projeto" class="collapse in">
+    <div id="div-btn-form-projeto" class="collapse show">
         <button 
             class="btn btn-secondary btn-circle" 
             alt="Adicionar novo projeto"
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <label for="input-projeto-descricao">Descrição:</label>
-                    <div class="input-group mb-1">
+                    <div class="input-group mb-3">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-info"></i>
                         </span>
@@ -52,7 +52,7 @@
                         ></textarea>
                     </div>
                     <label for="select-metodologia">Metodologia:</label>
-                    <div class="input-group mb-1">
+                    <div class="input-group mb-3">
                         <span class="input-group-addon border-square">
                             <i class="fa fa-database"></i>
                         </span>
@@ -112,7 +112,7 @@
                             <h4>Informações do projeto <span id="modal-info-projeto-nome"></span></h4>
                         </div>
                         <div class="modal-body">
-                            <div class="row mb-1">
+                            <div class="row mb-3">
                                 <div class="col-md-10 offset-md-1">
                                     <img src="" id="modal-info-projeto-capa" class="img-fluid img-thumbnail border-square">
                                 </div>
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-dialog collapse in" id="modal-editar">
+                <div class="modal-dialog collapse show" id="modal-editar">
                     <div class="modal-content border-square" id="modal-editar-projeto-conteudo">
                         <div class="modal-header">
                             <h4>Editar informações do projeto:</h4>
@@ -181,7 +181,7 @@
                                             </div>
                                         </div>
                                         <label for="input-editar-descricao" class="mt-0">Descrição:</label>
-                                        <div class="input-group mb-1">
+                                        <div class="input-group mb-3">
                                             <span class="input-group-addon border-square">
                                                 <i class="fa fa-info"></i>
                                             </span>
@@ -192,7 +192,7 @@
                                             ></textarea>
                                         </div>
                                         <label for="select-metodologia-editar">Metodologia:</label>
-                                        <div class="input-group mb-1">
+                                        <div class="input-group mb-3">
                                             <span class="input-group-addon border-square">
                                                 <i class="fa fa-database"></i>
                                             </span>

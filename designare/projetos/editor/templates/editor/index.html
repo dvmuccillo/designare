@@ -1,7 +1,7 @@
 {% extends 'projetos/recurso.html' %}
 {% block recurso_extra_toolbar %}
-    <div class="collapse in" id="editor-{{ execucao.pk }}-toolbar-editor">
-        <div class="btn-group-vertical mb-1">
+    <div class="collapse show" id="editor-{{ execucao.pk }}-toolbar-editor">
+        <div class="btn-group-vertical mb-3">
             <button 
                 class="btn btn-success border-square"
                 data-tooltip="tooltip" data-placement="left" title="Salvar"
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="collapse" id="editor-{{ execucao.pk }}-toolbar-exibicao">
-        <div class="btn-group-vertical mb-1">
+        <div class="btn-group-vertical mb-3">
             <button 
                 class="btn btn-secondary border-square"
                 data-tooltip="tooltip" data-placement="left" title="Editar"
@@ -32,9 +32,9 @@
     </div>
 {% endblock %}
 {% block recurso_content %}
-    <div class="collapse in" id="editor-{{ execucao.pk }}-edicao">
+    <div class="collapse show" id="editor-{{ execucao.pk }}-edicao">
         <div class="btn-toolbar" data-role="editor-{{ execucao.pk}}-toolbar" data-target="#editor-{{ execucao.pk }}">
-            <div class="btn-group mb-1">
+            <div class="btn-group mb-3">
                 <a class="btn btn-secondary dropdown-toggle border-square" data-toggle="dropdown" title="Font Size">
                     <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
                 <ul class="dropdown-menu border-square">
@@ -55,7 +55,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="btn-group mb-1">
+            <div class="btn-group mb-3">
                 <a class="btn btn-secondary border-square" data-edit="bold" title="Bold (Ctrl/Cmd+B)">
                     <i class="fa fa-bold"></i>
                 </a>
@@ -69,7 +69,7 @@
                     <i class="fa fa-underline"></i>
                 </a>
             </div>
-            <div class="btn-group mb-1">
+            <div class="btn-group mb-3">
                 <a class="btn btn-secondary border-square" data-edit="insertunorderedlist" title="Bullet list">
                     <i class="fa fa-list-ul"></i>
                 </a>
@@ -83,7 +83,7 @@
                     <i class="fa fa-indent"></i>
                 </a>
             </div>
-            <div class="btn-group mb-1">
+            <div class="btn-group mb-3">
                 <a class="btn btn-secondary border-square" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)">
                     <i class="fa fa-align-left"></i>
                 </a>
@@ -97,26 +97,26 @@
                     <i class="fa fa-align-justify"></i>
                 </a>
             </div>
-            <div class="btn-group mb-1">
+            <div class="btn-group mb-3">
                 <a class="btn btn-secondary border-square dropdown-toggle" data-toggle="dropdown" title="Hyperlink">
                     <i class="fa fa-link"></i>
                 </a>
-                <div class="dropdown-menu input-append p-1 m-0 border-square">
-                    <input class="border-square mb-1" placeholder="URL" type="text" data-edit="createLink"/>
+                <div class="dropdown-menu input-append p-1 m0 border-square">
+                    <input class="border-square mb-3" placeholder="URL" type="text" data-edit="createLink"/>
                     <button class="btn btn-secondary border-square" type="button">Adicionar</button>
                 </div>
                 <a class="btn btn-secondary border-square" data-edit="unlink" title="Remover Hyperlink">
                     <i class="fa fa-cut"></i>
                 </a>
             </div>
-            <div class="btn-group mb-1">
+            <div class="btn-group mb-3">
                 <a class="btn btn-secondary border-square" data-edit="undo" title="Undo (Ctrl/Cmd+Z)">
                     <i class="fa fa-undo"></i></a>
                 <a class="btn btn-secondary border-square" data-edit="redo" title="Redo (Ctrl/Cmd+Y)">
                     <i class="fa fa-repeat"></i></a>
             </div>
         </div>
-        <div id="editor-{{ execucao.pk }}" data-toggle="designare-editor" class="designare-editor border-square mr-1">
+        <div id="editor-{{ execucao.pk }}" data-toggle="designare-editor" class="designare-editor border-square mr-3">
         </div>
     </div>
     <div class="collapse" id="editor-{{ execucao.pk }}-exibicao">

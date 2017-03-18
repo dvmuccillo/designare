@@ -1,8 +1,9 @@
 from django.contrib.auth import logout,login,authenticate
-from django.shortcuts import get_object_or_404,render,redirect
-from django.http import HttpResponse,JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
+from django.http import HttpResponse,JsonResponse
+from django.shortcuts import get_object_or_404,render,redirect
+from django.template.loader import render_to_string
 from .models import Invite
 
 def login_view(request):
@@ -95,6 +96,7 @@ def user_send_invite(request):
     error_type = ''
     error_title = ''
     error_message = ''
+    template = ''
     #Verifica se nenhum campo está vazio
     if target_name and target_email:
         invite = Invite(
@@ -116,6 +118,7 @@ def user_send_invite(request):
                 error_type = "unable_to_send_email"
                 error_title = "Não conseguimos enviar o convite no momento!"
                 error_message = "Por favor, tente novamente mais tarde."
+            template = render_to_string("accounts/components/card-invite.html", {'invite':invite})
         except ValidationError:
             success = False
             error_type = "invalid_email_address"
@@ -128,5 +131,6 @@ def user_send_invite(request):
         'success'       : success,
         'error_type'    : error_type,
         'error_title'   : error_title, 
-        'error_message' : error_message 
+        'error_message' : error_message,
+        'template'      : template
     })

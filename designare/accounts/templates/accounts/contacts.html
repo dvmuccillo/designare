@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <!-- Abas de navegação -->
-                <ul class="nav nav-tabs border-square mt-1 mb-1" role="tablist">
+                <ul class="nav nav-tabs border-square mt-4 mb-3" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#Friends" role="tab"><i class="fa fa-address-book"></i> Amigos</a>
                     </li>
@@ -23,28 +23,32 @@
                 </ul>
                 <!-- Painéis de conteúdo -->
                 <div class="tab-content">
+                    <!-- Contatos -->
                     <div class="tab-pane active" id="Friends" role="tabpanel">
                         <div class="card card-outline-info border-square" id="div-none-friend">
                             <div class="card-block">
-                                <p>Você não possuim nenhum contato ainda!</p>
+                                <p>Você não possuim nenhum contato ainda.</p>
                             </div>
                         </div>
                     </div>
+                    <!-- Convites -->
                     <div class="tab-pane" id="Invites" role="tabpanel">
                         {% if user.profile.getInvites %}
-                            <div class="card-columns">
+                            <div class="row" id="div-invites"><!-- <div class="card-columns" id="div-invites"> -->
                                 {% for invite in user.profile.getInvites %}
                                     {% include "accounts/components/card-invite.html" with invite=invite %}                              
                                 {% endfor %}
+                            <!-- </div>  -->
                             </div>
                         {% else %}
                             <div class="card card-outline-info border-square" id="div-none-invite">
                                 <div class="card-block">
-                                    <p>Você não possuim nenhum convite pendente</p>
+                                    <p>Você não possuim nenhum convite pendente.</p>
                                 </div>
                             </div>                        
                         {% endif %}
                     </div>
+                    <!-- Formulário de Convite -->
                     <div class="tab-pane" id="InviteForm" role="tabpanel">
                         <div class="row">
                             <div class="col-md-12">

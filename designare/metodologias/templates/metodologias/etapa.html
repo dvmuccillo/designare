@@ -1,10 +1,10 @@
 {% load designare_tags %}
-<div class="collapse in" id="collapse-etapa-{{ etapa.pk }}">
+<div class="collapse show" id="collapse-etapa-{{ etapa.pk }}">
     <a id='etapa_{{ etapa.id }}'></a>
     <div class='row'>
         <div class='row'>
             <div class='card card-outline-secondary border-square'  style="">
-                <div class='card-block collapse in' id="card-etapa-info-{{ etapa.pk }}">
+                <div class='card-block collapse show' id="card-etapa-info-{{ etapa.pk }}">
                     <h3 class='card-title'>
                         <span id="etapa-nome-{{etapa.pk}}">{{ etapa.nome }}</span>
                         <button 
@@ -34,11 +34,11 @@
                 </div>
                 <div class='card-block collapse' id="card-etapa-editar-{{ etapa.pk }}">
                     <div class="col-md-12">
-                        <h4 class="mt-1">Editar etapa:</h4>
+                        <h4 class="mt-3">Editar etapa:</h4>
                         <form id="form-etapa-{{ etapa.pk }}" name="form_etapa_{{ etapa.pk }}">
                             <fieldset id="fieldset-editar-etapa-{{ etapa.pk }}">
                                 {% csrf_token %}
-                                <div class="form-group mr-1" id="div-input-etapa-nome-{{ etapa.pk }}">
+                                <div class="form-group mr-3" id="div-input-etapa-nome-{{ etapa.pk }}">
                                     <label>
                                         <b>Nome</b>&nbsp;
                                         <i
@@ -91,11 +91,11 @@
                 </div>
                 <div class='card-block collapse' id="card-atividade-editar-{{ etapa.pk }}">
                     <div class="col-md-12">
-                        <h4 class="mt-1">Editar atividade:</h4>
+                        <h4 class="mt-3">Editar atividade:</h4>
                         <form id="form-atividade-{{ etapa.pk }}" name="form_atividade_{{ etapa.pk }}">
                             <fieldset id="fieldset-editar-atividade-{{ etapa.pk }}">
                                 {% csrf_token %}
-                                <div class="form-group mr-1" id="div-input-atividade-nome-{{ etapa.pk }}">
+                                <div class="form-group mr-3" id="div-input-atividade-nome-{{ etapa.pk }}">
                                     <label>
                                         <b>Nome</b>&nbsp;
                                         <i
@@ -147,14 +147,14 @@
                     </div>
                 </div>
                 <hr>
-                <div id='div-listagem-atividades{{ etapa.pk }}' class="collapse in">
+                <div id='div-listagem-atividades{{ etapa.pk }}' class="collapse show">
                     {% if etapa.atividades.all %}
                         {% for atividade in etapa.atividades.all %}
                             {% include "metodologias/atividade.html" with atividade=atividade %}
                         {% endfor %}
                         <div class='row collapse' id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
                     {% else %}
-                        <div class='row collapse in' id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
+                        <div class='row collapse show' id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
                     {% endif %}    
                             <div class='col-md-11 offset-md-1'>
                                 <div class='card unbordered'>
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                         </div>
-                    <div class='row ml-0 collapse in' id='row-btn-nova-atividade{{ etapa.pk }}'>
+                    <div class='row ml-0 collapse show' id='row-btn-nova-atividade{{ etapa.pk }}'>
                         <div class='col-md-5 offset-md-1 my-1'>
                            <h3 class=''>
                                 <button 
@@ -185,13 +185,13 @@
                            </h3>
                         </div>
                     </div>
-                    <div class='row collapse mb-1' id='CadastrarAtividade{{ etapa.pk }}'>
+                    <div class='row collapse mb-3' id='CadastrarAtividade{{ etapa.pk }}'>
                         <div class='col-md-11 offset-md-1'>
-                            <h4 class='mt-1'>Adicionar nova atividade:</h4>
+                            <h4 class='mt-3'>Adicionar nova atividade:</h4>
                             <form id='form-nova-atividade{{ etapa.pk }}' name='form_nova_atividade{{ etapa.pk }}'>
                                 <fieldset id='fieldset-nova-atividade{{ etapa.pk }}'>
                                     {% csrf_token %}
-                                    <div class='form-group mr-1' id='div-input-atividade-nome{{ etapa.pk }}'>
+                                    <div class='form-group mr-3' id='div-input-atividade-nome{{ etapa.pk }}'>
                                         <label>
                                             <b>Nome</b>&nbsp;
                                             <i

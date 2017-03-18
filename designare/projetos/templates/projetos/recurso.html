@@ -1,9 +1,9 @@
-<div class="row mb-1 collapse in" id="execucao-{{ execucao.pk }}">
+<div class="row mb-3 collapse show" id="execucao-{{ execucao.pk }}">
     <div class="col-md-1 float-md-right">
         <div class="card unbordered">
                 {%  block recurso_extra_toolbar %}
                 {% endblock %}
-                <div class="btn-group-vertical mb-1">
+                <div class="btn-group-vertical mb-3">
                     {%  block recurso_main_toolbar %}
                     {% endblock %}
                     {% if not full_page %}                      

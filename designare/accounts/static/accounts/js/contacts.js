@@ -4,6 +4,10 @@
     /* Referência a outros namespaces */
     notify  : Designare.Notifications,
     forms   : Designare.Utils.Forms,
+    /* Abas */
+    tabInvites                  : $('#Invites'),
+    /*  */
+    divInvites       : $('#div-invites'),
     /* Formulário para envio de convite */
     divInviteForm               : $('#invite-user-form'),
     inviteFormFieldset          : $('#invite-user-form-fieldset'),
@@ -12,9 +16,18 @@
     inputEmail                  : $('#input-invite-email'),
     inputMessage                : $('#input-invite-message'),      
     /* Fim dos elementos HTML */
-    /* Exibe o formulário de convite */
-    ShowInviteForm: function(){
-        this.inputName.focus();
+    /* Adiciona o card de convite */
+    AppendInviteCard: function(card_invite){
+        alert("1");
+        if(this.divInvites.length){
+            alert("2");
+            //this.tabInvites.empty();
+            alert("3");
+            //this.tabInvites.append('<div class="card-columns" id="div-invites\"></div>')
+            alert("4");
+        }
+        alert("5");
+        this.divInvites.append(card_invite);
     },
     /* Limpa e recolhe o formulário de convite */
     ClearInviteForm: function(){
@@ -70,6 +83,7 @@
                             position: 'center',
                         });
                         this.i.ClearInviteForm();
+                        this.i.AppendInviteCard(data.template);
                     } else {
                         switch(data.error_type){
                             case 'invalid_email_address':
@@ -87,6 +101,7 @@
                                     position: 'center',
                                 });
                                 this.i.ClearInviteForm();
+                                this.i.AppendInviteCard(data.template);
                                 break;
                         };
                         
@@ -101,5 +116,9 @@
         }
         this.inviteFormFieldset.attr('disabled',false);
         this.inviteFormBtnSend.html('<i class="fa fa-check"></i> Enviar convite');
-    }
+    },
+    /* Exibe o formulário de convite */
+    ShowInviteForm: function(){
+        this.inputName.focus();
+    },
 }

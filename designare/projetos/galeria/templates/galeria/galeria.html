@@ -1,7 +1,7 @@
 {% extends "projetos/recurso.html" %}
 {% block recurso_extra_toolbar %}
-    <div class="collapse in" id="galeria-{{ execucao.pk }}-toolbar-upload">
-        <div class="btn-group-vertical mb-1">
+    <div class="collapse show" id="galeria-{{ execucao.pk }}-toolbar-upload">
+        <div class="btn-group-vertical mb-3">
             <button 
                 class="btn btn-success border-square"
                 data-tooltip="tooltip" data-placement="left" title="Enviar arquivos"
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="collapse" id="galeria-{{ execucao.pk }}-toolbar-exibicao">
-        <div class="btn-group-vertical mb-1">
+        <div class="btn-group-vertical mb-3">
             <button 
                 class="btn btn-success border-square"
                 data-tooltip="tooltip" data-placement="left" title="Adicionar imagem"
@@ -34,9 +34,9 @@
     </div>
 {% endblock %}
 {% block recurso_content %}
-    <div class="collapse in" id="galeria-input-{{ execucao.pk }}">
+    <div class="collapse show" id="galeria-input-{{ execucao.pk }}">
         <form
-            class="mb-1" 
+            class="mb-3" 
             enctype="multipart/form-data" id="form-add-imagem"
         >
             {% csrf_token %}

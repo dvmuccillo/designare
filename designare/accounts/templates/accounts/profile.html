@@ -4,7 +4,7 @@
     {{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Utils.Forms' }}
     {{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Accounts.Profile' }}
     {% include "accounts/components/tabs.html" with active="profile" %}
-    <div class="container mt-2">
+    <div class="container mt-4">
         <div class="row">
             <div class="modal fade" id="modal-password-change-success" data-backdrop="static">
                 <div class="modal-dialog">
@@ -26,7 +26,7 @@
                 </div>                    
             </div>
         </div>
-        <div class="row mt-1">
+        <div class="row mt-3">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
@@ -35,7 +35,7 @@
                             style="border-bottom: 1px solid;">
                             Informações Pessoais
                         </h1>
-                        <div class="collapse in" id="profile-personal-info">
+                        <div class="collapse show" id="profile-personal-info">
                             <button 
                                 class="btn btn-secondary border-square float-md-right" 
                                 onclick="Designare.Accounts.Profile.EditPersonalInfo();"
@@ -44,11 +44,11 @@
                             </button>
                             <dl>
                                 <dd class="mb-0">Nome</dd>
-                                <dt class="mb-1" id="profile-first-name">{{ user.first_name }}</dt>
+                                <dt class="mb-3" id="profile-first-name">{{ user.first_name }}</dt>
                                 <dd class="mb-0">Sobrenome</dd>
-                                <dt class="mb-1" id="profile-last-name">{{ user.last_name }}</dt>
+                                <dt class="mb-3" id="profile-last-name">{{ user.last_name }}</dt>
                                 <dd class="mb-0">E-mail</dd>
-                                <dt class="mb-1" id="profile-email">{{ user.email }}</dt>
+                                <dt class="mb-3" id="profile-email">{{ user.email }}</dt>
                             </dl>
                         </div>
                         <div class="collapse" id="profile-personal-info-form">
@@ -113,7 +113,7 @@
                             style="border-bottom: 1px solid;">
                             Informações de Acesso
                         </h1>
-                        <div class="collapse in" id="profile-password-btn">
+                        <div class="collapse show" id="profile-password-btn">
                             <button 
                                 class="btn btn-secondary border-square float-md-right"
                                 onclick="Designare.Accounts.Profile.EditPassword();"
@@ -173,9 +173,9 @@
                             <div class="clearfix"></div>
                         </div>
                         <dl>
-                            <dd class="mb-0">Nome de usuário</dd><dt class="mb-1">{{ user.username }}</dt>
-                            <dd class="mb-0">Data do último login</dd><dt class="mb-1">{{ user.last_login }}</dt>
-                            <dd class="mb-0">Data da criação da conta</dd><dt class="mb-1">{{ user.date_joined }}</dt>
+                            <dd class="mb-0">Nome de usuário</dd><dt class="mb-3">{{ user.username }}</dt>
+                            <dd class="mb-0">Data do último login</dd><dt class="mb-3">{{ user.last_login }}</dt>
+                            <dd class="mb-0">Data da criação da conta</dd><dt class="mb-3">{{ user.date_joined }}</dt>
                         </dl>
                     </div>
                 </div>                
