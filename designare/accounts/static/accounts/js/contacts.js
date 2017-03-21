@@ -65,7 +65,7 @@
                         $(element_id + "> .card-block > .btn").remove();
                     } else {
                         switch(data.error_type){
-                            case 'unable_to_send_email':
+                            default:
                                 this.i.tabInvites.tab('show');
                                 this.i.notify.warning({
                                     title: data.error_title,
@@ -129,7 +129,15 @@
                         });
                     } else {
                         switch(data.error_type){
-                            default:
+                            case 'invalid_email_address':
+                                this.i.forms.InputStateUpdate(this.i.inputEmail,'danger');
+                                this.i.notify.error({
+                                    title: data.error_title,
+                                    message: data.error_message,
+                                    position: 'center',
+                                });
+                                break;
+                            case 'unable_to_send_email':
                                 this.i.ClearInviteForm();
                                 this.i.AppendInviteCard(data.template);
                                 this.i.tabInvites.tab('show');
