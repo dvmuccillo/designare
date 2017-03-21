@@ -5,9 +5,10 @@
     notify  : Designare.Notifications,
     forms   : Designare.Utils.Forms,
     /* Abas */
-    tabInvites                  : $('#Invites'),
+    tabInvites                  : $('#tab-invites'),
     /*  */
-    divInvites       : $('#div-invites'),
+    divInvites                  : $('#div-invites'),
+    divNoneInvite               : $('#div-none-invite'),
     /* Formulário para envio de convite */
     divInviteForm               : $('#invite-user-form'),
     inviteFormFieldset          : $('#invite-user-form-fieldset'),
@@ -18,15 +19,9 @@
     /* Fim dos elementos HTML */
     /* Adiciona o card de convite */
     AppendInviteCard: function(card_invite){
-        alert("1");
-        if(this.divInvites.length){
-            alert("2");
-            //this.tabInvites.empty();
-            alert("3");
-            //this.tabInvites.append('<div class="card-columns" id="div-invites\"></div>')
-            alert("4");
+        if(this.divNoneInvite.length){
+            this.divNoneInvite.remove();
         }
-        alert("5");
         this.divInvites.append(card_invite);
     },
     /* Limpa e recolhe o formulário de convite */
@@ -36,6 +31,53 @@
         this.inputEmail.val('');
         this.forms.InputStateUpdate(this.inputEmail,'clear');
         this.inputMessage.val('');
+    },
+    /* Reenvia o convite */
+    ResendInvite: function(invite_id){
+        $.ajax({
+                type    : 'POST',
+                url     : '/accounts/my/contacts/resend-invite/',
+                data    : {
+                    'csrfmiddlewaretoken'   : Designare.csrfToken,
+                    'invite_id'             : invite_id,
+                },
+                dataType: 'json',
+                encode  : true,
+                // Mapeia o namespace para o contexto atual
+                i       : Designare.Accounts.Contacts.Invite,
+                error: function(){
+                    this.i.notify.error({
+                        title: 'Não conseguimos enviar seu convite neste momento!',
+                        message: 'Tente novamente mais tarde.',
+                        position: 'center',
+                    });
+                },
+                success: function (data) {
+                    console.log(data);
+                    if(data.success){
+                        this.i.notify.success({
+                            title   : 'Seu convite foi enviado!',
+                            position: 'center',
+                        });
+                        element_id = "#invite-card-" + data.invite_id;
+                        $(element_id).addClass("card-outline-primary").removeClass("card-outline-warning");
+                        $(element_id + "> .card-header").addClass("bg-primary").removeClass("bg-warning");
+                        $(element_id + "> .card-block > .btn").remove();
+                    } else {
+                        switch(data.error_type){
+                            case 'unable_to_send_email':
+                                this.i.tabInvites.tab('show');
+                                this.i.notify.warning({
+                                    title: data.error_title,
+                                    message: data.error_message,
+                                    position: 'center',
+                                });
+                                break;
+                        };
+                        
+                    }
+                }
+            });
     },
     /* Valida as informações e envia o convite */
     SendInvite: function(){
@@ -78,30 +120,24 @@
                 },
                 success: function (data) {
                     if(data.success){
+                        this.i.ClearInviteForm();
+                        this.i.AppendInviteCard(data.template);
+                        this.i.tabInvites.tab('show');
                         this.i.notify.success({
                             title   : 'Seu convite foi enviado!',
                             position: 'center',
                         });
-                        this.i.ClearInviteForm();
-                        this.i.AppendInviteCard(data.template);
                     } else {
                         switch(data.error_type){
-                            case 'invalid_email_address':
-                                this.i.forms.InputStateUpdate(this.i.inputEmail,'danger');
-                                this.i.notify.error({
-                                    title: data.error_title,
-                                    message: data.error_message,
-                                    position: 'center',
-                                });
-                                break;
-                            case 'unable_to_send_email':
+                            default:
+                                this.i.ClearInviteForm();
+                                this.i.AppendInviteCard(data.template);
+                                this.i.tabInvites.tab('show');
                                 this.i.notify.warning({
                                     title: data.error_title,
                                     message: data.error_message,
                                     position: 'center',
                                 });
-                                this.i.ClearInviteForm();
-                                this.i.AppendInviteCard(data.template);
                                 break;
                         };
                         

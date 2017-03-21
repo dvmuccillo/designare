@@ -13,7 +13,7 @@
                         <a class="nav-link active" data-toggle="tab" href="#Friends" role="tab"><i class="fa fa-address-book"></i> Amigos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#Invites" role="tab"><i class="fa fa-address-card"></i> Convites</a>
+                        <a class="nav-link" data-toggle="tab" href="#Invites" role="tab" id="tab-invites"><i class="fa fa-address-card"></i> Convites</a>
                     </li>
                     <li class="nav-item">
                         <a 
@@ -33,78 +33,75 @@
                     </div>
                     <!-- Convites -->
                     <div class="tab-pane" id="Invites" role="tabpanel">
-                        {% if user.profile.getInvites %}
-                            <div class="row" id="div-invites"><!-- <div class="card-columns" id="div-invites"> -->
-                                {% for invite in user.profile.getInvites %}
-                                    {% include "accounts/components/card-invite.html" with invite=invite %}                              
-                                {% endfor %}
-                            <!-- </div>  -->
-                            </div>
-                        {% else %}
-                            <div class="card card-outline-info border-square" id="div-none-invite">
-                                <div class="card-block">
-                                    <p>Você não possuim nenhum convite pendente.</p>
+                        <div class="row" id="div-invites">
+                            {% for invite in user.profile.getInvites %}
+                                {% include "accounts/components/card-invite.html" with invite=invite %}                              
+                            {% empty %}
+                                <div class="col-12" id="div-none-invite">
+                                    <div class="card card-outline-info border-square">
+                                        <div class="card-block">
+                                            <p>Você não possuim nenhum convite pendente.</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>                        
-                        {% endif %}
+                            {% endfor %}                        
+                        </div>
                     </div>
                     <!-- Formulário de Convite -->
                     <div class="tab-pane" id="InviteForm" role="tabpanel">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div id="invite-user-form">
-                                    <form class="col-lg-6 offset-lg-3 my-1">
-                                        <fieldset id="invite-user-form-fieldset">
-                                            <div class="form-group" id="input-invite-name-group">
-                                                <label for"" class="form-control-label">Nome</label>
-                                                <input
-                                                    type="text" maxlength="100"
-                                                    class="form-control border-square"
-                                                    id="input-invite-name"
-                                                    placeholder="Informe o nome do destinatário"
-                                                >
-                                            </div>
-                                            <div class="form-group" id="input-invite-email-group">
-                                                <label for"" class="form-control-label">E-mail</label>
-                                                <input
-                                                    type="email" maxlength="254"
-                                                    class="form-control border-square"
-                                                    id="input-invite-email"
-                                                    placeholder="Informe o e-mail do destinatário"
-                                                >
-                                                <small id="input-invite-email-help" class="form-text form-muted">
-                                                    Insira o e-mail para o qual o convite deve ser enviado.
-                                                </small>
-                                            </div>
-                                            <div class="form-group" id="input-invite-message-group">
-                                                <label for"" class="form-control-label">Mensagem <small>(Opcional)</small></label>
-                                                <textarea
-                                                    maxlength="255" rows="5"
-                                                    class="form-control border-square"
-                                                    id="input-invite-message"
-                                                    placeholder="Personalize seu convite incluindo uma mensagem"
-                                                ></textarea>
-                                            </div>
-                                            <div class="text-md-center">
-                                                <button 
-                                                    type="button" 
-                                                    class="btn btn-secondary border-square"
-                                                    onclick="Designare.Accounts.Contacts.Invite.ClearInviteForm();"
-                                                >
-                                                    <i class="fa fa-times"></i> Cancelar
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-success border-square"
-                                                    onclick="Designare.Accounts.Contacts.Invite.SendInvite();"
-                                                    id="invite-btn-send"
-                                                >
-                                                    <i class="fa fa-check"></i> Enviar convite
-                                                </button>
-                                            </div>                              
-                                        </fieldset>
-                                    </form>
-                                </div>
+                            <div class="col-lg-6 offset-lg-3" id="invite-user-form">
+                                <form class="my-1">
+                                    <fieldset id="invite-user-form-fieldset">
+                                        <div class="form-group" id="input-invite-name-group">
+                                            <label for"" class="form-control-label">Nome</label>
+                                            <input
+                                                type="text" maxlength="100"
+                                                class="form-control border-square"
+                                                id="input-invite-name"
+                                                placeholder="Informe o nome do destinatário"
+                                            >
+                                        </div>
+                                        <div class="form-group" id="input-invite-email-group">
+                                            <label for"" class="form-control-label">E-mail</label>
+                                            <input
+                                                type="email" maxlength="254"
+                                                class="form-control border-square"
+                                                id="input-invite-email"
+                                                placeholder="Informe o e-mail do destinatário"
+                                            >
+                                            <small id="input-invite-email-help" class="form-text form-muted">
+                                                Insira o e-mail para o qual o convite deve ser enviado.
+                                            </small>
+                                        </div>
+                                        <div class="form-group" id="input-invite-message-group">
+                                            <label for"" class="form-control-label">Mensagem <small>(Opcional)</small></label>
+                                            <textarea
+                                                maxlength="255" rows="5"
+                                                class="form-control border-square"
+                                                id="input-invite-message"
+                                                placeholder="Personalize seu convite incluindo uma mensagem"
+                                            ></textarea>
+                                        </div>
+                                        <div class="text-md-center">
+                                            <button 
+                                                type="button" 
+                                                class="btn btn-secondary border-square"
+                                                onclick="Designare.Accounts.Contacts.Invite.ClearInviteForm();"
+                                            >
+                                                <i class="fa fa-times"></i> Cancelar
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-success border-square"
+                                                onclick="Designare.Accounts.Contacts.Invite.SendInvite();"
+                                                id="invite-btn-send"
+                                            >
+                                                <i class="fa fa-check"></i> Enviar convite
+                                            </button>
+                                        </div>                              
+                                    </fieldset>
+                                </form>
                             </div>
                         </div>
                     </div>

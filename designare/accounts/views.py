@@ -1,6 +1,6 @@
 from django.contrib.auth import logout,login,authenticate
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError,ObjectDoesNotExist
 from django.http import HttpResponse,JsonResponse
 from django.shortcuts import get_object_or_404,render,redirect
 from django.template.loader import render_to_string
@@ -133,4 +133,41 @@ def user_send_invite(request):
         'error_title'   : error_title, 
         'error_message' : error_message,
         'template'      : template
+    })
+
+@login_required
+def user_resend_invite(request):
+    invite_id = request.POST.get('invite_id')
+    print(invite_id)
+    success = False
+    error_type = ''
+    error_title = ''
+    error_message = ''
+    if invite_id:
+        try:
+            invite = Invite.objects.get(pk=invite_id)
+            if invite.unsent:
+                try:
+                    invite.send()
+                    invite.unsent = False
+                    invite.save()
+                    success = True
+                except:
+                    error_type = "unable_to_send_email"
+                    error_title = "Não conseguimos enviar o convite no momento!"
+                    error_message = "Por favor, tente novamente mais tarde."
+            else:
+                error_type = "invite_already_sent"
+                error_title = "Este convite já foi enviado!"
+        except ObjectDoesNotExist:
+            error_type = "invite_not_found"
+            error_title = "Este convite não existe!"
+    else:
+        error_type = "missing_invite_id"
+    return JsonResponse({
+        'success'       : success,
+        'error_type'    : error_type,
+        'error_title'   : error_title, 
+        'error_message' : error_message,
+        'invite_id'     : invite_id
     })
