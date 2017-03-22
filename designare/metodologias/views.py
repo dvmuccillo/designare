@@ -27,14 +27,14 @@ def detalhes(request, metodologia_id):
 def atualizar_nome(request, metodologia_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
     metodologia.nome =  request.POST.get('nome')
-    metodologia.save();
+    metodologia.save()
     return JsonResponse({'sucesso': True})
 
 @login_required
 def cadastrar_etapa(request, metodologia_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
     if metodologia.etapas.all().count() == 0:
-        proxima_pos = 1;
+        proxima_pos = 1
     else:
         proxima_pos = metodologia.etapas.all().order_by('-ordem')[0].ordem + 1
     etapa = Etapa (
