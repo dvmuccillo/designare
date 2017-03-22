@@ -68,7 +68,7 @@ def cadastrar_atividade(request, metodologia_id, etapa_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
     etapa = get_object_or_404(Etapa,pk=etapa_id)
     if etapa.atividades.all().count() == 0:
-        proxima_pos = 1;
+        proxima_pos = 1
     else:
         proxima_pos = etapa.atividades.all().order_by('-ordem')[0].ordem + 1
     atividade = Atividade (
@@ -107,13 +107,13 @@ def cadastrar_metodologia(request):
     metodologia = Metodologia (
                 nome = request.POST.get('nome')
             )
-    metodologia.save();
+    metodologia.save()
     return JsonResponse({'metodologia_id': metodologia.pk, 'sucesso': True })
 
 @login_required
 def excluir_metodologia(request,metodologia_id):
     metodologia = get_object_or_404(Metodologia,pk=metodologia_id)
-    metodologia.delete();
+    metodologia.delete()
     return redirect('metodologias:index')
 
 @login_required
