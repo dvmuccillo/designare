@@ -171,3 +171,6 @@ def user_resend_invite(request):
         'error_message' : error_message,
         'invite_id'     : invite_id
     })
+
+def redeem_invite(request):
+    return render(request,"accounts/redeem-invite.html")

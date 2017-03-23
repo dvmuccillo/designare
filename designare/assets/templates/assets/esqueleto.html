@@ -24,9 +24,14 @@
                 {% csrf_token %}
             </form>
         </div>
-        {% block header %}
-            {% include "assets/components/menu.html" %}
-        {% endblock %}
+        {% include "assets/components/navbar.html" %}
+        <div class=""></div>
+        {% comment "" %}
+            {% block header %}
+                {% include "assets/components/menu.html" %}
+            {% endblock %}
+        {% endcomment %}
+        <div class="py-5"></div>     
         {% block body %}
         {% endblock %}
         <footer class="footer">

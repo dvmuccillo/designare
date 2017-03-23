@@ -49,7 +49,7 @@ class Invite(models.Model):
     target_name = models.CharField(max_length=100)
     target_email = models.EmailField(max_length=254)
     message = models.CharField(max_length=255, blank=True)
-    code = models.CharField(max_length=30, blank=True)
+    code = models.CharField(max_length=30, blank=True,unique=True)
     creation_date = models.DateTimeField(auto_now=True)
     unsent = models.BooleanField(default=False)
 

@@ -1,4 +1,4 @@
-<div class="col-sm-6 col-lg-4">
+<div class="col-sm-6 col-lg-4 mb-3">
     <div
         class="card border-square {% if not invite.unsent %} card-outline-primary {% else %} card-outline-warning {% endif %} mb-0"
         id="invite-card-{{ invite.pk }}"
@@ -6,21 +6,22 @@
         <div class="card-header border-square {% if not invite.unsent %} bg-primary {% else %} bg-warning {% endif %} mb-0">
             <a class="card-text text-white font-weight-bold text-capitalize">{{ invite.target_name }}</a>
         </div>
-        <div class="card-block">
-            {% if invite.unsent %}
-                <button 
-                    class="btn btn-warning btn-block border-square mb-2"
-                    onclick="Designare.Accounts.Contacts.Invite.ResendInvite('{{ invite.id }}');"
-                >Reenviar convite</button>
-            {% endif %}
+        <div class="card-block collapse">
             <dl>
-                <dd class="mb-0">E-mail</dd>
-                <dt class="mb-3" >{{ invite.target_email }}</dt>
                 <dd class="mb-0">Mensagem</dd>
                 <dt class="mb-3">{% firstof invite.message "<i>Nenhuma mensagem foi enviada com este convite.</i>" %}</dt>
+                <dd class="mb-0">E-mail</dd>
+                <dt class="mb-3" >{{ invite.target_email }}</dt>
                 <dd class="mb-0">Criado em</dd>
                 <dt class="mb-3" >{{ invite.creation_date }}</dt>
             </dl>
-        </div>        
+            {% if invite.unsent %}
+            <button 
+                class="btn btn-primary border-square mb-2"
+                onclick="Designare.Accounts.Contacts.Invite.ResendInvite('{{ invite.id }}');"
+            >Reenviar convite</button>
+        {% endif %}
+        </div>
+             
     </div>
 </div>
