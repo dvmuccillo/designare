@@ -8,7 +8,7 @@
     tabInvites                  : $('#tab-invites'),
     /*  */
     divInvites                  : $('#div-invites'),
-    divNoneInvite               : $('#div-none-people'),
+    divNoneInvite               : $('#div-none-invite'),
     /* Formulário para envio de convite */
     divInviteForm               : $('#invite-user-form'),
     inviteFormFieldset          : $('#invite-user-form-fieldset'),
