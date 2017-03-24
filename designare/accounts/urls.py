@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^my/contacts/send-invite/$', views.user_send_invite, name='user_send_invite'),
     url(r'^my/contacts/resend-invite/$', views.user_resend_invite, name='user_resend_invite'),
     url(r'^redeem-invite/$', views.redeem_invite, name='redeem_invite'),
+    url(r'^redeem-invite/(?P<code>[A-Z0-9]+)/$', views.redeem_invite, name='redeem_invite_with_code'),
 ]
    
