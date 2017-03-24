@@ -37,6 +37,7 @@
         {% endcomment %}
         {% block body %}
         {% endblock %}
+        {% block footer %}
         <footer class="footer">
             <div class="container">
                 <div class="row">
@@ -47,6 +48,7 @@
                 </div>            
             </div>
         </footer>
+        {% endblock %}
         {% block javascript_links %}
             {{ DESIGNARE_ASSETS_MANAGER.getJsLinks | safe }}
         {% endblock %}
