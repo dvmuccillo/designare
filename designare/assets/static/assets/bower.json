@@ -20,7 +20,8 @@
     "components-font-awesome": "^4.7.0",
     "bootstrap-wysiwyg": "*",
     "smooth-scroll": "https://github.com/cferdinandi/smooth-scroll.git#^10.2.0",
-    "izitoast": "^1.0.2"
+    "izitoast": "^1.0.2",
+    "popper.js": "https://unpkg.com/popper.js"
   },
   "overrides": {
     "bootstrap": {
@@ -33,11 +34,6 @@
       "main": [
         "external/jquery.hotkeys.js",
         "bootstrap-wysiwyg.js"
-      ]
-    },
-    "popper.js": {
-      "main": [
-        "packages/popper/bundle.js"
       ]
     },
     "smooth-scroll": {
@@ -53,6 +49,7 @@
     }
   },
   "resolutions": {
-    "bootstrap": "4.0.0-beta"
+    "bootstrap": "4.0.0-beta",
+    "popper.js": "e-tag:W/\"13b6b-1"
   }
 }
