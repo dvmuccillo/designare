@@ -1,2 +1,20 @@
 {% extends "assets/esqueleto.html" %}
 {% block header %}{% endblock %}
+{% block body %}
+    <div class="jumbotron jumbotron-fluid bg-primary m-0 p-0">
+        <div class="container">
+            <div class="d-flex flex-column justify-content-between full-height p-5 text-center text-white">
+                <div class="">
+                    <h1 class="display-2">Bem-vindo ao Designare <span class="text-capitalize">{{ invite.target_name }}</span></h1>
+                </div>
+                <div class="">
+                    <p class="">{% lorem %}</p>
+                </div>
+                <div class="">
+                    <button class="btn btn-secondary btn-lg border-square">Começar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

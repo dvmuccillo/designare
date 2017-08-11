@@ -172,5 +172,15 @@ def user_resend_invite(request):
         'invite_id'     : invite_id
     })
 
-def redeem_invite(request):
-    return render(request,"accounts/redeem-invite.html")
+def redeem_invite(request, code=None):
+    try:
+        invite = Invite.objects.get(code=code)
+    except ObjectDoesNotExist:
+        invite = None
+    return render(
+        request,
+        "accounts/redeem-invite.html",
+        {
+            'invite' : invite,
+        }
+    )
