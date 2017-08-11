@@ -29,9 +29,17 @@ class AssetsManager(object):
         return properties
 
     def loadBowerPackageProperties(self,package):
-        path_to_json_file = os.path.join(self.APP_BASE_DIR + self.BOWER_COMPONENTS_DIR + package + '/bower.json')
-        return self.loadProperties(path_to_json_file)
-        
+        try:
+            path_to_json_file = os.path.join(self.APP_BASE_DIR + self.BOWER_COMPONENTS_DIR + package + '/bower.json')
+            properties = self.loadProperties(path_to_json_file)
+        except FileNotFoundError:
+            try:
+                path_to_json_file = os.path.join(self.APP_BASE_DIR + self.BOWER_COMPONENTS_DIR + package + '/.bower.json')
+                properties = self.loadProperties(path_to_json_file)
+            except:
+                raise
+        return properties
+
     def registerBower(self,package):
         if package not in self.bower_components:
             self.bower_components.append(package)

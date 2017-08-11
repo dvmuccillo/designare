@@ -35,6 +35,11 @@
         "bootstrap-wysiwyg.js"
       ]
     },
+    "popper.js": {
+      "main": [
+        "packages/popper/bundle.js"
+      ]
+    },
     "smooth-scroll": {
       "main": [
         "dist/js/smooth-scroll.min.js"
