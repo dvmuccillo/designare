@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.5",
+    "bootstrap": "4.0.0-beta",
     "components-font-awesome": "^4.7.0",
     "bootstrap-wysiwyg": "*",
     "smooth-scroll": "https://github.com/cferdinandi/smooth-scroll.git#^10.2.0",
@@ -48,6 +48,6 @@
     }
   },
   "resolutions": {
-    "bootstrap": "v4-dev"
+    "bootstrap": "4.0.0-beta"
   }
 }
