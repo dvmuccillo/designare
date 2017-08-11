@@ -2,86 +2,79 @@
 {% block body %}
 <!DOCTYPE html>
     <div class="container">
-        <div class="row my-1">
-            <h2 align="center">{{ titulo_da_pagina }}</h2>
+        <div class="row mt-4 mb-3 d-flex justify-content-center">
+            <h2 align="center">Metodologias</h2>
         </div>
-        <div class="row my-2" align="center">
+        <div class="row mt-2 mb-5 d-flex justify-content-center">
             <a 
-                class="btn btn-secondary btn-circle" 
+                class="btn btn-primary border-square" 
                 id="btn-novo-projeto"
                 href="/metodologias/nova/"
-                data-tooltip="tooltip" data-placement="top" title="Adicionar Nova Metodologia"
             >
-                <i class="fa fa-plus" aria-hidden="true"></i>
+                Adicionar <i class="fa fa-plus" aria-hidden="true"></i>
             </a>
         </div>
         <div class="row">
-            <hr>
+            <div class="modal fade" id="modal-excluir-metodologia" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content border-square" id="modal-excluir-metodologia-conteudo">
+                        <div class="modal-header">
+                            <h4>Confirmar exclusão de metodologia:</h4>
+                        </div>
+                        <div class="modal-body">
+                            Deseja realmente excluir a metodologia <b id="modal-excluir-metodologia-nome"></b>?
+                        </div>
+                        <div class="modal-footer">
+                            <button 
+                                class="btn btn-info float-md-left border-square" 
+                                data-dismiss="modal" id="btn-cancelar-exclusao"
+                            >
+                                <i class="fa fa-ban"></i>&nbsp;Cancelar
+                            </button>
+                            <a class="btn btn-danger border-square" id="btn-excluir-metodologia">
+                                <i class="fa fa-times"></i>&nbsp;Excluir
+                            </a>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <ul class="list-group border-square">
+                    {% if metodologias %}
+                        {% for metodologia in metodologias %}
+                            <li class="list-group-item border-square">
+                                <a href="{% url 'metodologias:detalhes' metodologia.pk %}" class="btn btn-link">{{ metodologia.nome }}</a>
+                                <div class="btn-group float-md-right">
+                                    <a 
+                                        class="btn btn-light border-square" 
+                                        href="{% url 'metodologias:exportar_metodologia' metodologia.pk %}"
+                                        data-tooltip="tooltip" data-placement="top" title="Download"
+                                    >
+                                        <i class="fa fa-download"></i>
+                                    </a>
+                                    <button 
+                                        class="btn btn-danger border-square"
+                                        data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                        onclick='ExcluirMetodologia("{{ metodologia.pk }}","{{ metodologia.nome }}");' 
+                                    >
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li class="list-group-item list-group-item-info border-square">
+                            <h5 class="list-group-item-heading">Nenhuma metodologia cadastrada ainda!</h5>
+                            <p class="list-group-item-text"><i>Clique no botão acima para cadastrar uma nova!</i></p>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
-    {% block content %}
-        <div class="container">
-            <div class="row">
-                <div class="modal fade" id="modal-excluir-metodologia" data-backdrop="static">
-                    <div class="modal-dialog">
-                        <div class="modal-content border-square" id="modal-excluir-metodologia-conteudo">
-                            <div class="modal-header">
-                                <h4>Confirmar exclusão de metodologia:</h4>
-                            </div>
-                            <div class="modal-body">
-                                Deseja realmente excluir a metodologia <b id="modal-excluir-metodologia-nome"></b>?
-                            </div>
-                            <div class="modal-footer">
-                                <button 
-                                    class="btn btn-info float-md-left border-square" 
-                                    data-dismiss="modal" id="btn-cancelar-exclusao"
-                                >
-                                    <i class="fa fa-ban"></i>&nbsp;Cancelar
-                                </button>
-                                <a class="btn btn-danger border-square" id="btn-excluir-metodologia">
-                                    <i class="fa fa-times"></i>&nbsp;Excluir
-                                </a>
-                            </div>
-                        </div>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <ul class="list-group border-square">
-                        {% if metodologias %}
-                            {% for metodologia in metodologias %}
-                                <li class="list-group-item border-square">
-                                    <a href="{% url 'metodologias:detalhes' metodologia.pk %}" class="btn btn-link">{{ metodologia.nome }}</a>
-                                    <div class="btn-group float-md-right">
-                                        <a 
-                                            class="btn btn-secondary border-square" 
-                                            href="{% url 'metodologias:exportar_metodologia' metodologia.pk %}"
-                                            data-tooltip="tooltip" data-placement="top" title="Exportar para JSON"
-                                        >
-                                            <i class="fa fa-download"></i>
-                                        </a>
-                                        <button 
-                                            class="btn btn-danger border-square"
-                                            data-tooltip="tooltip" data-placement="top" title="Excluir"
-                                            onclick='ExcluirMetodologia("{{ metodologia.pk }}","{{ metodologia.nome }}");' 
-                                        >
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        {% else %}
-                            <li class="list-group-item list-group-item-info border-square">
-                                <h5 class="list-group-item-heading">Nenhuma metodologia cadastrada ainda!</h5>
-                                <p class="list-group-item-text"><i>Clique no botão acima para cadastrar uma nova!</i></p>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    {% endblock %}
+
 {% endblock %}
 {% block javascript_functions %}
     function ExcluirMetodologia(id_metodologia,nome){

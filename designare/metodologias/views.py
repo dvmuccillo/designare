@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     metodologias = Metodologia.objects.all().filter(is_copy=False).order_by('nome')
     context = {
-        'titulo_da_pagina' : "Metodologias",
         'metodologias'     : metodologias,
     }
     return render(request,'metodologias/index.html',context)
