@@ -2,13 +2,13 @@
 <div class="collapse show" id="collapse-etapa-{{ etapa.pk }}">
     <a id='etapa_{{ etapa.id }}'></a>
     <div class='row'>
-        <div class='row'>
-            <div class='card card-outline-secondary border-square'  style="">
-                <div class='card-block collapse show' id="card-etapa-info-{{ etapa.pk }}">
+        <div class='col'>
+            <div class='card card-outline-secondary border-square'>
+                <div class='card-body collapse show' id="card-etapa-info-{{ etapa.pk }}">
                     <h3 class='card-title'>
                         <span id="etapa-nome-{{etapa.pk}}">{{ etapa.nome }}</span>
                         <button 
-                            class='btn btn-secondary border-square' id='btn-edit-etapa-{{ etapa.pk }}'
+                            class='btn btn-light border-dark border-square' id='btn-edit-etapa-{{ etapa.pk }}'
                             data-tooltip='tooltip' data-placement='top'
                             title='Editar etapa'
                             onclick='EditarEtapa("{{ etapa.pk }}");' 
@@ -21,7 +21,7 @@
                             title='Excluir etapa'
                             onclick='ConfirmarExcluirEtapa("{{ etapa.pk }}","{{ etapa.nome }}");' 
                         >
-                            <i class='fa fa-times'></i>
+                            <i class='fa fa-trash'></i>
                         </button>
                     </h3>
                     <blockquote class='card-blockquote'>
@@ -32,7 +32,7 @@
                         {% endif %}
                     </blockquote>
                 </div>
-                <div class='card-block collapse' id="card-etapa-editar-{{ etapa.pk }}">
+                <div class='card-body collapse' id="card-etapa-editar-{{ etapa.pk }}">
                     <div class="col-md-12">
                         <h4 class="mt-3">Editar etapa:</h4>
                         <form id="form-etapa-{{ etapa.pk }}" name="form_etapa_{{ etapa.pk }}">
@@ -89,7 +89,7 @@
                         </form>
                     </div>
                 </div>
-                <div class='card-block collapse' id="card-atividade-editar-{{ etapa.pk }}">
+                <div class='card-body collapse' id="card-atividade-editar-{{ etapa.pk }}">
                     <div class="col-md-12">
                         <h4 class="mt-3">Editar atividade:</h4>
                         <form id="form-atividade-{{ etapa.pk }}" name="form_atividade_{{ etapa.pk }}">
@@ -156,9 +156,9 @@
                     {% else %}
                         <div class='row collapse show' id='row-nenhuma-etapa-aviso-{{ etapa.pk }}'>
                     {% endif %}    
-                            <div class='col-md-11 offset-md-1'>
+                            <div class='col-md-11 ml-auto'>
                                 <div class='card unbordered'>
-                                    <div class='card-block'>
+                                    <div class='card-body'>
                                         <blockquote class='card-blockquote'>
                                             <i>
                                                 Nenhuma atividade cadastrada para esta etapa.
@@ -170,10 +170,10 @@
                             </div>
                         </div>
                     <div class='row ml-0 collapse show' id='row-btn-nova-atividade{{ etapa.pk }}'>
-                        <div class='col-md-5 offset-md-1 my-1'>
+                        <div class='col-md-5 my-1'>
                            <h3 class=''>
                                 <button 
-                                    class='btn btn-secondary border-square' id='btn-edit-etapa'
+                                    class='btn btn-light border-dark border-square' id='btn-edit-etapa'
                                     data-tooltip='tooltip' data-placement='top'
                                     title='Adicionar nova atividade'
                                     data-toggle='collapse' data-target='#CadastrarAtividade{{ etapa.pk }}'
@@ -186,7 +186,7 @@
                         </div>
                     </div>
                     <div class='row collapse mb-3' id='CadastrarAtividade{{ etapa.pk }}'>
-                        <div class='col-md-11 offset-md-1'>
+                        <div class='col-md-11 ml-auto'>
                             <h4 class='mt-3'>Adicionar nova atividade:</h4>
                             <form id='form-nova-atividade{{ etapa.pk }}' name='form_nova_atividade{{ etapa.pk }}'>
                                 <fieldset id='fieldset-nova-atividade{{ etapa.pk }}'>

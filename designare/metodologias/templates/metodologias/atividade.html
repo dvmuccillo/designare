@@ -1,11 +1,11 @@
 <div class='row collapse show' id="collapse-atividade-{{ atividade.pk }}">
-    <div class='col-md-11 offset-md-1'>
+    <div class='col-md-11 ml-auto'>
         <div class='card unbordered'>
             <div class='card-block'>
                 <h3 class='card-title'>
                     <span id="atividade-nome-{{ atividade.pk }}">{{ atividade.nome }}</span>
                     <button 
-                        class='btn btn-secondary border-square' id='btn-edit-atividade-{{ atividade.pk }}'
+                        class='btn btn-light border-dark border-square' id='btn-edit-atividade-{{ atividade.pk }}'
                         data-tooltip='tooltip' data-placement='top'
                         title='Editar atividade'
                         onclick='EditarAtividade("{{ etapa.pk }}","{{ atividade.pk }}");'
@@ -18,7 +18,7 @@
                         title='Excluir atividade'
                         onclick='ConfirmarExcluirAtividade("{{ etapa.pk }}","{{ atividade.pk }}","{{ atividade.nome }}");' 
                     >
-                        <i class='fa fa-times'></i>
+                        <i class='fa fa-trash'></i>
                     </button>
                 </h3>
                 <blockquote class='card-blockquote'>

@@ -1,14 +1,11 @@
 {% extends 'assets/esqueleto.html' %}
-{% block header %}
-    {% include "metodologias/menu.html" %}
-{% endblock %}
 {% block body %}
 <div class="container">
     <div class="row my-1">
         <h2 align="center">{{ titulo_da_pagina }}</h2>
     </div>
-    <div class="row my-2 {% if metodologia %} hidden {% endif %}" align="center" id="div-form-metodologia">
-        <div class="col-md-6 offset-md-3">
+    <div class="row my-2 d-flex justify-content-center {% if metodologia %} hidden {% endif %}" id="div-form-metodologia">
+        <div class="col-md-6 d-flex justify-content-center">
             <form class="form-inline" id="form-metodologia" name="form_metodologia">
                 {% csrf_token %}
                 <input 
@@ -32,7 +29,7 @@
                             value="{{ metodologia.nome }}"
                         {% endif %}
                     >
-                    <button class="btn btn-danger border-square" id="btn-cancela-metodologia">
+                    <button class="btn btn-info border-square" id="btn-cancela-metodologia">
                         <i class="fa fa-times"></i>
                     </button>
                     <button class="btn btn-success border-square" id="btn-nova-metodologia">
@@ -44,20 +41,20 @@
     </div>
     <div
         {% if metodologia %}
-            class="row my-1"                    
+            class="row my-1 d-flex justify-content-center"                    
         {% else %}
-            class="row my-1 hidden" 
+            class="row my-1 d-flex justify-content-center hidden" 
         {% endif %} 
         id="div-metodologia-nome"
     >
-            <h2 align="center">
+            <h2>
                 <span id="metodologia-nome">
                     {% if metodologia %}
                         {{ metodologia.nome }}
                     {% endif %}
                 </span>
                 <button 
-                    class="btn btn-secondary border-square" id="btn-edit-metodologia"
+                    class="btn btn-light border-dark border-square" id="btn-edit-metodologia"
                     data-tooltip="tooltip" data-placement="top"
                     title="Editar nome"
                 >
@@ -71,7 +68,7 @@
 </div>
 <div class="container">
     <div class="row hidden" id="div-row-info">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-6">
             <div class="card card-block card-outline-info border-square">
                 <h4>Cadastro de metodologia</h4>
                 <p class="card-text">
@@ -100,7 +97,7 @@
                                     <i class="fa fa-ban"></i>&nbsp;Cancelar
                                 </button>
                                 <button class="btn btn-danger border-square" id="btn-excluir-etapa">
-                                    <i class="fa fa-times"></i>&nbsp;Excluir
+                                    <i class="fa fa-trash"></i>&nbsp;Excluir
                                 </button>
                             </fieldset>
                         </form>
@@ -127,7 +124,7 @@
                                     <i class="fa fa-ban"></i>&nbsp;Cancelar
                                 </button>
                                 <button class="btn btn-danger border-square" id="btn-excluir-atividade">
-                                    <i class="fa fa-times"></i>&nbsp;Excluir
+                                    <i class="fa fa-trash"></i>&nbsp;Excluir
                                 </button>
                             </fieldset>
                         </form>
@@ -160,7 +157,7 @@
         </div>
         <div class="col-md-9">
             <div class="row">
-                <div class="col-md-11 offset-md-1" id="div-listagem-etapas">
+                <div class="col-md-11 ml-auto" id="div-listagem-etapas">
                     <!-- Inserir etapas aqui -->
                     {% if metodologia.etapas.all %}
                         {% for etapa in metodologia.etapas.all %}
@@ -172,9 +169,9 @@
             </div>
             <a id="CadastrarEtapa"></a>
             <div class="row my-2" id="div-row-nova-etapa">
-                <div class="col-md-11">
+                <div class="col-md-11 ml-auto">
                     <div class="row collapse" id="collapse-cadastrar-etapa">
-                        <div class="col-md-11 offset-md-1">
+                        <div class="col-md-11 ml-auto">
                             <h4 class="mt-3">Adicionar nova etapa:</h4>
                             <form id="form-etapa" name="form_etapa">
                                 <fieldset id="fieldset-nova-etapa">
@@ -210,7 +207,7 @@
                                     <br>
                                     <div align="center">
                                         <button type="button" class="btn btn-danger border-square" id="btn-cancelar-etapa">
-                                            cancelar
+                                            Cancelar
                                         </button>
                                         <button type="button" class="btn btn-success border-square" id="btn-nova-etapa">
                                             Cadastrar Etapa
