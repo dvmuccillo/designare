@@ -13,6 +13,13 @@ class Methodology(models.Model):
         return self.name
     
     """
+    Return the stages based on order property
+    """
+    def ordered_stages():
+        return self.stages.all().order_by('order')
+
+
+    """
     Generates and returns a copy of the methodology provided
     """
     @classmethod
@@ -88,6 +95,12 @@ class Stage(models.Model):
     def __unicode__(self):
         return self.name
 
+    """
+    Return the activities based on order property
+    """
+    def ordered_activities():
+        return self.activities.all().order_by('order')
+
 class Activity(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
@@ -95,7 +108,7 @@ class Activity(models.Model):
     stage = models.ForeignKey(
         Stage,
         on_delete = models.CASCADE,
-        related_name = activities
+        related_name = 'activities'
     )
 
     def __str__(self):
