@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^accounts/',include('accounts.urls'), name='accounts'),
     url(r'^projetos/', include('projetos.urls'), name='projetos'),
     url(r'^metodologias/', include('metodologias.urls'), name='metodologias'),
+    url(r'^methodologies/', include('methodologies.urls'), name='methodologies'),
     url(r'^editor/', include('projetos.editor.urls'),name='editor'),
     url(r'^galeria/', include('projetos.galeria.urls'),name='galeria'),
     url(r'^', include('assets.urls'),name='assets'),

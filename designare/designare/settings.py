@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'utils.apps.UtilsConfig',
     'accounts.apps.AccountsConfig',
     'metodologias.apps.MetodologiasConfig',
+    'methodologies.apps.MethodologiesConfig',
     'projetos.apps.ProjetosConfig',
     'projetos.editor',
     'projetos.galeria',
