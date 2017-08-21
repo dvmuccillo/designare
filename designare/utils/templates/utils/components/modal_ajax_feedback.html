@@ -1,0 +1,15 @@
+{% load designare_tags %}
+{{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Utils.AjaxFeedback' }}
+<div class="modal" id="modal-ajax-feedback" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content border-square" id="modal-ajax-feedback-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-ajax-feedback-header"></h5>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid" id="modal-ajax-feedback-body"></div>
+            </div>
+            <div class="modal-footer" id="modal-ajax-feedback-footer"></div>
+        </div>
+    </div>                    
+</div>
