@@ -1,1 +1,56 @@
 {% extends 'assets/esqueleto.html' %}
+{% load designare_tags %}
+{% block body %}
+    <div class="container">
+        <div class="row mt-4 mb-3 d-flex justify-content-center">
+            <h2 align="center">Metodologias</h2>
+        </div>
+        <div class="row mt-2 mb-5 d-flex justify-content-center">
+            <a 
+                class="btn btn-primary border-square" 
+                id="btn-methodology-new"
+                href="{% url 'methodologies:new' %}"
+            >
+                Adicionar <i class="fa fa-plus" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="row">
+            {% include "utils/components/modal_ajax_feedback.html" %}
+            {% include "methodologies/components/modal_methodology_object_delete.html" %}
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <ul class="list-group border-square" id="list-group-methodologies">
+                    {% if methodologies %}
+                        {% for methodology in methodologies %}
+                            <li class="list-group-item border-square" id="list-group-methodologies-item-{{ methodology.pk }}">
+                                <a href="{% url 'methodologies:details' methodology.pk %}" class="btn btn-link">{{ methodology.name }}</a>
+                                <div class="btn-group float-md-right">
+                                    <a 
+                                        class="btn btn-light border-square" 
+                                        href="{% url 'methodologies:export_json' methodology.pk %}"
+                                        data-tooltip="tooltip" data-placement="top" title="Download"
+                                    >
+                                        <i class="fa fa-download"></i>
+                                    </a>
+                                    <button 
+                                        class="btn btn-danger border-square"
+                                        data-tooltip="tooltip" data-placement="top" title="Excluir"
+                                        onclick='Designare.Methodologies.Methodology.ShowModalDeleteObject("methodology","{{ methodology.pk }}", "{{ methodology.name}}");' 
+                                    >
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                    <li class="list-group-item list-group-item-info border-square {% if methodologies %} d-none {% endif %}">
+                        <h5 class="list-group-item-heading">Nenhuma metodologia cadastrada ainda.</h5>
+                        <p class="list-group-item-text"><i>Clique no botão</i> <b>Adicionar <span class="fa fa-plus"></span></b> <i>para cadastrar uma nova!</i></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Methodologies.Methodology' }}
+{% endblock %}

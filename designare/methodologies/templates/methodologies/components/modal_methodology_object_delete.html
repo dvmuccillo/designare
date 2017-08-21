@@ -1,0 +1,27 @@
+<div class="modal fade" id="modal-methodology-object-delete" data-backdrop="static">
+    <span class="d-none" id="modal-methodology-object-id"></span>
+    <div class="modal-dialog">
+        <div class="modal-content border-square" id="modal-methodology-object-delete-content">
+            <div class="modal-header">
+                <h4>Confirmar exclusão de <span id="modal-methodology-object-delete-type"></span>:</h4>
+            </div>
+            <div class="modal-body">
+                Deseja realmente excluir: <b id="modal-methodology-object-delete-name"></b>?
+            </div>
+            <div class="modal-footer">
+                <button 
+                    class="btn btn-info float-md-left border-square" 
+                    data-dismiss="modal" id="btn-methodology-object-delete-cancel"
+                >
+                    <i class="fa fa-ban"></i>&nbsp;Cancelar
+                </button>
+                <button 
+                    class="btn btn-danger border-square" id="btn-methodology-object-delete-confirm"
+                    onclick="Designare.Methodologies.Methodology.DeleteObject();"
+                >
+                    <i class="fa fa-times"></i>&nbsp;Excluir
+                </button>
+            </div>
+        </div>
+    </div>                    
+</div>
