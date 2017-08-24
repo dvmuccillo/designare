@@ -16,7 +16,7 @@ def index(request):
 
 @login_required
 def details(request,methodology_id):
-    pass
+    return render(request, 'methodologies/methodology.html')
 
 @login_required
 def delete_methodology(request,methodology_id):
@@ -38,4 +38,12 @@ def export_json(request,methodology_id):
 
 @login_required
 def new(request):
-    pass
+    return render(request, 'methodologies/methodology.html')
+
+@login_required
+def register_methodology(request):
+    methodology = Methodology (
+                name = request.POST.get('methodology_name')
+            )
+    methodology.save()
+    return JsonResponse({'methodology_id': methodology.pk, 'success': True })

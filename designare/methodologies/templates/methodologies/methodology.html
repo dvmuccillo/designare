@@ -1,0 +1,181 @@
+{% extends 'assets/esqueleto.html' %}
+{% load designare_tags %}
+{% block body %}
+<div class="container">
+    <div class="row my-2 {% if methodology %} d-none {% else %} d-flex {% endif %} justify-content-center " id="div-form-methodology">
+        <div class="col-md-6 d-flex justify-content-center">
+            <form id="form-methodology" name="form_methodology" onsubmit="event.preventDefault();" novalidate>
+                <fieldset id="form-methodology-fieldset">
+                    <input 
+                        type="hidden" name="methodology_id" id="input-methodology-id" 
+                        {% if methodology %}
+                            value="{{ methodology.pk }}"
+                        {% endif %}
+                    />
+                    <div class="form-group" id="div-input-methodology-name">
+                        <label class="" for="input-methodology-name">
+                            <b>Nome da metodologia:</b>&nbsp;
+                        </label>
+                        <input name="name" 
+                            type="text" class="form-control border-square" required
+                            placeholder="Minha Metodologia" id="input-methodology-name"
+                            {% if methodology %}
+                                value="{{ methodology.name }}"
+                            {% endif %}
+                        >
+                        <div class="invalid-feedback">Informe um nome para a metodologia.</div>
+                    </div>
+                    <div class="form-group">
+                        <button 
+                            class="btn btn-info border-square" id="btn-methodology-cancel" type="button"
+                            onclick="Designare.Methodologies.Methodology.BtnMethodologyCancelAction()"
+                        >
+                            <i class="fa fa-times"></i>
+                            <span id="btn-methodology-cancel-text">
+                                {% if methodology %}
+                                    Cancelar
+                                {% else %}
+                                    Cancelar e retornar
+                                {% endif %}
+                            </span>
+                        </button>
+                        <button
+                            class="btn btn-success border-square" id="btn-methodology-confirm" type="button"
+                            onclick="Designare.Methodologies.Methodology.BtnMethodologyConfirmAction()"
+                        >
+                            <i class="fa fa-check"></i>
+                            <span id="btn-methodology-confirm-text">
+                                {% if methodology %}
+                                    Atualizar
+                                {% else %}
+                                    Cadastrar
+                                {% endif %}
+                            </span>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div> 
+    </div>
+    <div class="row {% if methodology %} d-none {% else %} d-flex {% endif %} justify-content-center" id="div-methodology-new-info">
+        <div class="col-md-6">
+            <div class="card card-body border-info border-square">
+                <h4>Nomeando sua nova metodologia</h4>
+                <p class="card-text">
+                    O nome da metodologia tem por objetivo destacar o processo encapsulado, logo tente escolher um nome relevante ao contexto.
+                </p>                
+            </div>
+        </div>
+    </div>    
+    <div class="row my-1 {% if not methodology %} d-none {% else %} d-flex {% endif %} justify-content-center" id="div-methodology-name">
+        <h2>
+            <span id="span-methodology-name">
+                {% if methodology %}
+                    {{ methodology.name }}
+                {% endif %}
+            </span>
+            <button 
+                class="btn btn-light border-dark border-square" id="btn-methodology-edit"
+                data-tooltip="tooltip" data-placement="top"
+                title="Editar nome"
+            >
+                <i class="fa fa-pencil"></i>
+            </button>
+        </h2>
+    </div>
+    
+</div>
+<div class="container">
+    <div class="row">
+        {% include "utils/components/modal_ajax_feedback.html" %}
+        {% include "methodologies/components/modal_methodology_object_delete.html" %}
+    </div>
+    <div class="row {% if not methodology %} d-none {% else %} d-flex {% endif %}" id="div-row-stages">
+        <div class="col-md-3" >
+            <div class="list-group" id="list-group-stages-menu">
+                <!-- Inserir links de etapas aqui -->
+                {% if methodology.ordered_stages %}
+                    {% for stage in methodology.ordered_stages %}
+                        <a
+                            href="#stage-{{ stage.pk }}" id="list-group-stage-item-{{ stage.pk }}"
+                            class="list-group-item list-group-item-action border-square"
+                        >
+                            {{ stage.name }}
+                        </a>
+                    {% endfor %}
+                {% endif%}
+                <a 
+                    class="list-group-item list-group-item-action border-square" id="list-group-stage-new"
+                    href="#stage-new"
+                >
+                    <i class="fa fa-plus"></i>&nbsp;Adicionar nova etapa
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div 
+                    class="col-md-11 ml-auto" id="div-stages" 
+                    data-spy="scroll" target="#list-group-stage-menu" data-offset="0"
+                >
+                    <!-- Inserir etapas aqui -->
+                    {% if methodology.ordered_stages %}
+                        {% for stage in methodology.ordered_stages %}
+                            {% include "metodologias/etapa.html" with etapa=stage %}
+                        {% endfor %}
+                    {% endif%}
+                    <a id="stage-new"></a>
+                        <div class="row collapse my-2" id="row-stage-new">
+                            <div class="col-md-11 ml-auto">
+                                <h4 class="mt-3">Adicionar nova etapa:</h4>
+                                <form id="form-stage" name="form_stage">
+                                    <fieldset id="fieldset-stage-new">
+                                        {% csrf_token %}
+                                        <div class="form-group mr-3" id="div-input-stage-name">
+                                            <label for="input-stage-new">
+                                                <b>Nome</b>&nbsp;
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon border-square">
+                                                    <i class="fa fa-tag"></i>
+                                                </span>
+                                                <input name="name" 
+                                                    type="text"
+                                                    class="form-control border-square"
+                                                    placeholder="Minha Nova Etapa"
+                                                    id="input-stage-name" 
+                                                >
+                                                <small class="form-text text-muted"><i>Este campo é obrigatório!</i></small>
+                                            </div>
+                                        </div>
+                                        <label for="input-stage-description"><b>Descrição</b></label>
+                                        <div>
+                                            {% include "assets/components/editor-wysiwyg.html" with editor_id="input-stage-description" %}
+                                            <small class="form-text text-muted">
+                                                <i>Forneça uma descrição para auxiliar membros da equipe a identificar o propósito de cada etapa ou facilitar o aprendizado de novos membros.</i>
+                                            </small>
+                                        </div>
+                                        <br>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button" class="btn btn-danger border-square" id="btn-stage-new-cancel">
+                                                Cancelar
+                                            </button>
+                                            <button type="button" class="btn btn-success border-square" id="btn-stage-new-confirm">
+                                                Cadastrar Etapa
+                                            </button>
+                                        </div>
+                                    </fieldset>                                
+                                </form>
+                            </div>
+                        </div> 
+                </div>
+            </div>           
+        </div>
+    </div>
+</div>
+{{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Utils.Forms' }}
+{{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Methodologies.Methodology' }}
+{% endblock %}
+{% block javascript_functions %}
+    AtivaEditores();
+{% endblock %}

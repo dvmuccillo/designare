@@ -14,4 +14,6 @@ urlpatterns = [
     url(r'^(?P<methodology_id>[0-9]+)/export-json/$', views.export_json, name='export_json'),
     # /methodologies/new/
     url(r'^new/$', views.new, name='new'),
+    # /methodologies/new/register/
+    url(r'^new/register/$', views.register_methodology, name='register_methodology'),
 ]
