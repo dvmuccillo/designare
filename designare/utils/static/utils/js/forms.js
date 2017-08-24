@@ -10,6 +10,12 @@
             input.addClass('form-control-'+state);
         }        
     },
+    FieldsetEnable          : function(fieldset){
+        fieldset.prop("disabled", false);
+    },
+    FieldsetDisable         : function(fieldset){
+        fieldset.prop("disabled", true);
+    },
     /* Verifica campo vazio */
     InputIsEmpty: function(input){
         return($.trim(input.val()).length == 0);
