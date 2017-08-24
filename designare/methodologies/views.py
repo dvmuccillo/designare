@@ -16,13 +16,25 @@ def index(request):
 
 @login_required
 def details(request,methodology_id):
-    return render(request, 'methodologies/methodology.html')
+    methodology = get_object_or_404(Methodology,pk=methodology_id)
+    return render(request, 'methodologies/methodology.html',{'methodology' :  methodology})
 
 @login_required
 def delete_methodology(request,methodology_id):
     methodology = get_object_or_404(Methodology,pk=methodology_id)
     try:
         methodology.delete()
+        success = True
+    except:
+        success = False
+    return JsonResponse({'success': success})
+
+@login_required
+def update_methodology(request,methodology_id):
+    methodology = get_object_or_404(Methodology,pk=methodology_id)
+    try:
+        methodology.name = request.POST.get('methodology_name')
+        methodology.save()
         success = True
     except:
         success = False

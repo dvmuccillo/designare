@@ -69,15 +69,11 @@
     </div>    
     <div class="row my-1 {% if not methodology %} d-none {% else %} d-flex {% endif %} justify-content-center" id="div-methodology-name">
         <h2>
-            <span id="span-methodology-name">
-                {% if methodology %}
-                    {{ methodology.name }}
-                {% endif %}
-            </span>
+            <span id="span-methodology-name">{% if methodology %}{{ methodology.name }}{% endif %}</span>
             <button 
                 class="btn btn-light border-dark border-square" id="btn-methodology-edit"
-                data-tooltip="tooltip" data-placement="top"
-                title="Editar nome"
+                data-tooltip="tooltip" data-placement="top" title="Editar nome"
+                onclick="Designare.Methodologies.Methodology.BtnMethodologyEditAction()"
             >
                 <i class="fa fa-pencil"></i>
             </button>

@@ -18,6 +18,8 @@
     /**
      * Elements from /methodologies/new/ or /methodologies/<methodology_id>/
      */
+    btnMethodologyCancelText    : $('#btn-methodology-cancel-text'),
+    btnMethodologyConfirmText   : $('#btn-methodology-confirm-text'),
     divFormMethodology          : $('#div-form-methodology'),
     divMethodologyName          : $('#div-methodology-name'),
     divMethodologyNewInfo       : $('#div-methodology-new-info'),
@@ -135,6 +137,11 @@
     BtnMethodologyCancelAction  : function (){
         if(this.forms.InputIsEmpty(this.inputMethodologyId)){
             $(window.document.location).attr('href','/methodologies/');
+        } else {
+            this.formMethodology.removeClass("was-validated");
+            this.divFormMethodology.removeClass("d-flex").addClass("d-none");
+            this.divMethodologyNewInfo.removeClass("d-flex").addClass("d-none");
+            this.divMethodologyName.removeClass("d-none").addClass("d-flex");
         }
     },
     BtnMethodologyConfirmAction  : function (){
@@ -143,10 +150,15 @@
             this.inputMethodologyName.focus();
             this.formMethodology.addClass("was-validated");
         }else{
+            if(this.forms.InputIsEmpty(this.inputMethodologyId)){
+                target_url = "/methodologies/new/register/";
+            } else {
+                target_url = "/methodologies/" + this.inputMethodologyId.val() + "/update/";
+            }
             $.ajax({
                 context : this,
                 type    : "POST",
-                url     : "/methodologies/new/register/",
+                url     : target_url,
                 data    : {
                     'csrfmiddlewaretoken'   : Designare.csrfToken,
                     'methodology_id'        : this.inputMethodologyId.val(),
@@ -157,7 +169,11 @@
     
                 beforeSend: function(){
                     this.ajaxFeedback.clear();
-                    this.ajaxFeedback.setHeader("Cadastrando metodologia " + this.inputMethodologyName.val());
+                    if(this.forms.InputIsEmpty(this.inputMethodologyId)){
+                        this.ajaxFeedback.setHeader("Cadastrando metodologia " + this.inputMethodologyName.val());
+                    } else {
+                        this.ajaxFeedback.setHeader("Atualizando metodologia " + this.inputMethodologyName.val());
+                    }
                     this.ajaxFeedback.log("Enviando informações para o servidor <i class='fa fa-spinner fa-pulse'></i>");
                     this.ajaxFeedback.show();
                 },
@@ -165,22 +181,26 @@
                     this.ajaxFeedback.reset();
                     if(data.success)
                     {
-                        this.ajaxFeedback.log("Cadastro concluído com sucesso! <i class='fa fa-check-circle'></i>");
+                        if(this.forms.InputIsEmpty(this.inputMethodologyId)){
+                            window.history.replaceState(null, null, "/methodologies/"+data.methodology_id+"/")
+                            this.inputMethodologyId.val(data.methodology_id);
+                            this.btnMethodologyCancelText.html("Cancelar");
+                            this.btnMethodologyConfirmText.html("Atualizar");
+                            this.ajaxFeedback.log("Cadastro concluído com sucesso! <i class='fa fa-check-circle'></i>");
+                            this.divRowStages.removeClass("d-none").addClass("d-flex");
+                        }else{
+                            this.ajaxFeedback.log("Atualização concluída com sucesso! <i class='fa fa-check-circle'></i>");
+                        }
                         this.ajaxFeedback.setFooter(
                             "<button class='btn btn-primary border-square' data-dismiss='modal'>Fechar</button>"
                         );
-                        if(this.forms.InputIsEmpty(this.inputMethodologyId)){
-                            window.history.replaceState(null, null, "/methodologies/"+data.methodology_id+"/")
-                        }
                         this.spanMethodologyName.html(this.inputMethodologyName.val());
-                        this.inputMethodologyId.val(data.methodology_id);
+                        this.divMethodologyName.removeClass("d-none").addClass("d-flex");
                         this.formMethodology.removeClass("was-validated");
                         this.divFormMethodology.removeClass("d-flex").addClass("d-none");
                         this.divMethodologyNewInfo.removeClass("d-flex").addClass("d-none");
-                        this.divMethodologyName.removeClass("d-none").addClass("d-flex");
-                        this.divRowStages.removeClass("d-none").addClass("d-flex");
                     } else {
-                        this.ajaxFeedback.log("Não foi possível realizar o cadastro! <i class='fa fa-exclamation-triangle'></i>");
+                        this.ajaxFeedback.log("Não foi possível realizar a ação! <i class='fa fa-exclamation-triangle'></i>");
                         this.ajaxFeedback.log("Tente novamente mais tarde!");
                         this.ajaxFeedback.setFooter(
                             "<button class='btn btn-primary border-square' data-dismiss='modal'>Fechar</button>"
@@ -199,4 +219,10 @@
         }
         this.forms.FieldsetEnable(this.formMethodologyFieldset);
     },
+    BtnMethodologyEditAction    : function () {
+        this.inputMethodologyName.val(this.spanMethodologyName.html())
+        this.divFormMethodology.removeClass("d-none").addClass("d-flex");
+        this.divMethodologyNewInfo.removeClass("d-none").addClass("d-flex");
+        this.divMethodologyName.removeClass("d-flex").addClass("d-none");
+    }
 }

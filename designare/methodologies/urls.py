@@ -8,8 +8,10 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # /methodologies/id/
     url(r'^(?P<methodology_id>[0-9]+)/$', views.details, name='details'),
-    # /methodologies/id/delete
+    # /methodologies/id/delete/
     url(r'^(?P<methodology_id>[0-9]+)/delete/$', views.delete_methodology, name='delete_methodology'),
+    # /methodologies/id/update/
+    url(r'^(?P<methodology_id>[0-9]+)/update/$', views.update_methodology, name='update_methodology'),
     # /methodologies/id/export-json
     url(r'^(?P<methodology_id>[0-9]+)/export-json/$', views.export_json, name='export_json'),
     # /methodologies/new/
