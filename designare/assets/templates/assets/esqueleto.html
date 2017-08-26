@@ -18,7 +18,7 @@
         {% endblock %}
         <link rel="stylesheet" type="text/css" href="/static/css/designare.css">
     </head>
-    <body>
+    <body {% block body_options %}{% endblock %}>
         <div class="hidden">
             <form name="designare">
                 {% csrf_token %}
@@ -58,7 +58,7 @@
             $(document).ready(function(){
                 $(function () {
                     $('[data-tooltip="tooltip"]').tooltip()
-                })
+                });
             });
         </script>
     </body>
