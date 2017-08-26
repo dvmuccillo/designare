@@ -15,7 +15,7 @@ class Methodology(models.Model):
     """
     Return the stages based on order property
     """
-    def ordered_stages():
+    def ordered_stages(self):
         return self.stages.all().order_by('order')
 
 
@@ -98,7 +98,7 @@ class Stage(models.Model):
     """
     Return the activities based on order property
     """
-    def ordered_activities():
+    def ordered_activities(self):
         return self.activities.all().order_by('order')
 
 class Activity(models.Model):
