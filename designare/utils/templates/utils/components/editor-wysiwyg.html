@@ -1,5 +1,6 @@
 {% load designare_tags %}
 {{ DESIGNARE_ASSETS_MANAGER |registerBower:'bootstrap-wysiwyg' }}
+{{ DESIGNARE_ASSETS_MANAGER |registerNamespace:'Designare.Utils.Editor_WYSIWYG' }}
 <!-- Editor WYSIWYG  utilizando o plugin bootstrap-wyisyg-->
 <div 
     class="btn-toolbar" 
@@ -9,7 +10,7 @@
 >
     <div class="btn-group mb-3">
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 dropdown-toggle border-square" title="Tamanho da fonte"
+            class="btn  border-dark border-left-0 border-right-0 dropdown-toggle border-square" title="Tamanho da fonte"
             data-toggle="dropdown" data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
@@ -33,25 +34,25 @@
     </div>
     <div class="btn-group mb-3">
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="bold" title="Negrito (Ctrl/Cmd+B)" 
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="bold" title="Negrito (Ctrl/Cmd+B)" 
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-bold"></i>
         </a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0" data-edit="italic" title="Itálico (Ctrl/Cmd+I)"
+            class="btn  border-dark border-left-0 border-right-0" data-edit="italic" title="Itálico (Ctrl/Cmd+I)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-italic"></i>
         </a>
         <a
-            class="btn btn-light border-dark border-left-0 border-right-0" data-edit="strikethrough" title="Riscado"
+            class="btn  border-dark border-left-0 border-right-0" data-edit="strikethrough" title="Riscado"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-strikethrough"></i>
         </a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="underline" title="Sublinhado (Ctrl/Cmd+U)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="underline" title="Sublinhado (Ctrl/Cmd+U)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-underline"></i>
@@ -59,25 +60,25 @@
     </div>
     <div class="btn-group mb-3">
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="insertunorderedlist" title="Lista de Marcadores"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="insertunorderedlist" title="Lista de Marcadores"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-list-ul"></i>
         </a>
         <a
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="insertorderedlist" title="Lista de Números"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="insertorderedlist" title="Lista de Números"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-list-ol"></i>
         </a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="outdent" title="Reduzir Recuo (Shift+Tab)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="outdent" title="Reduzir Recuo (Shift+Tab)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-outdent"></i>
         </a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="indent" title="Aumentar Recuo (Tab)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="indent" title="Aumentar Recuo (Tab)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-indent"></i>
@@ -85,25 +86,25 @@
     </div>
     <div class="btn-group mb-3">
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="justifyleft" title="Alinhar à Esquerda  (Ctrl/Cmd+L)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="justifyleft" title="Alinhar à Esquerda  (Ctrl/Cmd+L)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-align-left"></i>
         </a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="justifycenter" title="Centralizar (Ctrl/Cmd+E)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="justifycenter" title="Centralizar (Ctrl/Cmd+E)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-align-center"></i>
         </a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="justifyright" title="Alinhar à Direita (Ctrl/Cmd+R)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="justifyright" title="Alinhar à Direita (Ctrl/Cmd+R)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-align-right"></i>
         </a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="justifyfull" title="Justificar (Ctrl/Cmd+J)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="justifyfull" title="Justificar (Ctrl/Cmd+J)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-align-justify"></i>
@@ -111,17 +112,17 @@
     </div>
     <div class="btn-group mb-3">
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square dropdown-toggle" data-toggle="dropdown" title=" Inserir Hyperlink"
+            class="btn  border-dark border-left-0 border-right-0 border-square dropdown-toggle" data-toggle="dropdown" title=" Inserir Hyperlink"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-link"></i>
         </a>
         <div class="dropdown-menu input-append p-1 m0 border-square">
             <input class="border-square mb-3" placeholder="URL" type="text" data-edit="createLink"/>
-            <button class="btn btn-light border-dark border-left-0 border-right-0 border-square" type="button">Adicionar</button>
+            <button class="btn  border-dark border-left-0 border-right-0 border-square" type="button">Adicionar</button>
         </div>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="unlink" title="Remover Hyperlink"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="unlink" title="Remover Hyperlink"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-cut"></i>
@@ -129,12 +130,12 @@
     </div>
     <div class="btn-group mb-3">
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="undo" title="Desfazer (Ctrl/Cmd+Z)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="undo" title="Desfazer (Ctrl/Cmd+Z)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-undo"></i></a>
         <a 
-            class="btn btn-light border-dark border-left-0 border-right-0 border-square" data-edit="redo" title="Refazer (Ctrl/Cmd+Y)"
+            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="redo" title="Refazer (Ctrl/Cmd+Y)"
             data-tooltip="tooltip" data-placement="top"
         >
             <i class="fa fa-repeat"></i></a>
@@ -143,5 +144,5 @@
 <div 
     id="{{ editor_id }}" 
     data-toggle="bootstrap-wysiwyg" 
-    class="border-square mr-3 designare-editor"
+    class="border-square designare-editor"
 ></div>
