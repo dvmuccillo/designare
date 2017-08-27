@@ -9,28 +9,30 @@
     id="{{ editor_id }}-toolbar"
 >
     <div class="btn-group mb-3">
-        <a 
-            class="btn  border-dark border-left-0 border-right-0 dropdown-toggle border-square" title="Tamanho da fonte"
-            data-toggle="dropdown" data-tooltip="tooltip" data-placement="top"
-        >
-            <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
-        <ul class="dropdown-menu border-square">
-            <li>
-                <a data-edit="fontSize 5" >
-                    <font size="5">Grande</font>
-                </a>
-            </li>
-            <li>
-                <a data-edit="fontSize 3" >
-                    <font size="3">Normal</font>
-                </a>
-            </li>
-            <li>
-                <a data-edit="fontSize 1" >
-                    <font size="1">Pequena</font>
-                </a>
-            </li>
-        </ul>
+        <span title="Tamanho da fonte" data-tooltip="tooltip" data-placement="top">
+            <a class="btn  border-dark border-left-0 border-right-0 dropdown-toggle border-square" data-toggle="dropdown">
+                <i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu border-square">
+                <li class="dropdown-item">
+                    <a data-edit="fontSize 5" >
+                        <font size="5">Grande</font>
+                    </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li class="dropdown-item">
+                    <a data-edit="fontSize 3" >
+                        <font size="3">Normal</font>
+                    </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li class="dropdown-item">
+                    <a data-edit="fontSize 1" >
+                        <font size="1">Pequena</font>
+                    </a>
+                </li>
+            </ul>
+        </span>
     </div>
     <div class="btn-group mb-3">
         <a 
@@ -111,22 +113,22 @@
         </a>
     </div>
     <div class="btn-group mb-3">
-        <a 
-            class="btn  border-dark border-left-0 border-right-0 border-square dropdown-toggle" data-toggle="dropdown" title=" Inserir Hyperlink"
-            data-tooltip="tooltip" data-placement="top"
-        >
-            <i class="fa fa-link"></i>
-        </a>
-        <div class="dropdown-menu input-append p-1 m0 border-square">
-            <input class="border-square mb-3" placeholder="URL" type="text" data-edit="createLink"/>
-            <button class="btn  border-dark border-left-0 border-right-0 border-square" type="button">Adicionar</button>
-        </div>
-        <a 
-            class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="unlink" title="Remover Hyperlink"
-            data-tooltip="tooltip" data-placement="top"
-        >
-            <i class="fa fa-cut"></i>
-        </a>
+        <span title=" Inserir Hyperlink" data-tooltip="tooltip" data-placement="top">
+            <a class="btn  border-dark border-left-0 border-right-0 border-square dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-link"></i>
+            </a>
+            <div class="dropdown-menu input-append p-1 m0 border-square">
+                <input class="border-square mb-3" placeholder="URL" type="text" data-edit="createLink"/>
+                <button class="btn  border-dark border-square" type="button">Adicionar</button>
+            </div>
+        </span>
+            <a 
+                class="btn  border-dark border-left-0 border-right-0 border-square" data-edit="unlink" title="Remover Hyperlink"
+                data-tooltip="tooltip" data-placement="top"
+            >
+                <i class="fa fa-cut"></i>
+            </a>
+        
     </div>
     <div class="btn-group mb-3">
         <a 
