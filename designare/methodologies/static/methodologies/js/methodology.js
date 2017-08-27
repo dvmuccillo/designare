@@ -57,7 +57,7 @@
     DeleteObject                : function () {
         switch(this.modalObjectDeleteType){
             case "activity":
-            delete_url = "/methodologies/activities/" + this.modalObjectDeleteId + "/delete/";
+            delete_url = "/methodologies/" + this.modalObjectDeleteId + "/acitivity/delete/";
             break;
     
         case "methodology":
@@ -65,14 +65,18 @@
             break;
         
         case "stage":
-            delete_url = "/methodologies/stages/" + this.modalObjectDeleteId + "/delete/";
+            delete_url = "/methodologies/" + this.inputMethodologyId.val() + "/stage/delete/";
             break;
         }
         $.ajax({
             context : this,
             type    : "POST",
             url     : delete_url,
-            data    : {'csrfmiddlewaretoken' : Designare.csrfToken},
+            data    : {
+                'csrfmiddlewaretoken' : Designare.csrfToken,
+                'object_id'           : this.modalObjectDeleteId,
+                'object_type'         : this.modalObjectDeleteType,
+            },
             dataType: "json",
             encode  : true,
 
@@ -97,7 +101,7 @@
                         break;
                     
                     case "stage":
-                        delete_url = "/methodologies/stages/" + this.modalObjectDeleteId + "/delete/";
+                        Designare.Methodologies.Stage.RemoveStageItem(this.modalObjectDeleteId);
                         break;
                     }
                     this.ajaxFeedback.log("Exclusão concluída com sucesso! <i class='fa fa-check-circle'></i>");

@@ -30,6 +30,18 @@ def delete_methodology(request,methodology_id):
     return JsonResponse({'success': success})
 
 @login_required
+def delete_stage(request,methodology_id):
+    methodology = get_object_or_404(Methodology,pk=methodology_id)
+    stage_id = request.POST.get('object_id')
+    stage = get_object_or_404(Stage,pk=stage_id)
+    try:
+        stage.delete()
+        success = True
+    except:
+        success = False
+    return JsonResponse({'success': success})
+
+@login_required
 def update_methodology(request,methodology_id):
     methodology = get_object_or_404(Methodology,pk=methodology_id)
     try:
@@ -59,3 +71,19 @@ def register_methodology(request):
             )
     methodology.save()
     return JsonResponse({'methodology_id': methodology.pk, 'success': True })
+
+@login_required
+def register_stage(request,methodology_id):
+    methodology = get_object_or_404(Methodology,pk=methodology_id)
+    stage_name = request.POST.get('stage_name')
+    stage_description = request.POST.get('stage_description')
+    stage_order = methodology.ordered_stages().last().order + 1
+    stage = Stage (
+        name = stage_name,
+        description = stage_description,
+        order = stage_order,
+        methodology = methodology
+    )
+    stage.save()
+    template = render_to_string('methodologies/stage.html', {'stage' : stage},request=request)
+    return JsonResponse({'stage_id': stage.pk, 'stage_name': stage.name, 'template': template, 'success': True })
