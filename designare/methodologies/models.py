@@ -13,7 +13,16 @@ class Methodology(models.Model):
         return self.name
     
     """
-    Return the stages based on order property
+    Returns the order for the next stage based on the stage with higher order
+    """
+    def next_stage_order(self):
+        try:
+            return self.ordered_stages().last().order + 1
+        except AttributeError:
+            return 1
+
+    """
+    Returns the stages based on order property
     """
     def ordered_stages(self):
         return self.stages.all().order_by('order')
@@ -96,7 +105,16 @@ class Stage(models.Model):
         return self.name
 
     """
-    Return the activities based on order property
+    Returns the order for the next activity based on the activity with higher order
+    """
+    def next_activity_order(self):
+        try:
+            return self.ordered_activities().last().order + 1
+        except AttributeError:
+            return 1
+
+    """
+    Returns the activities based on order property
     """
     def ordered_activities(self):
         return self.activities.all().order_by('order')
