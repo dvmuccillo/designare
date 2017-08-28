@@ -89,7 +89,7 @@ def register_stage(request,methodology_id):
     methodology = get_object_or_404(Methodology,pk=methodology_id)
     stage_name = request.POST.get('stage_name')
     stage_description = request.POST.get('stage_description')
-    stage_order = methodology.ordered_stages().last().order + 1
+    stage_order = methodology.next_stage_order()
     stage = Stage (
         name = stage_name,
         description = stage_description,
