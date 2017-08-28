@@ -35,15 +35,15 @@
     GetObjectTypeName           : function(object_type){
         switch (object_type) {
             case "activity":
-                return "Atividade";
+                return "atividade";
                 break;
         
             case "methodology":
-                return "Metodologia";
+                return "metodologia";
                 break;
             
             case "stage":
-                return "Etapa";
+                return "etapa";
                 break;
         }
     },
@@ -57,7 +57,7 @@
     DeleteObject                : function () {
         switch(this.modalObjectDeleteType){
             case "activity":
-            delete_url = "/methodologies/" + this.modalObjectDeleteId + "/acitivity/delete/";
+            delete_url = "/methodologies/" + this.inputMethodologyId.val() + "/activity/delete/";
             break;
     
         case "methodology":
@@ -93,7 +93,7 @@
                 {
                     switch(this.modalObjectDeleteType){
                         case "activity":
-                        delete_url = "/methodologies/activities/" + this.modalObjectDeleteId + "/delete/";
+                        Designare.Methodologies.Stage.RemoveActivityItem(this.modalObjectDeleteId);
                         break;
                 
                     case "methodology":

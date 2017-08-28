@@ -98,6 +98,12 @@
     */
     RemoveStageItem             : function (stage_id){
         $('#list-group-stage-item-' + stage_id).remove();
-        $('#stage-' +  stage_id).collapse('hide').remove();
+        $('#stage-' +  stage_id).remove();
+    },
+    /**
+    * Function for remove a activity (card) from html
+    */
+    RemoveActivityItem          : function (activity_id){
+        $('#activity-' + activity_id).remove();
     }
 }

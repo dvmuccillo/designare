@@ -1,0 +1,33 @@
+<div class='row collapse show' id="activity-{{ activity.pk }}">
+    <div class='col-md-11 ml-auto'>
+        <div class='card unbordered'>
+            <div class='card-body'>
+                    <div class="dropdown float-right">
+                        <button 
+                            class="btn btn-light dropdown-toggle border-square" type="button"
+                            id="activity-{{ activity.pk }}-menu" data-toggle="dropdown" 
+                            aria-haspopup="true" aria-expanded="false"
+                        >
+                            <i class="fa fa-cog"></i>
+                        </button>
+                            <div class="dropdown-menu dropdown-menu-right border-square" aria-labelledby="activity-{{ activity.pk }}-menu">
+                            <button class="dropdown-item" type="button">Alterar nome</button>
+                            <button
+                                class="dropdown-item" type="button" 
+                                onclick="Designare.Methodologies.Methodology.ShowModalDeleteObject('activity',{{ activity.pk }},'{{ activity.name }}');"
+                            >Excluir</button>
+                            <button class="dropdown-item disabled" type="button" disabled>Definir Permissões</button>
+                        </div>
+                    </div>
+                <h3 class='card-title' id='activity-{{ activity.pk }}-name'>{{ activity.name }}</h3>
+                <p class='card-text' id='activity-{{ activity.pk }}-description'>
+                    {%if activity.description %}
+                        {{ activity.description | safe }}
+                    {% else %}
+                        <i>Nenhuma descrição fornecida para esta atividade!</i>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

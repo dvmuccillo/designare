@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^(?P<methodology_id>[0-9]+)/delete/$', views.delete_methodology, name='delete_methodology'),
     # /methodologies/id/update/
     url(r'^(?P<methodology_id>[0-9]+)/update/$', views.update_methodology, name='update_methodology'),
+    # /methodologies/id/activity/delete/
+    url(r'^(?P<methodology_id>[0-9]+)/activity/delete/$', views.delete_activity, name='delete_activity'),
     # /methodologies/id/stage/delete/
     url(r'^(?P<methodology_id>[0-9]+)/stage/delete/$', views.delete_stage, name='delete_stage'),
     # /methodologies/id/stage/register/

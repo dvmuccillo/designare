@@ -30,6 +30,18 @@ def delete_methodology(request,methodology_id):
     return JsonResponse({'success': success})
 
 @login_required
+def delete_activity(request,methodology_id):
+    methodology = get_object_or_404(Methodology,pk=methodology_id)
+    activity_id = request.POST.get('object_id')
+    activity = get_object_or_404(Activity,pk=activity_id)
+    try:
+        activity.delete()
+        success = True
+    except:
+        success = False
+    return JsonResponse({'success': success})
+    
+@login_required
 def delete_stage(request,methodology_id):
     methodology = get_object_or_404(Methodology,pk=methodology_id)
     stage_id = request.POST.get('object_id')
